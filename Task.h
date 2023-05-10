@@ -1,3 +1,4 @@
+
 //
 // Created by Jan Ole Weighardt on 10.05.23.
 //
@@ -17,6 +18,8 @@ namespace ToDoListAdventure {
     public:
         Tasks() = default;
         void newTask(std::string const &task);
+        void searchTask(std::string const &searchIn);
+        void searchTask();
         void showTask();
         void deleteTask();
     };

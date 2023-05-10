@@ -8,6 +8,7 @@ int main() {
     tasks.newTask("test");
     tasks.newTask("Dishes");
     tasks.showTask();
+    tasks.searchTask();
     tasks.deleteTask();
     return 0;
 }
