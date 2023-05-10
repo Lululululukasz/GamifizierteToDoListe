@@ -13,9 +13,10 @@ namespace ToDoListAdventure {
         // Define a vector named "task"
         std::vector<std::string> task;
     public:
-        Tasks(){}
-        void newTask(std::string);
+        Tasks() = default;
+        void newTask(std::string const &task);
         void showTask();
+        void deleteTask(std::string taskToDelete);
     };
 
 } // ToDoListAdventure

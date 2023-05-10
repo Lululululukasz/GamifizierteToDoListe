@@ -7,15 +7,20 @@
 using namespace std;
 
 namespace ToDoListAdventure {
-    void Tasks::newTask(std::string task) {
+    void Tasks::newTask(std::string const &task) {
         // Add new tasks to the vector
         this->task.emplace_back(task);
-    };
+    }
 
     void Tasks::showTask() {
         for (const auto &element: task) {
             cout << element << endl << endl;
         }
-    } // ToDoListAdventure
+    }
+    // taskToDelete braucht einen cin zum überprüfen
+    void Tasks::deleteTask(std::string taskToDelete){
+        erase_if(this->task,[taskToDelete](auto a){return taskToDelete == a;});
+    }
+    // ToDoListAdventure
 }
 
