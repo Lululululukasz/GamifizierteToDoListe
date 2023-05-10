@@ -6,6 +6,7 @@
 #define PICGROUG6DEVELOUPMENT_TASK_H
 #include <string>
 #include <vector>
+#include <memory>
 
 namespace ToDoListAdventure {
 
@@ -17,6 +18,8 @@ namespace ToDoListAdventure {
         void newTask(std::string const &task);
         void showTask();
         void deleteTask(std::string taskToDelete);
+
+        std::shared_ptr<std::string> findTask(std::string);
     };
 
 } // ToDoListAdventure

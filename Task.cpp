@@ -21,6 +21,17 @@ namespace ToDoListAdventure {
     void Tasks::deleteTask(std::string taskToDelete){
         erase_if(this->task,[taskToDelete](auto a){return taskToDelete == a;});
     }
+
+    shared_ptr<string> Tasks::findTask(std::string taskName) {
+        for (auto t : this->task) {
+            if (taskName == t) {
+                return std::make_shared<string>(t);
+            }
+        }
+        return nullptr;
+    }
+
+
     // ToDoListAdventure
 }
 
