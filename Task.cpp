@@ -17,9 +17,20 @@ namespace ToDoListAdventure {
             cout << element << endl << endl;
         }
     }
-    // taskToDelete braucht einen cin zum überprüfen
-    void Tasks::deleteTask(std::string taskToDelete){
-        erase_if(this->task,[taskToDelete](auto a){return taskToDelete == a;});
+
+    void Tasks::deleteTask() {
+            string taskToDelete;
+            std::cout << "Geben sie die Task ein die sie entfernen wollen: ";
+            std::cin >> taskToDelete;
+
+            auto it = std::find(task.begin(), task.end(), taskToDelete);
+            if (it != task.end()) {
+                task.erase(it);
+                std::cout << "Task entfernt!" << std::endl;
+            } else {
+                std::cout << "Ein Task mit diesem Namen existiert nicht, bitte den richtigen Tasknamen eingeben"
+                          << std::endl;
+            }
     }
     // ToDoListAdventure
 }
