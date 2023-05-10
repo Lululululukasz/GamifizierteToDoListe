@@ -1,9 +1,11 @@
 #include <iostream>
-#include "createTask.h"
+#include "Tasks.h"
+
+using namespace ToDoListAdventure;
 
 int main() {
-
-    CreateTask::newTask();
+    Tasks tasks = Tasks();
+    tasks.newTask("test");
 
     std::cout << "Hello, World!" << std::endl;
     return 0;

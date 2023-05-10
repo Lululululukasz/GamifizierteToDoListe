@@ -3,4 +3,4 @@ project(pic_aem_projekt)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(pic_aem_projekt main.cpp createTask.h createTask.cpp)
+add_executable(pic_aem_projekt main.cpp Tasks.cpp)
