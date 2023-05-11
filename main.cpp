@@ -6,10 +6,16 @@ using namespace ToDoListAdventure;
 
 int main() {
     Tasks tasks = Tasks();
+    tasks.newTask("test");
+    tasks.newTask("Dishes");
+    tasks.showTask();
+    tasks.searchTask();
+    tasks.deleteTask();
+
+
     tasks.newTask("buy apples");
     tasks.newTask("buy oranges");
     tasks.newTask("watch c++ video");
-    tasks.showTask();
 
     Categories categories = Categories();
     categories.newCategory("shopping");

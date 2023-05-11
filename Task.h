@@ -4,9 +4,11 @@
 
 #ifndef PICGROUG6DEVELOUPMENT_TASK_H
 #define PICGROUG6DEVELOUPMENT_TASK_H
+#include <iostream>
 #include <string>
 #include <vector>
 #include <memory>
+#include <algorithm>
 
 namespace ToDoListAdventure {
 
@@ -16,8 +18,10 @@ namespace ToDoListAdventure {
     public:
         Tasks() = default;
         void newTask(std::string const &task);
+        void searchTask(std::string const &searchIn);
+        void searchTask();
         void showTask();
-        void deleteTask(std::string taskToDelete);
+        void deleteTask();
 
         std::shared_ptr<std::string> findTask(std::string);
     };
