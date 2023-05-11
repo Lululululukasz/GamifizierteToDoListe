@@ -20,9 +20,9 @@ int main() {
     Categories categories = Categories();
     categories.newCategory("shopping");
     categories.newCategory("studying");
-    categories.assignTaskToCategory(tasks.findTask("buy apples"), "shopping");
-    categories.assignTaskToCategory(tasks.findTask("buy oranges"), "shopping");
-    categories.assignTaskToCategory(tasks.findTask("watch c++ video"), "studying");
+    categories.assignTaskToCategory(tasks.searchTask("buy apples"), "shopping");
+    categories.assignTaskToCategory(tasks.searchTask("buy oranges"), "shopping");
+    categories.assignTaskToCategory(tasks.searchTask("watch c++ video"), "studying");
     categories.showAllCategories();
 
     return 0;

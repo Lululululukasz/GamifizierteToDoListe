@@ -18,8 +18,8 @@ namespace ToDoListAdventure {
     public:
         Tasks() = default;
         void newTask(std::string const &task);
-        void searchTask(std::string const &searchIn);
-        void searchTask();
+        std::shared_ptr<std::string> searchTask(std::string const &searchIn);
+        std::shared_ptr<std::string> searchTask();
         void showTask();
         void deleteTask();
 
