@@ -1,3 +1,4 @@
+
 //
 // Created by Jan Ole Weighardt on 10.05.23.
 //
@@ -15,6 +16,7 @@ namespace ToDoListAdventure {
     class Tasks {
         // Define a vector named "task"
         std::vector<std::string> task;
+        std::vector<std::string> defaultTask {"Abwaschen", "Wäsche waschen", "Müll rausbringen", "Bad putzen", "Blumen gießen", "Fenster putzen", "Bett machen", "staubsaugen"};
     public:
         Tasks() = default;
         void newTask(std::string const &task);
@@ -22,8 +24,7 @@ namespace ToDoListAdventure {
         std::shared_ptr<std::string> searchTask();
         void showTask();
         void deleteTask();
-
-        std::shared_ptr<std::string> findTask(std::string);
+        std::string suggestTask();
     };
 
 } // ToDoListAdventure
