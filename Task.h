@@ -16,7 +16,7 @@ namespace ToDoListAdventure {
     class Tasks {
         // Define a vector named "task"
         std::vector<std::string> task;
-        std::vector<std::string> defaultTask {"Abwaschen", "Wäsche waschen", "Müll rausbringen", "Bad putzen", "Blumen gießen", "Fenster putzen", "Bett machen", "staubsaugen"};
+        std::vector<std::string> defaultTask {"do the Laundry", "dishwashing", "bring out garbage", "clean the bath", "water the flowers", "clean the windows"};
     public:
         Tasks() = default;
         void newTask(std::string const &task);

@@ -21,7 +21,7 @@ namespace ToDoListAdventure {
 
     shared_ptr<string> Tasks::searchTask() {
         std::string input;
-        std::cout << "Geben Sie einen Suchbegriff ein: ";
+        std::cout << "Enter task name: ";
         std::cin >> input;
         return searchTask(input);
     }
@@ -32,24 +32,22 @@ namespace ToDoListAdventure {
             std::cout << "Task: " << *it << std::endl;
             return std::make_shared<string>( *it);
         } else {
-            std::cout << "Ein Task mit diesem Namen existiert nicht, bitte den richtigen Tasknamen eingeben"
-                      << std::endl;
+            std::cout << "A task with this name doesn't exist" << std::endl;
             return nullptr;
         }
     }
 
     void Tasks::deleteTask() {
             string taskToDelete;
-            std::cout << "Geben sie die Task ein die sie entfernen wollen: ";
+            std::cout << "Enter the task you wish to remove: ";
             std::cin >> taskToDelete;
 
             auto it = std::find(task.begin(), task.end(), taskToDelete);
             if (it != task.end()) {
                 task.erase(it);
-                std::cout << "Task entfernt!" << std::endl;
+                std::cout << "Task removed!" << std::endl;
             } else {
-                std::cout << "Ein Task mit diesem Namen existiert nicht, bitte den richtigen Tasknamen eingeben"
-                          << std::endl;
+                std::cout << "A task with this name doesn't exist" << std::endl;
             }
     }
 
@@ -68,15 +66,15 @@ namespace ToDoListAdventure {
     }
 
    string Tasks::suggestTask(){
-        int min {0}, max {static_cast<int>(defaultTask.size()) -1}, zwischenspeicher;
+        int min {0}, max {static_cast<int>(defaultTask.size()) -1}, cache;
        std::random_device rd;
        std::default_random_engine eng(rd());
        uniform_int_distribution<int> distr(min, max);
-       zwischenspeicher = distr(eng);
+       cache = distr(eng);
 
-       std::cout << "How about: " << defaultTask[zwischenspeicher] << "?" << std::endl;
+       std::cout << "How about: " << defaultTask[cache] << "?" << std::endl;
 
-       return defaultTask[zwischenspeicher];
+       return defaultTask[cache];
     }
     // ToDoListAdventure
 }
