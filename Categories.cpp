@@ -26,10 +26,22 @@ namespace ToDoListAdventure {
         erase_if(this->category,[categoryToDelete](auto &a){return categoryToDelete == a.first;});
     }
 
-    void Categories::assignTaskToCategory( std::shared_ptr<std::string> myTask, std::string category) {
+    void Categories::assignTaskToCategory( std::shared_ptr<std::string> ptrToTask, std::string categoryName) {
         for (auto &c: this->category)
-            if (category == c.first) {
-                c.second.emplace_back(move(myTask));
+            if (categoryName == c.first) {
+                c.second.emplace_back(move(ptrToTask));
+                break;
+            }
+    }
+
+
+    void Categories::showTasksInCategory(std::string categoryName) {
+        for (auto &c: this->category)
+            if (categoryName == c.first) {
+                std::cout << std::endl << "Here are all the Tasks in the Category \" " << c.first << "\"" << std::endl;
+                for (const auto task : c.second) { // print each task in that category
+                    std::cout << "   - " << *task << std::endl;
+                }
                 break;
             }
     }
