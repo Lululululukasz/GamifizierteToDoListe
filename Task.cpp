@@ -4,6 +4,7 @@
 
 #include "Task.h"
 #include "iostream"
+#include <random>
 using namespace std;
 
 namespace ToDoListAdventure {
@@ -48,6 +49,15 @@ namespace ToDoListAdventure {
                 std::cout << "Ein Task mit diesem Namen existiert nicht, bitte den richtigen Tasknamen eingeben"
                           << std::endl;
             }
+    }
+
+   string Tasks::suggestTask(){
+        int min {0}, max {static_cast<int>(defaultTask.size()) -1}, zwischenspeicher;
+       std::random_device rd;
+       std::default_random_engine eng(rd());
+       uniform_int_distribution<int> distr(min, max);
+       zwischenspeicher = distr(eng);
+        return defaultTask[zwischenspeicher];
     }
     // ToDoListAdventure
 }
