@@ -18,6 +18,23 @@ namespace ToDoListAdventure {
         }
     }
 
+    void Tasks::searchTask() {
+        std::string input;
+        std::cout << "Geben Sie einen Suchbegriff ein: ";
+        std::cin >> input;
+        searchTask(input);
+    }
+
+    void Tasks::searchTask(std::string const &searchIn) { // TODO: Optimierung Levenshtein Algorithmus
+        auto it = std::find(task.begin(), task.end(), searchIn);
+        if (it != task.end()) {
+            std::cout << "Task: " << *it << std::endl;
+        } else {
+            std::cout << "Ein Task mit diesem Namen existiert nicht, bitte den richtigen Tasknamen eingeben"
+                      << std::endl;
+        }
+    }
+
     void Tasks::deleteTask() {
             string taskToDelete;
             std::cout << "Geben sie die Task ein die sie entfernen wollen: ";
