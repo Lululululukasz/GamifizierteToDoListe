@@ -19,20 +19,22 @@ namespace ToDoListAdventure {
         }
     }
 
-    void Tasks::searchTask() {
+    shared_ptr<string> Tasks::searchTask() {
         std::string input;
         std::cout << "Geben Sie einen Suchbegriff ein: ";
         std::cin >> input;
-        searchTask(input);
+        return searchTask(input);
     }
 
-    void Tasks::searchTask(std::string const &searchIn) { // TODO: Optimierung Levenshtein Algorithmus
+    shared_ptr<string> Tasks::searchTask(std::string const &searchIn) { // TODO: Optimierung Levenshtein Algorithmus
         auto it = std::find(task.begin(), task.end(), searchIn);
         if (it != task.end()) {
             std::cout << "Task: " << *it << std::endl;
+            return std::make_shared<string>( *it);
         } else {
             std::cout << "Ein Task mit diesem Namen existiert nicht, bitte den richtigen Tasknamen eingeben"
                       << std::endl;
+            return nullptr;
         }
     }
 

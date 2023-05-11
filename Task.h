@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <memory>
 #include <algorithm>
 
 namespace ToDoListAdventure {
@@ -19,8 +20,8 @@ namespace ToDoListAdventure {
     public:
         Tasks() = default;
         void newTask(std::string const &task);
-        void searchTask(std::string const &searchIn);
-        void searchTask();
+        std::shared_ptr<std::string> searchTask(std::string const &searchIn);
+        std::shared_ptr<std::string> searchTask();
         void showTask();
         void deleteTask();
         std::string suggestTask();
