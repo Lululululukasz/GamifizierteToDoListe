@@ -9,7 +9,7 @@ int main() {
     tasks.newTask("test");
     tasks.newTask("Dishes");
     tasks.showTask();
-    std::cout << tasks.suggestTask() << std::endl;
+    tasks.addSuggested(tasks.suggestTask());
     tasks.searchTask();
     tasks.deleteTask();
 

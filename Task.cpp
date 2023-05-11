@@ -53,13 +53,30 @@ namespace ToDoListAdventure {
             }
     }
 
+    void Tasks::addSuggested(std::string const &task) {
+        char yn;
+        std::cout << "Do you want to add this task? y for yes, n for no: ";
+        std::cin >> yn;
+        if(yn == 'y'){
+            this->task.emplace_back(task);
+            std::cout << "Added Task: " << task << std::endl;
+        }else if(yn == 'n'){
+            std::cout << "Did not add Task: " << task << std::endl;
+        }else{
+            std::cout << "invalid input" << std::endl;
+        }
+    }
+
    string Tasks::suggestTask(){
         int min {0}, max {static_cast<int>(defaultTask.size()) -1}, zwischenspeicher;
        std::random_device rd;
        std::default_random_engine eng(rd());
        uniform_int_distribution<int> distr(min, max);
        zwischenspeicher = distr(eng);
-        return defaultTask[zwischenspeicher];
+
+       std::cout << "How about: " << defaultTask[zwischenspeicher] << "?" << std::endl;
+
+       return defaultTask[zwischenspeicher];
     }
     // ToDoListAdventure
 }

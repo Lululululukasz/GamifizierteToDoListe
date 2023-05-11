@@ -24,6 +24,7 @@ namespace ToDoListAdventure {
         std::shared_ptr<std::string> searchTask();
         void showTask();
         void deleteTask();
+        void addSuggested(std::string const &task);
         std::string suggestTask();
     };
 
