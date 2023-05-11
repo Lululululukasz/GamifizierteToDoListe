@@ -38,7 +38,7 @@ namespace ToDoListAdventure {
     void Categories::showTasksInCategory(std::string categoryName) {
         for (auto &c: this->category)
             if (categoryName == c.first) {
-                std::cout << std::endl << "Here are all the Tasks in the Category \" " << c.first << "\"" << std::endl;
+                std::cout << std::endl << "Here are all the Tasks in the Category \"" << c.first << "\"" << std::endl;
                 for (const auto task : c.second) { // print each task in that category
                     std::cout << "   - " << *task << std::endl;
                 }
