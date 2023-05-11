@@ -26,6 +26,8 @@ int main() {
     categories.assignTaskToCategory(tasks.searchTask("watch c++ video"), "studying");
     categories.showAllCategories();
 
+    categories.showTasksInCategory("shopping");
+
     return 0;
 }
 

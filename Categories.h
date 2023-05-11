@@ -25,7 +25,8 @@ namespace ToDoListAdventure {
         void showAllCategories();
         void deleteCategory(std::string categoryToDelete);
 
-        void assignTaskToCategory( std::shared_ptr<std::string>, std::string );
+        void assignTaskToCategory( std::shared_ptr<std::string> ptrToTask, std::string categoryName);
+        void showTasksInCategory(std::string categoryName);
     };
 
 } // ToDoListAdventure
