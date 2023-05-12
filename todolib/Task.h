@@ -14,15 +14,18 @@ class Task {
 private:
     string id;
     bool done {false};
-    // TODO datetimes
+    // TODO datetime
 
 public:
     string name;
     string description;
 
-    Task(string n, string d);
+    Task(const string &n, const string &d);
+
     bool getDoneStatus();
+
     void setAsDone();
+
     void setAsUndone();
 
 };

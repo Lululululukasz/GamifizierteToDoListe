@@ -9,8 +9,8 @@
 using namespace std;
 
 
-Task::Task(string n, string d) {
-    this->id = n + to_string((int)time(NULL));
+Task::Task(const string &n, const string &d) {
+    this->id = n + to_string((int) time(nullptr));
     this->name = n;
     this->description = d;
 }
