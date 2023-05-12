@@ -13,14 +13,19 @@ using namespace std;
 class Task {
 private:
     string id;
-    bool done {false};
+    bool done{false};
     // TODO datetime
 
 public:
     string name;
     string description;
 
+    // Constructor
     Task(const string &n, const string &d);
+
+    string getID();
+
+    bool isSame(const Task &other);
 
     bool getDoneStatus();
 

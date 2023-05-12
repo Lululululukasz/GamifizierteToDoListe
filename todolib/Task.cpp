@@ -15,6 +15,18 @@ Task::Task(const string &n, const string &d) {
     this->description = d;
 }
 
+string Task::getID() {
+    return this->id;
+}
+
+bool Task::isSame(const Task &other) {
+    if (this->getID() == other.id) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 bool Task::getDoneStatus() {
     return this->done;
 }
