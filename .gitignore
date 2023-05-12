@@ -1,0 +1,20 @@
+# CMake
+.cmake
+CMakeCache.txt
+CMakeFiles
+Makefile
+Testing
+build
+cmake-build-debug
+cmake_install.cmake
+
+# IDE trash
+.idea
+*.cbp
+
+# Editor stuff
+*.swp
+*~
+
+# Executable
+pic_aem_projekt
