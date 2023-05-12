@@ -2,9 +2,13 @@
 #include "Task.h"
 #include "Categories.h"
 
+#include <QApplication>
+#include <QWidget>
+
 using namespace ToDoListAdventure;
 
-int main() {
+int main(int argc, char** argv) {
+    /*
     Tasks tasks = Tasks();
     tasks.newTask("test");
     tasks.newTask("Dishes");
@@ -27,8 +31,14 @@ int main() {
     categories.showAllCategories();
 
     categories.showTasksInCategory("shopping");
+    */
 
-    return 0;
+    // Initialisiere eine QApplication-Instanz
+    QApplication app(argc, argv);
+    QWidget fenster; // lege ein Fenster an ..
+    fenster.show();  // ... und zeige es.
+    // Starten der QApplication
+    return app.exec();
 }
 
 
