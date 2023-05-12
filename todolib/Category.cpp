@@ -27,6 +27,8 @@ Category &Category::operator=(Category &other) {
     this->name = other.name;
 }
 
+//TODO move semantik ich glaube das ist das Problem
+
 const string Category::getID() {
     return this->id;
 }
@@ -43,12 +45,12 @@ unique_ptr<list<Task>> Category::getTasks() {
     return make_unique<list<Task>>(this->tasks);
 }
 
-void Category::addTask(Task task) {
+void Category::addTask(const Task &task) {
     this->tasks.emplace_front(task);
 }
 
-bool Category::deleteTask(const string &id) {
-    if (0 != this->tasks.remove_if([&] (Task t) {return (t.getID() == id);})) {
+bool Category::deleteTask(const string &deleteID) {
+    if (0 != this->tasks.remove_if([&] (Task t) {return (t.getID() == deleteID);})) {
         return true;
     } else {
         return false;

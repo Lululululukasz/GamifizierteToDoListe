@@ -21,7 +21,7 @@ public:
     string name;
 
     // Constructor
-    Category(const string &n);
+    explicit Category(const string &n);
 
     // Copy Constructor
     Category(Category &other);
@@ -35,9 +35,9 @@ public:
 
     unique_ptr<list<Task>> getTasks(); // ! returns a pointer that needs to be dereferentiated with "*"!
 
-    void addTask(Task task);
+    void addTask(const Task &task);
 
-    bool deleteTask(const string &id); // returns true if successfully deleted
+    bool deleteTask(const string &deleteID); // returns true if successfully deleted
 
 };
 

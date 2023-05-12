@@ -21,7 +21,7 @@ public:
     string description;
 
     // Constructor
-    Task(const string &n, const string &d);
+    explicit Task(const string &n, const string &d);
 
     string getID();
 
