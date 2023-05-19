@@ -2,20 +2,22 @@
 #define PIC_AEM_PROJEKT_CHECKBOX_H
 #include <QWidget>
 #include <QCheckBox>
+#include <QPushButton>
 
 
-class CheckBox : public QWidget {
+class TaskWidget : public QWidget {
 
 
 Q_OBJECT
 
 
 public:
-    explicit CheckBox(QWidget *parent = nullptr);
+    explicit TaskWidget(QWidget *parent = nullptr);
 
 
 private:
-    QCheckBox* cb;
+    QCheckBox* taskcheckbox;
+    QPushButton* taskdeletebutton;
 
 
 private slots:

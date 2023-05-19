@@ -37,14 +37,12 @@ int main(int argc, char** argv) {
     // Initialisiere eine QApplication-Instanz
     QApplication app(argc, argv);
 
-    CheckBox window;
+    TaskWidget window;
 
     window.resize(250, 150);
     window.setWindowTitle("to do list");
     window.show();
 
-    QWidget fenster; // lege ein Fenster an
-    fenster.show();  // ... und zeige es.
     // Starten der QApplication
     return app.exec();
 }

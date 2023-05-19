@@ -5,24 +5,32 @@
 #include <QHBoxLayout>
 #include <QFont>
 #include "TaskWidget.h"
+#include <QPushButton>
 
 
-CheckBox::CheckBox(QWidget *parent)
+
+TaskWidget::TaskWidget(QWidget *parent)
         : QWidget(parent) {
 
 
     QHBoxLayout *hbox = new QHBoxLayout(this);
-    cb = new QCheckBox(this);
-    cb->setText("some Task");
-    cb->setCheckState(Qt::Unchecked);
-    hbox->addWidget(cb, 0, Qt::AlignLeft | Qt::AlignTop);
+    taskcheckbox = new QCheckBox(this);
+    taskcheckbox ->setText("some Task");
+    taskcheckbox ->setCheckState(Qt::Unchecked);
+    taskdeletebutton = new QPushButton("button");
+    taskdeletebutton->setGeometry(50,100,150,80);
+    hbox->addWidget(taskcheckbox, 0, Qt::AlignLeft | Qt::AlignTop);
+    hbox->addWidget(taskdeletebutton, Qt::AlignRight, Qt::AlignTop);
 
 
-    connect(cb, &QCheckBox::stateChanged, this, &CheckBox::strikeout_task);
+    //taskdeletebutton->show();
+
+    //QObject::connect(button,&QPushButton::clicked,insert());
+    connect(taskcheckbox, &QCheckBox::stateChanged, this, &TaskWidget::strikeout_task);
 }
 
 
-void CheckBox::strikeout_task(int state) {
+void TaskWidget::strikeout_task(int state) {
 
 
     QFont *font = new QFont;
@@ -30,9 +38,9 @@ void CheckBox::strikeout_task(int state) {
 
     if (state == Qt::Checked) {
         font->setStrikeOut(true);
-        cb->setFont(*font);
+        taskcheckbox->setFont(*font);
     } else {
         font->setStrikeOut(false);
-        cb->setFont(*font);
+        taskcheckbox->setFont(*font);
     }
 }
