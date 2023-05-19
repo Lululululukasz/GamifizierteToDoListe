@@ -10,36 +10,37 @@
 #include <list>
 #include <memory>
 
-using namespace std;
 
-class ToDoList {
-private:
-    list<Task> suggestions;
+namespace todolib {
+    using namespace std;
 
-public:
-    list<Category> categories;
+    class ToDoList {
+    private:
+        list<Task> suggestions;
 
-    explicit ToDoList();
+    public:
+        list<Category> categories;
 
-    unique_ptr<list<Category>> getCategories();
+        explicit ToDoList();
 
-    unique_ptr<Category> getCategoryByName(const string &name); // ! Will just get you the first one with that name
-    unique_ptr<Category> getCategoryByID(const string &id);
+        Category &getCategoryByName(const string &name); // ! Will just get you the first one with that name
+        Category &getCategoryByID(const string &id);
 
-    void addCategory(Category &&category);
+        void addCategory(Category &&category);
 
-    bool deleteCategory(const string &c);
+        bool deleteCategory(const string &c);
 
-    list<Task> showAllTasks();
+        list<Task> showAllTasks();
 
-    unique_ptr<Task> getTaskByName(const string &search); // formerly search
+        Task &getTaskByName(const string &search); // formerly search
 
-    // TODO search funktion mit Levenshtein Algorithmus
+        // TODO search funktion mit Levenshtein Algorithmus
 
-    Task suggestTask();
+        Task suggestTask();
 
+    };
 
-};
+}
 
 
 #endif //PIC_AEM_PROJEKT_TODOLIST_H

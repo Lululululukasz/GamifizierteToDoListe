@@ -4,8 +4,10 @@
 
 #include "Category.h"
 #include <memory>
+#include <iostream>
 
 using namespace std;
+using namespace todolib;
 
 // Constructor
 Category::Category(const string &n) {
@@ -16,32 +18,36 @@ Category::Category(const string &n) {
 // Copy Constructor
 Category::Category(Category &other) {
     this->id = other.getID();
-    this->tasks = *other.getTasks();
+    this->tasks = *make_unique<list<Task>>(other.tasks);
     this->name = other.name;
 }
 
 // Copy Assignment Constructor
-Category &Category::operator=(Category &other) {
+Category &Category::operator=(Category const &other) {
     this->id = other.getID();
-    this->tasks = *other.getTasks();
+    this->tasks = *make_unique<list<Task>>(other.tasks);
     this->name = other.name;
+
+    return *this;
 }
 
 // Move Constructor
 Category::Category(Category &&other) noexcept {
     this->id = other.getID();
-    this->tasks = *other.getTasks();
+    this->tasks = *make_unique<list<Task>>(other.tasks);
     this->name = other.name;
 }
 
 // Move Assignment Constructor
-Category &Category::operator=(Category &&other) {
+Category &Category::operator=(Category &&other) noexcept {
     this->id = other.getID();
-    this->tasks = *other.getTasks();
+    this->tasks = *make_unique<list<Task>>(other.tasks);
     this->name = other.name;
+
+    return *this;
 }
 
-const string Category::getID() {
+string Category::getID() const {
     return this->id;
 }
 
@@ -53,13 +59,15 @@ bool Category::isSame(const Category &other) {
     }
 }
 
-unique_ptr<list<Task>> Category::getTasks() {
-    return make_unique<list<Task>>(this->tasks);
+void Category::addTask(const Task &task) {
+    tasks.push_front(task);
+    cout << "addTask &: " << tasks.front().name << endl; // debug
+}
+void Category::addTask(Task &&task) {
+    tasks.push_front(task);
+    cout << "addTask &&:" << tasks.front().name << endl; // debug
 }
 
-void Category::addTask(const Task &task) {
-    this->tasks.emplace_front(task);
-}
 
 bool Category::deleteTask(const string &deleteID) {
     if (0 != this->tasks.remove_if([&] (Task t) {return (t.getID() == deleteID);})) {

@@ -10,45 +10,47 @@
 #include "Task.h"
 #include <memory>
 
-using namespace std;
 
-class Category {
-private:
-    string id;
-    list<Task> tasks;
+namespace todolib {
+    using namespace std;
 
-public:
-    string name;
+    class Category {
+    private:
+        string id;
 
-    // Constructor
-    explicit Category(const string &n);
+    public:
+        string name;
+        list<Task> tasks;
 
-    // Copy Constructor
-    Category(Category &other);
+        // Constructor
+        explicit Category(const string &n);
 
-    // Copy Assignment Constructor
-    Category &operator=(Category &other);
+        // Copy Constructor
+        Category(Category &other);
 
-    // Move Constructor
-    Category (Category &&other) noexcept ;
+        // Copy Assignment Constructor
+        Category &operator=(Category const &other);
 
-    // Move Assignment Constructor
-    Category& operator=(Category&& other);
+        // Move Constructor
+        Category(Category &&other) noexcept;
 
-    // Destructor
-    ~Category() = default;
+        // Move Assignment Constructor
+        Category &operator=(Category &&other) noexcept;
 
-    const string getID();
+        // Destructor
+        ~Category() = default;
 
-    bool isSame(const Category &other);
+        string getID() const;
 
-    unique_ptr<list<Task>> getTasks(); // ! returns a pointer that needs to be dereferentiated with "*"!
+        bool isSame(const Category &other);
 
-    void addTask(const Task &task);
+        void addTask(const Task &task);
+        void addTask(Task &&task);
 
-    bool deleteTask(const string &deleteID); // returns true if successfully deleted
+        bool deleteTask(const string &deleteID); // returns true if successfully deleted
 
-};
+    };
 
+}
 
 #endif //PIC_AEM_PROJEKT_CATEGORY_H

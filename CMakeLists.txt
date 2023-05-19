@@ -5,6 +5,6 @@ set(CMAKE_CXX_STANDARD 20)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 add_subdirectory(todolib)
-add_executable(pic_aem_projekt main.cpp Task.cpp Categories.cpp)
+add_executable(pic_aem_projekt main.cpp)
 target_link_libraries(pic_aem_projekt Qt5::Widgets)
 target_link_libraries(pic_aem_projekt todolib)

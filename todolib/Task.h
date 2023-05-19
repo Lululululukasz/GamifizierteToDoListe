@@ -8,32 +8,35 @@
 #include <string>
 #include <vector>
 
-using namespace std;
 
-class Task {
-private:
-    string id;
-    bool done{false};
-    // TODO datetime
+namespace todolib {
+    using namespace std;
 
-public:
-    string name;
-    string description;
+    class Task {
+    private:
+        string id;
+        bool done{false};
+        // TODO datetime
 
-    // Constructor
-    explicit Task(const string &n, const string &d);
+    public:
+        string name;
+        string description;
 
-    string getID();
+        // Constructor
+        explicit Task(const string &n, const string &d);
 
-    bool isSame(const Task &other);
+        string getID();
 
-    bool getDoneStatus();
+        bool isSame(const Task &other);
 
-    void setAsDone();
+        bool getDoneStatus();
 
-    void setAsUndone();
+        void setAsDone();
 
-};
+        void setAsUndone();
 
+    };
+
+}
 
 #endif //PIC_AEM_PROJEKT_TASK_H
