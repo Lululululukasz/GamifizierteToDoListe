@@ -1,33 +1,28 @@
 #include "Window.h"
 
 #include <QPushButton>
-#include <QTextEdit>
 #include <QApplication>
 
-Window::Window(QWidget *parent) : QWidget(parent){
-    setFixedSize(400, 200);
+Window::Window(QWidget *parent) : QWidget(parent) {
+    setFixedSize(1400, 800);
     mainList = todolib::ToDoList();
 
-    aTNameTextEdit = new QTextEdit(this);
-    aTNameTextEdit->setGeometry(10, 10, 100, 30);
+    taskButton = new QPushButton("Add Task", this);
+    taskButton->setGeometry(10, 100, 80, 30);
+    taskButton->setCheckable(true);
 
-    aTDecriptionTextEdit = new QTextEdit(this);
-    aTDecriptionTextEdit->setGeometry(10, 40, 200, 60);
-
-    addTaskButton = new QPushButton("Add Task", this);
-    addTaskButton->setGeometry(10, 100, 80, 30);
-    addTaskButton->setCheckable(true);
-
-    connect(addTaskButton, SIGNAL (clicked(bool)), this, SLOT (addTaskClicked(bool)));
+    connect(taskButton, SIGNAL(clicked(bool)), this, SLOT (openNewWindow(bool)));
 }
 
-void Window::addTaskClicked(bool checked)
-{
-    if (checked) {
-        this->addTaskButton->setChecked(false);
-        std::string name{this->aTNameTextEdit->toPlainText().toStdString()};
-        std::string description{this->aTDecriptionTextEdit->toPlainText().toStdString()};
-        mainList.getCategoryByName("General").addTask(todolib::Task(name, description));
-        mainList.showAllTasks();
+void Window::openNewWindow(bool checked){
+    if(checked) {
+        this->taskButton->setChecked(false);
+        taskBox = new AddTaskBox();
+        taskBox->setmainList(mainList);//dosnt work.
+        taskBox->show();
     }
+}
+
+todolib::ToDoList Window::getList(){
+    return this->mainList;
 }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "todolib\todolib.h"
+#include "AddTaskBox.h"
 #include "Window.h"
 
 #include <QApplication>
