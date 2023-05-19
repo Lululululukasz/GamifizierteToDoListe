@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Task.h"
 #include "Categories.h"
+#include "GUI/TaskWidget.h"
 
 #include <QApplication>
 #include <QWidget>
@@ -35,7 +36,14 @@ int main(int argc, char** argv) {
 
     // Initialisiere eine QApplication-Instanz
     QApplication app(argc, argv);
-    QWidget fenster; // lege ein Fenster an ..
+
+    CheckBox window;
+
+    window.resize(250, 150);
+    window.setWindowTitle("to do list");
+    window.show();
+
+    QWidget fenster; // lege ein Fenster an
     fenster.show();  // ... und zeige es.
     // Starten der QApplication
     return app.exec();
