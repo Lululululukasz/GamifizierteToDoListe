@@ -18,10 +18,6 @@ ToDoList::ToDoList() {
     };
 }
 
-unique_ptr<list<Category>> ToDoList::getCategories() {
-    return make_unique<list<Category>>(this->categories);
-}
-
 unique_ptr<Category> ToDoList::getCategoryByName(const string &name) {
     for (Category category : categories) {
         if (category.name == name){
@@ -40,7 +36,7 @@ unique_ptr<Category> ToDoList::getCategoryByID(const string &id) {
     return nullptr;
 }
 
-void ToDoList::addCategory(const Category &category) {
+void ToDoList::addCategory(Category &&category) {
     this->categories.emplace_back(category);
 }
 
@@ -55,15 +51,19 @@ bool ToDoList::deleteCategory(const string &id) {
 list<Task> ToDoList::showAllTasks() {
     list<Task> allTasks;
     for (Category category : this->categories) {
-        allTasks.emplace_back(*(category.getTasks()));
+        for (const Task& task : *category.getTasks()) {
+            allTasks.push_back(task);
+        }
     }
     return allTasks;
 }
 
 unique_ptr<Task> ToDoList::getTaskByName(const string &search) {
-    for (Task task : *(this->getCategories())) {
-        if (task.name == search){
-            return make_unique<Task>(task);
+    for (Category category : this->categories) {
+        for (const Task& task: *category.getTasks()) {
+            if (task.name == search) {
+                return make_unique<Task>(task);
+            }
         }
     }
     return nullptr;

@@ -27,7 +27,19 @@ Category &Category::operator=(Category &other) {
     this->name = other.name;
 }
 
-//TODO move semantik ich glaube das ist das Problem
+// Move Constructor
+Category::Category(Category &&other) noexcept {
+    this->id = other.getID();
+    this->tasks = *other.getTasks();
+    this->name = other.name;
+}
+
+// Move Assignment Constructor
+Category &Category::operator=(Category &&other) {
+    this->id = other.getID();
+    this->tasks = *other.getTasks();
+    this->name = other.name;
+}
 
 const string Category::getID() {
     return this->id;

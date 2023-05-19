@@ -29,6 +29,15 @@ public:
     // Copy Assignment Constructor
     Category &operator=(Category &other);
 
+    // Move Constructor
+    Category (Category &&other) noexcept ;
+
+    // Move Assignment Constructor
+    Category& operator=(Category&& other);
+
+    // Destructor
+    ~Category() = default;
+
     const string getID();
 
     bool isSame(const Category &other);

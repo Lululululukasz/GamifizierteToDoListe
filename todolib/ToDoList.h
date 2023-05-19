@@ -14,10 +14,10 @@ using namespace std;
 
 class ToDoList {
 private:
-    list<Category> categories;
     list<Task> suggestions;
 
 public:
+    list<Category> categories;
 
     explicit ToDoList();
 
@@ -26,7 +26,7 @@ public:
     unique_ptr<Category> getCategoryByName(const string &name); // ! Will just get you the first one with that name
     unique_ptr<Category> getCategoryByID(const string &id);
 
-    void addCategory(const Category &category);
+    void addCategory(Category &&category);
 
     bool deleteCategory(const string &c);
 
