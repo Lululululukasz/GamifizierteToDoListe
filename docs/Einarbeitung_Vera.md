@@ -1,3 +1,0 @@
-# Einarbeitung
-
-- Jira
