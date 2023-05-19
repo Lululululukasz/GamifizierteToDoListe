@@ -1,46 +1,39 @@
 #include <iostream>
-#include "Task.h"
-#include "Categories.h"
+#include "todolib\todolib.h"
 
 #include <QApplication>
 #include <QWidget>
 
-using namespace ToDoListAdventure;
 
-int main(int argc, char** argv) {
-    /*
-    Tasks tasks = Tasks();
-    tasks.newTask("test");
-    tasks.newTask("Dishes");
-    tasks.showTask();
-    tasks.addSuggested(tasks.suggestTask());
-    tasks.searchTask();
-    tasks.deleteTask();
+int main(int argc, char **argv) {
 
+    using namespace std;
+    using namespace todolib;
 
-    tasks.newTask("buy apples");
-    tasks.newTask("buy oranges");
-    tasks.newTask("watch c++ video");
+    // Backend Tests start
 
-    Categories categories = Categories();
-    categories.newCategory("shopping");
-    categories.newCategory("studying");
-    categories.assignTaskToCategory(tasks.searchTask("buy apples"), "shopping");
-    categories.assignTaskToCategory(tasks.searchTask("buy oranges"), "shopping");
-    categories.assignTaskToCategory(tasks.searchTask("watch c++ video"), "studying");
-    categories.showAllCategories();
+    ToDoList mainList = ToDoList();
 
-    categories.showTasksInCategory("shopping");
-    */
+    cout << "getCategoryByName: " << mainList.getCategoryByName("General").name << endl;
+    mainList.getCategoryByName("General").addTask(Task("Test", ""));
+    mainList.getCategoryByName("General").addTask(Task("Dishes", ""));
+
+    mainList.showAllTasks();
+
+    cout << "Suggested Task: " << mainList.suggestTask().name << endl;
+
+    cout << "searched Task \"Test\": " << mainList.getTaskByName("Test").name << endl;
+    mainList.getCategoryByName("General").deleteTask(mainList.getTaskByName("Test").getID());
+
+    mainList.showAllTasks();
+
+    // Backend tests end
 
     // Initialisiere eine QApplication-Instanz
     QApplication app(argc, argv);
-    QWidget fenster; // lege ein Fenster an ..
+    QWidget fenster; // lege ein Fenster an
     fenster.show();  // ... und zeige es.
     // Starten der QApplication
     return app.exec();
+
 }
-
-
-
-
