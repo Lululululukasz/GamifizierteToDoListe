@@ -59,12 +59,14 @@ bool Category::isSame(const Category &other) {
     }
 }
 
-void Category::addTask(const Task &task) {
+void Category::addTask(Task &task) {
     tasks.push_front(task);
+    task.setCategory(*this);
     cout << "addTask &: " << tasks.front().name << endl; // debug
 }
 void Category::addTask(Task &&task) {
     tasks.push_front(task);
+    task.setCategory(*this);
     cout << "addTask &&:" << tasks.front().name << endl; // debug
 }
 

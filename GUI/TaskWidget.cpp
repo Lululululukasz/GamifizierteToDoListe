@@ -1,29 +1,22 @@
-//
-// Created by vera on 14.05.23.
-//
 #include <QCheckBox>
 #include <QHBoxLayout>
 #include <QFont>
+#include <QStyle>
 #include "TaskWidget.h"
 #include <QPushButton>
-
 
 
 TaskWidget::TaskWidget(QWidget *parent)
         : QWidget(parent) {
 
-
     QHBoxLayout *hbox = new QHBoxLayout(this);
     taskcheckbox = new QCheckBox(this);
     taskcheckbox ->setText("some Task");
     taskcheckbox ->setCheckState(Qt::Unchecked);
-    taskdeletebutton = new QPushButton("button");
-    taskdeletebutton->setGeometry(50,100,150,80);
+    taskdeletebutton = new QPushButton();
+    taskdeletebutton->setIcon(taskdeletebutton -> style()->standardIcon(QStyle::SP_TrashIcon));
     hbox->addWidget(taskcheckbox, 0, Qt::AlignLeft | Qt::AlignTop);
-    hbox->addWidget(taskdeletebutton, Qt::AlignRight, Qt::AlignTop);
-
-
-    //taskdeletebutton->show();
+    hbox->addWidget(taskdeletebutton, 0, Qt::AlignRight | Qt::AlignTop);
 
     //QObject::connect(button,&QPushButton::clicked,insert());
     connect(taskcheckbox, &QCheckBox::stateChanged, this, &TaskWidget::strikeout_task);
@@ -31,7 +24,6 @@ TaskWidget::TaskWidget(QWidget *parent)
 
 
 void TaskWidget::strikeout_task(int state) {
-
 
     QFont *font = new QFont;
 

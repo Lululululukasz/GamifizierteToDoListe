@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include "Category.h"
 
 
 namespace todolib {
@@ -16,6 +17,7 @@ namespace todolib {
     private:
         string id;
         bool done{false};
+        shared_ptr<Category> category;
         // TODO datetime
 
     public:
@@ -30,6 +32,10 @@ namespace todolib {
         bool isSame(const Task &other);
 
         bool getDoneStatus();
+
+        shared_ptr<Category> getCategory();
+
+        void setCategory(shared_ptr<Category> category);
 
         void setAsDone();
 
