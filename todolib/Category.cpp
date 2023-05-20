@@ -61,12 +61,12 @@ bool Category::isSame(const Category &other) {
 
 void Category::addTask(Task &task) {
     tasks.push_front(task);
-    task.setCategory(*this);
+    task.setCategory(make_shared<Category>(*this));
     cout << "addTask &: " << tasks.front().name << endl; // debug
 }
 void Category::addTask(Task &&task) {
     tasks.push_front(task);
-    task.setCategory(*this);
+    task.setCategory(make_shared<Category>(*this));
     cout << "addTask &&:" << tasks.front().name << endl; // debug
 }
 

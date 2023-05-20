@@ -1,17 +1,18 @@
+#include "TaskWidget.h"
+
 #include <QCheckBox>
 #include <QHBoxLayout>
 #include <QFont>
 #include <QStyle>
-#include "TaskWidget.h"
 #include <QPushButton>
 
 
-TaskWidget::TaskWidget(QWidget *parent)
+TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
         : QWidget(parent) {
 
     QHBoxLayout *hbox = new QHBoxLayout(this);
     taskcheckbox = new QCheckBox(this);
-    taskcheckbox ->setText("some Task");
+    taskcheckbox ->setText(QString::fromStdString(task.name));
     taskcheckbox ->setCheckState(Qt::Unchecked);
     taskdeletebutton = new QPushButton();
     taskdeletebutton->setIcon(taskdeletebutton -> style()->standardIcon(QStyle::SP_TrashIcon));

@@ -11,7 +11,8 @@ int main(int argc, char** argv) {
     // Initialisiere eine QApplication-Instanz
     QApplication app(argc, argv);
 
-    TaskWidget window;
+    todolib::Task task {"Name", "Beschreibung"};
+    TaskWidget window {task};
 
     window.resize(250, 150);
     window.setWindowTitle("to do list");

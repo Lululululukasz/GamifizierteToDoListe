@@ -1,5 +1,6 @@
 #ifndef PIC_AEM_PROJEKT_CHECKBOX_H
 #define PIC_AEM_PROJEKT_CHECKBOX_H
+#include "todolib/Task.h"
 #include <QWidget>
 #include <QCheckBox>
 #include <QPushButton>
@@ -12,7 +13,7 @@ Q_OBJECT
 
 
 public:
-    explicit TaskWidget(QWidget *parent = nullptr);
+    explicit TaskWidget(todolib::Task &task,QWidget *parent = nullptr);
 
 
 private:
