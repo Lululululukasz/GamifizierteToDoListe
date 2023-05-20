@@ -6,11 +6,10 @@
 #include <QStyle>
 #include <QPushButton>
 
-
 TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
-        : QWidget(parent) {
+        : task{task}, QWidget(parent) {
 
-    QHBoxLayout *hbox = new QHBoxLayout(this);
+    auto *hbox = new QHBoxLayout(this);
     taskcheckbox = new QCheckBox(this);
     taskcheckbox ->setText(QString::fromStdString(task.name));
     taskcheckbox ->setCheckState(Qt::Unchecked);
@@ -19,15 +18,13 @@ TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
     hbox->addWidget(taskcheckbox, 0, Qt::AlignLeft | Qt::AlignTop);
     hbox->addWidget(taskdeletebutton, 0, Qt::AlignRight | Qt::AlignTop);
 
-    //QObject::connect(button,&QPushButton::clicked,insert());
+    connect(taskdeletebutton,&QPushButton::clicked, this, &TaskWidget::delete_task);
     connect(taskcheckbox, &QCheckBox::stateChanged, this, &TaskWidget::strikeout_task);
 }
-
 
 void TaskWidget::strikeout_task(int state) {
 
     QFont *font = new QFont;
-
 
     if (state == Qt::Checked) {
         font->setStrikeOut(true);
@@ -36,4 +33,8 @@ void TaskWidget::strikeout_task(int state) {
         font->setStrikeOut(false);
         taskcheckbox->setFont(*font);
     }
+}
+
+void TaskWidget::delete_task() {
+    emit taskDeleted();
 }
