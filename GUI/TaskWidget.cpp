@@ -2,39 +2,79 @@
 
 #include <QCheckBox>
 #include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QFont>
 #include <QStyle>
 #include <QPushButton>
+#include <QToolButton>
+
 
 TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
         : task{task}, QWidget(parent) {
 
-    auto *hbox = new QHBoxLayout(this);
-    taskcheckbox = new QCheckBox(this);
-    taskcheckbox ->setText(QString::fromStdString(task.name));
-    taskcheckbox ->setCheckState(Qt::Unchecked);
-    taskdeletebutton = new QPushButton();
-    taskdeletebutton->setIcon(taskdeletebutton -> style()->standardIcon(QStyle::SP_TrashIcon));
-    hbox->addWidget(taskcheckbox, 0, Qt::AlignLeft | Qt::AlignTop);
-    hbox->addWidget(taskdeletebutton, 0, Qt::AlignRight | Qt::AlignTop);
+    hbox = new QHBoxLayout();
+    vbox = new QVBoxLayout(this);
 
-    connect(taskdeletebutton,&QPushButton::clicked, this, &TaskWidget::delete_task);
-    connect(taskcheckbox, &QCheckBox::stateChanged, this, &TaskWidget::strikeout_task);
+    taskCheckbox = new QCheckBox(this);
+    taskCheckbox->setCheckState(Qt::Unchecked);
+
+    taskNameLabel = new QLabel(this);
+    taskNameLabel->setText(QString::fromStdString(task.name));
+
+    taskDeleteButton = new QPushButton();
+    taskDeleteButton->setIcon(taskDeleteButton->style()->standardIcon(QStyle::SP_TrashIcon));
+
+    showDescriptionButton = new QToolButton(this);
+    showDescriptionButton->setCheckable(true);
+    showDescriptionButton->setArrowType(Qt::RightArrow);
+    showDescriptionButton->setStyleSheet("QToolButton{border: none;}");
+
+    taskDescriptionLabel = new QLabel();
+    taskDescriptionLabel->setWordWrap(true);
+    taskDescriptionLabel->setText(QString::fromStdString(task.description));
+
+    vbox->addLayout(hbox);
+    hbox->addWidget(taskCheckbox, 0, Qt::AlignLeft | Qt::AlignVCenter);
+    hbox->addWidget(showDescriptionButton, 0, Qt::AlignLeft | Qt::AlignVCenter);
+    hbox->addWidget(taskNameLabel, 1, Qt::AlignLeft | Qt::AlignVCenter);
+    hbox->addWidget(taskDeleteButton, 0, Qt::AlignRight | Qt::AlignVCenter);
+
+    connect(taskDeleteButton, &QPushButton::clicked, this, &TaskWidget::deleteTask);
+    connect(taskCheckbox, &QCheckBox::stateChanged, this, &TaskWidget::strikeoutTask);
+    connect(showDescriptionButton, &QToolButton::toggled, [=](bool checked) {
+        showDescriptionButton->setArrowType(checked ? Qt::ArrowType::DownArrow : Qt::ArrowType::RightArrow);
+        if (checked) showDescription();
+        else hideDescription();
+    });
+
 }
 
-void TaskWidget::strikeout_task(int state) {
+void TaskWidget::strikeoutTask(int state) {
 
     QFont *font = new QFont;
 
     if (state == Qt::Checked) {
         font->setStrikeOut(true);
-        taskcheckbox->setFont(*font);
+        taskNameLabel->setFont(*font);
     } else {
         font->setStrikeOut(false);
-        taskcheckbox->setFont(*font);
+        taskNameLabel->setFont(*font);
     }
 }
 
-void TaskWidget::delete_task() {
+void TaskWidget::deleteTask() {
     emit taskDeleted();
 }
+
+void TaskWidget::showDescription() {
+    taskDescriptionLabel->setVisible(true);
+    vbox->addWidget(taskDescriptionLabel, 0, Qt::AlignLeft | Qt::AlignVCenter);
+}
+
+void TaskWidget::hideDescription() {
+
+    hbox->removeWidget(taskDescriptionLabel);
+    taskDescriptionLabel->setVisible(false);
+
+}
+

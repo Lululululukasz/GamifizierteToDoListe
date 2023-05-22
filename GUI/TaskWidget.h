@@ -4,6 +4,11 @@
 #include <QWidget>
 #include <QCheckBox>
 #include <QPushButton>
+#include <QToolButton>
+#include <QLabel>
+#include <QScrollArea>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 
 class TaskWidget : public QWidget {
@@ -18,12 +23,19 @@ signals:
 
 private:
     todolib::Task &task;
-    QCheckBox* taskcheckbox;
-    QPushButton* taskdeletebutton;
+    QHBoxLayout* hbox;
+    QVBoxLayout* vbox;
+    QCheckBox* taskCheckbox;
+    QLabel* taskNameLabel;
+    QPushButton* taskDeleteButton;
+    QToolButton* showDescriptionButton;
+    QLabel* taskDescriptionLabel;
 
 private slots:
-    void strikeout_task(int);
-    void delete_task();
+    void strikeoutTask(int state);
+    void deleteTask();
+    void showDescription();
+    void hideDescription();
 
 };
 #endif //PIC_AEM_PROJEKT_CHECKBOX_H
