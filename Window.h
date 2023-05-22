@@ -1,24 +1,28 @@
 #ifndef PIC_AEM_PROJEKT_WINDOW_H
 #define PIC_AEM_PROJEKT_WINDOW_H
 
-#include <QWidget>
 #include "AddTaskBox.h"
-#include "todolib\todolib.h"
+#include "todolib/todolib.h"
 
-class QPushButton;
+#include <QWidget>
+#include <QPushButton>
+#include <memory>
+
 class Window : public QWidget{
-Q_OBJECT
+
+    Q_OBJECT
+
 public:
-    explicit Window(QWidget *parent = 0);
-    todolib::ToDoList getList();
+    explicit Window(QWidget *parent = nullptr);
+
 private slots:
     void openNewWindow(bool checked);
+
 private:
-    QPushButton *taskButton;
+    std::shared_ptr<QPushButton> taskButton;
+    std::shared_ptr<AddTaskBox> taskBox;
 
-    AddTaskBox *taskBox;
-
-    todolib::ToDoList mainList;
+    std::shared_ptr<todolib::ToDoList> mainList;
 };
 
 

@@ -1,26 +1,28 @@
 #ifndef PIC_AEM_PROJEKT_ADDTASKBOX_H
 #define PIC_AEM_PROJEKT_ADDTASKBOX_H
 
-#include <QWidget>
-#include "todolib\todolib.h"
+#include "todolib/todolib.h"
 
-class QPushButton;
-class QTextEdit;
+#include <QWidget>
+#include <memory>
+#include <QPushButton>
+#include <QTextEdit>
+
 class AddTaskBox : public QWidget{
 Q_OBJECT
 public:
     explicit AddTaskBox(QWidget *parent = 0);
-    void setmainList(todolib::ToDoList &list);
+    void setmainList(std::shared_ptr<todolib::ToDoList> list);
 signals:
     void isOver();
 private slots:
     void addTaskClicked(bool checked);
 private:
-    QPushButton *addTaskButton;
-    QTextEdit *aTNameTextEdit;
-    QTextEdit *aTDecriptionTextEdit;
+    std::shared_ptr<QPushButton> addTaskButton;
+    std::shared_ptr<QTextEdit> aTNameTextEdit;
+    std::shared_ptr<QTextEdit> aTDecriptionTextEdit;
 
-    todolib::ToDoList *mainList;
+    std::shared_ptr<todolib::ToDoList> mainList;
 };
 
 #endif //PIC_AEM_PROJEKT_ADDTASKBOX_H
