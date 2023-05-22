@@ -23,13 +23,13 @@ signals:
 
 private:
     todolib::Task &task;
-    QHBoxLayout* hbox;
-    QVBoxLayout* vbox;
-    QCheckBox* taskCheckbox;
-    QLabel* taskNameLabel;
-    QPushButton* taskDeleteButton;
-    QToolButton* showDescriptionButton;
-    QLabel* taskDescriptionLabel;
+    std::shared_ptr<QHBoxLayout> hbox;
+    std::shared_ptr<QVBoxLayout> vbox;
+    std::shared_ptr<QCheckBox> taskCheckbox;
+    std::shared_ptr<QLabel> taskNameLabel;
+    std::shared_ptr<QPushButton> taskDeleteButton;
+    std::shared_ptr<QToolButton> showDescriptionButton;
+    std::shared_ptr<QLabel> taskDescriptionLabel;
 
 private slots:
     void strikeoutTask(int state);
