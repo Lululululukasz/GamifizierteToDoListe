@@ -11,10 +11,12 @@
 class AddTaskBox : public QWidget{
 Q_OBJECT
 public:
-    explicit AddTaskBox(QWidget *parent = 0);
-    void setmainList(std::shared_ptr<todolib::ToDoList> list);
+    explicit AddTaskBox(QWidget *parent = nullptr);
+    void setmainList(std::shared_ptr<todolib::ToDoList> &list);
+
 signals:
     void isOver();
+
 private slots:
     void addTaskClicked(bool checked);
 private:

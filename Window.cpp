@@ -18,7 +18,8 @@ void Window::openNewWindow(bool checked){
     if(checked) {
         this->taskButton->setChecked(false);
         taskBox = std::make_shared<AddTaskBox>();
-        taskBox->setmainList(std::shared_ptr<todolib::ToDoList>(mainList));
+        auto mainListPtr = std::shared_ptr<todolib::ToDoList>(mainList);
+        taskBox->setmainList(mainListPtr);
         taskBox->show();
     }
 }

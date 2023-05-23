@@ -21,7 +21,7 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent){
     connect(this, SIGNAL (isOver()), QApplication::instance(), SLOT (quit()));
 }
 
-void AddTaskBox::setmainList(std::shared_ptr<todolib::ToDoList> list){
+void AddTaskBox::setmainList(std::shared_ptr<todolib::ToDoList> &list){
     this->mainList = list;
 }
 
