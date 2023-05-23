@@ -42,5 +42,4 @@ namespace todolib {
 
 }
 
-
 #endif //PIC_AEM_PROJEKT_TODOLIST_H
