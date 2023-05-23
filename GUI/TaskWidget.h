@@ -16,7 +16,7 @@ class TaskWidget : public QWidget {
 Q_OBJECT
 
 public:
-    explicit TaskWidget(todolib::Task &task,QWidget *parent = nullptr);
+    explicit TaskWidget(todolib::Task &task, QWidget *parent = nullptr);
 
 signals:
     void taskDeleted();

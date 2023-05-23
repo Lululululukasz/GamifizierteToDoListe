@@ -20,14 +20,14 @@ class ToDoListWindow : public QWidget {
 Q_OBJECT
 
 public:
-    explicit ToDoListWindow();
+    explicit ToDoListWindow(todolib::ToDoList& toDoList, QWidget *parent = nullptr);
 
 private:
-    todolib::ToDoList toDoList;
-    QPushButton* addCategoryButton;
+    todolib::ToDoList& toDoList;
+    //QPushButton addCategoryButton {QPushButton("add a new category")};
     QVBoxLayout layout {QVBoxLayout(this)};
-    QList<QStringList> categoryWidgets;
-    void addCategory();
+    std::list<CategoryWidget*> categoryWidgets;
+    //void addCategory();
 };
 
 

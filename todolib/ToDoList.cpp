@@ -41,6 +41,10 @@ void ToDoList::addCategory(Category &&category) {
     this->categories.emplace_back(category);
 }
 
+void ToDoList::addCategory(Category &category) {
+    this->categories.emplace_back(category);
+}
+
 bool ToDoList::deleteCategory(const string &id) {
     if (0 != this->categories.remove_if([&](const Category &c) { return (c.getID() == id); })) {
         return true;

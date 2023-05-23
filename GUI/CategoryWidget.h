@@ -6,33 +6,34 @@
 #define AEMPROJEKT_CATEGORYWIDGET_H
 
 #include "todolib/todolib.h"
-#include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QLabel>
+#include "ToDoListWindow.h"
+#include <QVBoxLayout>
+#include <QLabel>
 #include <QApplication>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QInputDialog>
+#include <QPushButton>
+#include <QInputDialog>
 #include <QWidget>
+#include <QPushButton>
 
 
-class CategoryWidget:public QWidget {
+class CategoryWidget : public QWidget {
 
 Q_OBJECT
 
-public:
-    explicit CategoryWidget(const QString& name, QList<QStringList>& categories, QVBoxLayout& layout, int index);
 
-public slots:
-    void deleteCategory();
+public:
+    explicit CategoryWidget(todolib::Category &category, QWidget *parent = nullptr);
+
+    todolib::Category& category;
 
 private:
-    QString m_name;
-    QList<QStringList>& m_categories;
-    QVBoxLayout* m_layout;
-    int m_index;
-    QLabel* m_label;
+    //ToDoListWindow *parent;
+    QVBoxLayout vlayout{QVBoxLayout(this)};
+    QHBoxLayout hlayout{QHBoxLayout(this)};
+    QLabel name {QLabel()};
+    QPushButton deleteButton {QPushButton()};
 
-    void updateIndexes();
-    void updateIndex(int newIndex);
+    void deleteCategory();
 };
 
 #endif //AEMPROJEKT_CATEGORYWIDGET_H

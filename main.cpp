@@ -12,7 +12,9 @@ int main(int argc, char** argv) {
     // Initialisiere eine QApplication-Instanz
     QApplication app(argc, argv);
 
-    ToDoListWindow window {};
+    todolib::ToDoList todoList;
+
+    ToDoListWindow window {todoList};
 
     // Starten der QApplication
     return app.exec();
