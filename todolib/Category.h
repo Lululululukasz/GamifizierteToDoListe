@@ -5,6 +5,10 @@
 #ifndef PIC_AEM_PROJEKT_CATEGORY_H
 #define PIC_AEM_PROJEKT_CATEGORY_H
 
+namespace todolib {
+    class Category;
+}
+
 #include <string>
 #include <list>
 #include "Task.h"
@@ -44,7 +48,7 @@ namespace todolib {
 
         bool isSame(const Category &other);
 
-        void addTask(const Task &task);
+        void addTask(Task &task);
         void addTask(Task &&task);
 
         bool deleteTask(const string &deleteID); // returns true if successfully deleted
