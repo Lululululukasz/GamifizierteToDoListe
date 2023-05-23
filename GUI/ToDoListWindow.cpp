@@ -10,42 +10,42 @@
 
 using namespace todolib;
 
-ToDoListWindow::ToDoListWindow(todolib::ToDoList& toDoList, QWidget *parent) : toDoList{toDoList}, QWidget{parent} {
-    toDoList = ToDoList();
-   // layout.addWidget(&addCategoryButton);
+ToDoListWindow::ToDoListWindow(todolib::ToDoList &toDoList, QWidget *parent) : toDoList{toDoList}, QWidget{parent} {
+    layout.addWidget(&addCategoryButton, 2, Qt::AlignHCenter);
+    connect(&addCategoryButton, &QPushButton::clicked, this, [&]() { addCategory(); });
 
-    //connect(&addCategoryButton, &QPushButton::clicked, this, &ToDoListWindow::addCategory);
-
-    for (auto &category: toDoList.categories) {
-        auto* categoryWidget {new CategoryWidget{category}};
-        layout.addWidget(categoryWidget, 0, Qt::AlignTop);
-        categoryWidgets.push_back(categoryWidget);
-
-       /* CategoryWidget widget {CategoryWidget(category)};
-        categoryWidgets.emplace_back(widget);
-        layout.addWidget(categoryWidget);*/
+    for (Category &category: toDoList.categories) {
+        addCategoryWidget(category);
     }
 
-    resize(250, 150);
+    resize(400, 400);
     setWindowTitle("to do list");
     show();
 }
 
-/*void ToDoListWindow::addCategory() {
+void ToDoListWindow::addCategory() {
     QString categoryName = QInputDialog::getText(this, "New Category", "enter the category name");
-
     if (!categoryName.isEmpty()) {
-        toDoList.addCategory(Category(categoryName.toStdString()));
-
-
-        adjustSize();
+        Category category = Category(categoryName.toStdString());
+        toDoList.addCategory(category);
+        addCategoryWidget(toDoList.categories.back());
     }
 }
 
-
-void ToDoListWindow::deleteCategory(CategoryWidget &categoryWidget) {
-    toDoList.deleteCategory(categoryWidget.category.getID());
-
+void ToDoListWindow::addCategoryWidget(Category& category) {
+    shared_ptr<CategoryWidget> widget {make_shared<CategoryWidget>(category)};
+    categoryWidgets.push_back(widget);
+    layout.addWidget(widget.get(), 0, Qt::AlignTop);
+    connect(widget.get(), &CategoryWidget::categoryDeleteSignal, this, [=, this]() { deleteCategory(widget); });
+    adjustSize();
 }
- */
+
+
+void ToDoListWindow::deleteCategory(shared_ptr<CategoryWidget> categoryWidget) {
+    toDoList.deleteCategory(categoryWidget->category.getID());
+    categoryWidget->hide();
+    layout.removeWidget(categoryWidget.get());
+    categoryWidgets.remove(categoryWidget);
+}
+
 

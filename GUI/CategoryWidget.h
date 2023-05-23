@@ -6,7 +6,6 @@
 #define AEMPROJEKT_CATEGORYWIDGET_H
 
 #include "todolib/todolib.h"
-#include "ToDoListWindow.h"
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QApplication>
@@ -24,15 +23,17 @@ Q_OBJECT
 public:
     explicit CategoryWidget(todolib::Category &category, QWidget *parent = nullptr);
 
-    todolib::Category& category;
+    todolib::Category &category;
+
+signals:
+
+    void categoryDeleteSignal();
 
 private:
-    //ToDoListWindow *parent;
-    QVBoxLayout vlayout{QVBoxLayout(this)};
-    QHBoxLayout hlayout{QHBoxLayout(this)};
+    QVBoxLayout vlayout {QVBoxLayout()};
+    QHBoxLayout hlayout {QHBoxLayout()};
     QLabel name {QLabel()};
     QPushButton deleteButton {QPushButton()};
-
     void deleteCategory();
 };
 

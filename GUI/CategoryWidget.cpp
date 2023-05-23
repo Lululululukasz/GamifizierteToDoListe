@@ -14,15 +14,19 @@
 CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : category{category},
                                                                                QWidget(parent) {
 
+    setLayout(&vlayout);
+    vlayout.addLayout(&hlayout);
+
     name.setText(QString::fromStdString(category.name));
-    hlayout.addWidget(&name, 0, Qt::AlignLeft | Qt::AlignCenter);
+    hlayout.addWidget(&name, 1, Qt::AlignLeft | Qt::AlignVCenter);
 
     deleteButton.setText("Delete");
-    hlayout.addWidget(&deleteButton, 1, Qt::AlignLeft | Qt::AlignCenter);
-    // connect(&deleteButton, &QPushButton::clicked, this, [&]() { deleteCategory(); });
+    hlayout.addWidget(&deleteButton, 0, Qt::AlignRight | Qt::AlignVCenter);
+    connect(&deleteButton, &QPushButton::clicked, this, [&]() { deleteCategory(); });
 
-    setLayout(&hlayout);
-    setLayout(&vlayout);
+}
 
+void CategoryWidget::deleteCategory() {
+    emit categoryDeleteSignal();
 }
 

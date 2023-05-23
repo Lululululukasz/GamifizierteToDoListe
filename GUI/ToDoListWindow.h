@@ -11,8 +11,9 @@
 #include <QInputDialog>
 #include <QLabel>
 #include "TaskWidget.h"
-#include "todolib/ToDoList.h"
+#include "todolib/todolib.h"
 #include "CategoryWidget.h"
+#include <memory>
 
 
 class ToDoListWindow : public QWidget {
@@ -22,12 +23,16 @@ Q_OBJECT
 public:
     explicit ToDoListWindow(todolib::ToDoList& toDoList, QWidget *parent = nullptr);
 
+private slots:
+    void deleteCategory(std::shared_ptr<CategoryWidget> categoryWidget);
+
 private:
     todolib::ToDoList& toDoList;
-    //QPushButton addCategoryButton {QPushButton("add a new category")};
+    QPushButton addCategoryButton {QPushButton("add a new category")};
     QVBoxLayout layout {QVBoxLayout(this)};
-    std::list<CategoryWidget*> categoryWidgets;
-    //void addCategory();
+    std::list<std::shared_ptr<CategoryWidget>> categoryWidgets;
+    void addCategory();
+    void addCategoryWidget(todolib::Category& category);
 };
 
 
