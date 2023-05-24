@@ -51,6 +51,8 @@ namespace todolib {
         void addTask(Task &task);
         void addTask(Task &&task);
 
+        list<Task> showTasks();
+
         bool deleteTask(const string &deleteID); // returns true if successfully deleted
 
     };

@@ -66,6 +66,13 @@ void Category::addTask(Task &&task) {
     tasks.push_front(task);
 }
 
+list<Task> Category::showTasks() {
+    cout << name << ": ";
+    for (const Task &task: tasks) {
+        cout << task.name; // TODO debug
+    }
+    cout << endl;
+}
 
 bool Category::deleteTask(const string &deleteID) {
     if (0 != this->tasks.remove_if([&] (Task t) {return (t.getID() == deleteID);})) {
