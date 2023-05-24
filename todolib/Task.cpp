@@ -9,7 +9,7 @@
 using namespace std;
 using namespace todolib;
 
-Task::Task(const string &n, const string &d) : category{nullptr} {
+Task::Task(const string &n, const string &d) {
     this->id = n + to_string((int) time(nullptr));
     this->name = n;
     this->description = d;
@@ -37,12 +37,4 @@ void Task::setAsDone() {
 
 void Task::setAsUndone() {
     this->done = false;
-}
-
-shared_ptr<Category> Task::getCategory() {
-    return category;
-}
-
-void Task::setCategory(shared_ptr<Category> category) {
-    this->category = category;
 }

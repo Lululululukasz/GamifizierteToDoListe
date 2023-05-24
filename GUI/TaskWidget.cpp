@@ -62,7 +62,7 @@ void TaskWidget::strikeoutTask(int state) {
 }
 
 void TaskWidget::deleteTask() {
-    emit taskDeleted();
+    emit deleteTaskSignal();
 }
 
 void TaskWidget::showDescription() {
