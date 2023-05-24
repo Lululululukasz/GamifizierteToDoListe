@@ -1,6 +1,6 @@
 #include <iostream>
 #include "todolib\todolib.h"
-#include "AddTaskBox.h"
+#include "GUI/AddTaskBox.h"
 #include "Window.h"
 #include "GUI/TaskWidget.h"
 #include "todolib/todolib.h"
@@ -12,14 +12,20 @@
 
 int main(int argc, char** argv) {
 
+
     // Initialisiere eine QApplication-Instanz
     QApplication app(argc, argv);
-    todolib::Task task {"Name", "Beschreibung"};
 
     todolib::ToDoList todoList;
-    todoList.getCategoryByName("General").addTask(task);
 
     ToDoListWindow window {todoList};
+
+    /*
+    QApplication app(argc, argv);
+
+    Window window;
+    window.show();
+    */
 
     // Starten der QApplication
     return app.exec();

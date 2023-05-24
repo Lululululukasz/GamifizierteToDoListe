@@ -1,7 +1,8 @@
+/*
 #ifndef PIC_AEM_PROJEKT_WINDOW_H
 #define PIC_AEM_PROJEKT_WINDOW_H
 
-#include "AddTaskBox.h"
+#include "GUI/AddTaskBox.h"
 #include "todolib/todolib.h"
 
 #include <QWidget>
@@ -16,7 +17,7 @@ public:
     explicit Window(QWidget *parent = nullptr);
 
 private slots:
-    void openNewWindow(bool checked);
+    void openAddTaskWindow(bool checked);
 
 private:
     std::shared_ptr<QPushButton> taskButton;
@@ -27,3 +28,4 @@ private:
 
 
 #endif //PIC_AEM_PROJEKT_WINDOW_H
+*/

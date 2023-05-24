@@ -15,6 +15,7 @@
 #include <QInputDialog>
 #include <QWidget>
 #include <QPushButton>
+#include "AddTaskBox.h"
 
 
 class CategoryWidget : public QWidget {
@@ -31,6 +32,9 @@ signals:
 
     void categoryDeleteSignal();
 
+private slots:
+    void openAddTaskWindow(bool checked);
+
 private:
     QVBoxLayout vlayout {QVBoxLayout()};
     QHBoxLayout hlayout {QHBoxLayout()};
@@ -40,6 +44,12 @@ private:
     void addTaskWidget(todolib::Task& task);
     void deleteCategory();
     void deleteTask(std::shared_ptr<TaskWidget> taskWidget);
+
+    // Adding Tasks
+    std::shared_ptr<QPushButton> addTaskButton;
+    std::shared_ptr<AddTaskBox> addTaskBox;
+    void addTask(todolib::Task &task);
+
 };
 
 #endif //AEMPROJEKT_CATEGORYWIDGET_H
