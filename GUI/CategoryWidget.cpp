@@ -50,7 +50,7 @@ void CategoryWidget::deleteCategory() {
 
 void CategoryWidget::addTask(Task &task) {
     category.addTask(task);
-    addTaskWidget(category.tasks.back());
+    addTaskWidget(task);
     //category.showTasks();
 }
 
