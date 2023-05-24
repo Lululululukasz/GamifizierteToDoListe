@@ -21,6 +21,7 @@ TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
     taskNameLabel->setText(QString::fromStdString(task.name));
 
     taskDeleteButton = std::make_shared<QPushButton>();
+    taskDeleteButton->setText("  Delete");
     taskDeleteButton->setIcon(taskDeleteButton->style()->standardIcon(QStyle::SP_TrashIcon));
 
     showDescriptionButton = std::make_shared<QToolButton>(this);

@@ -9,6 +9,7 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>
 #include <QWidget>
+#include <QStyle>
 
 using namespace todolib;
 
@@ -22,7 +23,8 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
     hlayout.addWidget(&name, 1, Qt::AlignLeft | Qt::AlignVCenter);
 
     // Category Delete Button
-    deleteButton.setText("Delete");
+    deleteButton.setText("  Delete");
+    deleteButton.setIcon(deleteButton.style()->standardIcon(QStyle::SP_TrashIcon));
     hlayout.addWidget(&deleteButton, 0, Qt::AlignRight | Qt::AlignVCenter);
     connect(&deleteButton, &QPushButton::clicked, this, [=]() { deleteCategory(); });
 
