@@ -23,9 +23,6 @@ Q_OBJECT
 public:
     explicit ToDoListWindow(todolib::ToDoList& toDoList, QWidget *parent = nullptr);
 
-private slots:
-    void deleteCategory(std::shared_ptr<CategoryWidget> categoryWidget);
-
 private:
     todolib::ToDoList& toDoList;
     QPushButton addCategoryButton {QPushButton("add a new category")};
@@ -33,6 +30,7 @@ private:
     std::list<std::shared_ptr<CategoryWidget>> categoryWidgets;
     void addCategory();
     void addCategoryWidget(todolib::Category& category);
+    void deleteCategory(std::shared_ptr<CategoryWidget> categoryWidget);
 };
 
 

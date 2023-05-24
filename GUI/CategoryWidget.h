@@ -39,6 +39,7 @@ private:
     std::list<std::shared_ptr<TaskWidget>> TaskWidgets;
     void addTaskWidget(todolib::Task& task);
     void deleteCategory();
+    void deleteTask(std::shared_ptr<TaskWidget> taskWidget);
 };
 
 #endif //AEMPROJEKT_CATEGORYWIDGET_H

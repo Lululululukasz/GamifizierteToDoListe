@@ -5,6 +5,7 @@
 #include "GUI/CategoryWidget.h"
 #include "todolib/todolib.h"
 #include "GUI/TaskWidget.h"
+
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QApplication>
@@ -43,7 +44,14 @@ void CategoryWidget::addTaskWidget(Task &task) {
     shared_ptr<TaskWidget> widget {make_shared<TaskWidget>(task)};
     TaskWidgets.push_back(widget);
     vlayout.addWidget(widget.get(), 0, Qt::AlignTop);
-    //connect(widget.get(), &TaskWidget::categoryDeleteSignal, this, [=, this]() { deleteCategory(widget); });
+    connect(widget.get(), &TaskWidget::deleteTaskSignal, this, [=, this]() { deleteTask(widget); });
     adjustSize();
+}
+
+void CategoryWidget::deleteTask(std::shared_ptr<TaskWidget> taskWidget) {
+    category.deleteTask(taskWidget->task.getID());
+    taskWidget->hide();
+    vlayout.removeWidget(taskWidget.get());
+    TaskWidgets.remove(taskWidget);
 }
 

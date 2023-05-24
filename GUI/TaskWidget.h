@@ -18,11 +18,12 @@ Q_OBJECT
 public:
     explicit TaskWidget(todolib::Task &task, QWidget *parent = nullptr);
 
+    todolib::Task &task;
+
 signals:
-    void taskDeleted();
+    void deleteTaskSignal();
 
 private:
-    todolib::Task &task;
     std::shared_ptr<QHBoxLayout> hbox;
     std::shared_ptr<QVBoxLayout> vbox;
     std::shared_ptr<QCheckBox> taskCheckbox;
