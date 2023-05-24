@@ -7,10 +7,7 @@
 #include "GUI/TaskWidget.h"
 
 #include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QLabel>
-#include <QApplication>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QInputDialog>
 #include <QWidget>
 
 using namespace todolib;
@@ -27,7 +24,7 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
     // Category Delete Button
     deleteButton.setText("Delete");
     hlayout.addWidget(&deleteButton, 0, Qt::AlignRight | Qt::AlignVCenter);
-    connect(&deleteButton, &QPushButton::clicked, this, [&]() { deleteCategory(); });
+    connect(&deleteButton, &QPushButton::clicked, this, [=]() { deleteCategory(); });
 
     //Add Task Button
     addTaskButton = std::make_shared<QPushButton>("Add Task", this);
