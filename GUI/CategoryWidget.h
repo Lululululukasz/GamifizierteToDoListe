@@ -6,6 +6,8 @@
 #define AEMPROJEKT_CATEGORYWIDGET_H
 
 #include "todolib/todolib.h"
+#include "TaskWidget.h"
+
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QApplication>
@@ -34,6 +36,8 @@ private:
     QHBoxLayout hlayout {QHBoxLayout()};
     QLabel name {QLabel()};
     QPushButton deleteButton {QPushButton()};
+    std::list<std::shared_ptr<TaskWidget>> TaskWidgets;
+    void addTaskWidget(todolib::Task& task);
     void deleteCategory();
 };
 

@@ -13,7 +13,6 @@ int main(int argc, char** argv) {
     QApplication app(argc, argv);
 
     todolib::ToDoList todoList;
-
     ToDoListWindow window {todoList};
 
     // Starten der QApplication

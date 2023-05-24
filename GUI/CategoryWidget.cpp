@@ -4,12 +4,15 @@
 
 #include "GUI/CategoryWidget.h"
 #include "todolib/todolib.h"
+#include "GUI/TaskWidget.h"
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QApplication>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QInputDialog>
 #include <QWidget>
+
+using namespace todolib;
 
 CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : category{category},
                                                                                QWidget(parent) {
@@ -24,9 +27,23 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
     hlayout.addWidget(&deleteButton, 0, Qt::AlignRight | Qt::AlignVCenter);
     connect(&deleteButton, &QPushButton::clicked, this, [&]() { deleteCategory(); });
 
+
+    for (Task &task: category.tasks) {
+        addTaskWidget(task);
+    }
+
+
 }
 
 void CategoryWidget::deleteCategory() {
     emit categoryDeleteSignal();
+}
+
+void CategoryWidget::addTaskWidget(Task &task) {
+    shared_ptr<TaskWidget> widget {make_shared<TaskWidget>(task)};
+    TaskWidgets.push_back(widget);
+    vlayout.addWidget(widget.get(), 0, Qt::AlignTop);
+    //connect(widget.get(), &TaskWidget::categoryDeleteSignal, this, [=, this]() { deleteCategory(widget); });
+    adjustSize();
 }
 
