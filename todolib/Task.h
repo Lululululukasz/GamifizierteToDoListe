@@ -5,8 +5,14 @@
 #ifndef PIC_AEM_PROJEKT_TASK_H
 #define PIC_AEM_PROJEKT_TASK_H
 
+namespace todolib {
+    class Task;
+}
+
 #include <string>
 #include <vector>
+#include <memory>
+#include "Category.h"
 
 
 namespace todolib {

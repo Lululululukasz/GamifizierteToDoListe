@@ -27,8 +27,9 @@ namespace todolib {
         Category &getCategoryByID(const string &id);
 
         void addCategory(Category &&category);
+        void addCategory(Category &category);
 
-        bool deleteCategory(const string &c);
+        bool deleteCategory(const string &id);
 
         list<Task> showAllTasks();
 
@@ -41,6 +42,5 @@ namespace todolib {
     };
 
 }
-
 
 #endif //PIC_AEM_PROJEKT_TODOLIST_H

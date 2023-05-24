@@ -2,40 +2,25 @@
 #include "todolib\todolib.h"
 #include "AddTaskBox.h"
 #include "Window.h"
+#include "GUI/TaskWidget.h"
+#include "todolib/todolib.h"
+#include "GUI/ToDoListWindow.h"
 
 #include <QApplication>
 #include <QWidget>
 
 
-int main(int argc, char **argv) {
-
-    using namespace std;
-    using namespace todolib;
-
-    // Backend Tests start
-    /*
-
-    ToDoList mainList = ToDoList();
-
-    cout << "getCategoryByName: " << mainList.getCategoryByName("General").name << endl;
-    mainList.getCategoryByName("General").addTask(Task("Test", ""));
-    mainList.getCategoryByName("General").addTask(Task("Dishes", ""));
-
-    mainList.showAllTasks();
-
-    cout << "Suggested Task: " << mainList.suggestTask().name << endl;
-
-    cout << "searched Task \"Test\": " << mainList.getTaskByName("Test").name << endl;
-    mainList.getCategoryByName("General").deleteTask(mainList.getTaskByName("Test").getID());
-
-    mainList.showAllTasks();*/
-
-    // Backend tests end
+int main(int argc, char** argv) {
 
     // Initialisiere eine QApplication-Instanz
     QApplication app(argc, argv);
-    Window window; // lege ein Fenster an
-    window.show();  // ... und zeige es.
+    todolib::Task task {"Name", "Beschreibung"};
+
+    todolib::ToDoList todoList;
+    todoList.getCategoryByName("General").addTask(task);
+
+    ToDoListWindow window {todoList};
+
     // Starten der QApplication
     return app.exec();
 
