@@ -7,6 +7,9 @@ Testing
 build
 cmake-build-debug
 cmake_install.cmake
+*_autogen
+*.a
+*.cmake
 
 # IDE trash
 .idea
