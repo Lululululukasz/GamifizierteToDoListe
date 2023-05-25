@@ -30,7 +30,7 @@ private:
     std::list<std::shared_ptr<CategoryWidget>> categoryWidgets;
     void addCategory();
     void addCategoryWidget(todolib::Category& category);
-    void deleteCategory(std::shared_ptr<CategoryWidget> categoryWidget);
+    void deleteCategory(const std::shared_ptr<CategoryWidget>& categoryWidget);
 };
 
 

@@ -55,9 +55,11 @@ void TaskWidget::strikeoutTask(int state) {
 
     if (state == Qt::Checked) {
         font->setStrikeOut(true);
+        task.setAsDone();
         taskNameLabel->setFont(*font);
     } else {
         font->setStrikeOut(false);
+        task.setAsUndone();
         taskNameLabel->setFont(*font);
     }
 }

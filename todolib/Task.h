@@ -35,7 +35,7 @@ namespace todolib {
 
         bool isSame(const Task &other);
 
-        bool getDoneStatus();
+        bool getDoneStatus() const;
 
         void setAsDone();
 

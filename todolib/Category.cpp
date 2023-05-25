@@ -51,7 +51,7 @@ string Category::getID() const {
     return this->id;
 }
 
-bool Category::isSame(const Category &other) {
+bool Category::isSame(const Category &other) const {
     if (this->getID() == other.id) {
         return true;
     } else {
