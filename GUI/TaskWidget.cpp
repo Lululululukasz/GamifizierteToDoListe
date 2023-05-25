@@ -1,11 +1,16 @@
 #include "TaskWidget.h"
 
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+
 #include <QCheckBox>
 #include <QHBoxLayout>
 #include <QFont>
 #include <QStyle>
 #include <QPushButton>
 #include <QToolButton>
+#include <QSound>
 
 
 TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
@@ -57,6 +62,7 @@ void TaskWidget::strikeoutTask(int state) {
         font->setStrikeOut(true);
         task.setAsDone();
         taskNameLabel->setFont(*font);
+        playRandomSound();
     } else {
         font->setStrikeOut(false);
         task.setAsUndone();
@@ -80,3 +86,16 @@ void TaskWidget::hideDescription() {
 
 }
 
+void TaskWidget::playRandomSound() {
+    std::srand(time(NULL));
+    int random = rand() % 3 + 1;
+
+    switch (random) {
+        case 1: QSound::play("resources/taskDoneSound_amazing.wav");
+        break;
+        case 2: QSound::play("resources/taskDoneSound_incredible.wav");
+        break;
+        case 3: QSound::play("resources/taskDoneSound_outstanding.wav");
+        break;
+    }
+}

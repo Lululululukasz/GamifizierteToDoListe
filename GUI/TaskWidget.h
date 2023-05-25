@@ -31,12 +31,12 @@ private:
     std::shared_ptr<QPushButton> taskDeleteButton;
     std::shared_ptr<QToolButton> showDescriptionButton;
     std::shared_ptr<QLabel> taskDescriptionLabel;
+    void playRandomSound();
 
 private slots:
     void strikeoutTask(int state);
     void deleteTask();
     void showDescription();
     void hideDescription();
-
 };
 #endif //PIC_AEM_PROJEKT_CHECKBOX_H
