@@ -1,4 +1,4 @@
-#include "todolib\todolib.h"
+#include "todolib/todolib.h"
 #include "GUI/ToDoListWindow.h"
 
 #include <QApplication>
