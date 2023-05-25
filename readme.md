@@ -7,7 +7,7 @@ Dies ist ein Aufgabenmanager, der über ein grafisches Interface gesteuert werde
 Mit diesem Programm lassen sich Tasks erstellen, löschen, nach Kategorien sortieren und auslesen. Außerdem können Defaulttasks vorgeschlagen werden.
 
 Dieses Projekt befindet sich in der zweiten Phase der Entwicklung.
-Das Programm ist von der C++ Standardbibliothek abhängig. Es wurde in CLion programmiert mit der 20 Version von C++.
+Das Programm ist von der C++ Standardbibliothek abhängig. Es wurde in CLion programmiert mit der 20 Version von C++. Wir nutzen die 5 Version von QT
 
 ### Ziele:
 
