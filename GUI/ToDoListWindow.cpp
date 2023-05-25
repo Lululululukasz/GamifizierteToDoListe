@@ -18,7 +18,6 @@ ToDoListWindow::ToDoListWindow(todolib::ToDoList &toDoList, QWidget *parent) : t
     for (Category &category: toDoList.categories) {
         addCategoryWidget(category);
     }
-    toDoList.showAllTasks();
 
     resize(400, 400);
     setWindowTitle("to do list");
