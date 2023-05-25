@@ -11,7 +11,8 @@
 using namespace todolib;
 
 ToDoListWindow::ToDoListWindow(todolib::ToDoList &toDoList, QWidget *parent) : toDoList{toDoList}, QWidget{parent} {
-    layout.addWidget(&addCategoryButton, 2, Qt::AlignHCenter);
+    layout.addWidget(&addCategoryButton);
+    addCategoryButton.setGeometry(10, 100, 80, 30);
     connect(&addCategoryButton, &QPushButton::clicked, this, [&]() { addCategory(); });
 
     for (Category &category: toDoList.categories) {
@@ -42,7 +43,7 @@ void ToDoListWindow::addCategoryWidget(Category& category) {
 }
 
 
-void ToDoListWindow::deleteCategory(shared_ptr<CategoryWidget> categoryWidget) {
+void ToDoListWindow::deleteCategory(const shared_ptr<CategoryWidget>& categoryWidget) {
     toDoList.deleteCategory(categoryWidget->category.getID());
     categoryWidget->hide();
     layout.removeWidget(categoryWidget.get());

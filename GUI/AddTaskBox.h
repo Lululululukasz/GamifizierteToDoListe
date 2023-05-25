@@ -7,6 +7,8 @@
 #include <memory>
 #include <QPushButton>
 #include <QTextEdit>
+#include <QLayout>
+#include <QLabel>
 
 class AddTaskBox : public QWidget {
 Q_OBJECT
@@ -17,7 +19,7 @@ public:
 
     todolib::Task task;
 
-    bool hasTask();
+    bool hasTask() const;
 
 signals:
 
@@ -31,8 +33,11 @@ private slots:
 
 private:
     bool hasTaskBool{false};
+    QVBoxLayout layout {QVBoxLayout(this)};
     std::shared_ptr<QPushButton> addTaskButton;
+    QLabel nameLabel {QLabel()};
     std::shared_ptr<QTextEdit> aTNameTextEdit;
+    QLabel descLabel {QLabel()};
     std::shared_ptr<QTextEdit> aTDecriptionTextEdit;
 
     std::shared_ptr<todolib::Category> category;

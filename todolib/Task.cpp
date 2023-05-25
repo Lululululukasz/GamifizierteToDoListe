@@ -27,7 +27,7 @@ bool Task::isSame(const Task &other) {
     }
 }
 
-bool Task::getDoneStatus() {
+bool Task::getDoneStatus() const {
     return this->done;
 }
 
