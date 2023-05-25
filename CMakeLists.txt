@@ -15,18 +15,20 @@ target_link_libraries(pic_aem_projekt todolib)
 # create install target
 install(TARGETS pic_aem_projekt DESTINATION bin)
 
-# add all mingw64 system dlls to install target
-# this is overkill, but collecting only the needed dlls is a pain
-set(MINGW_ROOT "c:/msys64/mingw64")
-# install all dlls except those which start with Qt5
-install(DIRECTORY ${MINGW_ROOT}/bin/ DESTINATION bin
-        FILES_MATCHING
-        PATTERN "*.dll"
-        PATTERN "Qt5*" EXCLUDE)
+if (WIN32)
+	# add all mingw64 system dlls to install target
+	# this is overkill, but collecting only the needed dlls is a pain
+	set(MINGW_ROOT "c:/msys64/mingw64")
+	# install all dlls except those which start with Qt5
+	install(DIRECTORY ${MINGW_ROOT}/bin/ DESTINATION bin
+		FILES_MATCHING
+		PATTERN "*.dll"
+		PATTERN "Qt5*" EXCLUDE)
 
-# add all qt dlls to install target
-include(cmake/WinDeployQt.cmake)
-windeployqt(pic_aem_projekt "bin")
+	# add all qt dlls to install target
+	include(cmake/WinDeployQt.cmake)
+	windeployqt(pic_aem_projekt "bin")
+endif (WIN32)
 
 # make deployment using cpack and nsis
 set(CPACK_GENERATOR "NSIS")
