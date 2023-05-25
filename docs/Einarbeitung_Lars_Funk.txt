@@ -1,0 +1,2 @@
+Einarbeitung:
+	- Qt
