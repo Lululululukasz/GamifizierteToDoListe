@@ -1,7 +1,6 @@
 #include <iostream>
 #include "todolib\todolib.h"
 #include "GUI/AddTaskBox.h"
-#include "Window.h"
 #include "GUI/TaskWidget.h"
 #include "todolib/todolib.h"
 #include "GUI/ToDoListWindow.h"
