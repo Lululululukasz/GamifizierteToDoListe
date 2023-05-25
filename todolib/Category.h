@@ -46,7 +46,7 @@ namespace todolib {
 
         string getID() const;
 
-        bool isSame(const Category &other);
+        bool isSame(const Category &other) const;
 
         void addTask(Task &task);
         void addTask(Task &&task);

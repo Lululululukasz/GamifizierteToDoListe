@@ -58,7 +58,6 @@ void CategoryWidget::addTaskWidget(Task &task) {
     TaskWidgets.push_back(widget);
     vlayout.addWidget(widget.get(), 0, Qt::AlignTop);
     connect(widget.get(), &TaskWidget::deleteTaskSignal, this, [=, this]() { deleteTask(widget); });
-    adjustSize();
 }
 
 void CategoryWidget::openAddTaskWindow(bool checked){
@@ -71,7 +70,7 @@ void CategoryWidget::openAddTaskWindow(bool checked){
     }
 }
 
-void CategoryWidget::deleteTask(std::shared_ptr<TaskWidget> taskWidget) {
+void CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget>& taskWidget) {
     category.deleteTask(taskWidget->task.getID());
     taskWidget->hide();
     vlayout.removeWidget(taskWidget.get());
