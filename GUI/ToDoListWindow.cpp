@@ -39,7 +39,6 @@ void ToDoListWindow::addCategoryWidget(Category& category) {
     categoryWidgets.push_back(widget);
     layout.addWidget(widget.get(), 0, Qt::AlignTop);
     connect(widget.get(), &CategoryWidget::categoryDeleteSignal, this, [=, this]() { deleteCategory(widget); });
-    adjustSize();
 }
 
 
