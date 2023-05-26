@@ -24,5 +24,9 @@ namespace todolib {
         achievements.emplace_back(achievement);
     }
 
+    std::vector<Achievement>  AchievementList::getAchievements() {
+        return this->achievements; //TODO make read only?
+    }
+
 } // todolib
 

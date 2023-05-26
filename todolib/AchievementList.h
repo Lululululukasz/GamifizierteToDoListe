@@ -24,6 +24,8 @@ namespace todolib {
 
         void addAchievement(Achievement &achievement);
 
+        std::vector<Achievement> getAchievements();
+
     };
 
 } // todolib

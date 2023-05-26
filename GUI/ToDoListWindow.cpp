@@ -7,6 +7,7 @@
 #include "TaskWidget.h"
 #include "CategoryWidget.h"
 #include "AchievementWidget.h"
+#include "AchievementListWidget.h"
 #include <memory>
 
 using namespace todolib;
@@ -19,11 +20,16 @@ ToDoListWindow::ToDoListWindow(todolib::ToDoList &toDoList, QWidget *parent) : t
     for (Category &category: toDoList.categories) {
         addCategoryWidget(category);
     }*/
-// TODO test code!
-    Achievement x {"Achievement Name", "bla bla bla bla bla bla bla bla bla bla bla bla"};
-    layout.addWidget(new AchievementWidget(x));
-    layout.addWidget(new AchievementWidget(x));
-    layout.addWidget(new AchievementWidget(x));
+// TODO testing code!
+    //Achievement x {"Achievement Name", "bla bla bla bla bla bla bla bla bla bla bla bla"};
+    //layout.addWidget(new AchievementWidget(x));
+    //layout.addWidget(new AchievementWidget(x));
+    //layout.addWidget(new AchievementWidget(x));
+
+    AchievementList l {};
+    AchievementListWidget list{l};
+    layout.addWidget(&list);
+// TODO end of testing code!
 
     resize(400, 400);
     setWindowTitle("to do list");
