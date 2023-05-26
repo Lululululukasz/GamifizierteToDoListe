@@ -1,7 +1,5 @@
 #include "TaskWidget.h"
 
-#include <random>
-
 #include <QCheckBox>
 #include <QHBoxLayout>
 #include <QFont>
@@ -69,11 +67,14 @@ void TaskWidget::strikeoutTask(int state) {
         font->setStrikeOut(true);
         task.setAsDone();
         taskNameLabel->setFont(*font);
+        //The Values for the points are provisional and should later be changed to whatever you want.
+        Points::getinstance().addPoints(1,1,'n');
         playRandomSound();
     } else {
         font->setStrikeOut(false);
         task.setAsUndone();
         taskNameLabel->setFont(*font);
+        Points::getinstance().subPoints(1,'n');
     }
 }
 
