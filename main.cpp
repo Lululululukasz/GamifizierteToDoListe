@@ -1,5 +1,6 @@
 #include "todolib/todolib.h"
 #include "GUI/ToDoListWindow.h"
+#include "todolib/AchievementList.h"
 
 #include <QApplication>
 
@@ -10,6 +11,7 @@ int main(int argc, char** argv) {
     QApplication app(argc, argv);
 
     todolib::ToDoList todoList;
+    todolib::AchievementList achievementList;
 
     ToDoListWindow window {todoList};
 

@@ -6,18 +6,22 @@
 #include "todolib/todolib.h"
 #include "TaskWidget.h"
 #include "CategoryWidget.h"
+#include "AchievementWidget.h"
 #include <memory>
 
 using namespace todolib;
 
 ToDoListWindow::ToDoListWindow(todolib::ToDoList &toDoList, QWidget *parent) : toDoList{toDoList}, QWidget{parent} {
-    layout.addWidget(&addCategoryButton);
+/*    layout.addWidget(&addCategoryButton);
     addCategoryButton.setGeometry(10, 100, 80, 30);
     connect(&addCategoryButton, &QPushButton::clicked, this, [&]() { addCategory(); });
 
     for (Category &category: toDoList.categories) {
         addCategoryWidget(category);
-    }
+    }*/
+
+    Achievement x {"name", "desc"};
+    layout.addWidget(new AchievementWidget(x));
 
     resize(400, 400);
     setWindowTitle("to do list");
