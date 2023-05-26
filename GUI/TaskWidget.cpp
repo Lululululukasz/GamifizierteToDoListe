@@ -129,6 +129,6 @@ void TaskWidget::playRandomSound() {
         case 3:
             QSound::play("./resources/taskDoneSound_outstanding.wav");
             break;
-#endif
     }
+#endif
 }
