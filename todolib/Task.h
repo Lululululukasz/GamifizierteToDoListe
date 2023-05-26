@@ -13,6 +13,7 @@ namespace todolib {
 #include <vector>
 #include <memory>
 #include "Category.h"
+#include "Xp.h"
 
 
 namespace todolib {

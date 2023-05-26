@@ -33,8 +33,10 @@ bool Task::getDoneStatus() const {
 
 void Task::setAsDone() {
     this->done = true;
+    Xp::xpFunc(done);
 }
 
 void Task::setAsUndone() {
     this->done = false;
+    Xp::xpFunc(done);
 }
