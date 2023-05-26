@@ -48,4 +48,10 @@ void ToDoListWindow::deleteCategory(const shared_ptr<CategoryWidget>& categoryWi
     categoryWidgets.remove(categoryWidget);
 }
 
+void ToDoListWindow::addXpWidget(Xp &xp){
+    std::shared_ptr<XpWidget> xpwidget {std::make_shared<XpWidget>(xp)};
+    xpWidgets.push_back(xpwidget);
+    layout.addWidget(xpwidget,0,QtAlignBottum);
+}
+
 
