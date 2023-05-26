@@ -7,13 +7,12 @@
 #include "Task.h"
 #include "iostream"
 
-
-class Xp {
-public:
-    static void xpFunc(bool xpBool);
-private:
-static int xpZahl;
-};
-
+namespace todolib {
+    class Xp {
+    public:
+        static void xpFunc(bool xpBool);
+        static int xpZahl;
+    };
+}
 
 #endif //AEMPROJEKT_XP_H

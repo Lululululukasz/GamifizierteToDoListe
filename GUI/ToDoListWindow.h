@@ -13,6 +13,7 @@
 #include "TaskWidget.h"
 #include "todolib/todolib.h"
 #include "CategoryWidget.h"
+#include "XpWidget.h"
 #include <memory>
 
 
@@ -28,9 +29,11 @@ private:
     QPushButton addCategoryButton {QPushButton("add a new category")};
     QVBoxLayout layout {QVBoxLayout(this)};
     std::list<std::shared_ptr<CategoryWidget>> categoryWidgets;
+    std::list<std::shared_ptr<XpWidget>> xpWidgets;
     void addCategory();
     void addCategoryWidget(todolib::Category& category);
     void deleteCategory(const std::shared_ptr<CategoryWidget>& categoryWidget);
+    void addXpWidget();
 };
 
 

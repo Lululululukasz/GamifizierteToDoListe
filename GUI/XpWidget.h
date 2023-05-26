@@ -11,15 +11,14 @@
 
 
 
-class XpWidget:QWidget {
+class XpWidget : public QWidget {
     Q_OBJECT
-public:
-    explicit XpWidget(todolib::Xp &xp, QWidget *parent= nullptr);
-    todolib::Xp &xp;
-private:
-    std::shared_ptr<QLabel> xpLabel;
-    std::shared_ptr<QVBoxLayout> xpLayout;
-};
+    public:
+        explicit XpWidget( QWidget *parent = nullptr);
+    private:
+        std::shared_ptr<QLabel> xpLabel;
+        std::shared_ptr<QVBoxLayout> xpLayout;
+    };
 
 
 

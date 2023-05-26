@@ -3,10 +3,13 @@
 //
 
 #include "XpWidget.h"
-XpWidget::XpWidget(todolib::Xp &xp, QWidget *parent) : xp{xp}, QWidget(parent) {
-    xpLabel = std::make_shared<QLabel>("0", this);
-    xpLayout = std::make_shared<QVBoxLayout>(this);
+XpWidget::XpWidget( QWidget *parent) : QWidget(parent) {
+
+    xpLabel = std::make_shared<QLabel>();
+
+    xpLayout = std::make_shared<QVBoxLayout>();
     xpLayout->addWidget(xpLabel.get());
-    xpLabel->setText(QString::number(xp));
+
+    xpLabel->setText(QString::number(todolib::Xp::xpZahl));
     setLayout(xpLayout.get());
 }

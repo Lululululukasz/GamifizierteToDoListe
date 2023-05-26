@@ -6,6 +6,7 @@
 #include "todolib/todolib.h"
 #include "TaskWidget.h"
 #include "CategoryWidget.h"
+#include "XpWidget.h"
 #include <memory>
 
 using namespace todolib;
@@ -17,8 +18,8 @@ ToDoListWindow::ToDoListWindow(todolib::ToDoList &toDoList, QWidget *parent) : t
 
     for (Category &category: toDoList.categories) {
         addCategoryWidget(category);
+        addXpWidget();
     }
-
     resize(400, 400);
     setWindowTitle("to do list");
     show();
@@ -48,10 +49,10 @@ void ToDoListWindow::deleteCategory(const shared_ptr<CategoryWidget>& categoryWi
     categoryWidgets.remove(categoryWidget);
 }
 
-void ToDoListWindow::addXpWidget(Xp &xp){
-    std::shared_ptr<XpWidget> xpwidget {std::make_shared<XpWidget>(xp)};
-    xpWidgets.push_back(xpwidget);
-    layout.addWidget(xpwidget,0,QtAlignBottum);
+void ToDoListWindow::addXpWidget(){
+    std::shared_ptr<XpWidget> xpWidget{std::make_shared<XpWidget>()};
+    xpWidgets.push_back(xpWidget);
+    layout.addWidget(xpWidget.get(),0,Qt::AlignBottom);
 }
 
 

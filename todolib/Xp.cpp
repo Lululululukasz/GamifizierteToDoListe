@@ -4,8 +4,9 @@
 
 #include "Xp.h"
 
-using namespace std;
+
 using namespace todolib;
+using namespace std;
 int Xp::xpZahl=0;
 
 void Xp::xpFunc(bool xpBool) {
