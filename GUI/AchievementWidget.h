@@ -28,6 +28,7 @@ private:
     QLabel achievementIcon {QLabel()};
 
 // TODO: Quelle des icons (resources/konfetti.png) angeben in der readme
+// https://www.flaticon.com/de/kostenloses-icon/konfetti_5016950?term=celebration&page=1&position=6&origin=search&related_id=5016950
 // <a href="https://www.flaticon.com/de/kostenlose-icons/feier" title="feier Icons">Feier Icons erstellt von Good Ware - Flaticon</a>
 
 };

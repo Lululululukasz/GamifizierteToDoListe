@@ -19,8 +19,10 @@ ToDoListWindow::ToDoListWindow(todolib::ToDoList &toDoList, QWidget *parent) : t
     for (Category &category: toDoList.categories) {
         addCategoryWidget(category);
     }*/
-
-    Achievement x {"name", "desc"};
+// TODO test code!
+    Achievement x {"Achievement Name", "bla bla bla bla bla bla bla bla bla bla bla bla"};
+    layout.addWidget(new AchievementWidget(x));
+    layout.addWidget(new AchievementWidget(x));
     layout.addWidget(new AchievementWidget(x));
 
     resize(400, 400);

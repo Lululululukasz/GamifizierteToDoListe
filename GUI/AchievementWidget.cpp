@@ -6,17 +6,23 @@
 
 AchievementWidget::AchievementWidget(todolib::Achievement & achievement, QWidget *parent) : QWidget(parent) {
 
-    setLayout(&vlayout);
-    vlayout.addLayout(&hlayout);
-
     achievementName.setText(QString::fromStdString(achievement.name));
+    QFont nameFont("Arial", 15, QFont::Bold);
+    achievementName.setFont(nameFont);
+
     achievementDescription.setText(QString::fromStdString(achievement.description));
 
     QPixmap pix("../resources/konfetti.png");
+    pix = pix.scaled(80, 80, Qt::KeepAspectRatio);
     achievementIcon.setPixmap(pix);
 
-    vlayout.addWidget(&achievementIcon, 1, Qt::AlignLeft | Qt::AlignVCenter);
-    hlayout.addWidget(&achievementName, 1, Qt::AlignLeft | Qt::AlignVCenter);
+
+    setLayout(&hlayout);
+    hlayout.addWidget(&achievementIcon, 1, Qt::AlignLeft | Qt::AlignVCenter);
+    hlayout.insertSpacing(1, 30);
+
+    hlayout.addLayout(&vlayout);
+    vlayout.addWidget(&achievementName, 1, Qt::AlignLeft | Qt::AlignVCenter);
     vlayout.addWidget(&achievementDescription, 1, Qt::AlignLeft | Qt::AlignVCenter);
 
 }
