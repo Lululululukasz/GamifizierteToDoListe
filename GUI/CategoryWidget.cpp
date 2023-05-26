@@ -28,6 +28,11 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
     hlayout.addWidget(&deleteButton, 0, Qt::AlignRight | Qt::AlignVCenter);
     connect(&deleteButton, &QPushButton::clicked, this, [=]() { deleteCategory(); });
 
+    // Category Config Button
+    confButton.setText("Config");
+    hlayout.addWidget(&confButton, 0 , Qt::AlignRight | Qt::AlignVCenter);
+    connect(&confButton, &QPushButton::clicked, this, [=]() {configCategory();});
+
     //Add Task Button
     addTaskButton = std::make_shared<QPushButton>("Add Task", this);
     addTaskButton->setGeometry(10, 100, 80, 30);
@@ -43,6 +48,13 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
 
 }
 
+void CategoryWidget::changeName(const QString &newName){
+    name.setText(newName);
+}
+
+void CategoryWidget::configCategory(){
+    emit categoryConfigSignal();
+}
 void CategoryWidget::deleteCategory() {
     emit categoryDeleteSignal();
 }

@@ -31,6 +31,7 @@ private:
     void addCategory();
     void addCategoryWidget(todolib::Category& category);
     void deleteCategory(const std::shared_ptr<CategoryWidget>& categoryWidget);
+    void configCategory(const std::shared_ptr<CategoryWidget>& categoryWidget);
 };
 
 
