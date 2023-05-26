@@ -11,6 +11,13 @@
 #include <QVBoxLayout>
 
 
+/** The hbox is the horizontal box that is the first element in the vertical box vbox. It
+ * consists of the taskNameLabel, the taskCheckbox, which when checked
+ * strikes out the taskNameLabel and plays a sound, the taskDeleteButton which when pressed emits the deleteTaskSignal
+ * and the showDescriptionButton, which when checked adds the taskDescriptionLabel to the vbox.
+ */
+
+
 class TaskWidget : public QWidget {
 
 Q_OBJECT
@@ -24,6 +31,7 @@ signals:
     void deleteTaskSignal();
 
 private:
+
     std::shared_ptr<QHBoxLayout> hbox;
     std::shared_ptr<QVBoxLayout> vbox;
     std::shared_ptr<QCheckBox> taskCheckbox;
