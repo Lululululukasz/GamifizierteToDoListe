@@ -39,7 +39,9 @@ private:
     std::shared_ptr<QPushButton> taskDeleteButton;
     std::shared_ptr<QToolButton> showDescriptionButton;
     std::shared_ptr<QLabel> taskDescriptionLabel;
-    void playRandomSound();
+    std::shared_ptr<QFont> font;
+
+    static void playRandomSound();
 
 private slots:
     void strikeoutTask(int state);

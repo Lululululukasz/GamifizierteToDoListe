@@ -1,8 +1,6 @@
 #include "TaskWidget.h"
 
-#include <cstdlib>
-#include <ctime>
-#include <iostream>
+#include <random>
 
 #include <QCheckBox>
 #include <QHBoxLayout>
@@ -98,11 +96,12 @@ void TaskWidget::hideDescription() {
 
 }
 
+//plays a random sound out of three when a TaskCheckbox gets checked
 void TaskWidget::playRandomSound() {
-    std::srand(time(NULL));
-    int random = rand() % 3 + 1;
+    std::random_device randomDevice;
+    std::uniform_int_distribution<std::mt19937::result_type> randomSound(1,3);
 
-    switch (random) {
+    switch (randomSound(randomDevice)) {
         case 1: QSound::play("resources/taskDoneSound_amazing.wav");
         break;
         case 2: QSound::play("resources/taskDoneSound_incredible.wav");
