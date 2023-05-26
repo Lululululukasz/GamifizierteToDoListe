@@ -9,7 +9,7 @@ private:
     unsigned int dPoints;
 public:
     void addPoints(unsigned int newpoints, double multi, char nORd);
-
+    void subPoints(unsigned int leavepoints, char nORd);
 
     unsigned int * getNPoints();
     unsigned int * getDPoints();
