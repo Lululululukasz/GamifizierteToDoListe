@@ -13,6 +13,7 @@
 #include "TaskWidget.h"
 #include "todolib/todolib.h"
 #include "CategoryWidget.h"
+#include "AchievementListWidget.h"
 #include <memory>
 
 
@@ -23,6 +24,7 @@ Q_OBJECT
 public:
     explicit ToDoListWindow(todolib::ToDoList& toDoList, QWidget *parent = nullptr);
 
+    std::shared_ptr<AchievementListWidget> achieveListW; // TODO: remove, only here for testing achievements
 private:
     todolib::ToDoList& toDoList;
     QPushButton addCategoryButton {QPushButton("add a new category")};

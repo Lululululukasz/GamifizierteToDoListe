@@ -11,7 +11,6 @@ int main(int argc, char** argv) {
     QApplication app(argc, argv);
 
     todolib::ToDoList todoList;
-    todolib::AchievementList achievementList;
 
     ToDoListWindow window {todoList};
 
