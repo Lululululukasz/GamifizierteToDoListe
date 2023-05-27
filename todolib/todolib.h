@@ -8,5 +8,7 @@
 #include "ToDoList.h"
 #include "Category.h"
 #include "Task.h"
+#include "Achievement.h"
+#include "AchievementList.h"
 
 #endif //PIC_AEM_PROJEKT_TODOLIB_H

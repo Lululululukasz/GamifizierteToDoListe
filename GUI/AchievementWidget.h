@@ -6,17 +6,19 @@
 #define PIC_AEM_PROJEKT_ACHIEVEMENTWIDGET_H
 
 
+#include "todolib/todolib.h"
+#include "AchievementWidget.h"
+
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QIcon>
-#include "todolib/Achievement.h"
 
 class AchievementWidget : public QWidget {
 
     Q_OBJECT
 
 public:
-    explicit AchievementWidget(todolib::Achievement & achievement, QWidget *parent = nullptr);
+    explicit AchievementWidget(todolib::Achievement &achievement, QWidget *parent = nullptr);
 
 private:
     QVBoxLayout vlayout {QVBoxLayout()};
@@ -24,7 +26,6 @@ private:
 
     QLabel achievementName {QLabel()};
     QLabel achievementDescription {QLabel()};
-    //QIcon achievementIcon {QIcon("../resources/konfetti.png")};
     QLabel achievementIcon {QLabel()};
 
 // TODO: Quelle des icons (resources/konfetti.png) angeben in der readme

@@ -12,24 +12,33 @@
 
 using namespace todolib;
 
-ToDoListWindow::ToDoListWindow(todolib::ToDoList &toDoList, QWidget *parent) : toDoList{toDoList}, QWidget{parent} {
-/*    layout.addWidget(&addCategoryButton);
+ToDoListWindow::ToDoListWindow(todolib::ToDoList &toDoList, QWidget *parent) : toDoList{toDoList}, QWidget{parent} {/*
+    layout.addWidget(&addCategoryButton);
     addCategoryButton.setGeometry(10, 100, 80, 30);
     connect(&addCategoryButton, &QPushButton::clicked, this, [&]() { addCategory(); });
 
     for (Category &category: toDoList.categories) {
         addCategoryWidget(category);
     }*/
-// TODO testing code!
-    //Achievement x {"Achievement Name", "bla bla bla bla bla bla bla bla bla bla bla bla"};
-    //layout.addWidget(new AchievementWidget(x));
-    //layout.addWidget(new AchievementWidget(x));
-    //layout.addWidget(new AchievementWidget(x));
 
-    AchievementList l {};
-    AchievementListWidget list{l};
-    layout.addWidget(&list);
-// TODO end of testing code!
+// TODO testing code! **************************************************************************
+    Achievement x {"Achievement Name", "bla bla bla bla bla bla bla bla bla bla bla bla"};
+    //layout.addWidget(new AchievementWidget(x), 0, Qt::AlignTop);
+    //shared_ptr<Achievement> a {make_shared<Achievement>("asdf", "qwer")};
+    //shared_ptr<AchievementWidget> b {make_shared<AchievementWidget>(x)};      // crashes app!
+    //layout.addWidget(b.get(), 0, Qt::AlignTop);
+    //AchievementWidget *y = new AchievementWidget(x);                          // doesn't crash
+    //AchievementWidget z = AchievementWidget(x);                               // crashes app!
+
+
+    QLabel test {QLabel()};
+    test.setText("test");
+    layout.addWidget(&test, 1, Qt::AlignTop);
+    //AchievementList l {};
+    //AchievementListWidget list{l};
+    //layout.addWidget(&list, 0, Qt::AlignTop);
+    //layout.addWidget(new AchievementListWidget(l), 0, Qt::AlignTop);
+// TODO end of testing code! *******************************************************************
 
     resize(400, 400);
     setWindowTitle("to do list");

@@ -9,6 +9,8 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include "todolib/AchievementList.h"
+#include "AchievementWidget.h"
+#include "todolib/Task.h"
 
 class AchievementListWidget : public QWidget {
 
@@ -21,6 +23,8 @@ private:
     QVBoxLayout vlayout{QVBoxLayout()};
     todolib::AchievementList &achievements;
 
+    std::vector<std::shared_ptr<AchievementWidget>> achievementWidgets;
+    void addAchievementWidget(todolib::Achievement &task);
 };
 
 #endif //PIC_AEM_PROJEKT_ACHIEVEMENTLISTWIDGET_H

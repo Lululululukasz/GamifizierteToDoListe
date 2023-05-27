@@ -4,7 +4,7 @@
 
 #include "AchievementWidget.h"
 
-AchievementWidget::AchievementWidget(todolib::Achievement & achievement, QWidget *parent) : QWidget(parent) {
+AchievementWidget::AchievementWidget(todolib::Achievement &achievement, QWidget *parent) : QWidget(parent) {
 
     achievementName.setText(QString::fromStdString(achievement.name));
     QFont nameFont("Arial", 15, QFont::Bold);
