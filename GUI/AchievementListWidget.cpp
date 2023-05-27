@@ -14,6 +14,11 @@ AchievementListWidget::AchievementListWidget(todolib::AchievementList &achieveme
      for (todolib::Achievement &a : achievementList.getAchievements()) {
          if (a.getDoneStatus()) addAchievementWidget(a);
      }
+
+    // background color for Achievement List Widget (background of individual achievements)
+    palet.setColor(QPalette::Window, "#141d29");
+    setAutoFillBackground(true);
+    setPalette(palet);
 }
 
 void AchievementListWidget::addAchievementWidget(todolib::Achievement &achievement) {

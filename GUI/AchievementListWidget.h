@@ -21,8 +21,9 @@ public:
 
 private:
     QVBoxLayout vlayout{QVBoxLayout()};
-    std::vector<std::shared_ptr<AchievementWidget>> achievementWidgets;
+    QPalette palet {QPalette()};
 
+    std::vector<std::shared_ptr<AchievementWidget>> achievementWidgets;
     void addAchievementWidget(todolib::Achievement &task);
 };
 

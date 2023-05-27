@@ -8,7 +8,7 @@ set(CMake_AUTORCC ON)
 
 find_package(Qt5 COMPONENTS Widgets Multimedia REQUIRED)
 add_subdirectory(todolib)
-add_executable(pic_aem_projekt main.cpp GUI/TaskWidget.cpp GUI/TaskWidget.h GUI/ToDoListWindow.cpp GUI/ToDoListWindow.h GUI/CategoryWidget.h GUI/CategoryWidget.cpp GUI/AddTaskBox.cpp GUI/AddTaskBox.h GUI/Points.h GUI/Points.cpp)
+add_executable(pic_aem_projekt main.cpp GUI/TaskWidget.cpp GUI/TaskWidget.h GUI/ToDoListWindow.cpp GUI/ToDoListWindow.h GUI/CategoryWidget.h GUI/CategoryWidget.cpp GUI/AddTaskBox.cpp GUI/AddTaskBox.h GUI/Points.h GUI/Points.cpp GUI/AchievementListWidget.cpp GUI/AchievementWidget.cpp)
 target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia)
 target_link_libraries(pic_aem_projekt todolib)
 
