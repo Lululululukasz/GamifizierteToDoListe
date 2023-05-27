@@ -27,10 +27,12 @@ public:
     explicit CategoryWidget(todolib::Category &category, QWidget *parent = nullptr);
 
     todolib::Category &category;
+    void changeName(const QString &newName);
 
 signals:
 
     void categoryDeleteSignal();
+    void categoryConfigSignal();
 
 private slots:
     void openAddTaskWindow(bool checked);
@@ -40,8 +42,10 @@ private:
     QHBoxLayout hlayout {QHBoxLayout()};
     QLabel name {QLabel()};
     QPushButton deleteButton {QPushButton()};
+    QPushButton confButton{QPushButton()};
     std::list<std::shared_ptr<TaskWidget>> TaskWidgets;
     void addTaskWidget(todolib::Task& task);
+    void configCategory();
     void deleteCategory();
     void deleteTask(const std::shared_ptr<TaskWidget>& taskWidget);
 

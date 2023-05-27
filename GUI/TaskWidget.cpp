@@ -1,11 +1,14 @@
 #include "TaskWidget.h"
+#include "Points.h"
 
+#include <random>
 #include <QCheckBox>
 #include <QHBoxLayout>
 #include <QFont>
 #include <QStyle>
 #include <QPushButton>
 #include <QToolButton>
+#include <QSound>
 
 
 TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
@@ -66,10 +69,14 @@ void TaskWidget::strikeoutTask(int state) {
         font->setStrikeOut(true);
         task.setAsDone();
         taskNameLabel->setFont(*font);
+        //The Values for the points are provisional and should later be changed to whatever you want.
+        Points::getinstance().addPoints(1,1,'n');
+        playRandomSound();
     } else {
         font->setStrikeOut(false);
         task.setAsUndone();
         taskNameLabel->setFont(*font);
+        Points::getinstance().subPoints(1,'n');
     }
 }
 
@@ -92,3 +99,36 @@ void TaskWidget::hideDescription() {
 
 }
 
+//plays a random sound out of three when a TaskCheckbox gets checked
+void TaskWidget::playRandomSound() {
+    std::random_device randomDevice;
+    std::uniform_int_distribution<std::mt19937::result_type> randomSound(1, 3);
+
+#ifdef _WIN32
+    switch (randomSound(randomDevice)) {
+        case 1:
+            QSound::play("../resources/taskDoneSound_amazing.wav");
+            break;
+        case 2:
+            QSound::play("../resources/taskDoneSound_incredible.wav");
+            break;
+        case 3:
+            QSound::play("../resources/taskDoneSound_outstanding.wav");
+            break;
+}
+#endif
+
+#ifdef linux
+    switch (randomSound(randomDevice)) {
+        case 1:
+            QSound::play("./resources/taskDoneSound_amazing.wav");
+            break;
+        case 2:
+            QSound::play("./resources/taskDoneSound_incredible.wav");
+            break;
+        case 3:
+            QSound::play("./resources/taskDoneSound_outstanding.wav");
+            break;
+    }
+#endif
+}

@@ -48,14 +48,22 @@ void ToDoListWindow::addCategoryWidget(Category& category) {
     categoryWidgets.push_back(widget);
     layout.addWidget(widget.get(), 0, Qt::AlignTop);
     connect(widget.get(), &CategoryWidget::categoryDeleteSignal, this, [=, this]() { deleteCategory(widget); });
+    connect(widget.get(), &CategoryWidget::categoryConfigSignal, this, [=, this]() { configCategory(widget); });
 }
-
 
 void ToDoListWindow::deleteCategory(const shared_ptr<CategoryWidget>& categoryWidget) {
     toDoList.deleteCategory(categoryWidget->category.getID());
     categoryWidget->hide();
     layout.removeWidget(categoryWidget.get());
     categoryWidgets.remove(categoryWidget);
+}
+
+void ToDoListWindow::configCategory(const shared_ptr<CategoryWidget>& categoryWidget){
+    QString categoryName = QInputDialog::getText(this, "Category Config", "enter the category name");
+    if (!categoryName.isEmpty()) {
+        categoryWidget->changeName(categoryName);
+        categoryWidget->category.name = categoryName.toStdString();
+    }
 }
 
 
