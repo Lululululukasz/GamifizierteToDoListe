@@ -9,7 +9,7 @@ namespace todolib {
     AchievementList::AchievementList(){
 
         //TODO remove temp achievements!
-        Achievement a {"Washing", "You washed 10 times the dishes"};
+        Achievement a {"Washing", "You washed the dishes  10 times"};
         Achievement b {"Learning", "You learned 1 time"};
         Achievement c {"First Time", "Go to your very first Lecture"};
         a.setAsDone();
