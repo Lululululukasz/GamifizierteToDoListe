@@ -16,7 +16,7 @@ AchievementWidget::AchievementWidget(todolib::Achievement &achievement, QWidget 
 
     // Achievement Icon (currently same example icon for every achievement)
     // TODO individualize icons for different achievements
-    QPixmap pix("../resources/konfetti.png");
+    QPixmap pix {"../resources/konfetti.png"};
     pix = pix.scaled(80, 80, Qt::KeepAspectRatio);
     achievementIcon.setPixmap(pix);
 

@@ -8,7 +8,7 @@ namespace todolib {
 
     AchievementList::AchievementList(){
 
-        //TODO remove temp achievements!
+        //TODO remove temp achievements! implement proper logic
         Achievement a {"Washing", "You washed the dishes  10 times"};
         Achievement b {"Learning", "You learned 1 time"};
         Achievement c {"First Time", "Go to your very first Lecture"};
@@ -25,7 +25,7 @@ namespace todolib {
     }
 
     std::vector<Achievement>  AchievementList::getAchievements() {
-        return this->achievements; //TODO make read only?
+        return this->achievements;
     }
 
 } // todolib
