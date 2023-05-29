@@ -14,6 +14,14 @@ AchievementWidget::AchievementWidget(todolib::Achievement &achievement, QWidget 
     // Achievement Description
     achievementDescription.setText(QString::fromStdString(achievement.description));
 
+    // Container for Name and Description
+    QWidget textContainer {QWidget()};
+    textContainer.setLayout(&vlayout);
+    textContainer.setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    textContainer.setMinimumSize(350,100);
+   // vlayout.addWidget(&achievementName, 1, Qt::AlignLeft | Qt::AlignVCenter);
+   // vlayout.addWidget(&achievementDescription, 1, Qt::AlignLeft | Qt::AlignVCenter);
+
     // Achievement Icon (currently same example icon for every achievement)
     // TODO individualize icons for different achievements
     QPixmap pix("../resources/konfetti.png");
@@ -24,9 +32,10 @@ AchievementWidget::AchievementWidget(todolib::Achievement &achievement, QWidget 
     setLayout(&hlayout); // hlayout places the two components (icon & vlayout(name,description)) next to each other
     hlayout.addWidget(&achievementIcon, 1, Qt::AlignLeft | Qt::AlignVCenter);
     hlayout.insertSpacing(1, 30);
-    hlayout.addLayout(&vlayout); // vlayout places the name and description below each other
+ /*   hlayout.addLayout(&vlayout); // vlayout places the name and description below each other
     vlayout.addWidget(&achievementName, 1, Qt::AlignLeft | Qt::AlignVCenter);
     vlayout.addWidget(&achievementDescription, 1, Qt::AlignLeft | Qt::AlignVCenter);
+*/  hlayout.addWidget(&textContainer, 1, Qt::AlignLeft | Qt::AlignVCenter);
 
     // background color and font color for Achievement Widget
     palet.setColor(QPalette::Window, "#080c11");

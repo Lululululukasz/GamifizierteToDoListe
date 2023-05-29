@@ -15,7 +15,7 @@ AchievementListWidget::AchievementListWidget(todolib::AchievementList &achieveme
          if (a.getDoneStatus()) addAchievementWidget(a);
      }
 
-    // background color for Achievement List Widget (background of individual achievements)
+    // background color for whole List
     palet.setColor(QPalette::Window, "#141d29");
     setAutoFillBackground(true);
     setPalette(palet);
@@ -24,5 +24,8 @@ AchievementListWidget::AchievementListWidget(todolib::AchievementList &achieveme
 void AchievementListWidget::addAchievementWidget(todolib::Achievement &achievement) {
     std::shared_ptr<AchievementWidget> widget {std::make_shared<AchievementWidget>(achievement)};
     achievementWidgets.emplace_back(widget);
+    widget->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    widget->setMinimumSize(450,100);
+
     vlayout.addWidget(widget.get(), 1, Qt::AlignLeft | Qt::AlignVCenter);
 }
