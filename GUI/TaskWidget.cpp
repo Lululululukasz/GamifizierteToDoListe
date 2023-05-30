@@ -102,11 +102,11 @@ void TaskWidget::playRandomSound() {
     std::uniform_int_distribution<std::mt19937::result_type> randomSound(1,3);
 
     switch (randomSound(randomDevice)) {
-        case 1: QSound::play("resources/taskDoneSound_amazing.wav");
+        case 1: QSound::play("../resources/taskDoneSound_amazing.wav");
         break;
-        case 2: QSound::play("resources/taskDoneSound_incredible.wav");
+        case 2: QSound::play("../resources/taskDoneSound_incredible.wav");
         break;
-        case 3: QSound::play("resources/taskDoneSound_outstanding.wav");
+        case 3: QSound::play("../resources/taskDoneSound_outstanding.wav");
         break;
     }
 }

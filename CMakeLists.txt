@@ -6,11 +6,19 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMake_AUTORCC ON)
 
-find_package(Qt5 COMPONENTS Widgets Multimedia REQUIRED)
+find_package(Qt5 COMPONENTS Widgets Multimedia QuickControls2 REQUIRED)
 add_subdirectory(todolib)
-add_executable(pic_aem_projekt main.cpp GUI/TaskWidget.cpp GUI/TaskWidget.h GUI/ToDoListWindow.cpp GUI/ToDoListWindow.h GUI/CategoryWidget.h GUI/CategoryWidget.cpp GUI/AddTaskBox.cpp GUI/AddTaskBox.h)
-target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia)
-target_link_libraries(pic_aem_projekt todolib)
+add_executable(pic_aem_projekt
+		main.cpp
+		GUI/TaskWidget.cpp GUI/TaskWidget.h
+		GUI/CategoryViewPage.cpp GUI/CategoryViewPage.h
+		GUI/CategoryWidget.h GUI/CategoryWidget.cpp
+		GUI/AddTaskBox.cpp GUI/AddTaskBox.h
+		GUI/MainWindow.cpp GUI/MainWindow.h
+		GUI/Page.cpp GUI/Page.h
+		GUI/MainPage.cpp GUI/MainPage.h)
+target_link_libraries(pic_aem_projekt todolib Qt5::Widgets Qt5::Multimedia Qt5::QuickControls2)
+qt5_use_modules(pic_aem_projekt Widgets Multimedia QuickControls2)
 
 # create install target
 install(TARGETS pic_aem_projekt DESTINATION bin)
