@@ -14,7 +14,6 @@
 #include "todolib/todolib.h"
 #include "CategoryWidget.h"
 #include <memory>
-#include <QtQuickControls2>
 #include "Page.h"
 
 
