@@ -5,5 +5,7 @@
 #include "Page.h"
 
 Page::Page(todolib::ToDoList &toDoList) : toDoList{toDoList} {
+    layout.addWidget(&closeButton, 0, Qt::AlignLeft);
+    connect(&closeButton, SIGNAL(clicked()), this, SIGNAL(closePageSignal()));
 
 }

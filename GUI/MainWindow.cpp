@@ -24,6 +24,13 @@ void MainWindow::openCategoryViewPage() {
     pages.push_back(newpage);
     stackedLayout.addWidget(newpage.get());
     stackedLayout.setCurrentIndex(stackedLayout.indexOf(newpage.get()));
+
+    connect(newpage.get(), &Page::closePageSignal, this, [=, this]() {closePage(newpage);});
+}
+
+void MainWindow::closePage(const std::shared_ptr<Page>& page) {
+    stackedLayout.removeWidget(page.get());
+    pages.remove(page);
 }
 
 

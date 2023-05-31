@@ -18,6 +18,7 @@ public:
     MainWindow(todolib::ToDoList &todolist);
 
 public slots:
+
     void openCategoryViewPage();
 
 
@@ -26,7 +27,7 @@ private:
     QStackedLayout stackedLayout{QStackedLayout(this)};
     std::list<std::shared_ptr<Page>> pages;
 
-
+    void closePage(const std::shared_ptr<Page>& page);
 };
 
 

@@ -8,6 +8,7 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include "todolib/todolib.h"
+#include <QPushButton>
 
 class Page : public QWidget {
 
@@ -16,9 +17,13 @@ Q_OBJECT
 public:
     explicit Page(todolib::ToDoList(& toDoList));
 
+signals:
+    void closePageSignal();
+
 protected:
     todolib::ToDoList& toDoList;
     QVBoxLayout layout {QVBoxLayout(this)};
+    QPushButton closeButton {QPushButton("<- Back")};
 
 };
 

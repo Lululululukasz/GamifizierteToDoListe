@@ -5,6 +5,7 @@
 #include "MainPage.h"
 
 MainPage::MainPage(todolib::ToDoList &toDoList) : Page{toDoList} {
+    closeButton.hide();
     layout.addWidget(&categoryViewPageButton);
     categoryViewPageButton.setGeometry(10, 100, 80, 30);
     connect(&categoryViewPageButton, SIGNAL(clicked()), this, SIGNAL(openCategoryViewPageSignal()));
