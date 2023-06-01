@@ -15,7 +15,3 @@ MainPage::MainPage(todolib::ToDoList &toDoList) : Page{toDoList} {
 
 }
 
-void MainPage::categoryViewPageButtonPressed() {
-    emit openCategoryViewPageSignal();
-}
-
