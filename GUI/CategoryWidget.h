@@ -33,6 +33,7 @@ signals:
 
     void categoryDeleteSignal();
     void categoryConfigSignal();
+    void refreshPage();
 
 private slots:
     void openAddTaskWindow(bool checked);

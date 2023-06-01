@@ -11,6 +11,7 @@
 #include <QPushButton>
 #include <QToolButton>
 #include <QSound>
+#include <QtDebug>
 
 
 TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
@@ -20,17 +21,20 @@ TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
     hbox = std::make_shared<QHBoxLayout>();
     vbox = std::make_shared<QVBoxLayout>(this);
 
+    //font
+    font = std::make_shared<QFont>();
+
     //taskCheckbox
     taskCheckbox = std::make_shared<QCheckBox>(this);
-    if(task.getDoneStatus()){
-        taskCheckbox->setCheckState(Qt::Checked);
-    }else{
-        taskCheckbox->setCheckState(Qt::Unchecked);
-    }
+
 
     //taskNameLabel
     taskNameLabel = std::make_shared<QLabel>(this);
     taskNameLabel->setText(QString::fromStdString(task.name));
+    debug = std::make_shared<QLabel>(this);
+    debug->setText(QString::fromStdString((task.getDoneStatus()) ? "true" : "false"));
+    qDebug() << "Constructor " << QString::fromStdString(task.name) << ": " << ((task.getDoneStatus()) ? "true" : "false");
+
 
     //taskDeleteButton
     taskDeleteButton = std::make_shared<QPushButton>();
@@ -53,11 +57,20 @@ TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
     hbox->addWidget(taskCheckbox.get(), 0, Qt::AlignLeft | Qt::AlignVCenter);
     hbox->addWidget(showDescriptionButton.get(), 0, Qt::AlignLeft | Qt::AlignVCenter);
     hbox->addWidget(taskNameLabel.get(), 1, Qt::AlignLeft | Qt::AlignVCenter);
+    hbox->addWidget(debug.get(),1, Qt::AlignLeft | Qt::AlignVCenter);
     hbox->addWidget(taskDeleteButton.get(), 0, Qt::AlignRight | Qt::AlignVCenter);
 
     //connecting to the slots below
     connect(taskDeleteButton.get(), &QPushButton::clicked, this, &TaskWidget::deleteTask);
-    connect(taskCheckbox.get(), &QCheckBox::stateChanged, this, &TaskWidget::strikeoutTask);
+    connect(taskCheckbox.get(), &QCheckBox::stateChanged, this, [=,this](bool checked){
+        if (checked) taskDone();
+        else taskUndone();
+    });
+    if(task.getDoneStatus()){
+        taskCheckbox->setCheckState(Qt::Checked);
+    } else {
+        taskCheckbox->setCheckState(Qt::Unchecked);
+    }
     connect(showDescriptionButton.get(), &QToolButton::toggled, [=,this](bool checked) {
         showDescriptionButton->setArrowType(checked ? Qt::ArrowType::DownArrow : Qt::ArrowType::RightArrow);
         if (checked) showDescription();
@@ -67,23 +80,19 @@ TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
 }
 
 //changes the state of the taskNameLabel to strikedout or not strikedout
-void TaskWidget::strikeoutTask(int state) {
+void TaskWidget::taskDone() {
 
-    QFont *font = new QFont;
-
-    if (state == Qt::Checked) {
         font->setStrikeOut(true);
-        task.setAsDone();
         taskNameLabel->setFont(*font);
-        //The Values for the points are provisional and should later be changed to whatever you want.
-        Points::getinstance().addPoints(1,1,'n');
-        playRandomSound();
-    } else {
-        font->setStrikeOut(false);
-        task.setAsUndone();
-        taskNameLabel->setFont(*font);
-        Points::getinstance().subPoints(1,'n');
-    }
+
+        if(!task.getDoneStatus()) {
+            task.setAsDone();
+            qDebug() << "taskDone " << QString::fromStdString(task.name) << ": " << ((task.getDoneStatus()) ? "true" : "false");
+            debug->setText(QString::fromStdString((task.getDoneStatus()) ? "true" : "false"));
+            //The Values for the points are provisional and should later be changed to whatever you want.
+            Points::getinstance().addPoints(1,1,'n');
+            playRandomSound();
+        }
 }
 
 //emits the deleteTaskSignal that is used in CategoryWidget
@@ -123,3 +132,21 @@ void TaskWidget::playRandomSound() {
             break;
     }
 }
+
+void TaskWidget::taskUndone() {
+
+    font->setStrikeOut(false);
+    taskNameLabel->setFont(*font);
+    if(task.getDoneStatus()) {
+        task.setAsUndone();
+        qDebug() << "taskUndone " << QString::fromStdString(task.name) << ": " << ((task.getDoneStatus()) ? "true" : "false");
+        debug->setText(QString::fromStdString((task.getDoneStatus()) ? "true" : "false"));
+        Points::getinstance().subPoints(1, 'n');
+    }
+
+}
+
+
+
+
+

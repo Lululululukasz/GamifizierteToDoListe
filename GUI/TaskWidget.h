@@ -36,15 +36,16 @@ private:
     std::shared_ptr<QVBoxLayout> vbox;
     std::shared_ptr<QCheckBox> taskCheckbox;
     std::shared_ptr<QLabel> taskNameLabel;
+    std::shared_ptr<QLabel> debug; //debug
     std::shared_ptr<QPushButton> taskDeleteButton;
     std::shared_ptr<QToolButton> showDescriptionButton;
     std::shared_ptr<QLabel> taskDescriptionLabel;
     std::shared_ptr<QFont> font;
-
     static void playRandomSound();
 
 private slots:
-    void strikeoutTask(int state);
+    void taskDone();
+    void taskUndone();
     void deleteTask();
     void showDescription();
     void hideDescription();

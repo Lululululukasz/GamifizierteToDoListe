@@ -10,6 +10,7 @@
 #include <QtWidgets/QPushButton>
 #include <QWidget>
 #include <QStyle>
+#include <QDebug>
 
 using namespace todolib;
 
@@ -26,12 +27,12 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
     deleteButton.setText("  Delete");
     deleteButton.setIcon(deleteButton.style()->standardIcon(QStyle::SP_TrashIcon));
     hlayout.addWidget(&deleteButton, 0, Qt::AlignRight | Qt::AlignVCenter);
-    connect(&deleteButton, &QPushButton::clicked, this, [=]() { deleteCategory(); });
+    connect(&deleteButton, &QPushButton::clicked, this, [=, this]() { deleteCategory(); });
 
     // Category Config Button
     confButton.setText("Config");
     hlayout.addWidget(&confButton, 0 , Qt::AlignRight | Qt::AlignVCenter);
-    connect(&confButton, &QPushButton::clicked, this, [=]() {configCategory();});
+    connect(&confButton, &QPushButton::clicked, this, [=, this]() {configCategory();});
 
     //Add Task Button
     addTaskButton = std::make_shared<QPushButton>("Add Task", this);
@@ -42,6 +43,7 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
 
     // List of Tasks
     for (Task &task: category.tasks) {
+        qDebug() << "CategoryWidget " << QString::fromStdString(task.name) << ": " << ((task.getDoneStatus()) ? "true" : "false");
         addTaskWidget(task);
     }
 
@@ -61,6 +63,7 @@ void CategoryWidget::deleteCategory() {
 
 void CategoryWidget::addTask(Task &task) {
     category.addTask(task);
+    emit refreshPage();
     addTaskWidget(task);
     //category.showTasks();
 }
