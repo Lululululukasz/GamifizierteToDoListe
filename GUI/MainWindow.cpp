@@ -8,6 +8,7 @@
 
 
 MainWindow::MainWindow(todolib::ToDoList &todolist) : toDoList{todolist} {
+    // MainPage automatically Added
     std::shared_ptr<Page> mainPage {std::make_shared<MainPage>(toDoList)};
     pages.push_back(mainPage);
     stackedLayout.addWidget(mainPage.get());
@@ -19,8 +20,7 @@ MainWindow::MainWindow(todolib::ToDoList &todolist) : toDoList{todolist} {
     show();
 }
 
-void MainWindow::openCategoryViewPage() {
-    std::shared_ptr<Page> newpage {std::make_shared<CategoryViewPage>(toDoList)};
+void MainWindow::openPage(const std::shared_ptr<Page>& newpage) {
     pages.push_back(newpage);
     stackedLayout.addWidget(newpage.get());
     stackedLayout.setCurrentIndex(stackedLayout.indexOf(newpage.get()));
@@ -33,4 +33,7 @@ void MainWindow::closePage(const std::shared_ptr<Page>& page) {
     pages.remove(page);
 }
 
-
+void MainWindow::openCategoryViewPage() {
+    std::shared_ptr<Page> newpage {std::make_shared<CategoryViewPage>(toDoList)};
+    openPage(newpage);
+}

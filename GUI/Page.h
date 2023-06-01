@@ -10,6 +10,10 @@
 #include "todolib/todolib.h"
 #include <QPushButton>
 
+/**
+ * Page
+ * parent class for pages including a closeSignal, a layout and a back button
+ */
 class Page : public QWidget {
 
 Q_OBJECT

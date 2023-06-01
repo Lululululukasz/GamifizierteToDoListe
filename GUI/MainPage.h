@@ -11,11 +11,21 @@
 #include <QWidget>
 #include <QVBoxLayout>
 
+/**
+ * MainPage
+ * Default Base Page including buttons to open all other pages.
+ * To add a new type of page it needs its own button and signal that are connected in the constructor.
+ */
 class MainPage : public Page {
 
 Q_OBJECT
 
 public:
+    /**
+     * MainPage Constructor
+     * Adds and connects the button for each type of page.
+     * @param toDoList
+     */
     explicit MainPage(todolib::ToDoList &toDoList);
 
     signals:
@@ -23,8 +33,6 @@ public:
 
 private:
     QPushButton categoryViewPageButton{QPushButton("Open the Category View")};
-
-    void categoryViewPageButtonPressed();
 
 };
 
