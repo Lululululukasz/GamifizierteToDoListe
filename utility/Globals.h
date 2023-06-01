@@ -8,9 +8,20 @@ QString changeHomepath();
  */
 class Globals{
 public:
+    /**
+     * homepath is the rootpath of the installfolder
+     */
     const static inline QString homepath = changeHomepath();
+
+    /**
+     * soundpath is the rootpath of the sounds for simpler access
+     */
     const static inline QString soundpath = homepath + "/resources/sounds/";
-    const static inline QString savespath = homepath + "/resources/saves/";
+
+    /**
+     * savespath is the rootpath of the savestates for simpler access
+     */
+    const static inline QString savespath = homepath + "/saves/";
 };
 
 
