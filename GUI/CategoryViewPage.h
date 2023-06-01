@@ -21,9 +21,6 @@ class CategoryViewPage : public Page {
 
 Q_OBJECT
 
-signals:
-    void refreshPage();
-
 public:
     explicit CategoryViewPage(todolib::ToDoList& toDoList);
 

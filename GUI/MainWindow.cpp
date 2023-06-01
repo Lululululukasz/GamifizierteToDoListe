@@ -32,26 +32,19 @@ void MainWindow::openPage(const std::shared_ptr<Page>& newpage) {
 
 void MainWindow::closePage(const std::shared_ptr<Page>& page) {
 
-    for (auto task : toDoList.showAllTasks()) {
-        qDebug() << "MainWindow prä close window: " << QString::fromStdString(task.name) << ": " << ((task.getDoneStatus()) ? "true" : "false");
-    }
-
     stackedLayout.removeWidget(page.get());
     pages.remove(page);
 
-    for (auto task : toDoList.showAllTasks()) {
-        qDebug() << "MainWindow post close window: " << QString::fromStdString(task.name) << ": " << ((task.getDoneStatus()) ? "true" : "false");
-    }
 
 }
 
 void MainWindow::openCategoryViewPage() {
     std::shared_ptr<Page> newpage {std::make_shared<CategoryViewPage>(toDoList)};
     openPage(newpage);
-    connect(newpage.get(), SIGNAL(refreshPage()), this, SLOT(refreshCategoryViewPage(newpage)));
+    connect(newpage.get(), &Page::refreshPageSignal, this, [=, this]() {refreshCategoryViewPage(newpage);});
 }
 
-void MainWindow::refreshCategoryViewPage(const std::shared_ptr<CategoryViewPage>& page) {
+void MainWindow::refreshCategoryViewPage(const std::shared_ptr<Page>& page) {
     closePage(page);
     openCategoryViewPage();
     qDebug() << "refresh";

@@ -31,9 +31,6 @@ TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
     //taskNameLabel
     taskNameLabel = std::make_shared<QLabel>(this);
     taskNameLabel->setText(QString::fromStdString(task.name));
-    debug = std::make_shared<QLabel>(this);
-    debug->setText(QString::fromStdString((task.getDoneStatus()) ? "true" : "false"));
-    qDebug() << "Constructor " << QString::fromStdString(task.name) << ": " << ((task.getDoneStatus()) ? "true" : "false");
 
 
     //taskDeleteButton
@@ -57,7 +54,6 @@ TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
     hbox->addWidget(taskCheckbox.get(), 0, Qt::AlignLeft | Qt::AlignVCenter);
     hbox->addWidget(showDescriptionButton.get(), 0, Qt::AlignLeft | Qt::AlignVCenter);
     hbox->addWidget(taskNameLabel.get(), 1, Qt::AlignLeft | Qt::AlignVCenter);
-    hbox->addWidget(debug.get(),1, Qt::AlignLeft | Qt::AlignVCenter);
     hbox->addWidget(taskDeleteButton.get(), 0, Qt::AlignRight | Qt::AlignVCenter);
 
     //connecting to the slots below
@@ -87,8 +83,6 @@ void TaskWidget::taskDone() {
 
         if(!task.getDoneStatus()) {
             task.setAsDone();
-            qDebug() << "taskDone " << QString::fromStdString(task.name) << ": " << ((task.getDoneStatus()) ? "true" : "false");
-            debug->setText(QString::fromStdString((task.getDoneStatus()) ? "true" : "false"));
             //The Values for the points are provisional and should later be changed to whatever you want.
             Points::getinstance().addPoints(1,1,'n');
             playRandomSound();
@@ -139,8 +133,6 @@ void TaskWidget::taskUndone() {
     taskNameLabel->setFont(*font);
     if(task.getDoneStatus()) {
         task.setAsUndone();
-        qDebug() << "taskUndone " << QString::fromStdString(task.name) << ": " << ((task.getDoneStatus()) ? "true" : "false");
-        debug->setText(QString::fromStdString((task.getDoneStatus()) ? "true" : "false"));
         Points::getinstance().subPoints(1, 'n');
     }
 

@@ -23,6 +23,7 @@ public:
 
 signals:
     void closePageSignal();
+    void refreshPageSignal();
 
 protected:
     todolib::ToDoList& toDoList;

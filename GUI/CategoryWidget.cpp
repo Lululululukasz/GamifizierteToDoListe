@@ -10,7 +10,6 @@
 #include <QtWidgets/QPushButton>
 #include <QWidget>
 #include <QStyle>
-#include <QDebug>
 
 using namespace todolib;
 
@@ -43,7 +42,6 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
 
     // List of Tasks
     for (Task &task: category.tasks) {
-        qDebug() << "CategoryWidget " << QString::fromStdString(task.name) << ": " << ((task.getDoneStatus()) ? "true" : "false");
         addTaskWidget(task);
     }
 
@@ -63,9 +61,9 @@ void CategoryWidget::deleteCategory() {
 
 void CategoryWidget::addTask(Task &task) {
     category.addTask(task);
-    emit refreshPage();
-    addTaskWidget(task);
-    //category.showTasks();
+    emit refreshPageWidgetSignal();
+    // addTaskWidget(task);
+    // category.showTasks();
 }
 
 void CategoryWidget::addTaskWidget(Task &task) {

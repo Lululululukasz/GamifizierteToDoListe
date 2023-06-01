@@ -30,7 +30,6 @@ public slots:
  * creates a shared pointer to a categoryViewPage and feeds it to the openPage() function
  */ // das würde ein Template sein wenn es ginge
     void openCategoryViewPage();
-    void refreshCategoryViewPage(const std::shared_ptr<CategoryViewPage>& page);
 
 private:
     todolib::ToDoList &toDoList;
@@ -44,6 +43,7 @@ private:
      */
     void openPage(const std::shared_ptr<Page>& newpage);
     void closePage(const std::shared_ptr<Page>& page);
+    void refreshCategoryViewPage(const std::shared_ptr<Page>& newpage);
 };
 
 
