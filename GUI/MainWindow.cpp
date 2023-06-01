@@ -4,6 +4,7 @@
 
 #include "MainWindow.h"
 #include "MainPage.h"
+#include "AchievementsPage.h"
 #include <memory>
 
 
@@ -14,6 +15,8 @@ MainWindow::MainWindow(todolib::ToDoList &todolist) : toDoList{todolist} {
     stackedLayout.addWidget(mainPage.get());
 
     connect(mainPage.get(), SIGNAL(openCategoryViewPageSignal()), this, SLOT(openCategoryViewPage()));
+    connect(mainPage.get(), SIGNAL(openAchievementsPageSignal()), this, SLOT(openAchievementsPage()));
+
 
     resize(400, 400);
     setWindowTitle("To-Do List");
@@ -36,4 +39,9 @@ void MainWindow::closePage(const std::shared_ptr<Page>& page) {
 void MainWindow::openCategoryViewPage() {
     std::shared_ptr<Page> newpage {std::make_shared<CategoryViewPage>(toDoList)};
     openPage(newpage);
+}
+
+void MainWindow::openAchievementsPage() {
+    std::shared_ptr<Page> newPage {std::make_shared<AchievementsPage>(toDoList)};
+    openPage(newPage);
 }

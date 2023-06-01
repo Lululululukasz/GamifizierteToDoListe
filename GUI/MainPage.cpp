@@ -12,6 +12,10 @@ MainPage::MainPage(todolib::ToDoList &toDoList) : Page{toDoList} {
     categoryViewPageButton.setGeometry(10, 100, 80, 30);
     connect(&categoryViewPageButton, SIGNAL(clicked()), this, SIGNAL(openCategoryViewPageSignal()));
 
+    // Adding and connecting the Achievements page
+    layout.addWidget(&achievementsPageButton);
+    achievementsPageButton.setGeometry(10, 100, 80, 30);
+    connect(&achievementsPageButton, SIGNAL(clicked()), this, SIGNAL(openAchievementsPageSignal()));
 
 }
 
