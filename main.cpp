@@ -3,12 +3,6 @@
 
 #include <QApplication>
 
-#include <QFile>
-#include <QDir>
-#include <QJsonArray>
-#include <QJsonDocument>
-#include <QJsonObject>
-
 int main(int argc, char **argv) {
 
     // Initialisiere eine QApplication-Instanz
