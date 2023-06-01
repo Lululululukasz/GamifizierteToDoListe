@@ -12,6 +12,8 @@ XpWidget::XpWidget(/*todolib::ToDoList &toDoList,*/ QWidget *parent) : /*xpobjek
 
     xpLabel->setText(QString::number(xpWidgetZahl));
     setLayout(xpLayout.get());
+
+    connect(, SIGNAL(xpWidgetSignal(bool)), this, SLOT(xpWidgetFunc(bool)));
 }
 void XpWidget::xpWidgetFunc(bool xpWidgetbool){
     if (xpWidgetbool){

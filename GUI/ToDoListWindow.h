@@ -20,8 +20,10 @@
 class ToDoListWindow : public QWidget {
 
 Q_OBJECT
-signals
-void xpWidgetSignal()
+
+signals:
+
+void xpWidgetSignal(bool xpsignal);
 public:
     explicit ToDoListWindow(todolib::ToDoList& toDoList, QWidget *parent = nullptr);
 
