@@ -1,5 +1,6 @@
 #include "TaskWidget.h"
 #include "Points.h"
+#include "todolib/todolib.h"
 
 #include <random>
 #include <QCheckBox>
@@ -23,7 +24,11 @@ TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
 
     //taskCheckbox
     taskCheckbox = std::make_shared<QCheckBox>(this);
-    taskCheckbox->setCheckState(Qt::Unchecked);
+    if (task.getDoneStatus()){
+      taskCheckbox->setCheckState(Qt::Checked);
+    } else {
+        taskCheckbox->setCheckState(Qt::Unchecked);
+    }
 
     //taskNameLabel
     taskNameLabel = std::make_shared<QLabel>(this);
