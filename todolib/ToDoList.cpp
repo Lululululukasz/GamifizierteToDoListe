@@ -18,6 +18,7 @@ ToDoList::ToDoList() {
             Task("Flowers", "Water the flowers"),
             Task("Windows", "Clean the windows"),
     };
+    //xpobjekt = Xp();
 }
 
 Category &ToDoList::getCategoryByName(const string &name) {

@@ -7,12 +7,12 @@
 
 using namespace todolib;
 using namespace std;
-int Xp::xpZahl=0;
+/*int Xp::xpZahl=0;
 
 void Xp::xpFunc(bool xpBool) {
-    if (xpBool== true){
+    if (xpBool){
         xpZahl++;
     }else{
         xpZahl--;
     };
-};
+};*/

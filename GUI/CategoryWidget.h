@@ -31,9 +31,11 @@ public:
 signals:
 
     void categoryDeleteSignal();
+    void xpWidgetSignal(bool xpsignal);
 
 private slots:
     void openAddTaskWindow(bool checked);
+
 
 private:
     QVBoxLayout vlayout {QVBoxLayout()};

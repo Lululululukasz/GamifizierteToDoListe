@@ -9,6 +9,7 @@
 #include "Task.h"
 #include <list>
 #include <memory>
+#include "Xp.h"
 
 
 namespace todolib {
@@ -20,6 +21,7 @@ namespace todolib {
 
     public:
         list<Category> categories;
+        int XpZahl;
 
         explicit ToDoList();
 

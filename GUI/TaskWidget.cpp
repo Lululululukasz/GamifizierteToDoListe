@@ -9,7 +9,7 @@
 
 
 TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
-        : task{task}, QWidget(parent) {
+        : task{task},QWidget(parent) {
 
     //layouts
     hbox = std::make_shared<QHBoxLayout>();
@@ -66,10 +66,12 @@ void TaskWidget::strikeoutTask(int state) {
         font->setStrikeOut(true);
         task.setAsDone();
         taskNameLabel->setFont(*font);
+        emit xpWidgetSignal(true);
     } else {
         font->setStrikeOut(false);
         task.setAsUndone();
         taskNameLabel->setFont(*font);
+        emit xpWidgetSignal(false);
     }
 }
 

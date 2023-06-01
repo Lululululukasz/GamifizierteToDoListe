@@ -43,6 +43,7 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
 
 }
 
+
 void CategoryWidget::deleteCategory() {
     emit categoryDeleteSignal();
 }
@@ -58,6 +59,7 @@ void CategoryWidget::addTaskWidget(Task &task) {
     TaskWidgets.push_back(widget);
     vlayout.addWidget(widget.get(), 0, Qt::AlignTop);
     connect(widget.get(), &TaskWidget::deleteTaskSignal, this, [=, this]() { deleteTask(widget); });
+    connect(widget.get(),SIGNAL (TaskWidget::xpWidgetSignal()),this,SIGNAL(xpWidgetSignal()));
 }
 
 void CategoryWidget::openAddTaskWindow(bool checked){
