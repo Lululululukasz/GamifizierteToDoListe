@@ -15,20 +15,19 @@
 #include "CategoryWidget.h"
 #include "AchievementListWidget.h"
 #include <memory>
+#include "Page.h"
 
 
-class ToDoListWindow : public QWidget {
+class CategoryViewPage : public Page {
 
 Q_OBJECT
 
 public:
-    explicit ToDoListWindow(todolib::ToDoList& toDoList, QWidget *parent = nullptr);
+    explicit CategoryViewPage(todolib::ToDoList& toDoList);
 
     std::shared_ptr<AchievementListWidget> achieveListW; // TODO: remove, only here for testing achievements
 private:
-    todolib::ToDoList& toDoList;
     QPushButton addCategoryButton {QPushButton("add a new category")};
-    QVBoxLayout layout {QVBoxLayout(this)};
     std::list<std::shared_ptr<CategoryWidget>> categoryWidgets;
     void addCategory();
     void addCategoryWidget(todolib::Category& category);

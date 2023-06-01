@@ -18,6 +18,10 @@ namespace todolib {
 namespace todolib {
     using namespace std;
 
+    /**
+     * Category
+     * saves a List of Tasks
+     */
     class Category {
     private:
         string id;
@@ -26,34 +30,72 @@ namespace todolib {
         string name;
         list<Task> tasks;
 
-        // Constructor
+        /**
+         * Category Constructor
+         * @param n name
+         */
         explicit Category(const string &n);
 
-        // Copy Constructor
+        /**
+         * Category Copy Constructor
+         * @param other
+         */
         Category(Category &other);
 
-        // Copy Assignment Constructor
+        /**
+         * Category Copy Assignment Constructor
+         * @param other
+         * @return
+         */
         Category &operator=(Category const &other);
 
-        // Move Constructor
+        /**
+         * Category Move Constructor
+         * @param other
+         */
         Category(Category &&other) noexcept;
 
-        // Move Assignment Constructor
+        /**
+         * Category Move Assignment Constructor
+         * @param other
+         * @return
+         */
         Category &operator=(Category &&other) noexcept;
 
-        // Destructor
+        /**
+         * Category Destructor
+         */
         ~Category() = default;
+
 
         string getID() const;
 
+        /**
+         * isSame
+         * @param other
+         * @return true if the tasks have the same id, false if not
+         */
         bool isSame(const Category &other) const;
 
+        /**
+         * addTask
+         * @param task (can be both l- and rvalue)
+         */
         void addTask(Task &task);
         void addTask(Task &&task);
 
+        /**
+         * showTasks
+         * @return List of tasks in the category
+         */
         list<Task> showTasks();
 
-        bool deleteTask(const string &deleteID); // returns true if successfully deleted
+        /**
+         * deleteTask
+         * @param deleteID id of the task to be deleted
+         * @return true if successful, false if unsuccessful
+         */
+        bool deleteTask(const string &deleteID);
 
     };
 
