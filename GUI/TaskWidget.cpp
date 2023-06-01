@@ -9,7 +9,10 @@
 #include <QPushButton>
 #include <QToolButton>
 #include <QSound>
-
+#include <QGraphicsRotation>
+#include <QGraphicsScene>
+#include <QGraphicsProxyWidget>
+#include <QGraphicsView>
 
 TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
         : task{task}, QWidget(parent) {
@@ -63,7 +66,7 @@ TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
 //changes the state of the taskNameLabel to strikedout or not strikedout
 void TaskWidget::strikeoutTask(int state) {
 
-    QFont *font = new QFont;
+    font = std::make_shared<QFont>();
 
     if (state == Qt::Checked) {
         font->setStrikeOut(true);
@@ -71,7 +74,8 @@ void TaskWidget::strikeoutTask(int state) {
         taskNameLabel->setFont(*font);
         //The Values for the points are provisional and should later be changed to whatever you want.
         Points::getinstance().addPoints(1,1,'n');
-        playRandomSound();
+        //playRandomSound();
+        playConfettiAnimation();
     } else {
         font->setStrikeOut(false);
         task.setAsUndone();
@@ -131,4 +135,24 @@ void TaskWidget::playRandomSound() {
             break;
     }
 #endif
+}
+
+void TaskWidget::playConfettiAnimation() {
+    confetti = std::make_shared<DrawConfetti>();
+    vbox->addWidget(confetti.get());
+    /*
+    return;
+    for(int i{0}; i<20; i++) {
+        auto confetti {std::make_shared<DrawConfetti>()};
+        auto animation {std::make_shared<QPropertyAnimation>(confetti.get(), "geometry")};
+        animation->setDuration(5000);
+        std::random_device randomDevice;
+        std::uniform_int_distribution<std::mt19937::result_type> width(1, 200);
+        animation->setStartValue(QRect(width(randomDevice), -250, 100, 30));
+        animation->setEndValue(QRect(width(randomDevice), confetti->height(), 100, 30));
+        animation->start();
+        vbox->addWidget(confetti.get());
+        drawConfetti.push_back(confetti);
+        confettiAnimation.push_back(animation);
+    }*/
 }
