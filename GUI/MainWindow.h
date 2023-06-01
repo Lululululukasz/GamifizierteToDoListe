@@ -30,6 +30,9 @@ public slots:
  * creates a shared pointer to a categoryViewPage and feeds it to the openPage() function
  */
     void openCategoryViewPage();
+    void openAchievementsPage(); // same function for Achievements Page
+
+
 
 
 private:

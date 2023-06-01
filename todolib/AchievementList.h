@@ -24,10 +24,8 @@ namespace todolib {
         ~AchievementList() = default;
 
         void addAchievement(Achievement &achievement);
-
         std::vector<Achievement> getAchievements();
-
-        bool checkIfAchievementShouldBeSetAsDone();
+        bool setThisAchievementAsDone(std::string &taskName);
 
     };
 

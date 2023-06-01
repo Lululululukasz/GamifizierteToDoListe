@@ -29,7 +29,8 @@ namespace todolib {
                 achievement.setAsDone();
             }
         }
-        achievements.begin()->setAsDone(); // TODO remove
+        achievements.begin()->setAsDone(); // TODO remove, temporary for display testing
+        (achievements.begin()+1)->setAsDone(); // TODO remove
 
     }
 
@@ -39,10 +40,6 @@ namespace todolib {
 
     std::vector<Achievement>  AchievementList::getAchievements() {
         return this->achievements;
-    }
-
-    bool checkIfAchievementShouldBeSetAsDone(){
-        // TODO implement or discard
     }
 
     // returns true if task with that Name can be found and achievement for it can be set

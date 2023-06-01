@@ -16,7 +16,7 @@ AchievementListWidget::AchievementListWidget(todolib::AchievementList &achieveme
      }
 
     // background color for whole List
-    palet.setColor(QPalette::Window, "#141d29");
+    palet.setColor(QPalette::Window, "#04395b");
     setAutoFillBackground(true);
     setPalette(palet);
 }

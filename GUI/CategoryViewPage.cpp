@@ -6,8 +6,6 @@
 #include "todolib/todolib.h"
 #include "TaskWidget.h"
 #include "CategoryWidget.h"
-#include "AchievementWidget.h"
-#include "AchievementListWidget.h"
 #include <memory>
 
 using namespace todolib;
@@ -20,13 +18,6 @@ CategoryViewPage::CategoryViewPage(todolib::ToDoList &toDoList) : Page{toDoList}
     for (Category &category: toDoList.categories) {
         addCategoryWidget(category);
     }
-
-
-// TODO testing code! **************************************************************************
-    AchievementList l {toDoList};
-    achieveListW = std::make_shared<AchievementListWidget>(l);
-    layout.addWidget(achieveListW.get(), 0, Qt::AlignTop);
-// TODO end of testing code! *******************************************************************
 
 }
 

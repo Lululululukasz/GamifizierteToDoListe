@@ -20,7 +20,7 @@ add_executable(pic_aem_projekt
 		GUI/Points.h GUI/Points.cpp
 		GUI/AchievementListWidget.cpp
 		GUI/AchievementWidget.cpp
-		utility/Globals.cpp)
+		utility/Globals.cpp GUI/AchievementsPage.cpp GUI/AchievementsPage.h)
 target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia)
 target_link_libraries(pic_aem_projekt todolib)
 

@@ -25,7 +25,6 @@ Q_OBJECT
 public:
     explicit CategoryViewPage(todolib::ToDoList& toDoList);
 
-    std::shared_ptr<AchievementListWidget> achieveListW; // TODO: remove, only here for testing achievements
 private:
     QPushButton addCategoryButton {QPushButton("add a new category")};
     std::list<std::shared_ptr<CategoryWidget>> categoryWidgets;
