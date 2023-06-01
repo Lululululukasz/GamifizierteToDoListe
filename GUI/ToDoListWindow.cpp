@@ -23,7 +23,7 @@ ToDoListWindow::ToDoListWindow(todolib::ToDoList &toDoList, QWidget *parent) : t
 
 
 // TODO testing code! **************************************************************************
-    AchievementList l {};
+    AchievementList l {toDoList};
     achieveListW = std::make_shared<AchievementListWidget>(l);
     layout.addWidget(achieveListW.get(), 0, Qt::AlignTop);
 // TODO end of testing code! *******************************************************************

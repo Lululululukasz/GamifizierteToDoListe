@@ -33,7 +33,7 @@ namespace todolib {
 
         list<Task> showAllTasks();
 
-        Task &getTaskByName(const string &search); // formerly search
+        std::shared_ptr<Task>  getTaskByName(const string &search); // formerly search
 
         // TODO search funktion mit Levenshtein Algorithmus
 

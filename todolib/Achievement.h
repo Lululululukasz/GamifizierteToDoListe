@@ -17,9 +17,10 @@ namespace todolib {
     public:
         const std::string name;
         const std::string description;
+        const std::string taskForAchievement;
 
         // Constructor
-        explicit Achievement(const std::string &name, const std::string &description);
+        explicit Achievement(const std::string &name, const std::string &description, const std::string task);
 
         std::string getID();
 

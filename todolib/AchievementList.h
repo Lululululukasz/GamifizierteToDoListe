@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "Achievement.h"
+#include "ToDoList.h"
 
 namespace todolib {
 
@@ -17,7 +18,7 @@ namespace todolib {
     public:
 
         // Constructor
-        explicit AchievementList();
+        explicit AchievementList(ToDoList &todolist);
 
         // Destructor
         ~AchievementList() = default;
@@ -25,6 +26,8 @@ namespace todolib {
         void addAchievement(Achievement &achievement);
 
         std::vector<Achievement> getAchievements();
+
+        bool checkIfAchievementShouldBeSetAsDone();
 
     };
 

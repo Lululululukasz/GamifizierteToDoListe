@@ -5,8 +5,8 @@
 #include "Achievement.h"
 
 namespace todolib {
-    Achievement::Achievement(const std::string &name, const std::string &description)
-    : name {name}, description {description} {
+    Achievement::Achievement(const std::string &name, const std::string &description, const std::string task)
+    : name {name}, description {description}, taskForAchievement {task} {
 
         this->id = name + std::to_string((int) time(nullptr));
 
