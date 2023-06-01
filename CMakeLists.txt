@@ -14,6 +14,8 @@ target_link_libraries(pic_aem_projekt todolib)
 
 # create install target
 install(TARGETS pic_aem_projekt DESTINATION bin)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/resources/
+		DESTINATION resources)
 
 if (WIN32)
 	# add all mingw64 system dlls to install target

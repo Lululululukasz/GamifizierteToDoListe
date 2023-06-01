@@ -9,6 +9,8 @@ QString changeHomepath();
 class Globals{
 public:
     const static inline QString homepath = changeHomepath();
+    const static inline QString soundpath = homepath + "/resources/sounds/";
+    const static inline QString savespath = homepath + "/resources/saves/";
 };
 
 
