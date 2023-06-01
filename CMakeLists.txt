@@ -17,7 +17,8 @@ add_executable(pic_aem_projekt
 		GUI/MainWindow.cpp GUI/MainWindow.h
 		GUI/Page.cpp GUI/Page.h
 		GUI/MainPage.cpp GUI/MainPage.h
-		GUI/Points.h GUI/Points.cpp)
+		GUI/Points.h GUI/Points.cpp
+		utility/Globals.cpp)
 target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia)
 target_link_libraries(pic_aem_projekt todolib)
 
