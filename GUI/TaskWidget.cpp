@@ -1,5 +1,6 @@
 #include "TaskWidget.h"
 #include "Points.h"
+#include "../utility/Globals.h"
 
 #include <random>
 #include <QCheckBox>
@@ -104,31 +105,16 @@ void TaskWidget::playRandomSound() {
     std::random_device randomDevice;
     std::uniform_int_distribution<std::mt19937::result_type> randomSound(1, 3);
 
-#ifdef _WIN32
-    switch (randomSound(randomDevice)) {
-        case 1:
-            QSound::play("../resources/taskDoneSound_amazing.wav");
-            break;
-        case 2:
-            QSound::play("../resources/taskDoneSound_incredible.wav");
-            break;
-        case 3:
-            QSound::play("../resources/taskDoneSound_outstanding.wav");
-            break;
-}
-#endif
 
-#ifdef linux
     switch (randomSound(randomDevice)) {
         case 1:
-            QSound::play("./resources/taskDoneSound_amazing.wav");
+            QSound::play(Globals::homepath+"/resources/taskDoneSound_amazing.wav");
             break;
         case 2:
-            QSound::play("./resources/taskDoneSound_incredible.wav");
+            QSound::play(Globals::homepath+"/resources/taskDoneSound_incredible.wav");
             break;
         case 3:
-            QSound::play("./resources/taskDoneSound_outstanding.wav");
+            QSound::play(Globals::homepath+"/resources/taskDoneSound_outstanding.wav");
             break;
     }
-#endif
 }
