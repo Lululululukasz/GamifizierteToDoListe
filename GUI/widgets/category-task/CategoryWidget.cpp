@@ -2,9 +2,9 @@
 // Created by Jan Ole Weighardt on 23.05.23.
 //
 
-#include "GUI/CategoryWidget.h"
+#include "CategoryWidget.h"
 #include "todolib/todolib.h"
-#include "GUI/TaskWidget.h"
+#include "TaskWidget.h"
 #include "utility/Globals.h"
 
 #include <QtWidgets/QVBoxLayout>

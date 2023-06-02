@@ -8,7 +8,7 @@
 #include <QStackedLayout>
 #include <QWidget>
 #include "todolib/todolib.h"
-#include "CategoryViewPage.h"
+#include "GUI/pages/CategoryViewPage.h"
 
 
 /**

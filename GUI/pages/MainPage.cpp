@@ -2,7 +2,7 @@
 // Created by helen on 30.05.2023.
 //
 
-#include "MainPage.h"
+#include "GUI/pages/MainPage.h"
 
 MainPage::MainPage(todolib::ToDoList &toDoList) : Page{toDoList} {
     closeButton->hide();

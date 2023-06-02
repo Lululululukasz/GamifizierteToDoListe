@@ -3,8 +3,8 @@
 //
 
 #include "MainWindow.h"
-#include "MainPage.h"
-#include "AchievementsPage.h"
+#include "GUI/pages/MainPage.h"
+#include "GUI/pages/AchievementsPage.h"
 #include <memory>
 #include <QDebug>
 

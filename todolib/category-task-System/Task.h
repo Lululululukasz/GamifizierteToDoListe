@@ -12,7 +12,6 @@ namespace todolib {
 #include <string>
 #include <vector>
 #include <memory>
-#include "Category.h"
 
 
 namespace todolib {
