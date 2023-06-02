@@ -5,14 +5,9 @@
 #include "Xp.h"
 
 
-//using namespace todolib;
+using namespace todolib;
 using namespace std;
-/*int Xp::xpZahl=0;
 
-void Xp::xpFunc(bool xpBool) {
-    if (xpBool){
-        xpZahl++;
-    }else{
-        xpZahl--;
-    };
-};*/
+void Xp::xpFunc(int xpZahlgive) {
+    xpZahl =xpZahlgive;
+}

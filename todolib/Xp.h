@@ -4,15 +4,15 @@
 
 #ifndef AEMPROJEKT_XP_H
 #define AEMPROJEKT_XP_H
-/*#include "Task.h"
+
 #include "iostream"
 
 namespace todolib {
     class Xp {
     public:
-        void xpFunc(bool xpBool);
-        int xpZahl {0};
+        int xpZahl;
+        void xpFunc(int xpZahlgive);
     };
-}*/
+}
 
 #endif //AEMPROJEKT_XP_H

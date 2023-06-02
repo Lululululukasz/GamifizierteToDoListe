@@ -51,7 +51,7 @@ void CategoryViewPage::deleteCategory(const shared_ptr<CategoryWidget>& category
 }
 
 void CategoryViewPage::addXpWidget(){
-    std::shared_ptr<XpWidget> xpWidget {std::make_shared<XpWidget>(/*toDoList,*/this)};
+    std::shared_ptr<XpWidget> xpWidget = std::make_shared<XpWidget>();
     xpWidgets.push_back(xpWidget);
     layout.addWidget(xpWidget.get(),0,Qt::AlignBottom);
     connect(this, &CategoryViewPage::xpWidgetSignal1, xpWidget.get(), &XpWidget::xpWidgetFunc1);

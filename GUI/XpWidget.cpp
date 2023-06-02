@@ -3,7 +3,7 @@
 //
 
 #include "XpWidget.h"
-XpWidget::XpWidget(/*todolib::ToDoList &toDoList,*/ QWidget *parent) : /*xpobjekt{toDoList},*/ QWidget(parent) {
+XpWidget::XpWidget(todolib::Xp &xp) :xp {xp}, QWidget() {
 
     xpLabel = std::make_shared<QLabel>();
 
@@ -17,10 +17,12 @@ XpWidget::XpWidget(/*todolib::ToDoList &toDoList,*/ QWidget *parent) : /*xpobjek
 }
 //this two function add or take one to the Xp Number
 void XpWidget::xpWidgetFunc1(){
-        ++xpWidgetNumber;
-        xpLabel->setText(QString::number(xpWidgetNumber));
+    ++xpWidgetNumber;
+    xpLabel->setText(QString::number(xpWidgetNumber));
+    xp.xpFunc(xpWidgetNumber);
 }
-void XpWidget::xpWidgetFunc2() {
+void XpWidget::xpWidgetFunc2(){
     --xpWidgetNumber;
     xpLabel->setText(QString::number(xpWidgetNumber));
+    xp.xpFunc(xpWidgetNumber);
 }

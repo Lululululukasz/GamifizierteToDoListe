@@ -26,7 +26,7 @@ ToDoList::ToDoList() {
             Task("Quit", "quit university"),
             Task("Exams", "go to all of your exams"),
     };
-    //xpobjekt = Xp();
+
 }
 
 Category &ToDoList::getCategoryByName(const string &name) {

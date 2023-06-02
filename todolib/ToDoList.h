@@ -32,7 +32,7 @@ namespace todolib {
          *  All Tasks are saved within the Categories in this List.
          */
         list<Category> categories;
-        int XpZahl;
+
 
         /**
          * ToDoList()
