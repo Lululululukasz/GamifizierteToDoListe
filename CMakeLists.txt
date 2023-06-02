@@ -20,12 +20,16 @@ add_executable(pic_aem_projekt
 		GUI/Points.h GUI/Points.cpp
 		GUI/AchievementListWidget.cpp
 		GUI/AchievementWidget.cpp
-		utility/Globals.cpp GUI/AchievementsPage.cpp GUI/AchievementsPage.h)
+		GUI/AchievementsPage.cpp GUI/AchievementsPage.h
+		utility/Globals.cpp utility/JsonList.tpp)
 target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia)
 target_link_libraries(pic_aem_projekt todolib)
+target_link_libraries(todolib Qt5::Widgets)
 
 # create install target
 install(TARGETS pic_aem_projekt DESTINATION bin)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/resources/
+		DESTINATION resources)
 
 if (WIN32)
 	# add all mingw64 system dlls to install target

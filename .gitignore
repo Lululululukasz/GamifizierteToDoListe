@@ -21,3 +21,6 @@ cmake_install.cmake
 
 # Executable
 pic_aem_projekt
+
+# Savefiles
+/saves

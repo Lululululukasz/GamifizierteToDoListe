@@ -13,6 +13,8 @@ namespace todolib {
 #include <list>
 #include "Task.h"
 #include <memory>
+#include "../utility/JsonList.tpp"
+#include "../utility/Json.h"
 
 
 namespace todolib {
@@ -28,13 +30,19 @@ namespace todolib {
 
     public:
         string name;
-        list<Task> tasks;
+        JsonList<Task> tasks;
 
         /**
          * Category Constructor
          * @param n name
          */
         explicit Category(const string &n);
+
+        /**
+         * Category Constructor for Jsonobjects
+         * @param jsonObject
+         */
+        explicit Category(const QJsonObject &jsonObject);
 
         /**
          * Category Copy Constructor
@@ -67,9 +75,6 @@ namespace todolib {
          */
         ~Category() = default;
 
-
-        string getID() const;
-
         /**
          * isSame
          * @param other
@@ -82,6 +87,7 @@ namespace todolib {
          * @param task (can be both l- and rvalue)
          */
         void addTask(Task &task);
+
         void addTask(Task &&task);
 
         /**
@@ -97,6 +103,17 @@ namespace todolib {
          */
         bool deleteTask(const string &deleteID);
 
+        /**
+         * Function to convert the category-attributes to a QJsonObject and writes it to a .jsonfile
+         */
+        void saveToJson();
+
+        /**
+         * getter and setter
+         */
+        string getID() const;
+
+        void setName(std::string newName);
     };
 
 }
