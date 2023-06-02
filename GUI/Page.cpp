@@ -3,9 +3,12 @@
 //
 
 #include "Page.h"
+#include <QStyle>
 
 Page::Page(todolib::ToDoList &toDoList) : toDoList{toDoList} {
-    layout.addWidget(&closeButton, 0, Qt::AlignLeft);
-    connect(&closeButton, SIGNAL(clicked()), this, SIGNAL(closePageSignal()));
+    closeButton = std::make_shared<QPushButton>();
+    closeButton->setIcon(closeButton->style()->standardIcon(QStyle::SP_ArrowBack));
+    layout.addWidget(closeButton.get(), 0, Qt::AlignLeft);
+    connect(closeButton.get(), SIGNAL(clicked()), this, SIGNAL(closePageSignal()));
 
 }

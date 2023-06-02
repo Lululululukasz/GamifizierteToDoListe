@@ -30,6 +30,9 @@ public slots:
  * creates a shared pointer to a categoryViewPage and feeds it to the openPage() function
  */ // das würde ein Template sein wenn es ginge
     void openCategoryViewPage();
+    void openAchievementsPage(); // same function for Achievements Page
+
+
 
 private:
     todolib::ToDoList &toDoList;

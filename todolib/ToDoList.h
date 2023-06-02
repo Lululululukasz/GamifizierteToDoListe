@@ -77,8 +77,7 @@ namespace todolib {
          * @param search
          * @return a task whith the exact same name as the search
          */
-        Task &getTaskByName(const string &search); // formerly search
-
+        std::shared_ptr<Task>  getTaskByName(const string &search); // formerly search
         // TODO search funktion mit Levenshtein Algorithmus
 
         /**

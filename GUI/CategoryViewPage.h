@@ -13,6 +13,7 @@
 #include "TaskWidget.h"
 #include "todolib/todolib.h"
 #include "CategoryWidget.h"
+#include "AchievementListWidget.h"
 #include <memory>
 #include "Page.h"
 
