@@ -5,7 +5,7 @@
 #include "MainPage.h"
 
 MainPage::MainPage(todolib::ToDoList &toDoList) : Page{toDoList} {
-    closeButton.hide();
+    closeButton->hide();
 
     // Adding and connecting of the categoryViewPage use as template for other Pages
     layout.addWidget(&categoryViewPageButton);

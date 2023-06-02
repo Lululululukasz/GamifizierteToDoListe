@@ -5,6 +5,7 @@
 #include "GUI/CategoryWidget.h"
 #include "todolib/todolib.h"
 #include "GUI/TaskWidget.h"
+#include "utility/Globals.h"
 
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>
@@ -29,7 +30,7 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
     connect(&deleteButton, &QPushButton::clicked, this, [&, this]() { deleteCategory(); });
 
     // Category Config Button
-    confButton.setText("Config");
+    confButton.setIcon(QIcon(Globals::homepath+"/resources/edit_icon.png"));
     hlayout.addWidget(&confButton, 0 , Qt::AlignRight | Qt::AlignVCenter);
     connect(&confButton, &QPushButton::clicked, this, [&, this]() {configCategory();});
 
