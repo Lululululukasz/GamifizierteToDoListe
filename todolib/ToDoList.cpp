@@ -9,7 +9,30 @@
 using namespace todolib;
 
 ToDoList::ToDoList() {
-    this->addCategory(Category("General"));
+    QJsonArray categories = Json::getAllSaves();
+    if (categories.isEmpty()) {
+        this->addCategory(Category("General"));
+    } else {
+        foreach(QJsonValue category, categories){
+                if (category.isObject()) {
+                    QJsonObject categoryObject = category.toObject();
+                    QStringList keys = categoryObject.keys();
+                    int checksum = 0;
+                            foreach(QString key, keys) {
+                            if (key == "id") {
+                                checksum += 1;
+                            } else if (key == "name") {
+                                checksum += 2;
+                            } else if (key == "tasks") {
+                                checksum += 4;
+                            }
+                        }
+                    if (checksum == 7) {
+                        this->addCategory(Category(categoryObject));
+                    }
+                }
+        }
+    }
     this->suggestions = {
             Task("Laundry", "Do the laundry"),
             Task("Dishes", "Do the dishes"),
@@ -18,6 +41,7 @@ ToDoList::ToDoList() {
             Task("Flowers", "Water the flowers"),
             Task("Windows", "Clean the windows"),
     };
+
 }
 
 Category &ToDoList::getCategoryByName(const string &name) {

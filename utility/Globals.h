@@ -1,6 +1,6 @@
 #ifndef PIC_AEM_PROJEKT_GLOBALS_H
 #define PIC_AEM_PROJEKT_GLOBALS_H
-#include <QString>
+#include <QtCore/QString>
 QString changeHomepath();
 
 /**

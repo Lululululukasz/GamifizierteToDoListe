@@ -12,6 +12,7 @@ namespace todolib {
 #include <string>
 #include <vector>
 #include <memory>
+#include <QtCore/QJsonObject>
 #include "Category.h"
 
 
@@ -35,6 +36,8 @@ namespace todolib {
          */
         explicit Task(const string &n, const string &d);
 
+        Task(const QJsonObject &taskObject);
+
         string getID();
 
         /**
@@ -49,6 +52,7 @@ namespace todolib {
         void setAsDone();
         void setAsUndone();
 
+        QJsonObject toJson();
     };
 
 }

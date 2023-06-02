@@ -1,5 +1,6 @@
 #include "todolib/todolib.h"
 #include "GUI/MainWindow.h"
+#include "utility/Json.h"
 
 #include <QApplication>
 
@@ -11,7 +12,6 @@ int main(int argc, char **argv) {
     todolib::ToDoList todoList = todolib::ToDoList();
 
     MainWindow window{todoList};
-
 
     /*
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
