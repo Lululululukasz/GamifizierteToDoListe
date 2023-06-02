@@ -29,7 +29,7 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
     connect(&deleteButton, &QPushButton::clicked, this, [=]() { deleteCategory(); });
 
     // Category Config Button
-    confButton.setText("Config");
+    confButton.setIcon(QIcon("resources/edit_icon.png"));
     hlayout.addWidget(&confButton, 0 , Qt::AlignRight | Qt::AlignVCenter);
     connect(&confButton, &QPushButton::clicked, this, [=]() {configCategory();});
 
