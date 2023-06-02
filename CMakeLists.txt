@@ -24,6 +24,7 @@ add_executable(pic_aem_projekt
 		utility/Globals.cpp utility/JsonList.tpp)
 target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia)
 target_link_libraries(pic_aem_projekt todolib)
+target_link_libraries(todolib Qt5::Widgets)
 
 # create install target
 install(TARGETS pic_aem_projekt DESTINATION bin)
