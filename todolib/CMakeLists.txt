@@ -1,3 +1,3 @@
 
 
-add_library(todolib todolib.h category-task-System/ToDoList.cpp category-task-System/ToDoList.h category-task-System/Category.cpp category-task-System/Category.h category-task-System/Task.cpp category-task-System/Task.h achievement-System/Achievement.cpp achievement-System/Achievement.h achievement-System/AchievementList.cpp achievement-System/AchievementList.h)
+add_library(todolib todolib.h todo-System/ToDoList.cpp todo-System/ToDoList.h todo-System/Category.cpp todo-System/Category.h todo-System/Task.cpp todo-System/Task.h achievement-System/Achievement.cpp achievement-System/Achievement.h achievement-System/AchievementList.cpp achievement-System/AchievementList.h Profile.cpp Profile.h)

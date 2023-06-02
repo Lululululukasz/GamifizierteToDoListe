@@ -8,10 +8,10 @@ int main(int argc, char **argv) {
     // Initialisiere eine QApplication-Instanz
     QApplication app(argc, argv);
 
-    todolib::ToDoList todoList = todolib::ToDoList();
+    //todolib::ToDoList todoList = todolib::ToDoList();
+    todolib::Profile profile = todolib::Profile();
 
-
-    MainWindow window{todoList};
+    MainWindow window{profile};
 
     /*
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);

@@ -22,7 +22,7 @@ class MainWindow : public QWidget {
 Q_OBJECT
 
 public:
-    MainWindow(todolib::ToDoList &todolist);
+    MainWindow(todolib::Profile &profile);
 
 public slots:
 /**
@@ -35,7 +35,8 @@ public slots:
 
 
 private:
-    todolib::ToDoList &toDoList;
+    //todolib::ToDoList &toDoList;
+    todolib::Profile &profile;
     QStackedLayout stackedLayout{QStackedLayout(this)};
     std::list<std::shared_ptr<Page>> pages;
 
