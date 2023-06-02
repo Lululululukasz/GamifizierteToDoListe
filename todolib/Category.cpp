@@ -13,7 +13,7 @@ using namespace todolib;
 Category::Category(const string &n) {
     this->id = n + to_string((int) time(nullptr));
     this->name = n;
-    saveToFile();
+    saveToJson();
 }
 
 /**
@@ -55,6 +55,7 @@ Category::Category(Category &other) {
     this->id = other.getID();
     this->tasks = *make_unique<JsonList<Task>>(other.tasks);
     this->name = other.name;
+    saveToJson();
 }
 
 // Copy Assignment Constructor
@@ -71,6 +72,7 @@ Category::Category(Category &&other) noexcept {
     this->id = other.getID();
     this->tasks = *make_unique<JsonList<Task>>(other.tasks);
     this->name = other.name;
+    saveToJson();
 }
 
 // Move Assignment Constructor
@@ -80,10 +82,6 @@ Category &Category::operator=(Category &&other) noexcept {
     this->name = other.name;
 
     return *this;
-}
-
-string Category::getID() const {
-    return this->id;
 }
 
 bool Category::isSame(const Category &other) const {
@@ -96,11 +94,11 @@ bool Category::isSame(const Category &other) const {
 
 void Category::addTask(Task &task) {
     tasks.push_back(task);
-    saveToFile();
+    saveToJson();
 }
 void Category::addTask(Task &&task) {
     tasks.push_back(task);
-    saveToFile();
+    saveToJson();
 }
 
 list<Task> Category::showTasks() {
@@ -113,10 +111,10 @@ list<Task> Category::showTasks() {
 
 bool Category::deleteTask(const string &deleteID) {
     if (0 != this->tasks.remove_if([&] (Task t) {return (t.getID() == deleteID);})) {
-        saveToFile();
+        saveToJson();
         return true;
     } else {
-        saveToFile();
+        saveToJson();
         return false;
     }
 }
@@ -124,7 +122,7 @@ bool Category::deleteTask(const string &deleteID) {
 /**
  * Function to convert the category-attributes to a QJsonObject and writes it to a .jsonfile
  */
-void Category::saveToFile() {
+void Category::saveToJson() {
     QJsonObject jsonObject;
     jsonObject.insert("id", id.c_str());
     jsonObject.insert("name", name.c_str());
@@ -132,6 +130,15 @@ void Category::saveToFile() {
     Json::writeJsonObjectToFile(jsonObject);
 }
 
+/**
+ * getter and setter
+ */
 
+string Category::getID() const {
+    return this->id;
+}
 
-
+void Category::setName(std::string newName) {
+    name = newName;
+    saveToJson();
+}

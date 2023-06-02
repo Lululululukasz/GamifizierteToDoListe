@@ -51,7 +51,9 @@ void MainWindow::openAchievementsPage() {
 void MainWindow::refreshCategoryViewPage(const std::shared_ptr<Page>& page) {
     closePage(page);
     openCategoryViewPage();
-    qDebug() << "refresh";
+    if (Globals::debug) {
+        qDebug() << "refresh";
+    }
 }
 
 

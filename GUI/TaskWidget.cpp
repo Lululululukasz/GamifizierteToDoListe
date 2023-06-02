@@ -86,6 +86,7 @@ void TaskWidget::taskDone() {
             //The Values for the points are provisional and should later be changed to whatever you want.
             Points::getinstance().addPoints(1,1,'n');
             playRandomSound();
+            emit taskMarkedChanged();
         }
 }
 
@@ -134,6 +135,7 @@ void TaskWidget::taskUndone() {
     if(task.getDoneStatus()) {
         task.setAsUndone();
         Points::getinstance().subPoints(1, 'n');
+        emit taskMarkedChanged();
     }
 
 }

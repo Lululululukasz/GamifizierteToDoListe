@@ -75,9 +75,6 @@ namespace todolib {
          */
         ~Category() = default;
 
-
-        string getID() const;
-
         /**
          * isSame
          * @param other
@@ -90,6 +87,7 @@ namespace todolib {
          * @param task (can be both l- and rvalue)
          */
         void addTask(Task &task);
+
         void addTask(Task &&task);
 
         /**
@@ -108,7 +106,14 @@ namespace todolib {
         /**
          * Function to convert the category-attributes to a QJsonObject and writes it to a .jsonfile
          */
-        void saveToFile();
+        void saveToJson();
+
+        /**
+         * getter and setter
+         */
+        string getID() const;
+
+        void setName(std::string newName);
     };
 
 }
