@@ -62,8 +62,9 @@ void CategoryWidget::deleteCategory() {
 
 void CategoryWidget::addTask(Task &task) {
     category.addTask(task);
-    addTaskWidget(task);
-    //category.showTasks();
+    emit refreshPageWidgetSignal();
+    // addTaskWidget(task);
+    // category.showTasks();
 }
 
 void CategoryWidget::addTaskWidget(Task &task) {

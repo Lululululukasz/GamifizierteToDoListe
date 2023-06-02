@@ -54,7 +54,8 @@ private:
     void playConfettiAnimation();
 
 private slots:
-    void strikeoutTask(int state);
+    void taskDone();
+    void taskUndone();
     void deleteTask();
     void showDescription();
     void hideDescription();

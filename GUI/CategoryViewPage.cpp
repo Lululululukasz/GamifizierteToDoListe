@@ -36,6 +36,7 @@ void CategoryViewPage::addCategoryWidget(Category& category) {
     layout.addWidget(widget.get(), 0, Qt::AlignTop);
     connect(widget.get(), &CategoryWidget::categoryDeleteSignal, this, [=, this]() { deleteCategory(widget); });
     connect(widget.get(), &CategoryWidget::categoryConfigSignal, this, [=, this]() { configCategory(widget); });
+    connect(widget.get(), &CategoryWidget::refreshPageWidgetSignal, this, &CategoryViewPage::refreshPageSignal);
 }
 
 void CategoryViewPage::deleteCategory(const shared_ptr<CategoryWidget>& categoryWidget) {
