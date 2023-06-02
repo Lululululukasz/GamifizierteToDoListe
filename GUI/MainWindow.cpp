@@ -6,6 +6,7 @@
 #include "MainPage.h"
 #include "AchievementsPage.h"
 #include <memory>
+#include <QDebug>
 
 
 MainWindow::MainWindow(todolib::ToDoList &todolist) : toDoList{todolist} {
@@ -39,9 +40,18 @@ void MainWindow::closePage(const std::shared_ptr<Page>& page) {
 void MainWindow::openCategoryViewPage() {
     std::shared_ptr<Page> newpage {std::make_shared<CategoryViewPage>(toDoList)};
     openPage(newpage);
+    connect(newpage.get(), &Page::refreshPageSignal, this, [=, this]() {refreshCategoryViewPage(newpage);});
 }
 
 void MainWindow::openAchievementsPage() {
     std::shared_ptr<Page> newPage {std::make_shared<AchievementsPage>(toDoList)};
     openPage(newPage);
+} // TODO apply same fix as category
+
+void MainWindow::refreshCategoryViewPage(const std::shared_ptr<Page>& page) {
+    closePage(page);
+    openCategoryViewPage();
+    qDebug() << "refresh";
 }
+
+

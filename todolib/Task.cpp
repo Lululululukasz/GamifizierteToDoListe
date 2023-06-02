@@ -4,7 +4,7 @@
 
 #include "Task.h"
 #include <time.h>
-
+#include <iostream>
 
 using namespace std;
 using namespace todolib;
@@ -13,6 +13,7 @@ Task::Task(const string &n, const string &d) {
     this->id = n + to_string((int) time(nullptr));
     this->name = n;
     this->description = d;
+    this->done = false;
 }
 
 string Task::getID() {
@@ -33,6 +34,7 @@ bool Task::getDoneStatus() const {
 
 void Task::setAsDone() {
     this->done = true;
+
 }
 
 void Task::setAsUndone() {
