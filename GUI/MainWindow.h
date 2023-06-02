@@ -28,8 +28,10 @@ public slots:
 /**
  * openCategoryViewPage
  * creates a shared pointer to a categoryViewPage and feeds it to the openPage() function
- */
+ */ // das würde ein Template sein wenn es ginge
     void openCategoryViewPage();
+    void openAchievementsPage(); // same function for Achievements Page
+
 
 
 private:
@@ -44,6 +46,7 @@ private:
      */
     void openPage(const std::shared_ptr<Page>& newpage);
     void closePage(const std::shared_ptr<Page>& page);
+    void refreshCategoryViewPage(const std::shared_ptr<Page>& newpage);
 };
 
 

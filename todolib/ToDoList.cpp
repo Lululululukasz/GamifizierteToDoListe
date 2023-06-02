@@ -36,15 +36,22 @@ ToDoList::ToDoList() {
                 }
         }
     }
-    this->suggestions = {
+    this->suggestions = { // if these get changed, the achievements also have to be altered! (AchievementList.cpp)
+            // Household chores
             Task("Laundry", "Do the laundry"),
             Task("Dishes", "Do the dishes"),
             Task("Garbage", "Take out the garbage"),
             Task("Bathroom", "Clean the bathroom"),
             Task("Flowers", "Water the flowers"),
             Task("Windows", "Clean the windows"),
-    };
 
+            // University
+            Task("Lecture", "Go to a lecture"),
+            Task("Study", "study for your courses"),
+            Task("Semester", "finish your first semester at university"),
+            Task("Quit", "quit university"),
+            Task("Exams", "go to all of your exams"),
+    };
 }
 
 Category &ToDoList::getCategoryByName(const string &name) {
@@ -92,14 +99,15 @@ list<Task> ToDoList::showAllTasks() {
     return allTasks;
 }
 
-Task& ToDoList::getTaskByName(const string &search) {
+std::shared_ptr<Task> ToDoList::getTaskByName(const string &search) {
     for (Category &category: this->categories) {
         for (Task &task: category.tasks) {
             if (task.name == search) {
-                return task;
+                return std::make_shared<Task>(task);
             }
         }
     }
+    return nullptr;
 }
 
 Task ToDoList::suggestTask() {

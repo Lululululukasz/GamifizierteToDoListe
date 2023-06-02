@@ -30,9 +30,11 @@ public:
 
     signals:
     void openCategoryViewPageSignal();
+    void openAchievementsPageSignal();
 
 private:
     QPushButton categoryViewPageButton{QPushButton("Open the Category View")};
+    QPushButton achievementsPageButton{QPushButton("Open the Achievements Page")};
 
 };
 

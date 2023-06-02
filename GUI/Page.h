@@ -9,6 +9,7 @@
 #include <QVBoxLayout>
 #include "todolib/todolib.h"
 #include <QPushButton>
+#include <memory>
 
 /**
  * Page
@@ -23,11 +24,12 @@ public:
 
 signals:
     void closePageSignal();
+    void refreshPageSignal();
 
 protected:
     todolib::ToDoList& toDoList;
     QVBoxLayout layout {QVBoxLayout(this)};
-    QPushButton closeButton {QPushButton("<- Back")};
+    std::shared_ptr<QPushButton> closeButton;
 
 };
 
