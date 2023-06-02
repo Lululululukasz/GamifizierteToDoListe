@@ -105,6 +105,9 @@ namespace todolib {
          */
         bool deleteTask(const string &deleteID);
 
+        /**
+         * Function to convert the category-attributes to a QJsonObject and writes it to a .jsonfile
+         */
         void saveToFile();
     };
 

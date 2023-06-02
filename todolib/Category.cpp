@@ -29,6 +29,8 @@ Category::Category(const QJsonObject &jsonObject) {
             if (task.isObject()){
                 QJsonObject taskObject = task.toObject();
                 QStringList keys = taskObject.keys();
+
+                // Check if the QJsonObject is convertable to a task
                 int checksum = 0;
                         foreach(QString key, keys) {
                         if (key == "id") {
@@ -42,7 +44,7 @@ Category::Category(const QJsonObject &jsonObject) {
                         }
                     }
                 if (checksum == 15) {
-                    this->tasks.push_front(Task(task.toObject()));
+                    this->tasks.push_back(Task(task.toObject()));
                 }
             }
     }
@@ -119,13 +121,15 @@ bool Category::deleteTask(const string &deleteID) {
     }
 }
 
+/**
+ * Function to convert the category-attributes to a QJsonObject and writes it to a .jsonfile
+ */
 void Category::saveToFile() {
-    //json.writeToFile();
-    QJsonObject test2;
-    test2.insert("id", id.c_str());
-    test2.insert("name", name.c_str());
-    test2.insert("tasks", tasks.toJson());
-    Json::writeJsonObjectToFile(test2);
+    QJsonObject jsonObject;
+    jsonObject.insert("id", id.c_str());
+    jsonObject.insert("name", name.c_str());
+    jsonObject.insert("tasks", tasks.toJson());
+    Json::writeJsonObjectToFile(jsonObject);
 }
 
 

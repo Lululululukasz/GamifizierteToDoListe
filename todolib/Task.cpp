@@ -15,6 +15,10 @@ Task::Task(const string &n, const string &d) {
     this->description = d;
 }
 
+/**
+ * Constructor to create a task with a QjsonObject
+ * @param QJsonObject taskObject
+ */
 Task::Task(const QJsonObject &taskObject) {
     id = taskObject.value(QString("id")).toString().toStdString();
     name = taskObject.value(QString("name")).toString().toStdString();
@@ -46,6 +50,10 @@ void Task::setAsUndone() {
     this->done = false;
 }
 
+/**
+ * Function to convert the task with it's attributes to a QJsonObject
+ * @return QJsonObject
+ */
 QJsonObject Task::toJson() {
     QJsonObject jsonObject;
     jsonObject.insert("id", id.c_str());

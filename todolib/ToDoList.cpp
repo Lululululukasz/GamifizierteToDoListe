@@ -10,12 +10,15 @@ using namespace todolib;
 
 ToDoList::ToDoList() {
     QJsonArray categories = Json::getAllSaves();
+    // if there is no json savefile create a new category
     if (categories.isEmpty()) {
         this->addCategory(Category("General"));
     } else {
         foreach(QJsonValue category, categories){
                 if (category.isObject()) {
                     QJsonObject categoryObject = category.toObject();
+
+                    // Check if the QJsonObject is convertable to a category
                     QStringList keys = categoryObject.keys();
                     int checksum = 0;
                             foreach(QString key, keys) {

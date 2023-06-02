@@ -13,6 +13,11 @@
 
 class Json {
 public:
+    /**
+     * Function to write a given QJsonObject to a json-file
+     * @param jsonObject
+     * @return bool if the writing succeeded
+     */
     static bool writeJsonObjectToFile(QJsonObject jsonObject) {
         QJsonDocument document;
         document.setObject(jsonObject);
@@ -25,11 +30,17 @@ public:
             file.close();
             return true;
         } else {
-            qWarning() << "file open failed: " << Globals::savespath << "test.json";
+            if (Globals::debug) {
+                qWarning() << "file open failed: " << Globals::savespath << jsonObject.value("id").toString() << ".json";
+            }
             return false;
         }
     }
 
+    /**
+     * read all jsonfiles from the saves directory
+     * @return QJsonArray of every json-file
+     */
     static QJsonArray getAllSaves() {
         QDir directory(Globals::savespath);
         QJsonArray saves;
@@ -40,6 +51,11 @@ public:
         return saves;
     }
 
+    /**
+     * read a single jsonfile and return it's jsonobject as QJsonFile
+     * @param filename name of the file
+     * @return the read json-object. return a empty jsonobject if failed
+     */
     static QJsonObject readJsonFile(QString filename) {
         QFile file(Globals::savespath + filename);
         if (file.open(QIODevice::ReadOnly)) {
@@ -49,7 +65,9 @@ public:
             QJsonParseError jsonError;
             QJsonDocument document = QJsonDocument::fromJson(val.toUtf8(), &jsonError);
             if (jsonError.error != QJsonParseError::NoError) {
-                qWarning() << "fromJson failed: " << jsonError.errorString();
+                if (Globals::debug) {
+                    qWarning() << "fromJson failed: " << jsonError.errorString();
+                }
                 return QJsonObject();
             }
             if (document.isObject()) {
@@ -59,36 +77,6 @@ public:
         }
         return QJsonObject();
     }
-
-    void readJson1() {
-        QString val;
-        QFile file;
-        file.setFileName(Globals::savespath + "test.json");
-        file.open(QIODevice::ReadOnly | QIODevice::Text);
-        val = file.readAll();
-        file.close();
-        qWarning() << val;
-        QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
-        QJsonObject sett2 = d.object();
-        QJsonValue value = sett2.value(QString("appName"));
-        qWarning() << value;
-        QJsonObject item = value.toObject();
-        qWarning().noquote() << "\nQJsonObject of description: " << item;
-
-        /* in case of string value get value and convert into string*/
-        qWarning().noquote() << "\nQJsonObject[appName] of description: " << item["description"];
-        QJsonValue subobj = item["description"];
-        qWarning() << subobj.toString();
-
-        /* in case of array get array and convert into string*/
-        qWarning().noquote() << "\nQJsonObject[appName] of value: " << item["imp"];
-        QJsonArray test = item["imp"].toArray();
-        qWarning() << test[1].toString();
-    };
-
-    bool writeToFile() {
-        return true;
-    };
 };
 
 

@@ -22,6 +22,11 @@ public:
      * savespath is the rootpath of the savestates for simpler access
      */
     const static inline QString savespath = homepath + "/saves/";
+
+    /**
+     * debug variable if debugmessages should be printed
+     */
+    static bool inline debug = false;
 };
 
 
