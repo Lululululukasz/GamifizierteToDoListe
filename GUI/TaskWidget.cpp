@@ -90,8 +90,20 @@ void TaskWidget::taskDone() {
             task.setAsDone();
             //The Values for the points are provisional and should later be changed to whatever you want.
             Points::getinstance().addPoints(1,1,'n');
-            playRandomSound();
+            //playRandomSound();
+            playConfettiAnimation();
         }
+}
+
+void TaskWidget::taskUndone() {
+
+    font->setStrikeOut(false);
+    taskNameLabel->setFont(*font);
+    if(task.getDoneStatus()) {
+        task.setAsUndone();
+        Points::getinstance().subPoints(1, 'n');
+    }
+
 }
 
 //emits the deleteTaskSignal that is used in CategoryWidget
@@ -131,23 +143,6 @@ void TaskWidget::playRandomSound() {
             break;
     }
 }
-
-void TaskWidget::taskUndone() {
-
-    font->setStrikeOut(false);
-    taskNameLabel->setFont(*font);
-    if(task.getDoneStatus()) {
-        task.setAsUndone();
-        Points::getinstance().subPoints(1, 'n');
-    }
-
-}
-
-
-
-
-
-
 
     void TaskWidget::playConfettiAnimation() {
         confetti = std::make_shared<DrawConfetti>();
