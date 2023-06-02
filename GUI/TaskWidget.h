@@ -1,7 +1,6 @@
 #ifndef PIC_AEM_PROJEKT_CHECKBOX_H
 #define PIC_AEM_PROJEKT_CHECKBOX_H
 #include "todolib/Task.h"
-#include "XpWidget.h"
 #include <QWidget>
 #include <QCheckBox>
 #include <QPushButton>
@@ -30,7 +29,9 @@ public:
 
 signals:
     void deleteTaskSignal();
-    void xpWidgetSignal(bool xpsignal);
+    void xpWidgetSignal1();
+    void xpWidgetSignal2();
+
 private:
 
     std::shared_ptr<QHBoxLayout> hbox;

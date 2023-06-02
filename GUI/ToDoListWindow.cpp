@@ -39,8 +39,8 @@ void ToDoListWindow::addCategoryWidget(Category& category) {
     categoryWidgets.push_back(widget);
     layout.addWidget(widget.get(), 0, Qt::AlignTop);
     connect(widget.get(), &CategoryWidget::categoryDeleteSignal, this, [=, this]() { deleteCategory(widget); });
-    connect(widget.get(), &CategoryWidget::xpWidgetSignal, this, &ToDoListWindow::xpWidgetSignal);
-
+    connect(widget.get(), &CategoryWidget::xpWidgetSignal1, this, &ToDoListWindow::xpWidgetSignal1);
+    connect(widget.get(), &CategoryWidget::xpWidgetSignal2, this, &ToDoListWindow::xpWidgetSignal2);
 }
 
 
@@ -55,6 +55,8 @@ void ToDoListWindow::addXpWidget(){
     std::shared_ptr<XpWidget> xpWidget {std::make_shared<XpWidget>(/*toDoList,*/this)};
     xpWidgets.push_back(xpWidget);
     layout.addWidget(xpWidget.get(),0,Qt::AlignBottom);
+    connect(this, &ToDoListWindow::xpWidgetSignal1, xpWidget.get(), &XpWidget::xpWidgetFunc1);
+    connect(this, &ToDoListWindow::xpWidgetSignal2, xpWidget.get(), &XpWidget::xpWidgetFunc2);
 }
 
 

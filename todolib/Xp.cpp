@@ -5,7 +5,7 @@
 #include "Xp.h"
 
 
-using namespace todolib;
+//using namespace todolib;
 using namespace std;
 /*int Xp::xpZahl=0;
 

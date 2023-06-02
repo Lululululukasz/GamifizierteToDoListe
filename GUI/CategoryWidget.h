@@ -7,7 +7,6 @@
 
 #include "todolib/todolib.h"
 #include "TaskWidget.h"
-
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QApplication>
@@ -31,11 +30,10 @@ public:
 signals:
 
     void categoryDeleteSignal();
-    void xpWidgetSignal(bool xpsignal);
-
+    void xpWidgetSignal1();
+    void xpWidgetSignal2();
 private slots:
     void openAddTaskWindow(bool checked);
-
 
 private:
     QVBoxLayout vlayout {QVBoxLayout()};

@@ -66,12 +66,13 @@ void TaskWidget::strikeoutTask(int state) {
         font->setStrikeOut(true);
         task.setAsDone();
         taskNameLabel->setFont(*font);
-        emit xpWidgetSignal(true);
+        emit xpWidgetSignal1();// Emit the Signal for Xp Number +1
     } else {
         font->setStrikeOut(false);
         task.setAsUndone();
         taskNameLabel->setFont(*font);
-        emit xpWidgetSignal(false);
+       // emit xpWidgetSignal2(false);
+        emit xpWidgetSignal2();
     }
 }
 

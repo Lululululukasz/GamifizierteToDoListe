@@ -26,7 +26,7 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
     deleteButton.setText("  Delete");
     deleteButton.setIcon(deleteButton.style()->standardIcon(QStyle::SP_TrashIcon));
     hlayout.addWidget(&deleteButton, 0, Qt::AlignRight | Qt::AlignVCenter);
-    connect(&deleteButton, &QPushButton::clicked, this, [=]() { deleteCategory(); });
+    connect(&deleteButton, &QPushButton::clicked, this, [=,this]() { deleteCategory(); });
 
     //Add Task Button
     addTaskButton = std::make_shared<QPushButton>("Add Task", this);
@@ -59,8 +59,10 @@ void CategoryWidget::addTaskWidget(Task &task) {
     TaskWidgets.push_back(widget);
     vlayout.addWidget(widget.get(), 0, Qt::AlignTop);
     connect(widget.get(), &TaskWidget::deleteTaskSignal, this, [=, this]() { deleteTask(widget); });
-    connect(widget.get(),SIGNAL (TaskWidget::xpWidgetSignal()),this,SIGNAL(xpWidgetSignal()));
+    connect(widget.get(),&TaskWidget::xpWidgetSignal1,this,&CategoryWidget::xpWidgetSignal1);
+    connect(widget.get(),&TaskWidget::xpWidgetSignal2,this,&CategoryWidget::xpWidgetSignal2);
 }
+
 
 void CategoryWidget::openAddTaskWindow(bool checked){
     if(checked) {

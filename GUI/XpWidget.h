@@ -9,7 +9,7 @@
 #include "CategoryWidget.h"
 #include <QLabel>
 #include <QVBoxLayout>
-
+// This class is here to calculate and show the Xp Progress
 
 
 class XpWidget : public QWidget {
@@ -17,10 +17,11 @@ class XpWidget : public QWidget {
     public:
         explicit XpWidget(/*todolib::ToDoList &toDoList,*/ QWidget *parent = nullptr);
     /*todolib::ToDoList &xpobjekt;*/
-    int xpWidgetZahl;
+    int xpWidgetNumber =0;
 
 public slots:
-    void xpWidgetFunc(bool xpWidgetbool);
+    void xpWidgetFunc1();
+    void xpWidgetFunc2();
 
     private:
         std::shared_ptr<QLabel> xpLabel;
