@@ -1,11 +1,17 @@
 #include "TaskWidget.h"
+#include "Points.h"
+#include "../utility/Globals.h"
+#include "todolib/todolib.h"
 
+#include <random>
 #include <QCheckBox>
 #include <QHBoxLayout>
 #include <QFont>
 #include <QStyle>
 #include <QPushButton>
 #include <QToolButton>
+#include <QSound>
+#include <QtDebug>
 
 
 TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
@@ -15,9 +21,12 @@ TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
     hbox = std::make_shared<QHBoxLayout>();
     vbox = std::make_shared<QVBoxLayout>(this);
 
+    //font
+    font = std::make_shared<QFont>();
+
     //taskCheckbox
     taskCheckbox = std::make_shared<QCheckBox>(this);
-    taskCheckbox->setCheckState(Qt::Unchecked);
+
 
     //taskNameLabel
     taskNameLabel = std::make_shared<QLabel>(this);
@@ -48,7 +57,15 @@ TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
 
     //connecting to the slots below
     connect(taskDeleteButton.get(), &QPushButton::clicked, this, &TaskWidget::deleteTask);
-    connect(taskCheckbox.get(), &QCheckBox::stateChanged, this, &TaskWidget::strikeoutTask);
+    connect(taskCheckbox.get(), &QCheckBox::stateChanged, this, [=,this](bool checked){
+        if (checked) taskDone();
+        else taskUndone();
+    });
+    if(task.getDoneStatus()){
+        taskCheckbox->setCheckState(Qt::Checked);
+    } else {
+        taskCheckbox->setCheckState(Qt::Unchecked);
+    }
     connect(showDescriptionButton.get(), &QToolButton::toggled, [=,this](bool checked) {
         showDescriptionButton->setArrowType(checked ? Qt::ArrowType::DownArrow : Qt::ArrowType::RightArrow);
         if (checked) showDescription();
@@ -58,22 +75,18 @@ TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
 }
 
 //changes the state of the taskNameLabel to strikedout or not strikedout
-void TaskWidget::strikeoutTask(int state) {
+void TaskWidget::taskDone() {
 
-    QFont *font = new QFont;
-
-    if (state == Qt::Checked) {
         font->setStrikeOut(true);
-        task.setAsDone();
         taskNameLabel->setFont(*font);
-        emit xpWidgetSignal1();// Emit the Signal for Xp Number +1
-    } else {
-        font->setStrikeOut(false);
-        task.setAsUndone();
-        taskNameLabel->setFont(*font);
-       // emit xpWidgetSignal2(false);
-        emit xpWidgetSignal2();
-    }
+
+        if(!task.getDoneStatus()) {
+            task.setAsDone();
+            emit xpWidgetSignal1();// Emit the Signal for Xp Number +1
+            //The Values for the points are provisional and should later be changed to whatever you want.
+            Points::getinstance().addPoints(1,1,'n');
+            playRandomSound();
+        }
 }
 
 //emits the deleteTaskSignal that is used in CategoryWidget
@@ -94,4 +107,39 @@ void TaskWidget::hideDescription() {
     taskDescriptionLabel->setVisible(false);
 
 }
+
+//plays a random sound out of three when a TaskCheckbox gets checked
+void TaskWidget::playRandomSound() {
+    std::random_device randomDevice;
+    std::uniform_int_distribution<std::mt19937::result_type> randomSound(1, 3);
+
+
+    switch (randomSound(randomDevice)) {
+        case 1:
+            QSound::play(Globals::homepath+"/resources/taskDoneSound_amazing.wav");
+            break;
+        case 2:
+            QSound::play(Globals::homepath+"/resources/taskDoneSound_incredible.wav");
+            break;
+        case 3:
+            QSound::play(Globals::homepath+"/resources/taskDoneSound_outstanding.wav");
+            break;
+    }
+}
+
+void TaskWidget::taskUndone() {
+
+    font->setStrikeOut(false);
+    taskNameLabel->setFont(*font);
+    if(task.getDoneStatus()) {
+        task.setAsUndone();
+         emit xpWidgetSignal2();
+        Points::getinstance().subPoints(1, 'n');
+    }
+
+}
+
+
+
+
 

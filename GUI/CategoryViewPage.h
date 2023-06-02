@@ -13,11 +13,13 @@
 #include "TaskWidget.h"
 #include "todolib/todolib.h"
 #include "CategoryWidget.h"
+#include "AchievementListWidget.h"
 #include "XpWidget.h"
 #include <memory>
+#include "Page.h"
 
 
-class ToDoListWindow : public QWidget {
+class CategoryViewPage : public Page {
 
 Q_OBJECT
 
@@ -26,18 +28,17 @@ signals:
     void xpWidgetSignal2();
 
 public:
-    explicit ToDoListWindow(todolib::ToDoList& toDoList, QWidget *parent = nullptr);
+    explicit CategoryViewPage(todolib::ToDoList& toDoList);
 
 private:
-    todolib::ToDoList& toDoList;
     QPushButton addCategoryButton {QPushButton("add a new category")};
-    QVBoxLayout layout {QVBoxLayout(this)};
     std::list<std::shared_ptr<CategoryWidget>> categoryWidgets;
     std::list<std::shared_ptr<XpWidget>> xpWidgets;
     void addCategory();
     void addCategoryWidget(todolib::Category& category);
     void deleteCategory(const std::shared_ptr<CategoryWidget>& categoryWidget);
     void addXpWidget();
+    void configCategory(const std::shared_ptr<CategoryWidget>& categoryWidget);
 };
 
 

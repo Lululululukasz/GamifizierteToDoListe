@@ -60,10 +60,10 @@ bool Category::isSame(const Category &other) const {
 }
 
 void Category::addTask(Task &task) {
-    tasks.push_front(task);
+    tasks.push_back(task);
 }
 void Category::addTask(Task &&task) {
-    tasks.push_front(task);
+    tasks.push_back(task);
 }
 
 list<Task> Category::showTasks() {

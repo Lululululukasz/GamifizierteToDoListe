@@ -5,6 +5,7 @@
 #include "GUI/CategoryWidget.h"
 #include "todolib/todolib.h"
 #include "GUI/TaskWidget.h"
+#include "utility/Globals.h"
 
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>
@@ -27,6 +28,12 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
     deleteButton.setIcon(deleteButton.style()->standardIcon(QStyle::SP_TrashIcon));
     hlayout.addWidget(&deleteButton, 0, Qt::AlignRight | Qt::AlignVCenter);
     connect(&deleteButton, &QPushButton::clicked, this, [=,this]() { deleteCategory(); });
+    connect(&deleteButton, &QPushButton::clicked, this, [&, this]() { deleteCategory(); });
+
+    // Category Config Button
+    confButton.setIcon(QIcon(Globals::homepath+"/resources/edit_icon.png"));
+    hlayout.addWidget(&confButton, 0 , Qt::AlignRight | Qt::AlignVCenter);
+    connect(&confButton, &QPushButton::clicked, this, [&, this]() {configCategory();});
 
     //Add Task Button
     addTaskButton = std::make_shared<QPushButton>("Add Task", this);
@@ -43,15 +50,22 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
 
 }
 
+void CategoryWidget::changeName(const QString &newName){
+    name.setText(newName);
+}
 
+void CategoryWidget::configCategory(){
+    emit categoryConfigSignal();
+}
 void CategoryWidget::deleteCategory() {
     emit categoryDeleteSignal();
 }
 
 void CategoryWidget::addTask(Task &task) {
     category.addTask(task);
-    addTaskWidget(task);
-    //category.showTasks();
+    emit refreshPageWidgetSignal();
+    // addTaskWidget(task);
+    // category.showTasks();
 }
 
 void CategoryWidget::addTaskWidget(Task &task) {
@@ -62,7 +76,6 @@ void CategoryWidget::addTaskWidget(Task &task) {
     connect(widget.get(),&TaskWidget::xpWidgetSignal1,this,&CategoryWidget::xpWidgetSignal1);
     connect(widget.get(),&TaskWidget::xpWidgetSignal2,this,&CategoryWidget::xpWidgetSignal2);
 }
-
 
 void CategoryWidget::openAddTaskWindow(bool checked){
     if(checked) {
