@@ -8,6 +8,20 @@ set(CMake_AUTORCC ON)
 
 find_package(Qt5 COMPONENTS Widgets Multimedia MultimediaWidgets REQUIRED)
 add_subdirectory(todolib)
+add_executable(pic_aem_projekt
+		main.cpp
+		GUI/TaskWidget.cpp GUI/TaskWidget.h
+		GUI/CategoryViewPage.cpp GUI/CategoryViewPage.h
+		GUI/CategoryWidget.h GUI/CategoryWidget.cpp
+		GUI/AddTaskBox.cpp GUI/AddTaskBox.h
+		GUI/MainWindow.cpp GUI/MainWindow.h
+		GUI/Page.cpp GUI/Page.h
+		GUI/MainPage.cpp GUI/MainPage.h
+		GUI/Points.h GUI/Points.cpp
+		GUI/AchievementListWidget.cpp
+		GUI/AchievementWidget.cpp
+		utility/Globals.cpp GUI/AchievementsPage.cpp GUI/AchievementsPage.h)
+target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia)
 add_executable(pic_aem_projekt main.cpp GUI/TaskWidget.cpp GUI/TaskWidget.h GUI/ToDoListWindow.cpp GUI/ToDoListWindow.h GUI/CategoryWidget.h GUI/CategoryWidget.cpp GUI/AddTaskBox.cpp GUI/AddTaskBox.h GUI/Points.h GUI/Points.cpp GUI/ConfettiAnimation/DrawConfetti.h GUI/ConfettiAnimation/DrawConfetti.cpp GUI/ConfettiAnimation/Confetto.cpp GUI/ConfettiAnimation/Confetto.h)
 target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets)
 target_link_libraries(pic_aem_projekt todolib)

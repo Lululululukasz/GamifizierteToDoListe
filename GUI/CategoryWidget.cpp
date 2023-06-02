@@ -5,6 +5,7 @@
 #include "GUI/CategoryWidget.h"
 #include "todolib/todolib.h"
 #include "GUI/TaskWidget.h"
+#include "utility/Globals.h"
 
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>
@@ -26,12 +27,12 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
     deleteButton.setText("  Delete");
     deleteButton.setIcon(deleteButton.style()->standardIcon(QStyle::SP_TrashIcon));
     hlayout.addWidget(&deleteButton, 0, Qt::AlignRight | Qt::AlignVCenter);
-    connect(&deleteButton, &QPushButton::clicked, this, [=]() { deleteCategory(); });
+    connect(&deleteButton, &QPushButton::clicked, this, [&, this]() { deleteCategory(); });
 
     // Category Config Button
-    confButton.setText("Config");
+    confButton.setIcon(QIcon(Globals::homepath+"/resources/edit_icon.png"));
     hlayout.addWidget(&confButton, 0 , Qt::AlignRight | Qt::AlignVCenter);
-    connect(&confButton, &QPushButton::clicked, this, [=]() {configCategory();});
+    connect(&confButton, &QPushButton::clicked, this, [&, this]() {configCategory();});
 
     //Add Task Button
     addTaskButton = std::make_shared<QPushButton>("Add Task", this);

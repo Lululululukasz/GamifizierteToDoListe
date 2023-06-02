@@ -28,17 +28,25 @@ namespace todolib {
         string name;
         string description;
 
-        // Constructor
+        /**
+         * Constructor Task
+         * @param n name
+         * @param d description
+         */
         explicit Task(const string &n, const string &d);
 
         string getID();
 
+        /**
+         * isSame
+         * @param other
+         * @return true if the tasks have the same id, false if not
+         */
         bool isSame(const Task &other);
 
         bool getDoneStatus() const;
 
         void setAsDone();
-
         void setAsUndone();
 
     };
