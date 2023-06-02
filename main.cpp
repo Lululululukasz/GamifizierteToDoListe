@@ -3,7 +3,6 @@
 
 #include <QApplication>
 
-
 int main(int argc, char **argv) {
 
     // Initialisiere eine QApplication-Instanz
@@ -13,7 +12,6 @@ int main(int argc, char **argv) {
 
 
     MainWindow window{todoList};
-
 
     /*
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
