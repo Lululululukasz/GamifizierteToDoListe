@@ -2,6 +2,7 @@
 #include "Points.h"
 #include "../utility/Globals.h"
 #include "todolib/todolib.h"
+#include "GUI/ConfettiAnimation/DrawConfetti.h"
 
 #include <random>
 #include <QCheckBox>
@@ -114,30 +115,36 @@ void TaskWidget::playRandomSound() {
     std::random_device randomDevice;
     std::uniform_int_distribution<std::mt19937::result_type> randomSound(1, 3);
 
-#ifdef _WIN32
-    switch (randomSound(randomDevice)) {
-        case 1:
-            QSound::play("../resources/taskDoneSound_amazing.wav");
-            break;
-        case 2:
-            QSound::play("../resources/taskDoneSound_incredible.wav");
-            break;
-        case 3:
-            QSound::play("../resources/taskDoneSound_outstanding.wav");
-            break;
-}
-#endif
 
-#ifdef linux
     switch (randomSound(randomDevice)) {
         case 1:
-            QSound::play(Globals::homepath+"/resources/taskDoneSound_amazing.wav");
+            QSound::play(Globals::homepath + "/resources/taskDoneSound_amazing.wav");
             break;
         case 2:
-            QSound::play(Globals::homepath+"/resources/taskDoneSound_incredible.wav");
+            QSound::play(Globals::homepath + "/resources/taskDoneSound_incredible.wav");
             break;
         case 3:
-            QSound::play(Globals::homepath+"/resources/taskDoneSound_outstanding.wav");
+            QSound::play(Globals::homepath + "/resources/taskDoneSound_outstanding.wav");
             break;
     }
 }
+
+    void TaskWidget::playConfettiAnimation() {
+        confetti = std::make_shared<DrawConfetti>();
+        vbox->addWidget(confetti.get());
+        /*
+        return;
+        for(int i{0}; i<20; i++) {
+            auto confetti {std::make_shared<DrawConfetti>()};
+            auto animation {std::make_shared<QPropertyAnimation>(confetti.get(), "geometry")};
+            animation->setDuration(5000);
+            std::random_device randomDevice;
+            std::uniform_int_distribution<std::mt19937::result_type> width(1, 200);
+            animation->setStartValue(QRect(width(randomDevice), -250, 100, 30));
+            animation->setEndValue(QRect(width(randomDevice), confetti->height(), 100, 30));
+            animation->start();
+            vbox->addWidget(confetti.get());
+            drawConfetti.push_back(confetti);
+            confettiAnimation.push_back(animation);
+        }*/
+    }
