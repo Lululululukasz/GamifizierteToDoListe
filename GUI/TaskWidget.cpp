@@ -1,6 +1,5 @@
 #include "TaskWidget.h"
 #include "Points.h"
-#include "../utility/Globals.h"
 #include "todolib/todolib.h"
 #include "GUI/ConfettiAnimation/DrawConfetti.h"
 
@@ -13,14 +12,12 @@
 #include <QToolButton>
 #include <QSound>
 #include <QGraphicsRotation>
-#include <QGraphicsScene>
 #include <QGraphicsProxyWidget>
 #include <QGraphicsView>
-#include <QtDebug>
 
 
-TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
-        : task{task}, QWidget(parent) {
+TaskWidget::TaskWidget(todolib::Task &task, Page &page, QWidget *parent)
+        : task{task}, page{page}, QWidget(parent) {
 
     //layouts
     hbox = std::make_shared<QHBoxLayout>();
@@ -145,29 +142,7 @@ void TaskWidget::playRandomSound() {
     }
 }
 
-    void TaskWidget::playConfettiAnimation() {
-        confetti = std::make_shared<DrawConfetti>();
-        vbox->addWidget(confetti.get());
-        /*
-        return;
-        for(int i{0}; i<20; i++) {
-            auto confetti {std::make_shared<DrawConfetti>()};
-            auto animation {std::make_shared<QPropertyAnimation>(confetti.get(), "geometry")};
-            animation->setDuration(5000);
-            std::random_device randomDevice;
-            std::uniform_int_distribution<std::mt19937::result_type> width(1, 200);
-            animation->setStartValue(QRect(width(randomDevice), -250, 100, 30));
-            animation->setEndValue(QRect(width(randomDevice), confetti->height(), 100, 30));
-            animation->start();
-            vbox->addWidget(confetti.get());
-            drawConfetti.push_back(confetti);
-            confettiAnimation.push_back(animation);
-        }*/
-    }
-
-
-
-
-
-
-
+void TaskWidget::playConfettiAnimation() {
+    confetti = std::make_shared<DrawConfetti>();
+    page.setOverlay(confetti);
+}

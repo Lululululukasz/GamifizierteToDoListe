@@ -7,15 +7,17 @@
 #include <utility>
 #include <cmath>
 
+#include <iostream>
+
 Confetto::Confetto(double x, double y, double width, double height, double angle, double vx, double vy, double vrot, QColor color) :
   x(x), y(y), width(width), height(height), angle(angle / 180 * M_PI), vx(vx), vy(vy), vrot(vrot / 180 * M_PI), color(std::move(color)) {}
 
 void Confetto::moveStep() {
-    double const scale {0.1};
+    double const scale {0.15};
     x += vx * scale;
     y += vy * scale;
     angle += vrot * scale;
-    vy += 2 * scale;
+    vy += 5 * scale;
 }
 
 QVector<QPoint> Confetto::getBoundaries() const {

@@ -25,7 +25,7 @@ add_executable(pic_aem_projekt
 		GUI/ConfettiAnimation/DrawConfetti.cpp GUI/ConfettiAnimation/DrawConfetti.h
 		GUI/ConfettiAnimation/Confetto.cpp GUI/ConfettiAnimation/Confetto.h
 		GUI/AchievementsPage.cpp GUI/AchievementsPage.h
-		utility/Globals.cpp utility/JsonList.tpp)
+		utility/Globals.cpp utility/JsonList.tpp GUI/PageLayoutWidget.cpp GUI/PageLayoutWidget.h)
 
 target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia)
 target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets)

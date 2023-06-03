@@ -16,6 +16,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include "AddTaskBox.h"
+#include "Page.h"
 
 
 class CategoryWidget : public QWidget {
@@ -24,7 +25,7 @@ Q_OBJECT
 
 
 public:
-    explicit CategoryWidget(todolib::Category &category, QWidget *parent = nullptr);
+    explicit CategoryWidget(todolib::Category &category, Page &page, QWidget *parent = nullptr);
 
     todolib::Category &category;
 
@@ -51,6 +52,7 @@ private:
     QPushButton deleteButton{QPushButton()};
     QPushButton confButton{QPushButton()};
     std::list<std::shared_ptr<TaskWidget>> TaskWidgets;
+    Page &page;
 
     void addTaskWidget(todolib::Task &task);
 

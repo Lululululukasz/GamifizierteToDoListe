@@ -11,7 +11,7 @@
 using namespace todolib;
 
 CategoryViewPage::CategoryViewPage(todolib::ToDoList &toDoList) : Page{toDoList} {
-    layout.addWidget(&addCategoryButton);
+    layout->addWidget(&addCategoryButton);
     addCategoryButton.setGeometry(10, 100, 80, 30);
     connect(&addCategoryButton, &QPushButton::clicked, this, [&]() { addCategory(); });
 
@@ -31,9 +31,9 @@ void CategoryViewPage::addCategory() {
 }
 
 void CategoryViewPage::addCategoryWidget(Category& category) {
-    shared_ptr<CategoryWidget> widget {make_shared<CategoryWidget>(category)};
+    shared_ptr<CategoryWidget> widget {make_shared<CategoryWidget>(category, *this)};
     categoryWidgets.push_back(widget);
-    layout.addWidget(widget.get(), 0, Qt::AlignTop);
+    layout->addWidget(widget.get(), 0, Qt::AlignTop);
     connect(widget.get(), &CategoryWidget::categoryDeleteSignal, this, [=, this]() { deleteCategory(widget); });
     connect(widget.get(), &CategoryWidget::categoryConfigSignal, this, [=, this]() { configCategory(widget); });
     connect(widget.get(), &CategoryWidget::refreshPageWidgetSignal, this, &CategoryViewPage::refreshPageSignal);
@@ -42,7 +42,7 @@ void CategoryViewPage::addCategoryWidget(Category& category) {
 void CategoryViewPage::deleteCategory(const shared_ptr<CategoryWidget>& categoryWidget) {
     toDoList.deleteCategory(categoryWidget->category.getID());
     categoryWidget->hide();
-    layout.removeWidget(categoryWidget.get());
+    layout->removeWidget(categoryWidget.get());
     categoryWidgets.remove(categoryWidget);
 }
 

@@ -8,8 +8,10 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include "todolib/todolib.h"
+#include "PageLayoutWidget.h"
 #include <QPushButton>
 #include <memory>
+#include <QStackedLayout>
 
 /**
  * Page
@@ -21,6 +23,7 @@ Q_OBJECT
 
 public:
     explicit Page(todolib::ToDoList(& toDoList));
+    void setOverlay(std::shared_ptr<QWidget> _overlay);
 
 signals:
     void closePageSignal();
@@ -28,9 +31,13 @@ signals:
 
 protected:
     todolib::ToDoList& toDoList;
-    QVBoxLayout layout {QVBoxLayout(this)};
+    std::shared_ptr<QVBoxLayout> layout {std::make_shared<QVBoxLayout>()};
     std::shared_ptr<QPushButton> closeButton;
 
+private:
+    PageLayoutWidget layoutWidget {PageLayoutWidget(layout)};
+    QStackedLayout stackedLayout {QStackedLayout(this)};
+    std::shared_ptr<QWidget> overlay;
 };
 
 

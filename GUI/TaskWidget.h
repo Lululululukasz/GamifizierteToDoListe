@@ -2,6 +2,7 @@
 #define PIC_AEM_PROJEKT_CHECKBOX_H
 #include "todolib/Task.h"
 #include "ConfettiAnimation/DrawConfetti.h"
+#include "Page.h"
 
 #include <QWidget>
 #include <QCheckBox>
@@ -26,7 +27,7 @@ class TaskWidget : public QWidget {
 Q_OBJECT
 
 public:
-    explicit TaskWidget(todolib::Task &task, QWidget *parent = nullptr);
+    explicit TaskWidget(todolib::Task &task, Page &page, QWidget *parent = nullptr);
 
     todolib::Task &task;
 
@@ -35,7 +36,7 @@ signals:
     void taskMarkedChanged();
 
 private:
-
+    Page &page;
     std::shared_ptr<QHBoxLayout> hbox;
     std::shared_ptr<QVBoxLayout> vbox;
     std::shared_ptr<QCheckBox> taskCheckbox;
