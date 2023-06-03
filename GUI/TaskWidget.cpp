@@ -92,7 +92,6 @@ void TaskWidget::taskDone() {
             Points::getinstance().addPoints(1,1,'n');
             playRandomSound();
             emit taskMarkedChanged();
-            //playRandomSound();
             playConfettiAnimation();
         }
 }
@@ -166,7 +165,7 @@ void TaskWidget::playRandomSound() {
         }*/
     }
 
-}
+
 
 
 
