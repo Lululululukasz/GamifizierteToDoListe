@@ -13,7 +13,7 @@ add_executable(pic_aem_projekt
 		GUI/widgets/category-task/TaskWidget.cpp GUI/widgets/category-task/TaskWidget.h
 		GUI/pages/CategoryViewPage.cpp GUI/pages/CategoryViewPage.h
 		GUI/widgets/category-task/CategoryWidget.h GUI/widgets/category-task/CategoryWidget.cpp
-		GUI/pupups/AddTaskBox.cpp GUI/pupups/AddTaskBox.h
+		GUI/popups/AddTaskBox.cpp GUI/popups/AddTaskBox.h
 		GUI/MainWindow.cpp GUI/MainWindow.h
 		GUI/pages/Page.cpp GUI/pages/Page.h
 		GUI/pages/MainPage.cpp GUI/pages/MainPage.h
