@@ -13,8 +13,8 @@ namespace todolib {
 #include <list>
 #include "Task.h"
 #include <memory>
-#include "../utility/JsonList.tpp"
-#include "../utility/Json.h"
+#include "../../utility/JsonList.tpp"
+#include "../../utility/Json.h"
 
 
 namespace todolib {

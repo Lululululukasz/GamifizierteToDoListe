@@ -8,7 +8,7 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include "todolib/todolib.h"
-#include "PageLayoutWidget.h"
+#include "GUI/PageLayoutWidget.h"
 #include <QPushButton>
 #include <memory>
 #include <QStackedLayout>

@@ -45,10 +45,7 @@ private:
     std::shared_ptr<QToolButton> showDescriptionButton;
     std::shared_ptr<QLabel> taskDescriptionLabel;
     std::shared_ptr<QFont> font;
-    //std::shared_ptr<ConfettiVideo> confetti;
     std::shared_ptr<DrawConfetti> confetti;
-//    std::list<std::shared_ptr<DrawConfetti>> drawConfetti;
-//    std::list<std::shared_ptr<QPropertyAnimation>> confettiAnimation;
     std::shared_ptr<QGraphicsScene> scene;
 
 

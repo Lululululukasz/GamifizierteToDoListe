@@ -20,7 +20,7 @@ add_executable(pic_aem_projekt
 		GUI/Points.h GUI/Points.cpp
 		GUI/ConfettiAnimation/DrawConfetti.cpp GUI/ConfettiAnimation/DrawConfetti.h
 		GUI/ConfettiAnimation/Confetto.cpp GUI/ConfettiAnimation/Confetto.h
-		GUI/AchievementsPage.cpp GUI/AchievementsPage.h
+		GUI/pages/AchievementsPage.cpp GUI/pages/AchievementsPage.h
 		GUI/PageLayoutWidget.cpp GUI/PageLayoutWidget.h
 		GUI/widgets/achievement/AchievementListWidget.cpp
 		GUI/widgets/achievement/AchievementWidget.cpp
