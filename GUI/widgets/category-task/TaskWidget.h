@@ -1,8 +1,8 @@
 #ifndef PIC_AEM_PROJEKT_CHECKBOX_H
 #define PIC_AEM_PROJEKT_CHECKBOX_H
-#include "todolib/Task.h"
-#include "ConfettiAnimation/DrawConfetti.h"
-#include "Page.h"
+#include "todolib/todo-System/Task.h"
+#include "GUI/ConfettiAnimation/DrawConfetti.h"
+#include "GUI/pages/Page.h"
 
 #include <QWidget>
 #include <QCheckBox>

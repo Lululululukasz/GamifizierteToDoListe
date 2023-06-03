@@ -10,10 +10,10 @@
 #include <QPushButton>
 #include <QInputDialog>
 #include <QLabel>
-#include "TaskWidget.h"
+#include "GUI/widgets/category-task/TaskWidget.h"
 #include "todolib/todolib.h"
-#include "CategoryWidget.h"
-#include "AchievementListWidget.h"
+#include "GUI/widgets/category-task/CategoryWidget.h"
+#include "GUI/widgets/achievement/AchievementListWidget.h"
 #include <memory>
 #include "Page.h"
 

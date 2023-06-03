@@ -4,7 +4,7 @@
 
 #include "AchievementListWidget.h"
 #include "AchievementWidget.h"
-#include "CategoryWidget.h"
+#include "GUI/widgets/category-task/CategoryWidget.h"
 
 AchievementListWidget::AchievementListWidget(todolib::AchievementList &achievementList, QWidget *parent) {
 

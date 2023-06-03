@@ -23,7 +23,7 @@ namespace todolib {
 
     class ToDoList {
     private:
-        list<Task> suggestions;
+        list<Task> generalTasks;
 
     public:
         /**
@@ -82,7 +82,7 @@ namespace todolib {
 
         /**
          * suggestTask
-         * @return random Task from the suggestions List
+         * @return random Task from the generalTasks List
          */
         Task suggestTask();
 

@@ -13,7 +13,6 @@ namespace todolib {
 #include <vector>
 #include <memory>
 #include <QtCore/QJsonObject>
-#include "Category.h"
 
 
 namespace todolib {

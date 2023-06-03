@@ -7,7 +7,7 @@
 
 
 #include "Page.h"
-#include "AchievementListWidget.h"
+#include "GUI/widgets/achievement/AchievementListWidget.h"
 
 class AchievementsPage : public Page {
 

@@ -2,7 +2,7 @@
 // Created by trashpanda on 01.06.23.
 //
 
-#include "AchievementsPage.h"
+#include "GUI/pages/AchievementsPage.h"
 
 AchievementsPage::AchievementsPage(todolib::ToDoList &toDoList) : Page{toDoList}, achievementList{toDoList} {
 

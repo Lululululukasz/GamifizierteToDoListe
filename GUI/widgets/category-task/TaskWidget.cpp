@@ -1,5 +1,6 @@
 #include "TaskWidget.h"
-#include "Points.h"
+#include "GUI/Points.h"
+#include "utility/Globals.h"
 #include "todolib/todolib.h"
 #include "GUI/ConfettiAnimation/DrawConfetti.h"
 

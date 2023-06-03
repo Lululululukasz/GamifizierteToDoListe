@@ -4,8 +4,8 @@
 
 #include "CategoryViewPage.h"
 #include "todolib/todolib.h"
-#include "TaskWidget.h"
-#include "CategoryWidget.h"
+#include "GUI/widgets/category-task/TaskWidget.h"
+#include "GUI/widgets/category-task/CategoryWidget.h"
 #include <memory>
 
 using namespace todolib;
