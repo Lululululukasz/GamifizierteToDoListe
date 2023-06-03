@@ -32,6 +32,7 @@ public:
 
 signals:
     void deleteTaskSignal();
+    void taskMarkedChanged();
 
 private:
 

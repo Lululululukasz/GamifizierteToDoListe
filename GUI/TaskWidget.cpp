@@ -90,6 +90,8 @@ void TaskWidget::taskDone() {
             task.setAsDone();
             //The Values for the points are provisional and should later be changed to whatever you want.
             Points::getinstance().addPoints(1,1,'n');
+            playRandomSound();
+            emit taskMarkedChanged();
             //playRandomSound();
             playConfettiAnimation();
         }
@@ -133,13 +135,13 @@ void TaskWidget::playRandomSound() {
 
     switch (randomSound(randomDevice)) {
         case 1:
-            QSound::play(Globals::homepath+"/resources/taskDoneSound_amazing.wav");
+            QSound::play(Globals::soundpath+"taskDoneSound_amazing.wav");
             break;
         case 2:
-            QSound::play(Globals::homepath+"/resources/taskDoneSound_incredible.wav");
+            QSound::play(Globals::soundpath+"taskDoneSound_incredible.wav");
             break;
         case 3:
-            QSound::play(Globals::homepath+"/resources/taskDoneSound_outstanding.wav");
+            QSound::play(Globals::soundpath+"taskDoneSound_outstanding.wav");
             break;
     }
 }
@@ -163,3 +165,10 @@ void TaskWidget::playRandomSound() {
             confettiAnimation.push_back(animation);
         }*/
     }
+
+}
+
+
+
+
+

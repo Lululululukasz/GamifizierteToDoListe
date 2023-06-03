@@ -51,6 +51,7 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
 
 void CategoryWidget::changeName(const QString &newName){
     name.setText(newName);
+    category.setName(newName.toStdString());
 }
 
 void CategoryWidget::configCategory(){
@@ -72,6 +73,7 @@ void CategoryWidget::addTaskWidget(Task &task) {
     TaskWidgets.push_back(widget);
     vlayout.addWidget(widget.get(), 0, Qt::AlignTop);
     connect(widget.get(), &TaskWidget::deleteTaskSignal, this, [=, this]() { deleteTask(widget); });
+    connect(widget.get(), &TaskWidget::taskMarkedChanged, this, &CategoryWidget::saveToJson);
 }
 
 void CategoryWidget::openAddTaskWindow(bool checked){
@@ -90,5 +92,9 @@ void CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget>& taskWidget) {
     vlayout.removeWidget(taskWidget.get());
     TaskWidgets.remove(taskWidget);
     //category.showTasks();
+}
+
+void CategoryWidget::saveToJson() {
+    category.saveToJson();
 }
 

@@ -9,7 +9,33 @@
 using namespace todolib;
 
 ToDoList::ToDoList() {
-    this->addCategory(Category("General"));
+    QJsonArray categories = Json::getAllSaves();
+    // if there is no json savefile create a new category
+    if (categories.isEmpty()) {
+        this->addCategory(Category("General"));
+    } else {
+        foreach(QJsonValue category, categories){
+                if (category.isObject()) {
+                    QJsonObject categoryObject = category.toObject();
+
+                    // Check if the QJsonObject is convertable to a category
+                    QStringList keys = categoryObject.keys();
+                    int checksum = 0;
+                            foreach(QString key, keys) {
+                            if (key == "id") {
+                                checksum += 1;
+                            } else if (key == "name") {
+                                checksum += 2;
+                            } else if (key == "tasks") {
+                                checksum += 4;
+                            }
+                        }
+                    if (checksum == 7) {
+                        this->addCategory(Category(categoryObject));
+                    }
+                }
+        }
+    }
     this->suggestions = { // if these get changed, the achievements also have to be altered! (AchievementList.cpp)
             // Household chores
             Task("Laundry", "Do the laundry"),

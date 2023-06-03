@@ -27,32 +27,43 @@ public:
     explicit CategoryWidget(todolib::Category &category, QWidget *parent = nullptr);
 
     todolib::Category &category;
+
     void changeName(const QString &newName);
 
 signals:
 
     void categoryDeleteSignal();
+
     void categoryConfigSignal();
+
     void refreshPageWidgetSignal();
 
 private slots:
+
     void openAddTaskWindow(bool checked);
 
+    void saveToJson();
+
 private:
-    QVBoxLayout vlayout {QVBoxLayout()};
-    QHBoxLayout hlayout {QHBoxLayout()};
-    QLabel name {QLabel()};
-    QPushButton deleteButton {QPushButton()};
+    QVBoxLayout vlayout{QVBoxLayout()};
+    QHBoxLayout hlayout{QHBoxLayout()};
+    QLabel name{QLabel()};
+    QPushButton deleteButton{QPushButton()};
     QPushButton confButton{QPushButton()};
     std::list<std::shared_ptr<TaskWidget>> TaskWidgets;
-    void addTaskWidget(todolib::Task& task);
+
+    void addTaskWidget(todolib::Task &task);
+
     void configCategory();
+
     void deleteCategory();
-    void deleteTask(const std::shared_ptr<TaskWidget>& taskWidget);
+
+    void deleteTask(const std::shared_ptr<TaskWidget> &taskWidget);
 
     // Adding Tasks
     std::shared_ptr<QPushButton> addTaskButton;
     std::shared_ptr<AddTaskBox> addTaskBox;
+
     void addTask(todolib::Task &task);
 
 };
