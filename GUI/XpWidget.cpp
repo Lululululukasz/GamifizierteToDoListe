@@ -3,7 +3,7 @@
 //
 
 #include "XpWidget.h"
-XpWidget::XpWidget(todolib::Xp &xp) :xp {xp}, QWidget() {
+XpWidget::XpWidget(todolib::Xp &xp, QWidget *parent ) :xp {xp}, QWidget(parent) {
 
     xpLabel = std::make_shared<QLabel>();
 

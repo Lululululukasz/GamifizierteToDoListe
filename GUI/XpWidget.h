@@ -15,7 +15,7 @@
 class XpWidget : public QWidget {
     Q_OBJECT
     public:
-        explicit XpWidget( todolib::Xp &xp);
+        explicit XpWidget( todolib::Xp &xp,QWidget *parent = nullptr);
     todolib::Xp &xp;
 
     int xpWidgetNumber {0};

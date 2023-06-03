@@ -8,6 +8,6 @@
 using namespace todolib;
 using namespace std;
 
-void Xp::xpFunc(int xpZahlgive) {
-    xpZahl =xpZahlgive;
+void Xp::xpFunc(int xpWidgetNumber) {
+    xpZahl =xpWidgetNumber;
 }

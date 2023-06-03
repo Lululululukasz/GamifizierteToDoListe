@@ -18,7 +18,7 @@ CategoryViewPage::CategoryViewPage(todolib::ToDoList &toDoList) : Page{toDoList}
 
     for (Category &category: toDoList.categories) {
         addCategoryWidget(category);
-        addXpWidget();
+        addXpWidget(xp);
     }
 
 }
@@ -50,8 +50,8 @@ void CategoryViewPage::deleteCategory(const shared_ptr<CategoryWidget>& category
     categoryWidgets.remove(categoryWidget);
 }
 
-void CategoryViewPage::addXpWidget(){
-    std::shared_ptr<XpWidget> xpWidget = std::make_shared<XpWidget>();
+void CategoryViewPage::addXpWidget(Xp& xp){
+    std::shared_ptr<XpWidget> xpWidget = std::make_shared<XpWidget>(xp);
     xpWidgets.push_back(xpWidget);
     layout.addWidget(xpWidget.get(),0,Qt::AlignBottom);
     connect(this, &CategoryViewPage::xpWidgetSignal1, xpWidget.get(), &XpWidget::xpWidgetFunc1);
