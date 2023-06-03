@@ -36,7 +36,7 @@ ToDoList::ToDoList() {
                 }
         }
     }
-    this->suggestions = { // if these get changed, the achievements also have to be altered! (AchievementList.cpp)
+    this->generalTasks = { // if these get changed, the achievements also have to be altered! (AchievementList.cpp)
             // Household chores
             Task("Laundry", "Do the laundry"),
             Task("Dishes", "Do the dishes"),
@@ -111,13 +111,13 @@ std::shared_ptr<Task> ToDoList::getTaskByName(const string &search) {
 }
 
 Task ToDoList::suggestTask() {
-    int min{0}, max{static_cast<int>(this->suggestions.size()) - 1}, cache;
+    int min{0}, max{static_cast<int>(this->generalTasks.size()) - 1}, cache;
     random_device rd;
     default_random_engine eng(rd());
     uniform_int_distribution<int> distr(min, max);
     cache = distr(eng);
 
-    list<Task>::iterator re{this->suggestions.begin()};
+    list<Task>::iterator re{this->generalTasks.begin()};
 
     for (int i{0}; i < cache; ++i, ++re) {
     }
