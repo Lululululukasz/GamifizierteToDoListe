@@ -15,7 +15,7 @@
 #include <QInputDialog>
 #include <QWidget>
 #include <QPushButton>
-#include "GUI/pupups/AddTaskBox.h"
+#include "GUI/popups/AddTaskBox.h"
 
 
 class CategoryWidget : public QWidget {
