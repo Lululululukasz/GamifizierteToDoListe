@@ -11,7 +11,7 @@
 #include <QPushButton>
 #include <QToolButton>
 #include <QSound>
-#include <QtDebug>
+
 
 
 TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
@@ -48,6 +48,10 @@ TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
     taskDescriptionLabel = std::make_shared<QLabel>();
     taskDescriptionLabel->setWordWrap(true);
     taskDescriptionLabel->setText(QString::fromStdString(task.description));
+
+    //taskPriorityLabel
+    taskPriorityLabel = std::make_shared<QLabel>();
+    taskPriorityLabel->setText(QString::fromStdString(task.getPriorityString()));
 
     //adding widgets to the layouts
     vbox->addLayout(hbox.get());
@@ -97,15 +101,17 @@ void TaskWidget::deleteTask() {
 
 //shows the description of a task when the showDescriptionButton is checked
 void TaskWidget::showDescription() {
-    taskDescriptionLabel->setVisible(true);
+
     vbox->addWidget(taskDescriptionLabel.get(), 0, Qt::AlignLeft | Qt::AlignVCenter);
+    vbox->addWidget(taskPriorityLabel.get());
 }
 
 //hides the description of a task when the showDescriptionButton is unchecked
 void TaskWidget::hideDescription() {
 
-    hbox->removeWidget(taskDescriptionLabel.get());
-    taskDescriptionLabel->setVisible(false);
+    vbox->removeWidget(taskDescriptionLabel.get());
+    vbox->removeWidget(taskPriorityLabel.get());
+
 
 }
 

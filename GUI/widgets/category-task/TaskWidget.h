@@ -40,6 +40,7 @@ private:
     std::shared_ptr<QPushButton> taskDeleteButton;
     std::shared_ptr<QToolButton> showDescriptionButton;
     std::shared_ptr<QLabel> taskDescriptionLabel;
+    std::shared_ptr<QLabel> taskPriorityLabel;
     std::shared_ptr<QFont> font;
     static void playRandomSound();
 

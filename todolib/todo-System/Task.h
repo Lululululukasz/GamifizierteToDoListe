@@ -19,14 +19,27 @@ namespace todolib {
     using namespace std;
 
     class Task {
+
+    public:
+
+        using priority_t = enum {
+            trivial,
+            low,
+            medium,
+            high,
+            urgent
+        };
+
     private:
         string id;
         bool done;
+        priority_t priority;
         // TODO datetime
 
     public:
         string name;
         string description;
+
 
         /**
          * Constructor Task
@@ -55,6 +68,10 @@ namespace todolib {
         void setAsDone();
         void setAsUndone();
 
+        void setPriority(Task::priority_t prio);
+        priority_t getPriority();
+
+        std::string getPriorityString();
         /**
          * Function to convert the task with it's attributes to a QJsonObject
          * @return QJsonObject
