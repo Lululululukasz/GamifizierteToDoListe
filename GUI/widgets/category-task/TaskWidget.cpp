@@ -118,14 +118,18 @@ void TaskWidget::deleteTask() {
 void TaskWidget::showDescription() {
 
     vbox->addWidget(taskDescriptionLabel.get(), 0, Qt::AlignLeft | Qt::AlignVCenter);
+    taskDescriptionLabel->setVisible(true);
     vbox->addWidget(taskPriorityLabel.get());
+    taskPriorityLabel->setVisible(true);
 }
 
 //hides the description of a task when the showDescriptionButton is unchecked
 void TaskWidget::hideDescription() {
 
     vbox->removeWidget(taskDescriptionLabel.get());
+    taskDescriptionLabel->setVisible(false);
     vbox->removeWidget(taskPriorityLabel.get());
+    taskPriorityLabel->setVisible(false);
 
 
 }
