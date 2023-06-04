@@ -5,6 +5,7 @@
 #include "GUI/CategoryWidget.h"
 #include "todolib/todolib.h"
 #include "GUI/TaskWidget.h"
+#include "GUI/ConfirmDeleteWindow.h"
 
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>
@@ -26,7 +27,7 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
     deleteButton.setText("  Delete");
     deleteButton.setIcon(deleteButton.style()->standardIcon(QStyle::SP_TrashIcon));
     hlayout.addWidget(&deleteButton, 0, Qt::AlignRight | Qt::AlignVCenter);
-    connect(&deleteButton, &QPushButton::clicked, this, [=]() { deleteCategory(); });
+    connect(&deleteButton, &QPushButton::clicked, this, [=, this]() { deleteCategory(); });
 
     //Add Task Button
     addTaskButton = std::make_shared<QPushButton>("Add Task", this);
@@ -50,16 +51,15 @@ void CategoryWidget::deleteCategory() {
 void CategoryWidget::addTask(Task &task) {
     category.addTask(task);
     addTaskWidget(task);
-    //category.showTasks();
 }
 
 void CategoryWidget::addTaskWidget(Task &task) {
     shared_ptr<TaskWidget> widget {make_shared<TaskWidget>(task)};
     TaskWidgets.push_back(widget);
     vlayout.addWidget(widget.get(), 0, Qt::AlignTop);
-    connect(widget.get(), &TaskWidget::deleteTaskSignal, this, [=, this]() { deleteTask(widget); });
+    connect(widget.get(), &TaskWidget::deleteTaskSignal, this,[=, this]() {&ConfirmDeleteWindow::catchDeleteTask;} );
 }
-
+//[=, this]() { deleteTask(widget); }
 void CategoryWidget::openAddTaskWindow(bool checked){
     if(checked) {
         this->addTaskButton->setChecked(false);
@@ -69,12 +69,12 @@ void CategoryWidget::openAddTaskWindow(bool checked){
         connect(addTaskBox.get(), &AddTaskBox::isOver, this, [=, this]() {if(addTaskBox->hasTask()) { addTask(addTaskBox->task);};});
     }
 }
-
-void CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget>& taskWidget) {
+void catchConfirmDelete() {
+    CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget> &taskWidget);
+}
+CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget> &taskWidget) {
     category.deleteTask(taskWidget->task.getID());
     taskWidget->hide();
     vlayout.removeWidget(taskWidget.get());
     TaskWidgets.remove(taskWidget);
-    //category.showTasks();
 }
-

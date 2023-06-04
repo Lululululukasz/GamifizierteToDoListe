@@ -6,6 +6,7 @@
 #include <QStyle>
 #include <QPushButton>
 #include <QToolButton>
+#include <QInputDialog>
 
 
 TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
@@ -67,7 +68,6 @@ void TaskWidget::strikeoutTask(int state) {
 void TaskWidget::deleteTask() {
     emit deleteTaskSignal();
 }
-
 void TaskWidget::showDescription() {
     taskDescriptionLabel->setVisible(true);
     vbox->addWidget(taskDescriptionLabel.get(), 0, Qt::AlignLeft | Qt::AlignVCenter);
