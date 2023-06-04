@@ -41,9 +41,11 @@ Category::Category(const QJsonObject &jsonObject) {
                             checksum += 4;
                         } else if (key == "done") {
                             checksum += 8;
+                        } else if (key == "priority"){
+                            checksum += 16;
                         }
                     }
-                if (checksum == 15) {
+                if (checksum == 31) {
                     this->tasks.push_back(Task(task.toObject()));
                 }
             }

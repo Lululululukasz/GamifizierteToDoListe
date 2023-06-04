@@ -26,6 +26,7 @@ Task::Task(const QJsonObject &taskObject) {
     name = taskObject.value(QString("name")).toString().toStdString();
     description = taskObject.value(QString("description")).toString().toStdString();
     done = taskObject.value(QString("done")).toString().toStdString() == "true";
+    priority = static_cast<priority_t>(taskObject.value(QString("priority")).toInt());
 }
 
 string Task::getID() {
