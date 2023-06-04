@@ -9,6 +9,7 @@
 #include <QTextEdit>
 #include <QLayout>
 #include <QLabel>
+#include <QComboBox>
 
 class AddTaskBox : public QWidget {
 Q_OBJECT
@@ -19,7 +20,7 @@ public:
 
     todolib::Task task;
 
-    bool hasTask() const;
+    [[nodiscard]] bool hasTask() const;
 
 signals:
 
@@ -31,6 +32,7 @@ private slots:
 
     void closeAddTaskWindow();
 
+
 private:
     bool hasTaskBool{false};
     QVBoxLayout layout {QVBoxLayout(this)};
@@ -39,6 +41,9 @@ private:
     std::shared_ptr<QTextEdit> aTNameTextEdit;
     QLabel descLabel {QLabel()};
     std::shared_ptr<QTextEdit> aTDecriptionTextEdit;
+    std::shared_ptr<QComboBox> selectPriorityBox;
+    QStringList prios {"trivial", "low", "medium", "high", "urgent"};
+    std::shared_ptr<QLabel> priorityLabel;
 
     std::shared_ptr<todolib::Category> category;
 };

@@ -52,6 +52,10 @@ TaskWidget::TaskWidget(todolib::Task &task, Page &page, QWidget *parent)
     taskDescriptionLabel->setWordWrap(true);
     taskDescriptionLabel->setText(QString::fromStdString(task.description));
 
+    //taskPriorityLabel
+    taskPriorityLabel = std::make_shared<QLabel>();
+    taskPriorityLabel->setText(QString::fromStdString(task.getPriorityString()));
+
     //adding widgets to the layouts
     vbox->addLayout(hbox.get());
     hbox->addWidget(taskCheckbox.get(), 0, Qt::AlignLeft | Qt::AlignVCenter);
@@ -112,15 +116,21 @@ void TaskWidget::deleteTask() {
 
 //shows the description of a task when the showDescriptionButton is checked
 void TaskWidget::showDescription() {
-    taskDescriptionLabel->setVisible(true);
+
     vbox->addWidget(taskDescriptionLabel.get(), 0, Qt::AlignLeft | Qt::AlignVCenter);
+    taskDescriptionLabel->setVisible(true);
+    vbox->addWidget(taskPriorityLabel.get());
+    taskPriorityLabel->setVisible(true);
 }
 
 //hides the description of a task when the showDescriptionButton is unchecked
 void TaskWidget::hideDescription() {
 
-    hbox->removeWidget(taskDescriptionLabel.get());
+    vbox->removeWidget(taskDescriptionLabel.get());
     taskDescriptionLabel->setVisible(false);
+    vbox->removeWidget(taskPriorityLabel.get());
+    taskPriorityLabel->setVisible(false);
+
 
 }
 

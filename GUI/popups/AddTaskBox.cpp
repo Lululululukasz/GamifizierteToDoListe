@@ -1,13 +1,15 @@
-#include "AddTaskBox.h"
+#include "GUI/popups/AddTaskBox.h"
 
 #include <QPushButton>
 #include <QTextEdit>
 #include <QLabel>
 #include <QApplication>
+#include <QStringList>
+
 
 AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task("", "")) {
 
-    setFixedSize(400, 200);
+    setFixedSize(400, 250);
 
     nameLabel.setText(QString::fromStdString("Task Name: "));
     layout.addWidget(&nameLabel);
@@ -20,6 +22,14 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
     aTDecriptionTextEdit = std::make_shared<QTextEdit>(this);
     aTDecriptionTextEdit->setGeometry(10, 40, 200, 60);
     layout.addWidget(aTDecriptionTextEdit.get());
+
+    priorityLabel = std::make_shared<QLabel>();
+    priorityLabel->setText("Select how high the priority of the task is:");
+    layout.addWidget(priorityLabel.get());
+
+    selectPriorityBox = std::make_shared<QComboBox>(this);
+    selectPriorityBox->addItems(prios);
+    layout.addWidget(selectPriorityBox.get());
 
     addTaskButton = std::make_shared<QPushButton>("Add Task", this);
     addTaskButton->setGeometry(10, 100, 80, 30);
@@ -43,6 +53,7 @@ void AddTaskBox::addTaskClicked(bool checked)
         // category->addTask(todolib::Task(name, description));
         task = todolib::Task(name, description);
         hasTaskBool = true;
+        task.setPriority(static_cast<todolib::Task::priority_t>(selectPriorityBox->currentIndex()));
         emit isOver();
     }
 }
@@ -54,3 +65,5 @@ bool AddTaskBox::hasTask() const {
 void AddTaskBox::closeAddTaskWindow() {
     this->hide();
 }
+
+
