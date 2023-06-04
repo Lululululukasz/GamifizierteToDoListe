@@ -12,7 +12,15 @@ XpWidget::XpWidget(todolib::Xp &xp, QWidget *parent ) :xp {xp}, QWidget(parent) 
 
     xpLabel->setText(QString::number(xpWidgetNumber));
     setLayout(xpLayout.get());
+    xpFirstNumber();
 
+}
+void XpWidget::xpFirstNumber(){
+    if (xp.xpZahl=!0){
+        xpWidgetNumber = xp.xpZahl;
+    }{
+        xpWidgetNumber = 0;
+    }
 
 }
 //this two function add or take one to the Xp Number

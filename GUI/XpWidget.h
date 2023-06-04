@@ -18,7 +18,7 @@ class XpWidget : public QWidget {
         explicit XpWidget( todolib::Xp &xp,QWidget *parent = nullptr);
     todolib::Xp &xp;
 
-    int xpWidgetNumber {0};
+    int xpWidgetNumber {xp.xpZahl};
 
 public slots:
     void xpWidgetFunc1();
@@ -27,6 +27,7 @@ public slots:
     private:
         std::shared_ptr<QLabel> xpLabel;
         std::shared_ptr<QVBoxLayout> xpLayout;
+        void xpFirstNumber();
     };
 
 
