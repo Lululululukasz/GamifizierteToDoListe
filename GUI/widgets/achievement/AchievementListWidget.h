@@ -8,7 +8,7 @@
 
 #include <QWidget>
 #include <QVBoxLayout>
-#include "../../todolib/todolib.h"
+#include "../todolib/todolib.h"
 #include "AchievementWidget.h"
 
 class AchievementListWidget : public QWidget {
