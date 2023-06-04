@@ -36,7 +36,7 @@ namespace todolib {
         string id;
         bool done;
         priority_t priority;
-        // TODO datetime
+        double duration;
 
     public:
         string name;
@@ -78,6 +78,9 @@ namespace todolib {
          * @return standard string
          */
         std::string getPriorityString();
+
+        void setDuration(double dur);
+        double getDuration();
         /**
          * Function to convert the task with it's attributes to a QJsonObject
          * @return QJsonObject

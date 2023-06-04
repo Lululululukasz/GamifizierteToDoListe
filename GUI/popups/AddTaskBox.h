@@ -44,6 +44,8 @@ private:
     std::shared_ptr<QComboBox> selectPriorityBox;
     QStringList prios {"trivial", "low", "medium", "high", "urgent"};
     std::shared_ptr<QLabel> priorityLabel;
+    std::shared_ptr<QLabel> durationLabel;
+    std::shared_ptr<QTextEdit> durationTextEdit;
 
     std::shared_ptr<todolib::Category> category;
 };
