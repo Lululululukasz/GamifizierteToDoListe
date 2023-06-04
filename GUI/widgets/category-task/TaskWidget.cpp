@@ -63,6 +63,14 @@ TaskWidget::TaskWidget(todolib::Task &task, Page &page, QWidget *parent)
     QString durationText = "Duration: " + QString::number(task.getDuration());
     taskDurationLabel->setText(durationText);
 
+    //taskDueDateLabel
+    taskDueDateLabel = std::make_shared<QLabel>();
+    int year = static_cast<int>(task.getdueDate().year());
+    unsigned month = static_cast<unsigned>(task.getdueDate().month());
+    unsigned day = static_cast<unsigned>(task.getdueDate().day());
+    QString dueDateText = "Due on: " + QString::number(day) + "." + QString::number(month) + "." + QString::number(year);
+    taskDueDateLabel->setText(dueDateText);
+
     //adding widgets to the layouts
     vbox->addLayout(hbox.get());
     hbox->addWidget(taskCheckbox.get(), 0, Qt::AlignLeft | Qt::AlignVCenter);
@@ -130,6 +138,8 @@ void TaskWidget::showDescription() {
     taskPriorityLabel->setVisible(true);
     vbox->addWidget(taskDurationLabel.get());
     taskDurationLabel->setVisible(true);
+    vbox->addWidget(taskDueDateLabel.get());
+    taskDueDateLabel->setVisible(true);
 }
 
 //hides the description of a task when the showDescriptionButton is unchecked
@@ -141,7 +151,8 @@ void TaskWidget::hideDescription() {
     taskPriorityLabel->setVisible(false);
     vbox->removeWidget(taskDurationLabel.get());
     taskDurationLabel->setVisible(false);
-
+    vbox->removeWidget(taskDueDateLabel.get());
+    taskDueDateLabel->setVisible(false);
 
 }
 

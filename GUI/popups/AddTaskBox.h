@@ -10,6 +10,7 @@
 #include <QLayout>
 #include <QLabel>
 #include <QComboBox>
+#include <QHBoxLayout>
 
 class AddTaskBox : public QWidget {
 Q_OBJECT
@@ -46,7 +47,14 @@ private:
     std::shared_ptr<QLabel> priorityLabel;
     std::shared_ptr<QLabel> durationLabel;
     std::shared_ptr<QTextEdit> durationTextEdit;
-
+    std::shared_ptr<QLabel> dueDateLabel;
+    QStringList day {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+    QStringList month {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    QStringList year{"2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033"};
+    std::shared_ptr<QComboBox> selectDayBox;
+    std::shared_ptr<QComboBox> selectMonthBox;
+    std::shared_ptr<QComboBox> selectYearBox;
+    std::shared_ptr<QHBoxLayout> dateLayout;
     std::shared_ptr<todolib::Category> category;
 };
 

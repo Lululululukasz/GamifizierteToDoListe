@@ -6,10 +6,9 @@
 #include <QApplication>
 #include <QStringList>
 
-
 AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task("", "")) {
 
-    setFixedSize(400, 300);
+    setFixedSize(400, 400);
 
     nameLabel.setText(QString::fromStdString("Task Name: "));
     layout.addWidget(&nameLabel);
@@ -39,6 +38,28 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
     durationTextEdit->setGeometry(10, 10, 100, 10);
     layout.addWidget(durationTextEdit.get());
 
+    dueDateLabel = std::make_shared<QLabel>();
+    dueDateLabel->setText("When should this task be done?");
+    layout.addWidget(dueDateLabel.get());
+
+    dateLayout = std::make_shared<QHBoxLayout>(this);
+    layout.addLayout(dateLayout.get());
+
+    selectDayBox = std::make_shared<QComboBox>(this);
+    selectDayBox->addItems(day);
+    selectDayBox->setPlaceholderText("day");
+    dateLayout->addWidget(selectDayBox.get());
+
+    selectMonthBox = std::make_shared<QComboBox>(this);
+    selectMonthBox->addItems(month);
+    selectMonthBox->setPlaceholderText("month");
+    dateLayout->addWidget(selectMonthBox.get());
+
+    selectYearBox = std::make_shared<QComboBox>(this);
+    selectYearBox->addItems(year);
+    selectYearBox->setPlaceholderText("year");
+    dateLayout->addWidget(selectYearBox.get());
+
     addTaskButton = std::make_shared<QPushButton>("Add Task", this);
     addTaskButton->setGeometry(10, 100, 80, 30);
     addTaskButton->setCheckable(true);
@@ -63,6 +84,11 @@ void AddTaskBox::addTaskClicked(bool checked)
         hasTaskBool = true;
         task.setPriority(static_cast<todolib::Task::priority_t>(selectPriorityBox->currentIndex()));
         task.setDuration(this->durationTextEdit->toPlainText().toDouble());
+        task.setdueDate(std::chrono::year_month_day(
+                std::chrono::year(selectYearBox->currentIndex() + 2023),
+                std::chrono::month(selectMonthBox->currentIndex() + 1),
+                std::chrono::day(selectDayBox->currentIndex() + 1)
+                ));
         emit isOver();
     }
 }
