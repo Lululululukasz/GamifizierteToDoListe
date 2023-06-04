@@ -16,6 +16,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include "AddTaskBox.h"
+#include "ConfirmDeleteWindow.h"
 
 
 class CategoryWidget : public QWidget {
@@ -25,7 +26,6 @@ Q_OBJECT
 
 public:
     explicit CategoryWidget(todolib::Category &category, QWidget *parent = nullptr);
-
     todolib::Category &category;
 
 signals:
@@ -47,8 +47,7 @@ private:
     void addTaskWidget(todolib::Task& task);
     void deleteCategory();
 public:
-    void deleteTask(const std::shared_ptr<TaskWidget>& taskWidget);
-
+    void deleteTask(std::shared_ptr<TaskWidget>& taskWidget);
     // Adding Tasks
     std::shared_ptr<QPushButton> addTaskButton;
     std::shared_ptr<AddTaskBox> addTaskBox;

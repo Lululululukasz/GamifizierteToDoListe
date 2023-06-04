@@ -69,10 +69,12 @@ void CategoryWidget::openAddTaskWindow(bool checked){
         connect(addTaskBox.get(), &AddTaskBox::isOver, this, [=, this]() {if(addTaskBox->hasTask()) { addTask(addTaskBox->task);};});
     }
 }
-void catchConfirmDelete() {
-    CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget> &taskWidget);
+void CategoryWidget::catchConfirmDelete() {
+    connect(ConfirmDeleteWindow::confirmInput(), ConfirmDeleteWindow::confirmDelete(), this, CategoryWidget::catchConfirmDelete()); {
+        CategoryWidget::deleteTask(std::shared_ptr<TaskWidget> & taskWidget);
+    }
 }
-CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget> &taskWidget) {
+CategoryWidget::deleteTask( std::shared_ptr<TaskWidget> &taskWidget) {
     category.deleteTask(taskWidget->task.getID());
     taskWidget->hide();
     vlayout.removeWidget(taskWidget.get());

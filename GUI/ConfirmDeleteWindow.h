@@ -13,11 +13,11 @@
 class ConfirmDeleteWindow : public QWidget {
 Q_OBJECT
 signals:
-    void confirmDelete();
+    static void confirmDelete();
 
 public slots:
     void catchDeleteTask();
-    void confirmInput();
+    static void confirmInput();
 
 public:
     explicit ConfirmDeleteWindow(QWidget *parent = nullptr);
@@ -30,4 +30,4 @@ private:
 
 };
 
-#endif //PIC_AEM_PROJEKT_CONFIRMDELETEWINDOW_Hcx x
+#endif //PIC_AEM_PROJEKT_CONFIRMDELETEWINDOW_H
