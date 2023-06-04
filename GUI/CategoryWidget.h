@@ -47,7 +47,7 @@ private:
     void addTaskWidget(todolib::Task& task);
     void deleteCategory();
 public:
-    void deleteTask(std::shared_ptr<TaskWidget>& taskWidget);
+    void deleteTask(const std::shared_ptr<TaskWidget>& taskWidget);
     // Adding Tasks
     std::shared_ptr<QPushButton> addTaskButton;
     std::shared_ptr<AddTaskBox> addTaskBox;

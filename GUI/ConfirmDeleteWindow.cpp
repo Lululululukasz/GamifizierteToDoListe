@@ -2,7 +2,7 @@
 #include <QInputDialog>
 
 
-ConfirmDeleteWindow::ConfirmDeleteWindow(QWidget *parent) {
+ConfirmDeleteWindow::ConfirmDeleteWindow() {
     instructions.setText(QString::fromStdString("Are you sure you want to delete this Task?"));
     layout.addWidget(&instructions);
 
@@ -17,7 +17,7 @@ ConfirmDeleteWindow::ConfirmDeleteWindow(QWidget *parent) {
 void ConfirmDeleteWindow::catchDeleteTask() {
     ConfirmDeleteWindow();
 }
-//todo connect confirmDelete() to deleteTask in CategoryWidget
+
 void ConfirmDeleteWindow::confirmInput() {
         emit confirmDelete();
 }

@@ -17,10 +17,10 @@ signals:
 
 public slots:
     void catchDeleteTask();
-    static void confirmInput();
+    void confirmInput();
 
 public:
-    explicit ConfirmDeleteWindow(QWidget *parent = nullptr);
+    ConfirmDeleteWindow();
 
 private:
     QVBoxLayout layout{QVBoxLayout(this)};

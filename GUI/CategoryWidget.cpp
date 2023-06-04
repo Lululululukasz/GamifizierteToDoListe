@@ -14,8 +14,7 @@
 
 using namespace todolib;
 
-CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : category{category},
-                                                                               QWidget(parent) {
+CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : category{category}, QWidget(parent) {
     setLayout(&vlayout);
     vlayout.addLayout(&hlayout);
 
@@ -57,9 +56,10 @@ void CategoryWidget::addTaskWidget(Task &task) {
     shared_ptr<TaskWidget> widget {make_shared<TaskWidget>(task)};
     TaskWidgets.push_back(widget);
     vlayout.addWidget(widget.get(), 0, Qt::AlignTop);
-    connect(widget.get(), &TaskWidget::deleteTaskSignal, this,[=, this]() {&ConfirmDeleteWindow::catchDeleteTask;} );
+    connect(widget.get(), &TaskWidget::deleteTaskSignal, confirmDeleteWindow, &ConfirmDeleteWindow::catchDeleteTask);
+    //connect(widgetA, &WidgetAType::widgetASignal, widgetB, &WidgetBType::widgetBSlot);
 }
-//[=, this]() { deleteTask(widget); }
+
 void CategoryWidget::openAddTaskWindow(bool checked){
     if(checked) {
         this->addTaskButton->setChecked(false);
@@ -69,12 +69,15 @@ void CategoryWidget::openAddTaskWindow(bool checked){
         connect(addTaskBox.get(), &AddTaskBox::isOver, this, [=, this]() {if(addTaskBox->hasTask()) { addTask(addTaskBox->task);};});
     }
 }
-void CategoryWidget::catchConfirmDelete() {
-    connect(ConfirmDeleteWindow::confirmInput(), ConfirmDeleteWindow::confirmDelete(), this, CategoryWidget::catchConfirmDelete()); {
-        CategoryWidget::deleteTask(std::shared_ptr<TaskWidget> & taskWidget);
-    }
+ConfirmDeleteWindow::ConfirmDeleteWindow() {
+    connect(this, &ConfirmDeleteWindow::confirmInput, categoryWidget, &CategoryWidget::catchConfirmDelete);
 }
-CategoryWidget::deleteTask( std::shared_ptr<TaskWidget> &taskWidget) {
+
+void CategoryWidget::catchConfirmDelete() {
+    deleteTask(const std::shared_ptr<TaskWidget> &taskWidget);
+}
+
+void CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget> &taskWidget) {
     category.deleteTask(taskWidget->task.getID());
     taskWidget->hide();
     vlayout.removeWidget(taskWidget.get());
