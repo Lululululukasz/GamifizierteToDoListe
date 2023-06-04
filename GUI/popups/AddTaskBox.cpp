@@ -9,7 +9,7 @@
 
 AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task("", "")) {
 
-    setFixedSize(400, 250);
+    setFixedSize(400, 300);
 
     nameLabel.setText(QString::fromStdString("Task Name: "));
     layout.addWidget(&nameLabel);
@@ -30,6 +30,14 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
     selectPriorityBox = std::make_shared<QComboBox>(this);
     selectPriorityBox->addItems(prios);
     layout.addWidget(selectPriorityBox.get());
+
+    durationLabel = std::make_shared<QLabel>();
+    durationLabel->setText("How many hours do you think this task will take?");
+    layout.addWidget(durationLabel.get());
+
+    durationTextEdit = std::make_shared<QTextEdit>(this);
+    durationTextEdit->setGeometry(10, 10, 100, 10);
+    layout.addWidget(durationTextEdit.get());
 
     addTaskButton = std::make_shared<QPushButton>("Add Task", this);
     addTaskButton->setGeometry(10, 100, 80, 30);
@@ -54,6 +62,7 @@ void AddTaskBox::addTaskClicked(bool checked)
         task = todolib::Task(name, description);
         hasTaskBool = true;
         task.setPriority(static_cast<todolib::Task::priority_t>(selectPriorityBox->currentIndex()));
+        task.setDuration(this->durationTextEdit->toPlainText().toDouble());
         emit isOver();
     }
 }

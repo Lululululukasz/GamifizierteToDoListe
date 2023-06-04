@@ -50,11 +50,18 @@ TaskWidget::TaskWidget(todolib::Task &task, Page &page, QWidget *parent)
     //taskDescriptionLabel
     taskDescriptionLabel = std::make_shared<QLabel>();
     taskDescriptionLabel->setWordWrap(true);
-    taskDescriptionLabel->setText(QString::fromStdString(task.description));
+    QString descriptionText = "Description: " + QString::fromStdString(task.description);
+    taskDescriptionLabel->setText(descriptionText);
 
     //taskPriorityLabel
     taskPriorityLabel = std::make_shared<QLabel>();
-    taskPriorityLabel->setText(QString::fromStdString(task.getPriorityString()));
+    QString priorityText = "Priority: " + QString::fromStdString(task.getPriorityString());
+    taskPriorityLabel->setText(priorityText);
+
+    //taskDurationLabel
+    taskDurationLabel = std::make_shared<QLabel>();
+    QString durationText = "Duration: " + QString::number(task.getDuration());
+    taskDurationLabel->setText(durationText);
 
     //adding widgets to the layouts
     vbox->addLayout(hbox.get());
@@ -121,6 +128,8 @@ void TaskWidget::showDescription() {
     taskDescriptionLabel->setVisible(true);
     vbox->addWidget(taskPriorityLabel.get());
     taskPriorityLabel->setVisible(true);
+    vbox->addWidget(taskDurationLabel.get());
+    taskDurationLabel->setVisible(true);
 }
 
 //hides the description of a task when the showDescriptionButton is unchecked
@@ -130,6 +139,8 @@ void TaskWidget::hideDescription() {
     taskDescriptionLabel->setVisible(false);
     vbox->removeWidget(taskPriorityLabel.get());
     taskPriorityLabel->setVisible(false);
+    vbox->removeWidget(taskDurationLabel.get());
+    taskDurationLabel->setVisible(false);
 
 
 }

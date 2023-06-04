@@ -15,6 +15,7 @@ Task::Task(const string &n, const string &d) {
     this->description = d;
     this->done = false;
     this->priority = medium;
+    this->duration = 1;
 }
 
 /**
@@ -27,6 +28,7 @@ Task::Task(const QJsonObject &taskObject) {
     description = taskObject.value(QString("description")).toString().toStdString();
     done = taskObject.value(QString("done")).toString().toStdString() == "true";
     priority = static_cast<priority_t>(taskObject.value(QString("priority")).toInt());
+    duration = taskObject.value(QString("duration")).toDouble();
 }
 
 string Task::getID() {
@@ -78,6 +80,13 @@ std::string Task::getPriorityString() {
     }
 }
 
+void Task::setDuration(double dur) {
+    this->duration = dur;
+}
+double Task::getDuration() {
+    return this->duration;
+}
+
 /**
  * Function to convert the task with it's attributes to a QJsonObject
  * @return QJsonObject
@@ -89,8 +98,10 @@ QJsonObject Task::toJson() {
     jsonObject.insert("description", description.c_str());
     jsonObject.insert("done", done?"true":"false");
     jsonObject.insert("priority", static_cast<int>(priority));
+    jsonObject.insert("duration", duration);
     return jsonObject;
 }
+
 
 
 
