@@ -2,6 +2,7 @@
 #include "GUI/Points.h"
 #include "utility/Globals.h"
 #include "todolib/todolib.h"
+#include "GUI/ConfettiAnimation/DrawConfetti.h"
 
 #include <random>
 #include <QCheckBox>
@@ -11,11 +12,13 @@
 #include <QPushButton>
 #include <QToolButton>
 #include <QSound>
-#include <QtDebug>
+#include <QGraphicsRotation>
+#include <QGraphicsProxyWidget>
+#include <QGraphicsView>
 
 
-TaskWidget::TaskWidget(todolib::Task &task, QWidget *parent)
-        : task{task}, QWidget(parent) {
+TaskWidget::TaskWidget(todolib::Task &task, Page &page, QWidget *parent)
+        : task{task}, page{page}, QWidget(parent) {
 
     //layouts
     hbox = std::make_shared<QHBoxLayout>();
@@ -87,7 +90,19 @@ void TaskWidget::taskDone() {
             Points::getinstance().addPoints(1,1,'n');
             playRandomSound();
             emit taskMarkedChanged();
+            playConfettiAnimation();
         }
+}
+
+void TaskWidget::taskUndone() {
+
+    font->setStrikeOut(false);
+    taskNameLabel->setFont(*font);
+    if(task.getDoneStatus()) {
+        task.setAsUndone();
+        Points::getinstance().subPoints(1, 'n');
+    }
+
 }
 
 //emits the deleteTaskSignal that is used in CategoryWidget
@@ -128,19 +143,7 @@ void TaskWidget::playRandomSound() {
     }
 }
 
-void TaskWidget::taskUndone() {
-
-    font->setStrikeOut(false);
-    taskNameLabel->setFont(*font);
-    if(task.getDoneStatus()) {
-        task.setAsUndone();
-        Points::getinstance().subPoints(1, 'n');
-        emit taskMarkedChanged();
-    }
-
+void TaskWidget::playConfettiAnimation() {
+    confetti = std::make_shared<DrawConfetti>();
+    page.setOverlay(confetti);
 }
-
-
-
-
-
