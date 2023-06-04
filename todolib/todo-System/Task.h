@@ -21,7 +21,9 @@ namespace todolib {
     class Task {
 
     public:
-
+        /**
+         * an enum that holds the different possible priorities.
+         */
         using priority_t = enum {
             trivial,
             low,
@@ -71,6 +73,10 @@ namespace todolib {
         void setPriority(Task::priority_t prio);
         priority_t getPriority();
 
+        /** converts the priority to a string
+         *
+         * @return standard string
+         */
         std::string getPriorityString();
         /**
          * Function to convert the task with it's attributes to a QJsonObject
