@@ -1,6 +1,9 @@
 #ifndef PIC_AEM_PROJEKT_CHECKBOX_H
 #define PIC_AEM_PROJEKT_CHECKBOX_H
 #include "todolib/todo-System/Task.h"
+#include "GUI/ConfettiAnimation/DrawConfetti.h"
+#include "GUI/pages/Page.h"
+
 #include <QWidget>
 #include <QCheckBox>
 #include <QPushButton>
@@ -9,6 +12,7 @@
 #include <QScrollArea>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QGraphicsScene>
 
 
 /** The hbox is the horizontal box that is the first element in the vertical box vbox. It
@@ -23,7 +27,7 @@ class TaskWidget : public QWidget {
 Q_OBJECT
 
 public:
-    explicit TaskWidget(todolib::Task &task, QWidget *parent = nullptr);
+    explicit TaskWidget(todolib::Task &task, Page &page, QWidget *parent = nullptr);
 
     todolib::Task &task;
 
@@ -32,7 +36,7 @@ signals:
     void taskMarkedChanged();
 
 private:
-
+    Page &page;
     std::shared_ptr<QHBoxLayout> hbox;
     std::shared_ptr<QVBoxLayout> vbox;
     std::shared_ptr<QCheckBox> taskCheckbox;
@@ -42,7 +46,12 @@ private:
     std::shared_ptr<QLabel> taskDescriptionLabel;
     std::shared_ptr<QLabel> taskPriorityLabel;
     std::shared_ptr<QFont> font;
+    std::shared_ptr<DrawConfetti> confetti;
+    std::shared_ptr<QGraphicsScene> scene;
+
+
     static void playRandomSound();
+    void playConfettiAnimation();
 
 private slots:
     void taskDone();

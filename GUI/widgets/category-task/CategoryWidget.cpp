@@ -14,8 +14,9 @@
 
 using namespace todolib;
 
-CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : category{category},
-                                                                               QWidget(parent) {
+CategoryWidget::CategoryWidget(todolib::Category &category, Page &page, QWidget *parent) : category{category},
+                                                                                           page{page},
+                                                                                           QWidget(parent) {
     setLayout(&vlayout);
     vlayout.addLayout(&hlayout);
 
@@ -69,7 +70,7 @@ void CategoryWidget::addTask(Task &task) {
 }
 
 void CategoryWidget::addTaskWidget(Task &task) {
-    shared_ptr<TaskWidget> widget {make_shared<TaskWidget>(task)};
+    shared_ptr<TaskWidget> widget {make_shared<TaskWidget>(task, page)};
     TaskWidgets.push_back(widget);
     vlayout.addWidget(widget.get(), 0, Qt::AlignTop);
     connect(widget.get(), &TaskWidget::deleteTaskSignal, this, [=, this]() { deleteTask(widget); });
