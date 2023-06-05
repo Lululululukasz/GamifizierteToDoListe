@@ -70,7 +70,8 @@ void CategoryWidget::openAddTaskWindow(bool checked){
     }
 }
 ConfirmDeleteWindow::ConfirmDeleteWindow() {
-    connect(this, &ConfirmDeleteWindow::confirmInput, categoryWidget, &CategoryWidget::catchConfirmDelete);
+    connect(this, &ConfirmDeleteWindow::confirmInput, CategoryWidget, &CategoryWidget::catchConfirmDelete);
+    //connect(widgetA, &WidgetAType::widgetASignal, widgetB, &WidgetBType::widgetBSlot);
 }
 
 void CategoryWidget::catchConfirmDelete() {
