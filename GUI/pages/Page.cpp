@@ -11,15 +11,17 @@ Page::Page(todolib::ToDoList &toDoList) : toDoList{toDoList} {
     stackedLayout.addWidget(&layoutWidget);
     stackedLayout.setStackingMode(QStackedLayout::StackAll);
 
-    closeButton = std::make_shared<QPushButton>();
+    // hNavBar
     closeButton->setIcon(closeButton->style()->standardIcon(QStyle::SP_ArrowBack));
-    layout->addWidget(closeButton.get(), 0, Qt::AlignLeft);
+    layoutWidget.hNavBar->addWidget(closeButton.get(), 0, Qt::AlignLeft);
     connect(closeButton.get(), SIGNAL(clicked()), this, SIGNAL(closePageSignal()));
 
+    // XP-Bar
+    layoutWidget.vBodyLayout->addWidget(&placeholderXP);
 }
 
 /**
- * This adds an overlay widget to the stacked layout which
+ * This adds an overlay widget to the stacked vOuterLayout which
  * is automatically removed after 2 seconds.
  *
  * @param _overlay Widget to overlay
