@@ -35,7 +35,6 @@ public slots:
 
 
 private:
-    //todolib::ToDoList &toDoList;
     todolib::Profile &profile;
     QStackedLayout stackedLayout{QStackedLayout(this)};
     std::list<std::shared_ptr<Page>> pages;

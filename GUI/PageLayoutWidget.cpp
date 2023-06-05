@@ -5,6 +5,15 @@
 #include <QLayout>
 #include "PageLayoutWidget.h"
 
-PageLayoutWidget::PageLayoutWidget(std::shared_ptr<QLayout> layout) {
-    this->setLayout(layout.get());
+PageLayoutWidget::PageLayoutWidget() {
+    this->setLayout(vOuterLayout.get());
+
+
+
+    vOuterLayout->addLayout(hNavBar.get());
+    vOuterLayout->addLayout(hOuterBodyLayout.get());
+    hOuterBodyLayout->addLayout(vSideBar.get());
+    hOuterBodyLayout->addLayout(vBodyLayout.get());
 }
+
+
