@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QApplication>
 #include <QStringList>
+#include <iostream>
 
 AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task("", "")) {
 
@@ -32,6 +33,11 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
     selectPriorityBox = std::make_shared<QComboBox>(this);
     selectPriorityBox->addItems(prios);
     layout.addWidget(selectPriorityBox.get());
+
+    //invalidPriority
+    invalidPriorityLabel = std::make_shared<QLabel>();
+    invalidPriorityLabel->setHidden(true);
+    layout.addWidget(invalidPriorityLabel.get());
 
     //taskDuration
     durationLabel = std::make_shared<QLabel>();
@@ -65,9 +71,8 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
 
     //invalidDate
     invalidDateLabel = std::make_shared<QLabel>();
-    invalidDateLabel->setVisible("false");
+    invalidDateLabel->setHidden("true");
     layout.addWidget(invalidDateLabel.get());
-
 
     //addTask
     addTaskButton = std::make_shared<QPushButton>("Add Task", this);
@@ -75,14 +80,17 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
     addTaskButton->setCheckable(true);
     layout.addWidget(addTaskButton.get());
 
-    connect(selectDayBox.get(), static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [=, this](int x) {
-        invalidDateLabel->setText("");
+    connect(selectPriorityBox.get(), static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [=,this]{
+        invalidPriorityLabel->setHidden(true);
     });
-    connect(selectMonthBox.get(), static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [=, this](int x) {
-        invalidDateLabel->setText("");
+    connect(selectDayBox.get(), static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [=, this] {
+        invalidDateLabel->setHidden(true);
     });
-    connect(selectYearBox.get(), static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [=, this](int x) {
-        invalidDateLabel->setText("");
+    connect(selectMonthBox.get(), static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [=, this] {
+        invalidDateLabel->setHidden(true);
+    });
+    connect(selectYearBox.get(), static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [=, this] {
+        invalidDateLabel->setHidden(true);
     });
     connect(addTaskButton.get(), SIGNAL (clicked(bool)), this, SLOT (addTaskClicked(bool)));
     connect(this, SIGNAL (isOver()), this, SLOT (closeAddTaskWindow()));
@@ -93,6 +101,7 @@ void AddTaskBox::setCategory(todolib::Category &category){
 }
 
 bool AddTaskBox::invalidDate() {
+
     if(selectDayBox->currentIndex() == 0 || selectMonthBox->currentIndex() == 0 || selectYearBox->currentIndex() == 0){
         return true;
     } else if(selectDayBox->currentIndex() == 31 && selectMonthBox->currentIndex() == 2){
@@ -109,18 +118,61 @@ bool AddTaskBox::invalidDate() {
         return true;
     } else if (selectDayBox->currentIndex() == 31 && selectMonthBox->currentIndex() == 11){
         return true;
+    } else if (pastDate()){
+        return true;
     } else {
         return false;
     }
 }
 
+bool AddTaskBox::invalidPriority() {
+    if(selectPriorityBox->currentIndex() == 0){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool AddTaskBox::pastDate() {
+    auto now = std::chrono::system_clock::now();
+    auto today = std::chrono::floor<std::chrono::days>(now);
+    std::chrono::year_month_day dateToday{today};
+
+    std::chrono::year_month_day dueDate {std::chrono::year(selectYearBox->currentIndex() + 2022),
+                                         std::chrono::month(selectMonthBox->currentIndex()),
+                                         std::chrono::day(selectDayBox->currentIndex())};
+
+
+    if(dueDate < dateToday){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool AddTaskBox::invalidInput() {
+    if(invalidPriority()){
+        invalidPriorityLabel->setText("Please enter a priority.");
+        invalidPriorityLabel->setStyleSheet("QLabel{color: red};");
+        invalidPriorityLabel->setHidden(false);
+    }
+    if(invalidDate()){
+        invalidDateLabel->setText("Please enter a valid date.");
+        invalidDateLabel->setStyleSheet("QLabel{color: red};");
+        invalidDateLabel->setHidden(false);
+    }
+    if(invalidPriority() || invalidDate()){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 void AddTaskBox::addTaskClicked(bool checked)
 {
     if (checked) {
-        if(invalidDate()){
-            invalidDateLabel->setText("Please enter a valid date.");
-            invalidDateLabel->setStyleSheet("QLabel{color: red};");
-            invalidDateLabel->setVisible(true);
+        if(invalidInput()){
             this->addTaskButton->setChecked(false);
         } else {
             this->addTaskButton->setChecked(false);
@@ -132,7 +184,7 @@ void AddTaskBox::addTaskClicked(bool checked)
             task.setPriority(static_cast<todolib::Task::priority_t>(selectPriorityBox->currentIndex()));
             task.setDuration(this->durationTextEdit->toPlainText().toDouble());
             task.setdueDate(std::chrono::year_month_day(
-                    std::chrono::year(selectYearBox->currentIndex() + 2023),
+                    std::chrono::year(selectYearBox->currentIndex() + 2022),
                     std::chrono::month(selectMonthBox->currentIndex()),
                     std::chrono::day(selectDayBox->currentIndex())
             ));
@@ -148,6 +200,8 @@ bool AddTaskBox::hasTask() const {
 void AddTaskBox::closeAddTaskWindow() {
     this->hide();
 }
+
+
 
 
 

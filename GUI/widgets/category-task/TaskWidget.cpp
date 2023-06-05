@@ -75,7 +75,12 @@ TaskWidget::TaskWidget(todolib::Task &task, Page &page, QWidget *parent)
         QString dayString = dayList[day - 1];
         QString dueDateText = "Due on: " + dayString + " of " + monthString + " " + QString::number(year);
         taskDueDateLabel->setText(dueDateText);
-    } else {
+    } else if(day == 21 || day == 22 || day == 23){
+        QStringList dayList {"21st", "22nd", "23rd"};
+        QString dayString = dayList[day - 21];
+        QString dueDateText = "Due on: " + dayString + " of " + monthString + " " + QString::number(year);
+        taskDueDateLabel->setText(dueDateText);
+    }else{
         QString dueDateText = "Due on: " + QString::number(day)  + "th" + " of " + monthString + " " + QString::number(year);
         taskDueDateLabel->setText(dueDateText);
     }
