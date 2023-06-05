@@ -18,7 +18,7 @@ XpWidget::XpWidget(todolib::Xp &xp, QWidget *parent ) :xp {xp}, QWidget(parent) 
 void XpWidget::xpFirstNumber(){
     if (xp.xpZahl=!0){
         xpWidgetNumber = xp.xpZahl;
-    }{
+    }else{
         xpWidgetNumber = 0;
     }
 
