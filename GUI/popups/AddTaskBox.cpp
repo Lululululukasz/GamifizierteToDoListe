@@ -10,18 +10,21 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
 
     setFixedSize(400, 400);
 
+    //taskName
     nameLabel.setText(QString::fromStdString("Task Name: "));
     layout.addWidget(&nameLabel);
     aTNameTextEdit = std::make_shared<QTextEdit>(this);
     aTNameTextEdit->setGeometry(10, 10, 100, 10);
     layout.addWidget(aTNameTextEdit.get());
 
+    //taskDescription
     descLabel.setText(QString::fromStdString("Task Description: "));
     layout.addWidget(&descLabel);
     aTDecriptionTextEdit = std::make_shared<QTextEdit>(this);
     aTDecriptionTextEdit->setGeometry(10, 40, 200, 60);
     layout.addWidget(aTDecriptionTextEdit.get());
 
+    //taskPriority
     priorityLabel = std::make_shared<QLabel>();
     priorityLabel->setText("Select how high the priority of the task is:");
     layout.addWidget(priorityLabel.get());
@@ -30,14 +33,17 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
     selectPriorityBox->addItems(prios);
     layout.addWidget(selectPriorityBox.get());
 
+    //taskDuration
     durationLabel = std::make_shared<QLabel>();
     durationLabel->setText("How many hours do you think this task will take?");
     layout.addWidget(durationLabel.get());
 
     durationTextEdit = std::make_shared<QTextEdit>(this);
     durationTextEdit->setGeometry(10, 10, 100, 10);
+    durationTextEdit->setPlaceholderText("Please enter a number");
     layout.addWidget(durationTextEdit.get());
 
+    //taskDueDate
     dueDateLabel = std::make_shared<QLabel>();
     dueDateLabel->setText("When should this task be done?");
     layout.addWidget(dueDateLabel.get());
@@ -47,19 +53,23 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
 
     selectDayBox = std::make_shared<QComboBox>(this);
     selectDayBox->addItems(day);
-    selectDayBox->setPlaceholderText("day");
     dateLayout->addWidget(selectDayBox.get());
 
     selectMonthBox = std::make_shared<QComboBox>(this);
     selectMonthBox->addItems(month);
-    selectMonthBox->setPlaceholderText("month");
     dateLayout->addWidget(selectMonthBox.get());
 
     selectYearBox = std::make_shared<QComboBox>(this);
     selectYearBox->addItems(year);
-    selectYearBox->setPlaceholderText("year");
     dateLayout->addWidget(selectYearBox.get());
 
+    //invalidDate
+    invalidDateLabel = std::make_shared<QLabel>();
+    invalidDateLabel->setVisible("false");
+    layout.addWidget(invalidDateLabel.get());
+
+
+    //addTask
     addTaskButton = std::make_shared<QPushButton>("Add Task", this);
     addTaskButton->setGeometry(10, 100, 80, 30);
     addTaskButton->setCheckable(true);
@@ -73,23 +83,52 @@ void AddTaskBox::setCategory(todolib::Category &category){
     this->category = std::make_shared<todolib::Category>(category);
 }
 
+bool AddTaskBox::invalidDate() {
+    if(selectDayBox->currentIndex() == 0 || selectMonthBox->currentIndex() == 0 || selectYearBox->currentIndex() == 0){
+        return true;
+    } else if(selectDayBox->currentIndex() == 31 && selectMonthBox->currentIndex() == 2){
+        return true;
+    } else if(selectDayBox->currentIndex() == 30 && selectMonthBox->currentIndex() == 2 ){
+        return true;
+    } else if(selectDayBox->currentIndex() == 29 && selectMonthBox->currentIndex() == 2){
+        return true;
+    } else if (selectDayBox->currentIndex() == 31 && selectMonthBox->currentIndex() == 4){
+        return true;
+    } else if (selectDayBox->currentIndex() == 31 && selectMonthBox->currentIndex() == 6){
+        return true;
+    } else if (selectDayBox->currentIndex() == 31 && selectMonthBox->currentIndex() == 9){
+        return true;
+    } else if (selectDayBox->currentIndex() == 31 && selectMonthBox->currentIndex() == 11){
+        return true;
+    } else {
+        return false;
+    }
+}
+
 void AddTaskBox::addTaskClicked(bool checked)
 {
     if (checked) {
-        this->addTaskButton->setChecked(false);
-        std::string name{this->aTNameTextEdit->toPlainText().toStdString()};
-        std::string description{this->aTDecriptionTextEdit->toPlainText().toStdString()};
-        // category->addTask(todolib::Task(name, description));
-        task = todolib::Task(name, description);
-        hasTaskBool = true;
-        task.setPriority(static_cast<todolib::Task::priority_t>(selectPriorityBox->currentIndex()));
-        task.setDuration(this->durationTextEdit->toPlainText().toDouble());
-        task.setdueDate(std::chrono::year_month_day(
-                std::chrono::year(selectYearBox->currentIndex() + 2023),
-                std::chrono::month(selectMonthBox->currentIndex() + 1),
-                std::chrono::day(selectDayBox->currentIndex() + 1)
-                ));
-        emit isOver();
+        if(invalidDate()){
+            invalidDateLabel->setText("Please enter a valid date.");
+            invalidDateLabel->setStyleSheet("QLabel{color: red};");
+            invalidDateLabel->setVisible(true);
+            this->addTaskButton->setChecked(false);
+        } else {
+            this->addTaskButton->setChecked(false);
+            std::string name{this->aTNameTextEdit->toPlainText().toStdString()};
+            std::string description{this->aTDecriptionTextEdit->toPlainText().toStdString()};
+            // category->addTask(todolib::Task(name, description));
+            task = todolib::Task(name, description);
+            hasTaskBool = true;
+            task.setPriority(static_cast<todolib::Task::priority_t>(selectPriorityBox->currentIndex()));
+            task.setDuration(this->durationTextEdit->toPlainText().toDouble());
+            task.setdueDate(std::chrono::year_month_day(
+                    std::chrono::year(selectYearBox->currentIndex() + 2023),
+                    std::chrono::month(selectMonthBox->currentIndex()),
+                    std::chrono::day(selectDayBox->currentIndex())
+            ));
+            emit isOver();
+        }
     }
 }
 
@@ -100,5 +139,6 @@ bool AddTaskBox::hasTask() const {
 void AddTaskBox::closeAddTaskWindow() {
     this->hide();
 }
+
 
 
