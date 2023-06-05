@@ -18,8 +18,7 @@ MainWindow::MainWindow(todolib::Profile &profile) : profile{profile} {
     connect(mainPage.get(), SIGNAL(openCategoryViewPageSignal()), this, SLOT(openCategoryViewPage()));
     connect(mainPage.get(), SIGNAL(openAchievementsPageSignal()), this, SLOT(openAchievementsPage()));
 
-
-    resize(400, 400);
+    resize(1280, 720);
     setWindowTitle("To-Do List");
     show();
 }

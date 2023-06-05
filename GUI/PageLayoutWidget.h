@@ -10,7 +10,13 @@
 
 class PageLayoutWidget : public QWidget {
 public:
-    PageLayoutWidget(std::shared_ptr<QLayout> layout);
+    PageLayoutWidget();
+
+    std::shared_ptr<QVBoxLayout> vOuterLayout {std::make_shared<QVBoxLayout>()};
+    std::shared_ptr<QHBoxLayout> hNavBar {std::make_shared<QHBoxLayout>()};
+    std::shared_ptr<QHBoxLayout> hOuterBodyLayout {std::make_shared<QHBoxLayout>()};
+    std::shared_ptr<QVBoxLayout> vSideBar {std::make_shared<QVBoxLayout>()};
+    std::shared_ptr<QHBoxLayout> vBodyLayout {std::make_shared<QHBoxLayout>()};
 };
 
 
