@@ -8,6 +8,8 @@
 PageLayoutWidget::PageLayoutWidget() {
     this->setLayout(vOuterLayout.get());
 
+
+
     vOuterLayout->addLayout(hNavBar.get());
     vOuterLayout->addLayout(hOuterBodyLayout.get());
     hOuterBodyLayout->addLayout(vSideBar.get());

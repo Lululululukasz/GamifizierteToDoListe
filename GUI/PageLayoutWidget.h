@@ -16,7 +16,7 @@ public:
     std::shared_ptr<QHBoxLayout> hNavBar {std::make_shared<QHBoxLayout>()};
     std::shared_ptr<QHBoxLayout> hOuterBodyLayout {std::make_shared<QHBoxLayout>()};
     std::shared_ptr<QVBoxLayout> vSideBar {std::make_shared<QVBoxLayout>()};
-    std::shared_ptr<QHBoxLayout> vBodyLayout {std::make_shared<QHBoxLayout>()};
+    std::shared_ptr<QVBoxLayout> vBodyLayout {std::make_shared<QVBoxLayout>()};
 };
 
 

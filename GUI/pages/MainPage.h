@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include <QWidget>
 #include <QVBoxLayout>
+#include <QLabel>
 
 /**
  * MainPage
@@ -33,8 +34,14 @@ public:
     void openAchievementsPageSignal();
 
 private:
+    QLabel header {QLabel("Kontra Krastination")};
     QPushButton categoryViewPageButton{QPushButton("Open the Category View")};
     QPushButton achievementsPageButton{QPushButton("Open the Achievements Page")};
+
+    QLabel placeholderSearchbar {QLabel("Searchbar")};
+    QLabel placeholderBody {QLabel("Body")};
+    QLabel placeholderFilter {QLabel("Filter")};
+    QLabel placeholderAddButton {QLabel("AddButton")};
 
 };
 

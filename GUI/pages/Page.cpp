@@ -9,6 +9,7 @@
 
 Page::Page(todolib::ToDoList &toDoList) : toDoList{toDoList} {
     stackedLayout.addWidget(&layoutWidget);
+    stackedLayout.setStackingMode(QStackedLayout::StackAll);
 
     // hNavBar
     closeButton->setIcon(closeButton->style()->standardIcon(QStyle::SP_ArrowBack));
@@ -16,7 +17,7 @@ Page::Page(todolib::ToDoList &toDoList) : toDoList{toDoList} {
     connect(closeButton.get(), SIGNAL(clicked()), this, SIGNAL(closePageSignal()));
 
     // XP-Bar
-    // vBodyLayout->addWidget();
+    layoutWidget.vBodyLayout->addWidget(&placeholderXP);
 }
 
 /**

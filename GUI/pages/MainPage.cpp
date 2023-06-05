@@ -5,7 +5,9 @@
 #include "GUI/pages/MainPage.h"
 
 MainPage::MainPage(todolib::ToDoList &toDoList) : Page{toDoList} {
+    // nav bar
     closeButton->hide();
+    layoutWidget.hNavBar->addWidget(&header);
 
     // Adding and connecting of the categoryViewPage use as template for other Pages
     layoutWidget.hNavBar->addWidget(&categoryViewPageButton);
@@ -17,5 +19,13 @@ MainPage::MainPage(todolib::ToDoList &toDoList) : Page{toDoList} {
     achievementsPageButton.setGeometry(10, 100, 80, 30);
     connect(&achievementsPageButton, SIGNAL(clicked()), this, SIGNAL(openAchievementsPageSignal()));
 
-}
+    // Sidebar
+    layoutWidget.vSideBar->addWidget(&placeholderSearchbar);
+    layoutWidget.vSideBar->addWidget(&placeholderFilter);
 
+    // Body
+    layoutWidget.vBodyLayout->addWidget(&placeholderBody);
+
+    // Footer
+    layoutWidget.vOuterLayout->addWidget(&placeholderAddButton);
+}

@@ -13,6 +13,7 @@
 #include <QPushButton>
 #include <memory>
 #include <QStackedLayout>
+#include <QLabel>
 
 /**
  * Page
@@ -34,6 +35,7 @@ protected:
     todolib::ToDoList& toDoList;
     PageLayoutWidget layoutWidget {PageLayoutWidget()};
     std::shared_ptr<QPushButton> closeButton {std::make_shared<QPushButton>()};
+    QLabel placeholderXP {QLabel("XP Bar")};
 
 private:
     QStackedLayout stackedLayout {QStackedLayout(this)};
