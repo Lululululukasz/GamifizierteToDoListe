@@ -75,6 +75,15 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
     addTaskButton->setCheckable(true);
     layout.addWidget(addTaskButton.get());
 
+    connect(selectDayBox.get(), static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [=, this](int x) {
+        invalidDateLabel->setText("");
+    });
+    connect(selectMonthBox.get(), static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [=, this](int x) {
+        invalidDateLabel->setText("");
+    });
+    connect(selectYearBox.get(), static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [=, this](int x) {
+        invalidDateLabel->setText("");
+    });
     connect(addTaskButton.get(), SIGNAL (clicked(bool)), this, SLOT (addTaskClicked(bool)));
     connect(this, SIGNAL (isOver()), this, SLOT (closeAddTaskWindow()));
 }
