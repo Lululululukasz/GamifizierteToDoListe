@@ -16,10 +16,10 @@ XpWidget::XpWidget(todolib::Xp &xp, QWidget *parent ) :xp {xp}, QWidget(parent) 
 
 }
 void XpWidget::xpFirstNumber(){
-    if (xp.xpZahl=!0){
-        xpWidgetNumber = xp.xpZahl;
+    if (xp.xptrueNumber=!0){
+        xpWidgetNumber = xp.xptrueNumber;
     }else{
-        xpWidgetNumber = 0;
+        xpWidgetNumber = xp.xpNumber;
     }
 
 }
