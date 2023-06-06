@@ -4,7 +4,7 @@
 
 #include "GUI/pages/AchievementsPage.h"
 
-AchievementsPage::AchievementsPage(todolib::ToDoList &toDoList) : Page{toDoList}, achievementList{toDoList} {
+AchievementsPage::AchievementsPage(todolib::Profile &profile) : Page{profile}, achievementList{profile.todoList} {
 
     achievementListWidget = std::make_shared<AchievementListWidget>(achievementList);
     layoutWidget.vOuterLayout->addWidget(achievementListWidget.get(), 0, Qt::AlignTop);

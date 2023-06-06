@@ -52,6 +52,7 @@ ToDoList::ToDoList() {
             Task("Quit", "quit university"),
             Task("Exams", "go to all of your exams"),
     };
+
 }
 
 Category &ToDoList::getCategoryByName(const string &name) {

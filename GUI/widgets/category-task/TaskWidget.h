@@ -33,6 +33,8 @@ public:
 
 signals:
     void deleteTaskSignal();
+    void xpWidgetSignal1();
+    void xpWidgetSignal2();
     void taskMarkedChanged();
 
 private:

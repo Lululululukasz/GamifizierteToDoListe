@@ -25,7 +25,8 @@ add_executable(pic_aem_projekt
 		GUI/widgets/achievement/AchievementListWidget.cpp
 		GUI/widgets/achievement/AchievementWidget.cpp
 		utility/Globals.cpp GUI/pages/AchievementsPage.cpp GUI/pages/AchievementsPage.h
-		utility/Globals.cpp utility/JsonList.tpp)
+		utility/Globals.cpp utility/JsonList.tpp
+		GUI/widgets/XpWidget.cpp GUI/widgets/XpWidget.h)
 
 target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia)
 target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets)

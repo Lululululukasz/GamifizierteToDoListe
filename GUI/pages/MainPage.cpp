@@ -4,7 +4,7 @@
 
 #include "GUI/pages/MainPage.h"
 
-MainPage::MainPage(todolib::ToDoList &toDoList) : Page{toDoList} {
+MainPage::MainPage(todolib::Profile &profile) : Page{profile} {
     // nav bar
     closeButton->hide();
     layoutWidget.hNavBar->addWidget(&header);
