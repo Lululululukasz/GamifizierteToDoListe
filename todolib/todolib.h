@@ -10,5 +10,6 @@
 #include "Task.h"
 #include "Achievement.h"
 #include "AchievementList.h"
+#include "Xp.h"
 
 #endif //PIC_AEM_PROJEKT_TODOLIB_H

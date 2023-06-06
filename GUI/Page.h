@@ -10,6 +10,10 @@
 #include "todolib/todolib.h"
 #include <QPushButton>
 #include <memory>
+#include "XpWidget.h"
+//#include "CategoryViewPage.h"
+#include <QMetaMethod>
+
 
 /**
  * Page
@@ -21,16 +25,20 @@ Q_OBJECT
 
 public:
     explicit Page(todolib::ToDoList(& toDoList));
-
+    todolib::ToDoList& toDoList;
+    void addXpWidget();
 signals:
     void closePageSignal();
     void refreshPageSignal();
-
+    void xpWidgetSignal1();
+    void xpWidgetSignal2();
+private:
+   std::list<std::shared_ptr<XpWidget>> xpWidgets;
+   todolib::Xp xp;
 protected:
-    todolib::ToDoList& toDoList;
+
     QVBoxLayout layout {QVBoxLayout(this)};
     std::shared_ptr<QPushButton> closeButton;
-
 };
 
 

@@ -10,25 +10,24 @@ XpWidget::XpWidget(todolib::Xp &xp, QWidget *parent ) :xp {xp}, QWidget(parent) 
     xpLayout = std::make_shared<QVBoxLayout>();
     xpLayout->addWidget(xpLabel.get());
 
-    xpFirstNumber();
-    xpLabel->setText(QString::number(xpWidgetNumber));
-    setLayout(xpLayout.get());
 
+    xpLabel->setText(QString::number(xp.xptrueNumber));
+    setLayout(xpLayout.get());
+   // xpFirstNumber();
 
 }
-void XpWidget::xpFirstNumber(){
-    if (0!=xp.xptrueNumber){
+/*void XpWidget::xpFirstNumber(){
+    if (0!=xp.xpNumber){
         xpWidgetNumber = xp.xptrueNumber;
     }
-}
+}*/
 //this two function add or take one to the Xp Number
 void XpWidget::xpWidgetFunc1(){
-    ++xpWidgetNumber;
-    xpLabel->setText(QString::number(xpWidgetNumber));
-    xp.xpFunc(xpWidgetNumber);
+    ++xp.xptrueNumber;
+    xpLabel->setText(QString::number(xp.xptrueNumber));
+
 }
 void XpWidget::xpWidgetFunc2(){
-    --xpWidgetNumber;
-    xpLabel->setText(QString::number(xpWidgetNumber));
-    xp.xpFunc(xpWidgetNumber);
+    --xp.xptrueNumber;
+    xpLabel->setText(QString::number(xp.xptrueNumber));
 }

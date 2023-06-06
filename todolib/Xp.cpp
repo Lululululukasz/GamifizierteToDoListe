@@ -10,5 +10,5 @@ using namespace std;
 
 
 void Xp::xpFunc(int xpWidgetNumber) {
-    xptrueNumber=xpWidgetNumber;
+
 }

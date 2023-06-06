@@ -14,7 +14,7 @@
 #include "todolib/todolib.h"
 #include "CategoryWidget.h"
 #include "AchievementListWidget.h"
-#include "XpWidget.h"
+//#include "XpWidget.h"
 #include <memory>
 #include "Page.h"
 
@@ -33,13 +33,13 @@ public:
 private:
     QPushButton addCategoryButton {QPushButton("add a new category")};
     std::list<std::shared_ptr<CategoryWidget>> categoryWidgets;
-    std::list<std::shared_ptr<XpWidget>> xpWidgets;
     void addCategory();
     void addCategoryWidget(todolib::Category& category);
     void deleteCategory(const std::shared_ptr<CategoryWidget>& categoryWidget);
-    void addXpWidget(todolib::Xp& xp);
     void configCategory(const std::shared_ptr<CategoryWidget>& categoryWidget);
-
+    //std::list<std::shared_ptr<XpWidget>> xpWidgets;
+   // todolib::Xp xp;
+    //void addXpWidget(todolib::Xp& xp);
 };
 
 

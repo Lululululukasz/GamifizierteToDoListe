@@ -12,13 +12,13 @@
 using namespace todolib;
 
 CategoryViewPage::CategoryViewPage(todolib::ToDoList &toDoList) : Page{toDoList} {
+    //addXpWidget(xp);
     layout.addWidget(&addCategoryButton);
     addCategoryButton.setGeometry(10, 100, 80, 30);
     connect(&addCategoryButton, &QPushButton::clicked, this, [&]() { addCategory(); });
-
     for (Category &category: toDoList.categories) {
         addCategoryWidget(category);
-        addXpWidget();
+
     }
 
 }
@@ -37,8 +37,8 @@ void CategoryViewPage::addCategoryWidget(Category& category) {
     categoryWidgets.push_back(widget);
     layout.addWidget(widget.get(), 0, Qt::AlignTop);
     connect(widget.get(), &CategoryWidget::categoryDeleteSignal, this, [=, this]() { deleteCategory(widget); });
-    connect(widget.get(), &CategoryWidget::xpWidgetSignal1, this, &CategoryViewPage::xpWidgetSignal1);
-    connect(widget.get(), &CategoryWidget::xpWidgetSignal2, this, &CategoryViewPage::xpWidgetSignal2);
+    connect(widget.get(), &CategoryWidget::xpWidgetSignal1, this, &Page::xpWidgetSignal1);
+    connect(widget.get(), &CategoryWidget::xpWidgetSignal2, this, &Page::xpWidgetSignal2);
     connect(widget.get(), &CategoryWidget::categoryConfigSignal, this, [=, this]() { configCategory(widget); });
     connect(widget.get(), &CategoryWidget::refreshPageWidgetSignal, this, &CategoryViewPage::refreshPageSignal);
 }
@@ -50,13 +50,13 @@ void CategoryViewPage::deleteCategory(const shared_ptr<CategoryWidget>& category
     categoryWidgets.remove(categoryWidget);
 }
 
-void CategoryViewPage::addXpWidget(Xp& xp){
+/*void CategoryViewPage::addXpWidget(Xp& xp){
     std::shared_ptr<XpWidget> xpWidget = std::make_shared<XpWidget>(xp);
     xpWidgets.push_back(xpWidget);
-    layout.addWidget(xpWidget.get(),0,Qt::AlignBottom);
+    layout.addWidget(xpWidget.get(),0,Qt::AlignTop);
     connect(this, &CategoryViewPage::xpWidgetSignal1, xpWidget.get(), &XpWidget::xpWidgetFunc1);
     connect(this, &CategoryViewPage::xpWidgetSignal2, xpWidget.get(), &XpWidget::xpWidgetFunc2);
-}
+}*/
 
 void CategoryViewPage::configCategory(const shared_ptr<CategoryWidget>& categoryWidget){
     QString categoryName = QInputDialog::getText(this, "Category Config", "enter the category name");
