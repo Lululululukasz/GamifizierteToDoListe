@@ -21,7 +21,10 @@ MainPage::MainPage(todolib::ToDoList &toDoList) : Page{toDoList} {
 
     // Sidebar
     layoutWidget.vSideBar->addWidget(&placeholderSearchbar);
-    layoutWidget.vSideBar->addWidget(&placeholderFilter);
+
+    //Filter
+    filterWidget = std::make_shared<FilterWidget>();
+    layoutWidget.vSideBar->addWidget(filterWidget.get());
 
     // Body
     layoutWidget.vBodyLayout->addWidget(&placeholderBody);

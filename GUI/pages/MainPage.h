@@ -7,10 +7,14 @@
 
 #include "Page.h"
 #include "todolib/todolib.h"
+#include "GUI/widgets/filter/FilterWidget.h"
 #include <QPushButton>
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QLabel>
+#include <memory>
+#include <QCheckBox>
+#include <QRadioButton>
 
 /**
  * MainPage
@@ -37,6 +41,8 @@ private:
     QLabel header {QLabel("Kontra Krastination")};
     QPushButton categoryViewPageButton{QPushButton("Open the Category View")};
     QPushButton achievementsPageButton{QPushButton("Open the Achievements Page")};
+
+    std::shared_ptr<FilterWidget> filterWidget;
 
     QLabel placeholderSearchbar {QLabel("Searchbar")};
     QLabel placeholderBody {QLabel("Body")};
