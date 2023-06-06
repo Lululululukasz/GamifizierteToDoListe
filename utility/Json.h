@@ -77,6 +77,11 @@ public:
         }
         return QJsonObject();
     }
+
+    static bool deleteJson (QString filename) {
+        QFile file (Globals::savespath + filename);
+        return file.remove();
+    }
 };
 
 
