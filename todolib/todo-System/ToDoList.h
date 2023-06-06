@@ -12,6 +12,7 @@
 
 
 
+
 namespace todolib {
     using namespace std;
 
@@ -31,6 +32,7 @@ namespace todolib {
          *  All Tasks are saved within the Categories in this List.
          */
         list<Category> categories;
+
 
         /**
          * ToDoList()

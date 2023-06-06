@@ -52,6 +52,7 @@ ToDoList::ToDoList() {
             Task("Quit", "quit university"),
             Task("Exams", "go to all of your exams"),
     };
+
 }
 
 Category &ToDoList::getCategoryByName(const string &name) {
@@ -79,7 +80,11 @@ void ToDoList::addCategory(Category &category) {
 }
 
 bool ToDoList::deleteCategory(const string &id) {
-    if (0 != this->categories.remove_if([&](const Category &c) { return (c.getID() == id); })) {
+    if (0 != this->categories.remove_if([&](const Category &c) { if (c.getID() == id) {
+        Json::deleteJson((c.getID()+".json").c_str());
+        return true;
+    }return false;
+    })) {
         return true;
     } else {
         return false;

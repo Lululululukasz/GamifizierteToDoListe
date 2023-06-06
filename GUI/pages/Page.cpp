@@ -7,7 +7,7 @@
 #include <QTimer>
 #include <utility>
 
-Page::Page(todolib::ToDoList &toDoList) : toDoList{toDoList} {
+Page::Page(todolib::Profile & profile) : profile{profile} {
     stackedLayout.addWidget(&layoutWidget);
     stackedLayout.setStackingMode(QStackedLayout::StackAll);
 
@@ -17,7 +17,8 @@ Page::Page(todolib::ToDoList &toDoList) : toDoList{toDoList} {
     connect(closeButton.get(), SIGNAL(clicked()), this, SIGNAL(closePageSignal()));
 
     // XP-Bar
-    layoutWidget.vBodyLayout->addWidget(&placeholderXP);
+    //layoutWidget.vBodyLayout->addWidget(&placeholderXP);
+    addXpWidget();
 }
 
 /**
@@ -38,4 +39,11 @@ void Page::setOverlay(std::shared_ptr<QWidget> _overlay) {
         this->overlay = nullptr;
     });
     overlayRemoveTimer->start(2000);
+}
+void Page::addXpWidget(){
+    std::shared_ptr<XpWidget> xpWidget = std::make_shared<XpWidget>(profile.xp);
+    xpWidgets.push_back(xpWidget);
+    layoutWidget.vBodyLayout->addWidget(xpWidget.get(),0,Qt::AlignTop);
+    connect(this, &Page::xpWidgetSignal1, xpWidget.get(), &XpWidget::xpWidgetFunc1);
+    connect(this, &Page::xpWidgetSignal2, xpWidget.get(), &XpWidget::xpWidgetFunc2);
 }

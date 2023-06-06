@@ -27,7 +27,7 @@ public:
      * Adds and connects the button for each type of page.
      * @param toDoList
      */
-    explicit MainPage(todolib::ToDoList &toDoList);
+    explicit MainPage(todolib::Profile& profile);
 
     signals:
     void openCategoryViewPageSignal();

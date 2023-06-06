@@ -75,6 +75,8 @@ void CategoryWidget::addTaskWidget(Task &task) {
     vlayout.addWidget(widget.get(), 0, Qt::AlignTop);
     connect(widget.get(), &TaskWidget::deleteTaskSignal, this, [=, this]() { deleteTask(widget); });
     connect(widget.get(), &TaskWidget::taskMarkedChanged, this, &CategoryWidget::saveToJson);
+    connect(widget.get(),&TaskWidget::xpWidgetSignal1,this,&CategoryWidget::xpWidgetSignal1);
+    connect(widget.get(),&TaskWidget::xpWidgetSignal2,this,&CategoryWidget::xpWidgetSignal2);
 }
 
 void CategoryWidget::openAddTaskWindow(bool checked){

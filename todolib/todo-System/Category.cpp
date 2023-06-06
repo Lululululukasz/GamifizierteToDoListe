@@ -148,7 +148,7 @@ string Category::getID() const {
     return this->id;
 }
 
-void Category::setName(std::string newName) {
+void Category::setName(std::string &&newName) {
     name = newName;
     saveToJson();
 }
