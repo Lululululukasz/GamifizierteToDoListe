@@ -6,6 +6,7 @@
 #include <QApplication>
 #include <QStringList>
 #include <iostream>
+#include <cmath>
 
 AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task("", "")) {
 
@@ -48,6 +49,11 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
     durationTextEdit->setGeometry(10, 10, 100, 10);
     durationTextEdit->setPlaceholderText("Please enter a number");
     layout.addWidget(durationTextEdit.get());
+
+    //invalidDuration
+    invalidDurationLabel = std::make_shared<QLabel>();
+    invalidDurationLabel->setHidden("true");
+    layout.addWidget(invalidDurationLabel.get());
 
     //taskDueDate
     dueDateLabel = std::make_shared<QLabel>();
@@ -150,6 +156,14 @@ bool AddTaskBox::pastDate() {
     }
 }
 
+bool AddTaskBox::invalidDuration() {
+    try {std::stod(durationTextEdit->toPlainText().toStdString());
+    } catch(std::exception &notANumber){
+        return true;
+    }
+        return false;
+}
+
 bool AddTaskBox::invalidInput() {
     if(invalidPriority()){
         invalidPriorityLabel->setText("Please enter a priority.");
@@ -161,7 +175,12 @@ bool AddTaskBox::invalidInput() {
         invalidDateLabel->setStyleSheet("QLabel{color: red};");
         invalidDateLabel->setHidden(false);
     }
-    if(invalidPriority() || invalidDate()){
+    if(invalidDuration()){
+        invalidDurationLabel->setText("Please enter a number");
+        invalidDurationLabel->setStyleSheet("QLabel{color: red};");
+        invalidDurationLabel->setHidden(false);
+    }
+    if(invalidPriority() || invalidDate() || invalidDuration()){
         return true;
     } else {
         return false;
@@ -200,6 +219,8 @@ bool AddTaskBox::hasTask() const {
 void AddTaskBox::closeAddTaskWindow() {
     this->hide();
 }
+
+
 
 
 
