@@ -10,7 +10,7 @@
 
 AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task("", "")) {
 
-    setFixedSize(400, 400);
+    setFixedSize(400, 450);
 
     //taskName
     nameLabel.setText(QString::fromStdString("Task Name: "));
@@ -18,6 +18,12 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
     aTNameTextEdit = std::make_shared<QTextEdit>(this);
     aTNameTextEdit->setGeometry(10, 10, 100, 10);
     layout.addWidget(aTNameTextEdit.get());
+
+
+    //invalidName
+    invalidNameLabel = std::make_shared<QLabel>();
+    invalidNameLabel->setHidden(true);
+    layout.addWidget(invalidNameLabel.get());
 
     //taskDescription
     descLabel.setText(QString::fromStdString("Task Description: "));
@@ -64,15 +70,15 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
     layout.addLayout(dateLayout.get());
 
     selectDayBox = std::make_shared<QComboBox>(this);
-    selectDayBox->addItems(day);
+    selectDayBox->addItems(days);
     dateLayout->addWidget(selectDayBox.get());
 
     selectMonthBox = std::make_shared<QComboBox>(this);
-    selectMonthBox->addItems(month);
+    selectMonthBox->addItems(months);
     dateLayout->addWidget(selectMonthBox.get());
 
     selectYearBox = std::make_shared<QComboBox>(this);
-    selectYearBox->addItems(year);
+    selectYearBox->addItems(years);
     dateLayout->addWidget(selectYearBox.get());
 
     //invalidDate
@@ -98,6 +104,12 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
     connect(selectYearBox.get(), static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), [=, this] {
         invalidDateLabel->setHidden(true);
     });
+    connect(durationTextEdit.get(), &QTextEdit::textChanged, [=,this]{
+        invalidDurationLabel->setHidden(true);
+    });
+    connect(aTNameTextEdit.get(), &QTextEdit::textChanged, [=,this]{
+        invalidNameLabel->setHidden(true);
+    });
     connect(addTaskButton.get(), SIGNAL (clicked(bool)), this, SLOT (addTaskClicked(bool)));
     connect(this, SIGNAL (isOver()), this, SLOT (closeAddTaskWindow()));
 }
@@ -108,23 +120,19 @@ void AddTaskBox::setCategory(todolib::Category &category){
 
 bool AddTaskBox::invalidDate() {
 
-    if(selectDayBox->currentIndex() == 0 || selectMonthBox->currentIndex() == 0 || selectYearBox->currentIndex() == 0){
+    int day = selectDayBox->currentIndex();
+    int month = selectMonthBox->currentIndex();
+    int year = selectYearBox->currentIndex() + 2022;
+
+    if(day == 0 || month == 0 || year == 0) {
         return true;
-    } else if(selectDayBox->currentIndex() == 31 && selectMonthBox->currentIndex() == 2){
+    } else if(day == 31 && (month == 2 || month == 4 || month == 6 || month == 9 || month == 11)){
         return true;
-    } else if(selectDayBox->currentIndex() == 30 && selectMonthBox->currentIndex() == 2 ){
+    } else if(day == 30 && month == 2 ){
         return true;
-    } else if(selectDayBox->currentIndex() == 29 && selectMonthBox->currentIndex() == 2){
+    } else if(day == 29 && month == 2 && !(year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))){
         return true;
-    } else if (selectDayBox->currentIndex() == 31 && selectMonthBox->currentIndex() == 4){
-        return true;
-    } else if (selectDayBox->currentIndex() == 31 && selectMonthBox->currentIndex() == 6){
-        return true;
-    } else if (selectDayBox->currentIndex() == 31 && selectMonthBox->currentIndex() == 9){
-        return true;
-    } else if (selectDayBox->currentIndex() == 31 && selectMonthBox->currentIndex() == 11){
-        return true;
-    } else if (pastDate()){
+    } else if (pastDate()) {
         return true;
     } else {
         return false;
@@ -157,8 +165,18 @@ bool AddTaskBox::pastDate() {
 }
 
 bool AddTaskBox::invalidDuration() {
+    if(durationTextEdit->toPlainText().toStdString().length() == 0){
+        return false;
+    } else {
     try {std::stod(durationTextEdit->toPlainText().toStdString());
     } catch(std::exception &notANumber){
+        return true;
+    }}
+        return false;
+}
+
+bool AddTaskBox::invalidName() {
+    if(aTNameTextEdit->toPlainText().toStdString().length() == 0){
         return true;
     }
         return false;
@@ -180,7 +198,12 @@ bool AddTaskBox::invalidInput() {
         invalidDurationLabel->setStyleSheet("QLabel{color: red};");
         invalidDurationLabel->setHidden(false);
     }
-    if(invalidPriority() || invalidDate() || invalidDuration()){
+    if(invalidName()){
+        invalidNameLabel->setText("Please enter a name");
+        invalidNameLabel->setStyleSheet("QLabel{color: red};");
+        invalidNameLabel->setHidden(false);
+    }
+    if(invalidPriority() || invalidDate() || invalidDuration() || invalidName()){
         return true;
     } else {
         return false;
@@ -219,6 +242,7 @@ bool AddTaskBox::hasTask() const {
 void AddTaskBox::closeAddTaskWindow() {
     this->hide();
 }
+
 
 
 

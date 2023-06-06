@@ -38,10 +38,14 @@ private:
     bool hasTaskBool{false};
     QVBoxLayout layout {QVBoxLayout(this)};
 
+    std::vector<std::shared_ptr<QLabel>> starLabel;
+
     std::shared_ptr<QPushButton> addTaskButton;
 
     QLabel nameLabel {QLabel()};
     std::shared_ptr<QTextEdit> aTNameTextEdit;
+    std::shared_ptr<QLabel> invalidNameLabel;
+    bool invalidName();
 
     QLabel descLabel {QLabel()};
     std::shared_ptr<QTextEdit> aTDecriptionTextEdit;
@@ -56,9 +60,9 @@ private:
     std::shared_ptr<QLabel> invalidDurationLabel;
 
     std::shared_ptr<QLabel> dueDateLabel;
-    QStringList day {"select a day", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
-    QStringList month {"select a month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    QStringList year{"select a year", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033"};
+    QStringList days {"select a days", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+    QStringList months {"select a months", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    QStringList years{"select a years", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033"};
     std::shared_ptr<QComboBox> selectDayBox;
     std::shared_ptr<QComboBox> selectMonthBox;
     std::shared_ptr<QComboBox> selectYearBox;
