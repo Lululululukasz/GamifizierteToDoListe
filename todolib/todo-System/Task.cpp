@@ -69,8 +69,8 @@ Task::priority_t Task::getPriority() {
     return this->priority;
 }
 
-std::string Task::getPriorityString() {
-    switch(priority) {
+std::string Task::getPriorityString(Task::priority_t prio) {
+    switch(prio) {
         case trivial:
             return "trivial";
         case low:

@@ -80,7 +80,7 @@ namespace todolib {
          *
          * @return standard string
          */
-        std::string getPriorityString();
+        static std::string getPriorityString(priority_t prio);
 
         void setDuration(double dur);
         [[nodiscard]] double getDuration() const;

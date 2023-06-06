@@ -55,7 +55,7 @@ TaskWidget::TaskWidget(todolib::Task &task, Page &page, QWidget *parent)
 
     //taskPriorityLabel
     taskPriorityLabel = std::make_shared<QLabel>();
-    QString priorityText = "Priority: " + QString::fromStdString(task.getPriorityString());
+    QString priorityText = "Priority: " + QString::fromStdString(todolib::Task::getPriorityString(task.getPriority()));
     taskPriorityLabel->setText(priorityText);
 
     //taskDurationLabel

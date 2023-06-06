@@ -12,8 +12,8 @@ PageLayoutWidget::PageLayoutWidget() {
 
     vOuterLayout->addLayout(hNavBar.get());
     vOuterLayout->addLayout(hOuterBodyLayout.get());
-    hOuterBodyLayout->addLayout(vSideBar.get());
-    hOuterBodyLayout->addLayout(vBodyLayout.get());
+    hOuterBodyLayout->addLayout(vSideBar.get(), 1);
+    hOuterBodyLayout->addLayout(vBodyLayout.get(), 3);
 }
 
 
