@@ -56,7 +56,7 @@ public:
      * @param filename name of the file
      * @return the read json-object. return a empty jsonobject if failed
      */
-    static QJsonObject readJsonFile(QString filename) {
+    static QJsonObject readJsonFile(QString &filename) {
         QFile file(Globals::savespath + filename);
         if (file.open(QIODevice::ReadOnly)) {
             QString val = file.readAll();
@@ -78,7 +78,7 @@ public:
         return QJsonObject();
     }
 
-    static bool deleteJson (QString filename) {
+    static bool deleteJson (QString &&filename) {
         QFile file (Globals::savespath + filename);
         return file.remove();
     }

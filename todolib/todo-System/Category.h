@@ -113,7 +113,7 @@ namespace todolib {
          */
         string getID() const;
 
-        void setName(std::string newName);
+        void setName(std::string &&newName);
     };
 
 }
