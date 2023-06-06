@@ -6,7 +6,7 @@
 #define AEMPROJEKT_XPWIDGET_H
 #include <QWidget>
 #include "todolib/todolib.h"
-#include "CategoryWidget.h"
+
 #include <QLabel>
 #include <QVBoxLayout>
 // This class is here to calculate and show the Xp Progress

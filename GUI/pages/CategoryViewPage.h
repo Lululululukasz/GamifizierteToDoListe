@@ -27,7 +27,7 @@ signals:
     void xpWidgetSignal2();
 
 public:
-    explicit CategoryViewPage(todolib::ToDoList& toDoList);
+    explicit CategoryViewPage(todolib::Profile & profile);
 
 private:
     QPushButton addCategoryButton {QPushButton("add a new category")};

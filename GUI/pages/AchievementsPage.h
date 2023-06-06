@@ -14,7 +14,7 @@ class AchievementsPage : public Page {
 Q_OBJECT
 
 public:
-    explicit AchievementsPage(todolib::ToDoList& toDoList);
+    explicit AchievementsPage(todolib::Profile &profile);
 
 private:
     std::shared_ptr<AchievementListWidget> achievementListWidget;

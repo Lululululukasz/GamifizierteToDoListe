@@ -4,21 +4,21 @@
 
 #include "CategoryViewPage.h"
 #include "todolib/todolib.h"
-#include "TaskWidget.h"
-#include "CategoryWidget.h"
-#include "XpWidget.h"
+
+
+#include "GUI/widgets/XpWidget.h"
 #include "GUI/widgets/category-task/TaskWidget.h"
 #include "GUI/widgets/category-task/CategoryWidget.h"
 #include <memory>
 
 using namespace todolib;
 
-CategoryViewPage::CategoryViewPage(todolib::ToDoList &toDoList) : Page{toDoList} {
+CategoryViewPage::CategoryViewPage(todolib::Profile &profile) : Page{profile} {
     layoutWidget.vOuterLayout->addWidget(&addCategoryButton);
     addCategoryButton.setGeometry(10, 100, 80, 30);
     connect(&addCategoryButton, &QPushButton::clicked, this, [&]() { addCategory(); });
 
-    for (Category &category: toDoList.categories) {
+    for (Category &category: profile.todoList.categories) {
         addCategoryWidget(category);
     }
 
@@ -28,8 +28,8 @@ void CategoryViewPage::addCategory() {
     QString categoryName = QInputDialog::getText(this, "New Category", "enter the category name");
     if (!categoryName.isEmpty()) {
         Category category = Category(categoryName.toStdString());
-        toDoList.addCategory(category);
-        addCategoryWidget(toDoList.categories.back());
+        profile.todoList.addCategory(category);
+        addCategoryWidget(profile.todoList.categories.back());
     }
 }
 
@@ -45,7 +45,7 @@ void CategoryViewPage::addCategoryWidget(Category& category) {
 }
 
 void CategoryViewPage::deleteCategory(const shared_ptr<CategoryWidget>& categoryWidget) {
-    toDoList.deleteCategory(categoryWidget->category.getID());
+    profile.todoList.deleteCategory(categoryWidget->category.getID());
     categoryWidget->hide();
     layoutWidget.vOuterLayout->removeWidget(categoryWidget.get());
     categoryWidgets.remove(categoryWidget);
