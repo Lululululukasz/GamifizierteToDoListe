@@ -18,7 +18,7 @@ class XpWidget : public QWidget {
         explicit XpWidget( todolib::Xp &xp,QWidget *parent = nullptr);
     todolib::Xp &xp;
 
-    int xpWidgetNumber {xp.xpZahl};
+    int xpWidgetNumber {0};
 
 public slots:
     void xpWidgetFunc1();

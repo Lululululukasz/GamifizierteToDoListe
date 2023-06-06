@@ -18,7 +18,7 @@ CategoryViewPage::CategoryViewPage(todolib::ToDoList &toDoList) : Page{toDoList}
 
     for (Category &category: toDoList.categories) {
         addCategoryWidget(category);
-        addXpWidget(xp);
+        addXpWidget();
     }
 
 }

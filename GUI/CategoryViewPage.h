@@ -39,7 +39,7 @@ private:
     void deleteCategory(const std::shared_ptr<CategoryWidget>& categoryWidget);
     void addXpWidget(todolib::Xp& xp);
     void configCategory(const std::shared_ptr<CategoryWidget>& categoryWidget);
-    todolib::Xp xp;
+
 };
 
 

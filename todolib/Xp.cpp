@@ -8,7 +8,7 @@
 using namespace todolib;
 using namespace std;
 
+
 void Xp::xpFunc(int xpWidgetNumber) {
-    xpNumber = xpWidgetNumber;
     xptrueNumber=xpWidgetNumber;
 }

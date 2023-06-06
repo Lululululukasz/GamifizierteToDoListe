@@ -10,8 +10,8 @@
 namespace todolib {
     class Xp {
     public:
-        int xpNumber=0;
-        int xptrueNumber;
+        Xp();
+        int xptrueNumber ;
         void xpFunc(int xpZahlgive);
     };
 }
