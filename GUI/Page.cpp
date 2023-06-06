@@ -23,4 +23,3 @@ void Page::addXpWidget(){
    connect(this, &Page::xpWidgetSignal1, xpWidget.get(), &XpWidget::xpWidgetFunc1);
    connect(this, &Page::xpWidgetSignal2, xpWidget.get(), &XpWidget::xpWidgetFunc2);
 }
-

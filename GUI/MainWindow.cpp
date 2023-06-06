@@ -3,23 +3,22 @@
 //
 
 #include "MainWindow.h"
-#include "MainPage.h"
-#include "AchievementsPage.h"
+#include "GUI/pages/MainPage.h"
+#include "GUI/pages/AchievementsPage.h"
 #include <memory>
 #include <QDebug>
 
 
-MainWindow::MainWindow(todolib::ToDoList &todolist) : toDoList{todolist} {
+MainWindow::MainWindow(todolib::Profile &profile) : profile{profile} {
     // MainPage automatically Added
-    std::shared_ptr<Page> mainPage {std::make_shared<MainPage>(toDoList)};
+    std::shared_ptr<Page> mainPage {std::make_shared<MainPage>(profile.todoList)};
     pages.push_back(mainPage);
     stackedLayout.addWidget(mainPage.get());
 
     connect(mainPage.get(), SIGNAL(openCategoryViewPageSignal()), this, SLOT(openCategoryViewPage()));
     connect(mainPage.get(), SIGNAL(openAchievementsPageSignal()), this, SLOT(openAchievementsPage()));
 
-
-    resize(400, 400);
+    resize(1280, 720);
     setWindowTitle("To-Do List");
     show();
 }
@@ -38,20 +37,22 @@ void MainWindow::closePage(const std::shared_ptr<Page>& page) {
 }
 
 void MainWindow::openCategoryViewPage() {
-    std::shared_ptr<Page> newpage {std::make_shared<CategoryViewPage>(toDoList)};
+    std::shared_ptr<Page> newpage {std::make_shared<CategoryViewPage>(profile.todoList)};
     openPage(newpage);
     connect(newpage.get(), &Page::refreshPageSignal, this, [=, this]() {refreshCategoryViewPage(newpage);});
 }
 
 void MainWindow::openAchievementsPage() {
-    std::shared_ptr<Page> newPage {std::make_shared<AchievementsPage>(toDoList)};
+    std::shared_ptr<Page> newPage {std::make_shared<AchievementsPage>(profile.todoList)};
     openPage(newPage);
 } // TODO apply same fix as category
 
 void MainWindow::refreshCategoryViewPage(const std::shared_ptr<Page>& page) {
     closePage(page);
     openCategoryViewPage();
-    qDebug() << "refresh";
+    if (Globals::debug) {
+        qDebug() << "refresh";
+    }
 }
 
 

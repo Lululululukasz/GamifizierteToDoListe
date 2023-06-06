@@ -6,28 +6,37 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMake_AUTORCC ON)
 
-find_package(Qt5 COMPONENTS Widgets Multimedia REQUIRED)
+find_package(Qt5 COMPONENTS Widgets Multimedia MultimediaWidgets REQUIRED)
 add_subdirectory(todolib)
 add_executable(pic_aem_projekt
 		main.cpp
-		GUI/TaskWidget.cpp GUI/TaskWidget.h
-		GUI/CategoryViewPage.cpp GUI/CategoryViewPage.h
-		GUI/CategoryWidget.h GUI/CategoryWidget.cpp
-		GUI/AddTaskBox.cpp GUI/AddTaskBox.h
+		GUI/widgets/category-task/TaskWidget.cpp GUI/widgets/category-task/TaskWidget.h
+		GUI/pages/CategoryViewPage.cpp GUI/pages/CategoryViewPage.h
+		GUI/widgets/category-task/CategoryWidget.h GUI/widgets/category-task/CategoryWidget.cpp
+		GUI/popups/AddTaskBox.cpp GUI/popups/AddTaskBox.h
 		GUI/MainWindow.cpp GUI/MainWindow.h
-		GUI/Page.cpp GUI/Page.h
-		GUI/MainPage.cpp GUI/MainPage.h
+		GUI/pages/Page.cpp GUI/pages/Page.h
+		GUI/pages/MainPage.cpp GUI/pages/MainPage.h
 		GUI/Points.h GUI/Points.cpp
-		GUI/AchievementListWidget.cpp
-		GUI/AchievementWidget.cpp
-		utility/Globals.cpp GUI/AchievementsPage.cpp GUI/AchievementsPage.h
-		GUI/XpWidget.cpp GUI/XpWidget.h)
+		GUI/ConfettiAnimation/DrawConfetti.cpp GUI/ConfettiAnimation/DrawConfetti.h
+		GUI/ConfettiAnimation/Confetto.cpp GUI/ConfettiAnimation/Confetto.h
+		GUI/pages/AchievementsPage.cpp GUI/pages/AchievementsPage.h
+		GUI/PageLayoutWidget.cpp GUI/PageLayoutWidget.h
+		GUI/widgets/achievement/AchievementListWidget.cpp
+		GUI/widgets/achievement/AchievementWidget.cpp
+		utility/Globals.cpp GUI/pages/AchievementsPage.cpp GUI/pages/AchievementsPage.h
+		utility/Globals.cpp utility/JsonList.tpp
+		GUI/XpWidget.cpp GUI/XpWidget.h))
+
 target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia)
-target_link_libraries(pic_aem_projekt Qt5::Widgets)
+target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets)
 target_link_libraries(pic_aem_projekt todolib)
+target_link_libraries(todolib Qt5::Widgets)
 
 # create install target
 install(TARGETS pic_aem_projekt DESTINATION bin)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/resources/
+		DESTINATION resources)
 
 if (WIN32)
 	# add all mingw64 system dlls to install target
