@@ -46,6 +46,7 @@ private:
     std::shared_ptr<QLabel> taskDescriptionLabel;
     std::shared_ptr<QLabel> taskPriorityLabel;
     std::shared_ptr<QLabel> taskDurationLabel;
+    std::shared_ptr<QLabel> taskDueDateLabel;
     std::shared_ptr<QFont> font;
     std::shared_ptr<DrawConfetti> confetti;
     std::shared_ptr<QGraphicsScene> scene;

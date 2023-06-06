@@ -45,9 +45,15 @@ Category::Category(const QJsonObject &jsonObject) {
                             checksum += 16;
                         } else if (key == "duration"){
                            checksum += 32 ;
+                        } else if (key == "dueYear"){
+                            checksum += 64;
+                        } else if (key == "dueMonth"){
+                            checksum += 128;
+                        } else if (key == "dueDay"){
+                            checksum += 256;
                         }
                     }
-                if (checksum == 63) {
+                if (checksum == 511) {
                     this->tasks.push_back(Task(task.toObject()));
                 }
             }
