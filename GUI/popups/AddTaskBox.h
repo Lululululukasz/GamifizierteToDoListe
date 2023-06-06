@@ -5,6 +5,7 @@
 
 #include <QWidget>
 #include <memory>
+#include <vector>
 #include <QPushButton>
 #include <QTextEdit>
 #include <QLayout>
@@ -38,7 +39,7 @@ private:
     bool hasTaskBool{false};
     QVBoxLayout layout {QVBoxLayout(this)};
 
-    std::vector<std::shared_ptr<QLabel>> starLabel;
+    std::vector<std::shared_ptr<QLabel>> starLabels;
 
     std::shared_ptr<QPushButton> addTaskButton;
 

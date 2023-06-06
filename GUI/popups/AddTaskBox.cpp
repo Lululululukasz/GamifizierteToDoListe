@@ -12,6 +12,14 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
 
     setFixedSize(400, 450);
 
+    //stars
+    for(auto i {0}; i < 3; i++) {
+        auto starLabel {std::make_shared<QLabel>()};
+        starLabel->setText("*");
+        starLabel->setText("QLabel{color = orange;}");
+        starLabels.push_back(starLabel);
+    }
+
     //taskName
     nameLabel.setText(QString::fromStdString("Task Name: "));
     layout.addWidget(&nameLabel);
