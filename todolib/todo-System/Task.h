@@ -12,6 +12,7 @@ namespace todolib {
 #include <string>
 #include <vector>
 #include <memory>
+#include <chrono>
 #include <QtCore/QJsonObject>
 
 
@@ -37,6 +38,8 @@ namespace todolib {
         bool done;
         priority_t priority;
         double duration;
+        std::chrono::year_month_day dueDate;
+
 
     public:
         string name;
@@ -80,7 +83,11 @@ namespace todolib {
         std::string getPriorityString();
 
         void setDuration(double dur);
-        double getDuration();
+        [[nodiscard]] double getDuration() const;
+
+        void setdueDate(std::chrono::year_month_day due);
+        std::chrono::year_month_day getdueDate();
+
         /**
          * Function to convert the task with it's attributes to a QJsonObject
          * @return QJsonObject

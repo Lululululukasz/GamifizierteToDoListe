@@ -63,6 +63,29 @@ TaskWidget::TaskWidget(todolib::Task &task, Page &page, QWidget *parent)
     QString durationText = "Duration: " + QString::number(task.getDuration());
     taskDurationLabel->setText(durationText);
 
+    //taskDueDateLabel
+    taskDueDateLabel = std::make_shared<QLabel>();
+    int year = static_cast<int>(task.getdueDate().year());
+    unsigned month = static_cast<unsigned>(task.getdueDate().month());
+    QStringList monthList {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    QString monthString = monthList[month - 1];
+    unsigned day = static_cast<unsigned>(task.getdueDate().day());
+    if(day<=3) {
+        QStringList dayList {"1st", "2nd", "3rd"};
+        QString dayString = dayList[day - 1];
+        QString dueDateText = "Due on: " + dayString + " of " + monthString + " " + QString::number(year);
+        taskDueDateLabel->setText(dueDateText);
+    } else if(day == 21 || day == 22 || day == 23){
+        QStringList dayList {"21st", "22nd", "23rd"};
+        QString dayString = dayList[day - 21];
+        QString dueDateText = "Due on: " + dayString + " of " + monthString + " " + QString::number(year);
+        taskDueDateLabel->setText(dueDateText);
+    }else{
+        QString dueDateText = "Due on: " + QString::number(day)  + "th" + " of " + monthString + " " + QString::number(year);
+        taskDueDateLabel->setText(dueDateText);
+    }
+
+
     //adding widgets to the layouts
     vbox->addLayout(hbox.get());
     hbox->addWidget(taskCheckbox.get(), 0, Qt::AlignLeft | Qt::AlignVCenter);
@@ -130,6 +153,8 @@ void TaskWidget::showDescription() {
     taskPriorityLabel->setVisible(true);
     vbox->addWidget(taskDurationLabel.get());
     taskDurationLabel->setVisible(true);
+    vbox->addWidget(taskDueDateLabel.get());
+    taskDueDateLabel->setVisible(true);
 }
 
 //hides the description of a task when the showDescriptionButton is unchecked
@@ -141,7 +166,8 @@ void TaskWidget::hideDescription() {
     taskPriorityLabel->setVisible(false);
     vbox->removeWidget(taskDurationLabel.get());
     taskDurationLabel->setVisible(false);
-
+    vbox->removeWidget(taskDueDateLabel.get());
+    taskDueDateLabel->setVisible(false);
 
 }
 
