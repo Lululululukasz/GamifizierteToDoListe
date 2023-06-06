@@ -6,9 +6,10 @@
 #define AEMPROJEKT_XPWIDGET_H
 #include <QWidget>
 #include "todolib/todolib.h"
-
+#include <QProgressBar>
 #include <QLabel>
-#include <QVBoxLayout>
+#include <QHBoxLayout>
+
 // This class is here to calculate and show the Xp Progress
 
 
@@ -18,16 +19,18 @@ class XpWidget : public QWidget {
         explicit XpWidget( todolib::Xp &xp,QWidget *parent = nullptr);
     todolib::Xp &xp;
 
-    int xpWidgetNumber {55};
 
 public slots:
-    void xpWidgetFunc1();
-    void xpWidgetFunc2();
+    void xpWidgetFuncAdd();
+    void xpWidgetFuncSub();
 
     private:
         std::shared_ptr<QLabel> xpLabel;
-        std::shared_ptr<QVBoxLayout> xpLayout;
-        void xpFirstNumber();
+        std::shared_ptr<QHBoxLayout> xpLayout;
+        std::shared_ptr<QProgressBar>progressBar;
+        void levelUp();
+        unsigned int levelcap{xp.levelNumber};
+         std::string currrentLevel{"Level: " + std::to_string(xp.levelNumber)};
     };
 
 

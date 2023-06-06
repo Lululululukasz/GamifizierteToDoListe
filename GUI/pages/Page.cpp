@@ -44,6 +44,6 @@ void Page::addXpWidget(){
     std::shared_ptr<XpWidget> xpWidget = std::make_shared<XpWidget>(profile.xp);
     xpWidgets.push_back(xpWidget);
     layoutWidget.vBodyLayout->addWidget(xpWidget.get(),0,Qt::AlignTop);
-    connect(this, &Page::xpWidgetSignal1, xpWidget.get(), &XpWidget::xpWidgetFunc1);
-    connect(this, &Page::xpWidgetSignal2, xpWidget.get(), &XpWidget::xpWidgetFunc2);
+    connect(this, &Page::xpWidgetSignalAdd, xpWidget.get(), &XpWidget::xpWidgetFuncAdd);
+    connect(this, &Page::xpWidgetSignalSub, xpWidget.get(), &XpWidget::xpWidgetFuncSub);
 }
