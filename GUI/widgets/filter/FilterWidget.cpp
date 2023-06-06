@@ -20,12 +20,13 @@ FilterWidget::FilterWidget(QWidget *parent) : QWidget(parent) {
     font.setPointSize(static_cast<int>(font.pointSize() * 1.5));
     filterLabel->setFont(font);
     filterVLayout->addWidget(filterLabel.get());
-    filterLabel->setStyleSheet("QLabel { border-bottom: 1px solid lightgray; padding-bottom: 0.5em; }");
 
+    borderLabel = std::make_shared<QLabel>();
+    filterVLayout->addWidget(borderLabel.get());
+    borderLabel->setStyleSheet("QLabel { border-top: 1px solid lightgray; padding-top: 0.5em; }");
 
     //priorityFilter
     priorityFilterHLayout = std::make_shared<QHBoxLayout>();
-    priorityFilterHLayout->setAlignment(Qt::AlignLeft);
 
     filterForPriorityLabel = std::make_shared<QLabel>();
     filterForPriorityLabel->setText("Priority");
@@ -56,10 +57,24 @@ FilterWidget::FilterWidget(QWidget *parent) : QWidget(parent) {
         else hidePriorityFilter();
     });
 
+
+    priorityBorderLabel = std::make_shared<QLabel>();
+    filterVLayout->addWidget(priorityBorderLabel.get());
+    priorityBorderLabel->setStyleSheet("QLabel { border-top: 1px solid lightgray; padding-top: 0.5em; }");
+
     //DueDateFilter
+    dueDateFilterHLayout = std::make_shared<QHBoxLayout>();
+    filterVLayout->addLayout(dueDateFilterHLayout.get());
+
     filterForDueDateLabel = std::make_shared<QLabel>();
     filterForDueDateLabel->setText("Due on");
-    filterVLayout->addWidget(filterForDueDateLabel.get());
+    dueDateFilterHLayout->addWidget(filterForDueDateLabel.get());
+
+    showDueDateFilterButton = std::make_shared<QToolButton>();
+    showDueDateFilterButton->setCheckable(true);
+    showDueDateFilterButton->setArrowType(Qt::RightArrow);
+    showDueDateFilterButton->setStyleSheet("QToolButton{border: none;}");
+    dueDateFilterHLayout->addWidget(showDueDateFilterButton.get());
 
     createDueDateCheckbox(std::chrono::days(0), std::chrono::days(0), "today");
     createDueDateCheckbox(std::chrono::days(1), std::chrono::days(1), "tomorrow");
@@ -67,10 +82,19 @@ FilterWidget::FilterWidget(QWidget *parent) : QWidget(parent) {
     createDueDateCheckbox(std::chrono::days(0), std::chrono::days(31), "this month");
     createDueDateCheckbox(std::chrono::days(-100000), std::chrono::days(100000), "whenever");
 
+    connect(showDueDateFilterButton.get(), &QToolButton::toggled, [=,this](bool checked) {
+        showDueDateFilterButton->setArrowType(checked ? Qt::ArrowType::DownArrow : Qt::ArrowType::RightArrow);
+        if (checked) showDueDateFilter();
+        else hideDueDateFilter();
+    });
+
+    dueDateBorderLabel = std::make_shared<QLabel>();
+    filterVLayout->addWidget(dueDateBorderLabel.get());
+    dueDateBorderLabel->setStyleSheet("QLabel { border-top: 1px solid lightgray; padding-top: 0.5em; }");
+
     //DurationFilter
     durationFilterHLayout = std::make_shared<QHBoxLayout>();
     filterVLayout->addLayout(durationFilterHLayout.get());
-    durationFilterHLayout->setAlignment(Qt::AlignLeft);
 
     filterForDurationLabel = std::make_shared<QLabel>();
     filterForDurationLabel->setText("Duration");
@@ -95,7 +119,9 @@ FilterWidget::FilterWidget(QWidget *parent) : QWidget(parent) {
         if (checked) showDurationFilter();
         else hideDurationFilter();
     });
+
 }
+
 
 void FilterWidget::createDurationRadioButton(double limit, bool more) {
     auto radioButton {std::make_shared<QRadioButton>()};
@@ -119,6 +145,7 @@ void FilterWidget::createPriorityCheckbox(todolib::Task::priority_t priority) {
     checkBox->setChecked(true);
     filterVLayout->addWidget(checkBox.get());
     priorityCheckboxes.push_back(checkBox);
+    checkBox->setHidden(true);
 }
 
 void FilterWidget::createDueDateCheckbox(std::chrono::days lowerBound, std::chrono::days upperBound, std::string label) {
@@ -127,6 +154,7 @@ void FilterWidget::createDueDateCheckbox(std::chrono::days lowerBound, std::chro
     checkBox->setChecked(true);
     filterVLayout->addWidget(checkBox.get());
     dueDateCheckboxes.push_back(checkBox);
+    checkBox->setHidden(true);
 }
 
 void FilterWidget::showDurationFilter() {
@@ -135,9 +163,35 @@ void FilterWidget::showDurationFilter() {
     }
 }
 
+
 void FilterWidget::hideDurationFilter() {
     for(auto const& radioButton : durationRadioButtons) {
         radioButton->setHidden(true);
+    }
+}
+
+void FilterWidget::showPriorityFilter() {
+    for(auto const& checkbox : priorityCheckboxes){
+        checkbox->setHidden(false);
+    }
+
+}
+
+void FilterWidget::hidePriorityFilter() {
+    for(auto const& checkbox : priorityCheckboxes) {
+        checkbox->setHidden(true);
+    }
+}
+void FilterWidget::showDueDateFilter() {
+    for(auto const& checkbox : dueDateCheckboxes){
+        checkbox->setHidden(false);
+    }
+
+}
+
+void FilterWidget::hideDueDateFilter() {
+    for(auto const& checkbox : dueDateCheckboxes) {
+        checkbox->setHidden(true);
     }
 }
 
@@ -147,3 +201,6 @@ void FilterWidget::paintEvent(QPaintEvent *event) {
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }
+
+
+

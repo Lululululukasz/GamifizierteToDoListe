@@ -27,6 +27,12 @@ private:
     std::shared_ptr<QLabel> filterLabel;
     std::shared_ptr<QVBoxLayout> filterVLayout;
 
+    //borders
+    std::shared_ptr<QLabel> borderLabel;
+    std::shared_ptr<QLabel> priorityBorderLabel;
+    std::shared_ptr<QLabel> dueDateBorderLabel;
+
+    //PriorityFilter
     std::shared_ptr<QHBoxLayout> priorityFilterHLayout;
     std::shared_ptr<QLabel> filterForPriorityLabel;
     std::shared_ptr<QToolButton> showPriorityFilterButton;
@@ -35,11 +41,16 @@ private:
     void showPriorityFilter();
     void hidePriorityFilter();
 
+    //DueDateFilter
     std::shared_ptr<QHBoxLayout> dueDateFilterHLayout;
     std::shared_ptr<QLabel> filterForDueDateLabel;
+    std::shared_ptr<QToolButton> showDueDateFilterButton;
     std::list<std::shared_ptr<QCheckBox>> dueDateCheckboxes;
     void createDueDateCheckbox(std::chrono::days lowerBound, std::chrono::days upperBound, std::string label);
+    void showDueDateFilter();
+    void hideDueDateFilter();
 
+    //DurationFilter
     std::shared_ptr<QHBoxLayout> durationFilterHLayout;
     std::shared_ptr<QLabel> filterForDurationLabel;
     std::shared_ptr<QToolButton> showDurationFilterButton;
