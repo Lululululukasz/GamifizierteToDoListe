@@ -52,7 +52,7 @@ namespace todolib {
          * @param id
          * @return a reference to the category with that id
          */
-        Category &getCategoryByID(const string &id);
+        shared_ptr<Category> getCategoryByID(const string &id);
 
         /**
          * addCategory
