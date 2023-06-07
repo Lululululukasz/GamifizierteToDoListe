@@ -41,7 +41,7 @@ public slots:
 private slots:
     void openAddTaskWindow(bool checked);
     void openConfirmDeleteWindow(const std::shared_ptr<TaskWidget> taskWidget);
-    void deleteTask(const std::shared_ptr<TaskWidget> taskWidget);
+    void deleteTask( std::shared_ptr<TaskWidget> taskWidget);
 private:
     QVBoxLayout vlayout {QVBoxLayout()};
     QHBoxLayout hlayout {QHBoxLayout()};
