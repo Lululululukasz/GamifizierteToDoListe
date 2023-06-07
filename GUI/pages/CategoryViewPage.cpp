@@ -38,8 +38,8 @@ void CategoryViewPage::addCategoryWidget(Category& category) {
     categoryWidgets.push_back(widget);
     layoutWidget.vOuterLayout->addWidget(widget.get(), 0, Qt::AlignTop);
     connect(widget.get(), &CategoryWidget::categoryDeleteSignal, this, [=, this]() { deleteCategory(widget); });
-    connect(widget.get(), &CategoryWidget::xpWidgetSignal1, this, &Page::xpWidgetSignal1);
-    connect(widget.get(), &CategoryWidget::xpWidgetSignal2, this, &Page::xpWidgetSignal2);
+    connect(widget.get(), &CategoryWidget::xpWidgetSignalAdd, this, &Page::xpWidgetSignalAdd);
+    connect(widget.get(), &CategoryWidget::xpWidgetSignalSub, this, &Page::xpWidgetSignalSub);
     connect(widget.get(), &CategoryWidget::categoryConfigSignal, this, [=, this]() { configCategory(widget); });
     connect(widget.get(), &CategoryWidget::refreshPageWidgetSignal, this, &CategoryViewPage::refreshPageSignal);
 }
