@@ -4,6 +4,7 @@
 #include "todolib/todolib.h"
 #include "GUI/widgets/addTaskWidgets/DatePickerWidget.h"
 #include "GUI/widgets/addTaskWidgets/AddTaskElementWidget.h"
+#include "GUI/popups/AddPictureBox.h"
 
 #include <QWidget>
 #include <memory>
@@ -50,7 +51,8 @@ private:
     QStringList prios {"select a priority", "trivial", "low", "medium", "high", "urgent"};
     std::shared_ptr<QTextEdit> durationTextEdit;
     std::shared_ptr<DatePickerWidget> datePicker;
-
+    std::shared_ptr<QPushButton> addPictureButton;
+    std::shared_ptr<AddPictureBox> addPictureBox;
     std::shared_ptr<todolib::Category> category;
 
     /**
@@ -63,6 +65,9 @@ private:
      * @return true of false
      */
     bool invalidInput();
+
+private slots:
+    void openAddPictureWindow(bool checked);
 };
 
 #endif //PIC_AEM_PROJEKT_ADDTASKBOX_H

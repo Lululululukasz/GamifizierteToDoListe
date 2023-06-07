@@ -89,6 +89,14 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
         layout.addWidget(element.get());
     }
 
+    addPictureButton = std::make_shared<QPushButton>();
+    addPictureButton->setText("Add a picture");
+    addPictureButton->setIcon(QIcon(Globals::homepath+"/resources/material_design_plus.png"));
+    addPictureButton->setStyleSheet("QPushButton{border: none; margin-bottom: 15px}");
+    addPictureButton->setCheckable(true);
+    layout.addWidget(addPictureButton.get());
+    connect(addPictureButton.get(), SIGNAL(clicked(bool)), this, SLOT (openAddPictureWindow(bool)));
+
     addTaskButton = std::make_shared<QPushButton>("Add Task", this);
     addTaskButton->setGeometry(10, 100, 80, 30);
     addTaskButton->setCheckable(true);
@@ -122,6 +130,14 @@ bool AddTaskBox::invalidInput() {
         }
     }
     return !valid;
+}
+
+void AddTaskBox::openAddPictureWindow(bool checked) {
+if(checked){
+    this->addPictureButton->setChecked(false);
+    addPictureBox = std::make_shared<AddPictureBox>();
+    addPictureBox->show();
+}
 }
 
 
