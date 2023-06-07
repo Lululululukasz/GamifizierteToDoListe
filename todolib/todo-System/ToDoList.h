@@ -46,13 +46,13 @@ namespace todolib {
          * @param name
          * @return a reference to the first Category that fits the name String
          */
-        Category &getCategoryByName(const string &name);
+        shared_ptr<Category> getCategoryByName(const string &name);
         /**
          * get getCategoryByID
          * @param id
          * @return a reference to the category with that id
          */
-        Category &getCategoryByID(const string &id);
+        shared_ptr<Category> getCategoryByID(const string &id);
 
         /**
          * addCategory

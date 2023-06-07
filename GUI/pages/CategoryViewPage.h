@@ -17,9 +17,9 @@
 #include <memory>
 #include <optional>
 #include "Page.h"
+#include "MainPage.h"
 
-
-class CategoryViewPage : public Page {
+class CategoryViewPage : public MainPage {
 
 Q_OBJECT
 
