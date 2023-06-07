@@ -31,8 +31,8 @@ public:
 signals:
     void closePageSignal();
     void refreshPageSignal();
-    void xpWidgetSignal1();
-    void xpWidgetSignal2();
+    void xpWidgetSignalAdd();
+    void xpWidgetSignalSub();
 
 protected:
     todolib::Profile& profile ;

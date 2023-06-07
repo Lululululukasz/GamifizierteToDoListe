@@ -19,7 +19,7 @@ namespace todolib {
     /**
      * ToDoList
      *
-     * The purpose of the ToDoList is to be a top level place whithin which all backend information is saved.
+     * The purpose of the ToDoList is to be a top currrentLevel place whithin which all backend information is saved.
      */
 
     class ToDoList {
