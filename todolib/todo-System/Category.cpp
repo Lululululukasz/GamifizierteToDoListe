@@ -152,3 +152,7 @@ void Category::setName(std::string &&newName) {
     name = newName;
     saveToJson();
 }
+
+std::string Category::getName() {
+    return name;
+}
