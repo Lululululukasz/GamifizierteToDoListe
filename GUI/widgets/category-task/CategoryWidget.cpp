@@ -96,7 +96,7 @@ void CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget> taskWidget) {
 void CategoryWidget::saveToJson() {
     category.saveToJson();
 }
-
+// open the PopUp when called
 void CategoryWidget::openConfirmDeleteWindow(const std::shared_ptr<TaskWidget> taskWidget) {
     confirmDeleteWindow = std::make_shared<ConfirmDeleteWindow>();
     connect(confirmDeleteWindow.get(), &ConfirmDeleteWindow::confirmDelete, this, [=, this]() { deleteTask(taskWidget);});
