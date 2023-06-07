@@ -17,7 +17,6 @@ Page::Page(todolib::Profile & profile) : profile{profile} {
     connect(closeButton.get(), SIGNAL(clicked()), this, SIGNAL(closePageSignal()));
 
     // XP-Bar
-    //layoutWidget.vBodyLayout->addWidget(&placeholderXP);
     addXpWidget();
 }
 

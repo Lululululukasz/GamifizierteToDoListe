@@ -9,13 +9,6 @@ MainPage::MainPage(todolib::Profile &profile) : Page{profile} {
     closeButton->hide();
     layoutWidget.hNavBar->addWidget(&header);
 
-    /*
-    // Adding and connecting of the categoryViewPage use as template for other Pages
-    layoutWidget.hNavBar->addWidget(&categoryViewPageButton);
-    categoryViewPageButton.setGeometry(10, 100, 80, 30);
-    connect(&categoryViewPageButton, SIGNAL(clicked()), this, SIGNAL(openCategoryViewPageSignal()));
-     */
-
     // Adding and connecting the Achievements page
     layoutWidget.hNavBar->addWidget(&achievementsPageButton);
     achievementsPageButton.setGeometry(10, 100, 80, 30);
@@ -24,7 +17,4 @@ MainPage::MainPage(todolib::Profile &profile) : Page{profile} {
     // Sidebar
     layoutWidget.vSideBar->addWidget(&placeholderSearchbar);
     layoutWidget.vSideBar->addWidget(&placeholderFilter);
-
-    // Body
-    //layoutWidget.vBodyLayout->addWidget(&placeholderBody);
 }
