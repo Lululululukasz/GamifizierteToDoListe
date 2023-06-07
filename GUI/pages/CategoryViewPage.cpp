@@ -14,7 +14,7 @@
 using namespace todolib;
 
 CategoryViewPage::CategoryViewPage(todolib::Profile &profile) : MainPage{profile} {
-    layoutWidget.vBodyLayout->addWidget(&addCategoryButton);
+    layoutWidget.vBodyLayout->addWidget(&addCategoryButton, 0,Qt::AlignTop);
     addCategoryButton.setGeometry(10, 100, 80, 30);
     connect(&addCategoryButton, &QPushButton::clicked, this, [&]() { addCategory(); });
 

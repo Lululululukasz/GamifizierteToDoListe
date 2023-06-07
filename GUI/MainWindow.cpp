@@ -45,6 +45,7 @@ void MainWindow::openCategoryViewPage() {
     std::shared_ptr<Page> newpage {std::make_shared<CategoryViewPage>(profile)};
     openPage(newpage);
     connect(newpage.get(), &Page::refreshPageSignal, this, [=, this]() {refreshCategoryViewPage(newpage);});
+    connect(newpage.get(), SIGNAL(openAchievementsPageSignal()), this, SLOT(openAchievementsPage()));
 }
 
 void MainWindow::openAchievementsPage() {

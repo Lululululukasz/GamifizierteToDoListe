@@ -39,9 +39,8 @@ private:
     QPushButton achievementsPageButton{QPushButton("Open the Achievements Page")};
 
     QLabel placeholderSearchbar {QLabel("Searchbar")};
-    QLabel placeholderBody {QLabel("Body")};
+    //QLabel placeholderBody {QLabel("Body")};
     QLabel placeholderFilter {QLabel("Filter")};
-    QLabel placeholderAddButton {QLabel("AddButton")};
 
 };
 

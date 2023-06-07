@@ -26,8 +26,5 @@ MainPage::MainPage(todolib::Profile &profile) : Page{profile} {
     layoutWidget.vSideBar->addWidget(&placeholderFilter);
 
     // Body
-    layoutWidget.vBodyLayout->addWidget(&placeholderBody);
-
-    // Footer
-    layoutWidget.vOuterLayout->addWidget(&placeholderAddButton);
+    //layoutWidget.vBodyLayout->addWidget(&placeholderBody);
 }
