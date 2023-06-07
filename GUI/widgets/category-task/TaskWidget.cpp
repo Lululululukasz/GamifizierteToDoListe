@@ -120,7 +120,7 @@ void TaskWidget::taskDone() {
 
         if(!task.getDoneStatus()) {
             task.setAsDone();
-            emit xpWidgetSignal1();// Emit the Signal for Xp Number +1
+            emit xpWidgetSignalAdd();// Emit the Signal for Xp Number +1
             //The Values for the points are provisional and should later be changed to whatever you want.
             Points::getinstance().addPoints(1,1,'n');
             playRandomSound();
@@ -135,7 +135,7 @@ void TaskWidget::taskUndone() {
     taskNameLabel->setFont(*font);
     if(task.getDoneStatus()) {
         task.setAsUndone();
-         emit xpWidgetSignal2();
+         emit xpWidgetSignalSub();// Emit the Signal Xp Number -1 sends the signal through CategoryWidget to CategoryViewPage to Page where it aktivates the function
         Points::getinstance().subPoints(1, 'n');
     }
 

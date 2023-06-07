@@ -34,8 +34,8 @@ public:
 signals:
 
     void categoryDeleteSignal();
-    void xpWidgetSignal1();
-    void xpWidgetSignal2();
+    void xpWidgetSignalAdd();
+    void xpWidgetSignalSub();
 
     void categoryConfigSignal();
 

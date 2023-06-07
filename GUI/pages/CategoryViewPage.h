@@ -24,8 +24,8 @@ class CategoryViewPage : public Page {
 Q_OBJECT
 
 signals:
-    void xpWidgetSignal1();
-    void xpWidgetSignal2();
+    void xpWidgetSignalAdd();
+    void xpWidgetSignalSub();
 
 public:
     explicit CategoryViewPage(todolib::Profile & profile);
