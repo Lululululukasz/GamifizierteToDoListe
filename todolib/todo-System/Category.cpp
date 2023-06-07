@@ -60,40 +60,6 @@ Category::Category(const QJsonObject &jsonObject) {
     }
 }
 
-// Copy Constructor
-Category::Category(Category &other) {
-    this->id = other.getID();
-    this->tasks = *make_unique<JsonList<Task>>(other.tasks);
-    this->name = other.name;
-    saveToJson();
-}
-
-// Copy Assignment Constructor
-Category &Category::operator=(Category const &other) {
-    this->id = other.getID();
-    this->tasks = *make_unique<JsonList<Task>>(other.tasks);
-    this->name = other.name;
-
-    return *this;
-}
-
-// Move Constructor
-Category::Category(Category &&other) noexcept {
-    this->id = other.getID();
-    this->tasks = *make_unique<JsonList<Task>>(other.tasks);
-    this->name = other.name;
-    saveToJson();
-}
-
-// Move Assignment Constructor
-Category &Category::operator=(Category &&other) noexcept {
-    this->id = other.getID();
-    this->tasks = *make_unique<JsonList<Task>>(other.tasks);
-    this->name = other.name;
-
-    return *this;
-}
-
 bool Category::isSame(const Category &other) const {
     if (this->getID() == other.id) {
         return true;
@@ -111,6 +77,7 @@ void Category::addTask(Task &&task) {
     saveToJson();
 }
 
+/*
 list<Task> Category::showTasks() {
     cout << name << ": ";
     for (const Task &task: tasks) {
@@ -118,6 +85,7 @@ list<Task> Category::showTasks() {
     }
     cout << endl;
 }
+ */
 
 bool Category::deleteTask(const string &deleteID) {
     if (0 != this->tasks.remove_if([&] (Task t) {return (t.getID() == deleteID);})) {

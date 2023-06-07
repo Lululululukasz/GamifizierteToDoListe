@@ -45,37 +45,6 @@ namespace todolib {
         explicit Category(const QJsonObject &jsonObject);
 
         /**
-         * Category Copy Constructor
-         * @param other
-         */
-        Category(Category &other);
-
-        /**
-         * Category Copy Assignment Constructor
-         * @param other
-         * @return
-         */
-        Category &operator=(Category const &other);
-
-        /**
-         * Category Move Constructor
-         * @param other
-         */
-        Category(Category &&other) noexcept;
-
-        /**
-         * Category Move Assignment Constructor
-         * @param other
-         * @return
-         */
-        Category &operator=(Category &&other) noexcept;
-
-        /**
-         * Category Destructor
-         */
-        ~Category() = default;
-
-        /**
          * isSame
          * @param other
          * @return true if the tasks have the same id, false if not
@@ -89,12 +58,6 @@ namespace todolib {
         void addTask(Task &task);
 
         void addTask(Task &&task);
-
-        /**
-         * showTasks
-         * @return List of tasks in the category
-         */
-        list<Task> showTasks();
 
         /**
          * deleteTask
