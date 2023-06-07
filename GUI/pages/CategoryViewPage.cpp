@@ -27,18 +27,16 @@ CategoryViewPage::CategoryViewPage(todolib::Profile &profile) : Page{profile} {
 void CategoryViewPage::addCategory() {
     categoryName = std::make_shared<QInputDialog>();
     QString categoryNameInput = categoryName->getText(this, "New Category", "enter the category name");
+
     if (categoryNameInput.length() == 0) {
-        categoryName->setLabelText("Please enter a category name!");
-        categoryName->setStyleSheet("QLabel{color: red;}");
-        //to use in change category Name
-        categoryName->setTextValue("Test");
-
-        categoryName->exec();
-        categoryNameInput = categoryName->textValue();}
-
+        Category category = Category(invalidCategoryName().toStdString());
+        profile.todoList.addCategory(category);
+        addCategoryWidget(profile.todoList.categories.back());
+        } else {
         Category category = Category(categoryNameInput.toStdString());
         profile.todoList.addCategory(category);
         addCategoryWidget(profile.todoList.categories.back());
+    }
 }
 
 
@@ -62,10 +60,28 @@ void CategoryViewPage::deleteCategory(const shared_ptr<CategoryWidget>& category
 }
 
 void CategoryViewPage::configCategory(const shared_ptr<CategoryWidget>& categoryWidget){
-    QString categoryName = QInputDialog::getText(this, "Category Config", "enter the category name");
-    if (!categoryName.isEmpty()) {
-        categoryWidget->changeName(categoryName);
-        categoryWidget->category.name = categoryName.toStdString();
+    categoryConfig = std::make_shared<QInputDialog>();
+    categoryConfig->setLabelText("Enter a new category name");
+    categoryConfig->setWindowTitle("Edit category");
+    //categoryConfig->setTextValue(QString::fromStdString(QString::fromStdString(categoryWidget.get()));
+    categoryConfig->exec();
+    QString categoryNameEdited =categoryConfig->textValue();
+    if (!categoryNameEdited.isEmpty()) {
+        categoryWidget->changeName(categoryNameEdited);
+        categoryWidget->category.name = categoryNameEdited.toStdString();
+    }
+}
+
+QString CategoryViewPage::invalidCategoryName() {
+    QString categoryNameInput;
+    categoryName->setLabelText("Please enter a category name!");
+    categoryName->setStyleSheet("QLabel{color: red;}");
+    categoryName->exec();
+    categoryNameInput = categoryName->textValue();
+    if(categoryNameInput.length() == 0){
+        invalidCategoryName();
+    } else {
+        return categoryNameInput;
     }
 }
 

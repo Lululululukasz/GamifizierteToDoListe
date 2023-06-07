@@ -33,6 +33,8 @@ private:
     QPushButton addCategoryButton {QPushButton("add a new category")};
     std::list<std::shared_ptr<CategoryWidget>> categoryWidgets;
     std::shared_ptr<QInputDialog> categoryName;
+    std::shared_ptr<QInputDialog> categoryConfig;
+    QString invalidCategoryName();
     void addCategory();
     void addCategoryWidget(todolib::Category& category);
     void deleteCategory(const std::shared_ptr<CategoryWidget>& categoryWidget);
