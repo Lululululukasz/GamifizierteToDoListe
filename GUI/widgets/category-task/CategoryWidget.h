@@ -5,8 +5,6 @@
 #ifndef AEMPROJEKT_CATEGORYWIDGET_H
 #define AEMPROJEKT_CATEGORYWIDGET_H
 
-
-
 #include <memory>
 #include <QVBoxLayout>
 #include <QLabel>
@@ -22,12 +20,9 @@
 #include "GUI/widgets/category-task/TaskWidget.h"
 #include "GUI/popups/ConfirmDeleteWindow.h"
 
-
 class CategoryWidget : public QWidget {
 
 Q_OBJECT
-
-
 public:
     explicit CategoryWidget(todolib::Category &category, Page &page, QWidget *parent = nullptr);
 
@@ -36,7 +31,6 @@ public:
     void changeName(const QString &newName);
 
 signals:
-
     void categoryDeleteSignal();
     void xpWidgetSignalAdd();
     void xpWidgetSignalSub();
@@ -71,14 +65,11 @@ private:
     std::shared_ptr<ConfirmDeleteWindow> confirmDeleteWindow;
 
 public:
-
     // Adding Tasks
     std::shared_ptr<QPushButton> addTaskButton;
     std::shared_ptr<AddTaskBox> addTaskBox;
 
     void addTask(todolib::Task &task);
-
-
 };
 
 #endif //AEMPROJEKT_CATEGORYWIDGET_H

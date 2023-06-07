@@ -9,13 +9,11 @@
 #include <QLayout>
 #include <QLabel>
 
-
 class ConfirmDeleteWindow : public QWidget {
 Q_OBJECT
 
 signals:
     void confirmDelete();
-
 
 public slots:
     void deleteButtonClicked();
@@ -24,11 +22,9 @@ public:
     ConfirmDeleteWindow();
 
 private:
-
     QVBoxLayout layout{QVBoxLayout(this)};
     QPushButton deleteButton{QPushButton()};
     QPushButton cancelButton{QPushButton()};
     QLabel instructions{QLabel()};
-
 };
 #endif //PIC_AEM_PROJEKT_CONFIRMDELETEWINDOW_H

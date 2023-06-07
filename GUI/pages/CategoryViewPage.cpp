@@ -15,9 +15,8 @@ using namespace todolib;
 
 CategoryViewPage::CategoryViewPage(todolib::Profile &profile) : Page{profile} {
     layoutWidget.vOuterLayout->addWidget(&addCategoryButton);
+    connect(&addCategoryButton, &QPushButton::clicked, this, &CategoryViewPage::addCategory);
     addCategoryButton.setGeometry(10, 100, 80, 30);
-    connect(&addCategoryButton, &QPushButton::clicked, this, [&]() { addCategory(); });
-
     for (Category &category: profile.todoList.categories) {
         addCategoryWidget(category);
     }
@@ -51,7 +50,8 @@ void CategoryViewPage::addCategoryWidget(Category& category) {
     shared_ptr<CategoryWidget> widget {make_shared<CategoryWidget>(category, *this)};
     categoryWidgets.push_back(widget);
     layoutWidget.vOuterLayout->addWidget(widget.get(), 0, Qt::AlignTop);
-    connect(widget.get(), &CategoryWidget::categoryDeleteSignal, this, [=, this]() { deleteCategory(widget); });
+    connect(widget.get(), &CategoryWidget::categoryDeleteSignal, this, [=, this]() { openConfirmDeleteWindow(widget); });
+    //connect(widget.get(), &CategoryWidget::categoryDeleteSignal, this, [=, this]() { deleteCategory(widget); });
     connect(widget.get(), &CategoryWidget::xpWidgetSignalAdd, this, &Page::xpWidgetSignalAdd);
     connect(widget.get(), &CategoryWidget::xpWidgetSignalSub, this, &Page::xpWidgetSignalSub);
     connect(widget.get(), &CategoryWidget::categoryConfigSignal, this, [=, this]() { configCategory(widget); });
@@ -93,5 +93,7 @@ optional<QString> CategoryViewPage::invalidCategoryName() {
         return categoryNameInput;
     }
 }
-
-
+void CategoryViewPage::openConfirmDeleteWindow(std::shared_ptr<CategoryWidget> categoryWidget) {
+    confirmDeleteWindow = std::make_shared<ConfirmDeleteWindow>();
+    connect(confirmDeleteWindow.get(), &ConfirmDeleteWindow::confirmDelete, this, [=, this]() { deleteCategory(categoryWidget);});
+}
