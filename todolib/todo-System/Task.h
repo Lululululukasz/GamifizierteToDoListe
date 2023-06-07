@@ -76,7 +76,7 @@ namespace todolib {
         void setPriority(Task::priority_t prio);
         priority_t getPriority();
 
-        /** converts the priority to a string
+        /** converts the priorityFilter to a string
          *
          * @return standard string
          */

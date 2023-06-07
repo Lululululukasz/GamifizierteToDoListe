@@ -41,9 +41,9 @@ Category::Category(const QJsonObject &jsonObject) {
                             checksum += 4;
                         } else if (key == "done") {
                             checksum += 8;
-                        } else if (key == "priority"){
+                        } else if (key == "priorityFilter"){
                             checksum += 16;
-                        } else if (key == "duration"){
+                        } else if (key == "durationFilter"){
                            checksum += 32 ;
                         } else if (key == "dueYear"){
                             checksum += 64;

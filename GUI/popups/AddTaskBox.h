@@ -47,7 +47,7 @@ private:
     std::shared_ptr<QTextEdit> nameTextEdit;
     std::shared_ptr<QTextEdit> descriptionTextEdit;
     std::shared_ptr<QComboBox> selectPriorityBox;
-    QStringList prios {"select a priority", "trivial", "low", "medium", "high", "urgent"};
+    QStringList prios {"select a priorityFilter", "trivial", "low", "medium", "high", "urgent"};
     std::shared_ptr<QTextEdit> durationTextEdit;
     std::shared_ptr<DatePickerWidget> datePicker;
 

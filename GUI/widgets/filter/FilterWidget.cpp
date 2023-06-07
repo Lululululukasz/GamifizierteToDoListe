@@ -92,7 +92,7 @@ FilterWidget::FilterWidget(QWidget *parent) : QWidget(parent) {
     filterVLayout->addWidget(dueDateBorderLabel.get());
     dueDateBorderLabel->setStyleSheet("QLabel { border-top: 1px solid lightgray; padding-top: 0.5em; }");
 
-    //DurationFilter
+    //DueDateFilter
     durationFilterHLayout = std::make_shared<QHBoxLayout>();
     filterVLayout->addLayout(durationFilterHLayout.get());
 

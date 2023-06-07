@@ -40,7 +40,7 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
     selectPriorityBox->addItems(prios);
     elements.push_back(std::make_shared<AddTaskElementWidget>(
             "Priority",
-            "Please enter a priority.",
+            "Please enter a priorityFilter.",
             true,
             [this] { return selectPriorityBox->currentIndex() > 0; },
             selectPriorityBox.get()
