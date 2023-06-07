@@ -4,6 +4,7 @@
 #include "GUI/ConfettiAnimation/DrawConfetti.h"
 #include "GUI/pages/Page.h"
 
+#include <memory>
 #include <QWidget>
 #include <QCheckBox>
 #include <QPushButton>
@@ -27,11 +28,13 @@ class TaskWidget : public QWidget {
 Q_OBJECT
 
 public:
-    explicit TaskWidget(todolib::Task &task, Page &page, QWidget *parent = nullptr);
+    explicit TaskWidget(std::shared_ptr<todolib::Task> task, std::shared_ptr<todolib::Category> category, Page &page);
 
-    todolib::Task &task;
+    std::shared_ptr<todolib::Task> task;
+    std::shared_ptr<todolib::Category> catgory;
 
 signals:
+    void deleteButtonPressed();
     void deleteTaskSignal();
     void xpWidgetSignalAdd();
     void xpWidgetSignalSub();

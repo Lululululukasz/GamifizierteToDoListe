@@ -16,13 +16,12 @@ Q_OBJECT
 signals:
     void confirmDelete();
 
+
 public slots:
-    void deleteButtonClicked(bool checked);
+    void deleteButtonClicked();
 
 public:
     ConfirmDeleteWindow();
-    bool confirmedClick{};
-    bool isConfirmed() const;
 
 private:
 

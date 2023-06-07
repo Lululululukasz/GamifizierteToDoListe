@@ -7,7 +7,7 @@
 #include "GUI/widgets/category-task/TaskWidget.h"
 #include "utility/Globals.h"
 #include "GUI/widgets/category-task/TaskWidget.h"
-#include "GUI/ConfirmDeleteWindow.h"
+#include "GUI/popups/ConfirmDeleteWindow.h"
 
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>
@@ -73,10 +73,10 @@ void CategoryWidget::addTask(Task &task) {
 }
 
 void CategoryWidget::addTaskWidget(Task &task) {
-    shared_ptr<TaskWidget> widget {make_shared<TaskWidget>(task, page)};
+    shared_ptr<TaskWidget> widget {make_shared<TaskWidget>(make_shared<Task>(task), make_shared<Category>(category), page)};
     TaskWidgets.push_back(widget);
     vlayout.addWidget(widget.get(), 0, Qt::AlignTop);
-    connect(widget.get(), &TaskWidget::deleteTaskSignal, this, [=, this]() { openConfirmDeleteWindow(widget); });
+    connect(widget.get(), &TaskWidget::deleteButtonPressed, this, [=, this]() { openConfirmDeleteWindow(widget); });
     connect(widget.get(), &TaskWidget::taskMarkedChanged, this, &CategoryWidget::saveToJson);
     connect(widget.get(),&TaskWidget::xpWidgetSignalAdd,this,&CategoryWidget::xpWidgetSignalAdd);
     connect(widget.get(),&TaskWidget::xpWidgetSignalSub,this,&CategoryWidget::xpWidgetSignalSub);
@@ -94,7 +94,7 @@ void CategoryWidget::openAddTaskWindow(bool checked){
 
 
 void CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget> taskWidget) {
-    category.deleteTask(taskWidget->task.getID());
+    category.deleteTask(taskWidget->task->getID());
     taskWidget->hide();
     vlayout.removeWidget(taskWidget.get());
     TaskWidgets.remove(taskWidget);
@@ -107,6 +107,6 @@ void CategoryWidget::saveToJson() {
 
 void CategoryWidget::openConfirmDeleteWindow(const std::shared_ptr<TaskWidget> taskWidget) {
     confirmDeleteWindow = std::make_shared<ConfirmDeleteWindow>();
-    connect(confirmDeleteWindow.get(), &ConfirmDeleteWindow::confirmDelete, this, [=, this]() {if (confirmDeleteWindow->isConfirmed()) { deleteTask(taskWidget);}});
+    connect(confirmDeleteWindow.get(), &ConfirmDeleteWindow::confirmDelete, this, [=, this]() { deleteTask(taskWidget);});
 }
     //connect(widgetA, &WidgetAType::widgetASignal, widgetB, &WidgetBType::widgetBSlot);

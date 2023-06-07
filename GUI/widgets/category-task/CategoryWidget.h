@@ -20,7 +20,7 @@
 
 #include "todolib/todolib.h"
 #include "GUI/widgets/category-task/TaskWidget.h"
-#include "GUI/ConfirmDeleteWindow.h"
+#include "GUI/popups/ConfirmDeleteWindow.h"
 
 
 class CategoryWidget : public QWidget {
@@ -68,7 +68,6 @@ private:
 
     void deleteCategory();
 
-    void deleteTask(const std::shared_ptr<TaskWidget> &taskWidget);
     std::shared_ptr<ConfirmDeleteWindow> confirmDeleteWindow;
 
 public:

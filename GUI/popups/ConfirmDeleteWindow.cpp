@@ -1,4 +1,4 @@
-#include "ConfirmDeleteWindow.h"
+#include "GUI/popups/ConfirmDeleteWindow.h"
 #include <QInputDialog>
 
 
@@ -8,8 +8,8 @@ ConfirmDeleteWindow::ConfirmDeleteWindow() {
 
     layout.addWidget(&deleteButton);
     deleteButton.setText("Delete");
-    connect(&deleteButton, SIGNAL (clicked(bool)), this, SLOT (deleteButtonClicked(bool)));
-    connect(&deleteButton, &QPushButton::clicked, this, &ConfirmDeleteWindow::confirmDelete);
+    //connect(&deleteButton, SIGNAL (clicked(bool)), this, SLOT (deleteButtonClicked(bool)));
+    connect(&deleteButton, &QPushButton::clicked, this, &ConfirmDeleteWindow::deleteButtonClicked);
 
     cancelButton.setText("Cancel");
     layout.addWidget(&cancelButton);
@@ -17,16 +17,17 @@ ConfirmDeleteWindow::ConfirmDeleteWindow() {
     show();
 }
 
-void ConfirmDeleteWindow::deleteButtonClicked(bool checked){
-    if (checked) {
-        isConfirmed();
-    }
+void ConfirmDeleteWindow::deleteButtonClicked(){
+    emit confirmDelete();
+    this->close();
 }
 
+
+/*
 bool ConfirmDeleteWindow::isConfirmed() const {
     return confirmedClick;
 }
-
+*/
 /*
 void ConfirmDeleteWindow::catchDeleteTask() {
     ConfirmDeleteWindow();
