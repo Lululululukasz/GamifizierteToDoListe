@@ -20,12 +20,11 @@ namespace todolib {
 
     class Task {
     private:
-
+        string id;
         bool done{false};
         // TODO datetime
 
     public:
-        string id;
         string name;
         string description;
 
