@@ -59,7 +59,7 @@ Category::Category(const QJsonObject &jsonObject) {
             }
     }
 }
-
+/*
 // Copy Constructor
 Category::Category(Category &other) {
     this->id = other.getID();
@@ -93,7 +93,7 @@ Category &Category::operator=(Category &&other) noexcept {
 
     return *this;
 }
-
+*/
 bool Category::isSame(const Category &other) const {
     if (this->getID() == other.id) {
         return true;
@@ -111,6 +111,7 @@ void Category::addTask(Task &&task) {
     saveToJson();
 }
 
+/*
 list<Task> Category::showTasks() {
     cout << name << ": ";
     for (const Task &task: tasks) {
@@ -118,6 +119,7 @@ list<Task> Category::showTasks() {
     }
     cout << endl;
 }
+ */
 
 bool Category::deleteTask(const string &deleteID) {
     if (0 != this->tasks.remove_if([&] (Task t) {return (t.getID() == deleteID);})) {

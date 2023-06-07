@@ -48,32 +48,32 @@ namespace todolib {
          * Category Copy Constructor
          * @param other
          */
-        Category(Category &other);
+        //Category(Category &other);
 
         /**
          * Category Copy Assignment Constructor
          * @param other
          * @return
          */
-        Category &operator=(Category const &other);
+        //Category &operator=(Category const &other);
 
         /**
          * Category Move Constructor
          * @param other
          */
-        Category(Category &&other) noexcept;
+        //Category(Category &&other) noexcept;
 
         /**
          * Category Move Assignment Constructor
          * @param other
          * @return
          */
-        Category &operator=(Category &&other) noexcept;
+        //Category &operator=(Category &&other) noexcept;
 
         /**
          * Category Destructor
          */
-        ~Category() = default;
+        //~Category() = default;
 
         /**
          * isSame
@@ -94,7 +94,7 @@ namespace todolib {
          * showTasks
          * @return List of tasks in the category
          */
-        list<Task> showTasks();
+        //list<Task> showTasks();
 
         /**
          * deleteTask

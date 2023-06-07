@@ -55,12 +55,13 @@ ToDoList::ToDoList() {
 
 }
 
-Category &ToDoList::getCategoryByName(const string &name) {
+shared_ptr<Category> ToDoList::getCategoryByName(const string &name) {
     for (Category &category: categories) {
         if (category.name == name) {
-            return category;
+            return make_shared<Category>(category);
         }
     }
+    return static_cast<shared_ptr<Category>>(nullptr);
 }
 
 Category &ToDoList::getCategoryByID(const string &id) {

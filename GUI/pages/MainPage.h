@@ -30,7 +30,7 @@ public:
     explicit MainPage(todolib::Profile& profile);
 
     signals:
-    void openCategoryViewPageSignal();
+    //void openCategoryViewPageSignal();
     void openAchievementsPageSignal();
 
 private:

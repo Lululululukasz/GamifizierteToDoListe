@@ -10,6 +10,7 @@
 
 
 MainWindow::MainWindow(todolib::Profile &profile) : profile{profile} {
+    /*
     // MainPage automatically Added
     std::shared_ptr<Page> mainPage {std::make_shared<MainPage>(profile)};
     pages.push_back(mainPage);
@@ -17,6 +18,10 @@ MainWindow::MainWindow(todolib::Profile &profile) : profile{profile} {
 
     connect(mainPage.get(), SIGNAL(openCategoryViewPageSignal()), this, SLOT(openCategoryViewPage()));
     connect(mainPage.get(), SIGNAL(openAchievementsPageSignal()), this, SLOT(openAchievementsPage()));
+
+     */
+
+    openCategoryViewPage();
 
     resize(1280, 720);
     setWindowTitle("To-Do List");
