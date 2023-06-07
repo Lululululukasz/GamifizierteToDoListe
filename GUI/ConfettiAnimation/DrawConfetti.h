@@ -26,6 +26,7 @@ public:
     explicit DrawConfetti();
 
     [[nodiscard]] QSize minimumSizeHint() const override;
+    void resizeEvent(QResizeEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
 
 public slots:
