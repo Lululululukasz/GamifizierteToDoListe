@@ -11,21 +11,23 @@
 #include <QHBoxLayout>
 #include <memory>
 #include <QPixmap>
+#include <QPushButton>
 
 class AddPictureBoxElementWidget : public QWidget {
     Q_OBJECT
 public:
     explicit AddPictureBoxElementWidget(
             std::string picturePath,
-            QWidget *parent = nullptr
-                    );
+            QWidget *parent = nullptr);
+    signals:
+    void pictureSelectedSignal(std::string picture);
 
 private:
+    std::string pic;
     std::shared_ptr<QHBoxLayout> pictureLayout;
     std::shared_ptr<QRadioButton> pictureRadioButton;
     std::shared_ptr<QLabel> pictureLabel;
-
-
+    void pictureSelected();
 
 };
 

@@ -37,6 +37,10 @@ private slots:
 
     void closeAddTaskWindow();
 
+    void openAddPictureWindow(bool checked);
+
+    void savePicturePath(std::string picture);
+
 
 private:
     bool hasTaskBool{false};
@@ -55,6 +59,8 @@ private:
     std::shared_ptr<AddPictureBox> addPictureBox;
     std::shared_ptr<todolib::Category> category;
 
+    std::string picturePath;
+
     /**
      * checks if the date the user entered is in the past
      * @return true of false
@@ -66,8 +72,6 @@ private:
      */
     bool invalidInput();
 
-private slots:
-    void openAddPictureWindow(bool checked);
 };
 
 #endif //PIC_AEM_PROJEKT_ADDTASKBOX_H

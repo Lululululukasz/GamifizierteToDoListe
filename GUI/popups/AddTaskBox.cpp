@@ -9,6 +9,7 @@
 #include <QStringList>
 #include <iostream>
 #include <cmath>
+#include <utility>
 
 AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task("", "")) {
     setFixedSize(400, 600);
@@ -137,6 +138,7 @@ if(checked){
     this->addPictureButton->setChecked(false);
     addPictureBox = std::make_shared<AddPictureBox>();
     addPictureBox->show();
+    connect(addPictureBox.get(), &AddPictureBox::picturePathSignal, this, &AddTaskBox::savePicturePath);
 }
 }
 
@@ -156,9 +158,14 @@ void AddTaskBox::addTaskClicked(bool checked)
             task.setPriority(static_cast<todolib::Task::priority_t>(selectPriorityBox->currentIndex()));
             task.setDuration(this->durationTextEdit->toPlainText().toDouble());
             task.setdueDate(datePicker->createDueDate());
+            task.setPicture(picturePath);
             emit isOver();
         }
     }
+}
+
+void AddTaskBox::savePicturePath(std::string picture) {
+    picturePath  = picture;
 }
 
 bool AddTaskBox::hasTask() const {
@@ -168,3 +175,5 @@ bool AddTaskBox::hasTask() const {
 void AddTaskBox::closeAddTaskWindow() {
     this->hide();
 }
+
+

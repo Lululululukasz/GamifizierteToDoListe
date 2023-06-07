@@ -51,9 +51,11 @@ Category::Category(const QJsonObject &jsonObject) {
                             checksum += 128;
                         } else if (key == "dueDay"){
                             checksum += 256;
+                        } else if (key == "picture"){
+                            checksum += 512;
                         }
                     }
-                if (checksum == 511) {
+                if (checksum == 1023) {
                     this->tasks.push_back(Task(task.toObject()));
                 }
             }
