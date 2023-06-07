@@ -2,9 +2,11 @@
 // Created by Jan Ole Weighardt on 23.05.23.
 //
 
-#include "GUI/CategoryWidget.h"
+#include "GUI/widgets/category-task/CategoryWidget.h"
 #include "todolib/todolib.h"
-#include "GUI/TaskWidget.h"
+#include "GUI/widgets/category-task/TaskWidget.h"
+#include "utility/Globals.h"
+#include "GUI/widgets/category-task/TaskWidget.h"
 #include "GUI/ConfirmDeleteWindow.h"
 
 #include <QtWidgets/QVBoxLayout>
@@ -14,7 +16,9 @@
 
 using namespace todolib;
 
-CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : category{category}, QWidget(parent) {
+CategoryWidget::CategoryWidget(todolib::Category &category, Page &page, QWidget *parent) : category{category},
+                                                                                           page{page},
+                                                                                           QWidget(parent) {
     setLayout(&vlayout);
     vlayout.addLayout(&hlayout);
 
@@ -26,7 +30,13 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
     deleteButton.setText("  Delete");
     deleteButton.setIcon(deleteButton.style()->standardIcon(QStyle::SP_TrashIcon));
     hlayout.addWidget(&deleteButton, 0, Qt::AlignRight | Qt::AlignVCenter);
-    connect(&deleteButton, &QPushButton::clicked, this, [=, this]() { deleteCategory(); });
+    connect(&deleteButton, &QPushButton::clicked, this, [&, this]() { deleteCategory(); });
+
+
+    // Category Config Button
+    confButton.setIcon(QIcon(Globals::homepath+"/resources/edit_icon.png"));
+    hlayout.addWidget(&confButton, 0 , Qt::AlignRight | Qt::AlignVCenter);
+    connect(&confButton, &QPushButton::clicked, this, [&, this]() {configCategory();});
 
     //Add Task Button
     addTaskButton = std::make_shared<QPushButton>("Add Task", this);
@@ -43,21 +53,33 @@ CategoryWidget::CategoryWidget(todolib::Category &category, QWidget *parent) : c
 
 }
 
+void CategoryWidget::changeName(const QString &newName){
+    name.setText(newName);
+    category.setName(newName.toStdString());
+}
+
+void CategoryWidget::configCategory(){
+    emit categoryConfigSignal();
+}
 void CategoryWidget::deleteCategory() {
     emit categoryDeleteSignal();
 }
 
 void CategoryWidget::addTask(Task &task) {
     category.addTask(task);
-    addTaskWidget(task);
+    emit refreshPageWidgetSignal();
+    // addTaskWidget(task);
+    // category.showTasks();
 }
 
 void CategoryWidget::addTaskWidget(Task &task) {
-    shared_ptr<TaskWidget> widget {make_shared<TaskWidget>(task)};
+    shared_ptr<TaskWidget> widget {make_shared<TaskWidget>(task, page)};
     TaskWidgets.push_back(widget);
     vlayout.addWidget(widget.get(), 0, Qt::AlignTop);
-    connect(widget.get(), &TaskWidget::deleteTaskSignal, this, [=, this] () {openConfirmDeleteWindow(widget);});
-    //connect(sender: widgetA, signal: &WidgetAType::widgetASignal, context: widgetB, slot: &WidgetBType::widgetBSlot);
+    connect(widget.get(), &TaskWidget::deleteTaskSignal, this, [=, this]() { openConfirmDeleteWindow(widget); });
+    connect(widget.get(), &TaskWidget::taskMarkedChanged, this, &CategoryWidget::saveToJson);
+    connect(widget.get(),&TaskWidget::xpWidgetSignalAdd,this,&CategoryWidget::xpWidgetSignalAdd);
+    connect(widget.get(),&TaskWidget::xpWidgetSignalSub,this,&CategoryWidget::xpWidgetSignalSub);
 }
 
 void CategoryWidget::openAddTaskWindow(bool checked){
@@ -77,6 +99,11 @@ void CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget> taskWidget) {
     vlayout.removeWidget(taskWidget.get());
     TaskWidgets.remove(taskWidget);
 }
+
+void CategoryWidget::saveToJson() {
+    category.saveToJson();
+}
+
 
 void CategoryWidget::openConfirmDeleteWindow(const std::shared_ptr<TaskWidget> taskWidget) {
     confirmDeleteWindow = std::make_shared<ConfirmDeleteWindow>();

@@ -15,11 +15,12 @@
 #include <QInputDialog>
 #include <QWidget>
 #include <QPushButton>
+#include "GUI/popups/AddTaskBox.h"
+#include "GUI/pages/Page.h"
 
 #include "todolib/todolib.h"
-#include "TaskWidget.h"
-#include "AddTaskBox.h"
-#include "ConfirmDeleteWindow.h"
+#include "GUI/widgets/category-task/TaskWidget.h"
+#include "GUI/ConfirmDeleteWindow.h"
 
 
 class CategoryWidget : public QWidget {
@@ -28,28 +29,46 @@ Q_OBJECT
 
 
 public:
-    explicit CategoryWidget(todolib::Category &category, QWidget *parent = nullptr);
+    explicit CategoryWidget(todolib::Category &category, Page &page, QWidget *parent = nullptr);
+
     todolib::Category &category;
+
+    void changeName(const QString &newName);
 
 signals:
 
     void categoryDeleteSignal();
+    void xpWidgetSignalAdd();
+    void xpWidgetSignalSub();
 
-public slots:
-    //void catchConfirmDelete();
+    void categoryConfigSignal();
+
+    void refreshPageWidgetSignal();
 
 private slots:
+
     void openAddTaskWindow(bool checked);
+
+    void saveToJson();
+
     void openConfirmDeleteWindow(const std::shared_ptr<TaskWidget> taskWidget);
     void deleteTask( std::shared_ptr<TaskWidget> taskWidget);
 private:
-    QVBoxLayout vlayout {QVBoxLayout()};
-    QHBoxLayout hlayout {QHBoxLayout()};
-    QLabel name {QLabel()};
-    QPushButton deleteButton {QPushButton()};
+    QVBoxLayout vlayout{QVBoxLayout()};
+    QHBoxLayout hlayout{QHBoxLayout()};
+    QLabel name{QLabel()};
+    QPushButton deleteButton{QPushButton()};
+    QPushButton confButton{QPushButton()};
     std::list<std::shared_ptr<TaskWidget>> TaskWidgets;
-    void addTaskWidget(todolib::Task& task);
+    Page &page;
+
+    void addTaskWidget(todolib::Task &task);
+
+    void configCategory();
+
     void deleteCategory();
+
+    void deleteTask(const std::shared_ptr<TaskWidget> &taskWidget);
     std::shared_ptr<ConfirmDeleteWindow> confirmDeleteWindow;
 
 public:
@@ -57,6 +76,7 @@ public:
     // Adding Tasks
     std::shared_ptr<QPushButton> addTaskButton;
     std::shared_ptr<AddTaskBox> addTaskBox;
+
     void addTask(todolib::Task &task);
 
 
