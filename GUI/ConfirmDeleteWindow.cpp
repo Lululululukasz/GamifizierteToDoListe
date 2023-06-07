@@ -7,17 +7,17 @@ ConfirmDeleteWindow::ConfirmDeleteWindow() {
     layout.addWidget(&instructions);
 
     layout.addWidget(&deleteButton);
-
+    deleteButton.setText("Delete");
     connect(&deleteButton, SIGNAL (clicked(bool)), this, SLOT (deleteButtonClicked(bool)));
     connect(&deleteButton, &QPushButton::clicked, this, &ConfirmDeleteWindow::confirmDelete);
 
+    cancelButton.setText("Cancel");
     layout.addWidget(&cancelButton);
     connect(&cancelButton, &QPushButton::clicked, this, [&, this]() {this-> hide();});
     show();
 }
 
-void ConfirmDeleteWindow::deleteButtonClicked(bool checked)
-{
+void ConfirmDeleteWindow::deleteButtonClicked(bool checked){
     if (checked) {
         isConfirmed();
     }
@@ -26,6 +26,7 @@ void ConfirmDeleteWindow::deleteButtonClicked(bool checked)
 bool ConfirmDeleteWindow::isConfirmed() const {
     return confirmedClick;
 }
+
 /*
 void ConfirmDeleteWindow::catchDeleteTask() {
     ConfirmDeleteWindow();

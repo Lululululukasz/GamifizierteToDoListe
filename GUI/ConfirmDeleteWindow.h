@@ -21,10 +21,11 @@ public slots:
 
 public:
     ConfirmDeleteWindow();
-    bool confirmedClick{false};
+    bool confirmedClick{};
     bool isConfirmed() const;
 
 private:
+
     QVBoxLayout layout{QVBoxLayout(this)};
     QPushButton deleteButton{QPushButton()};
     QPushButton cancelButton{QPushButton()};

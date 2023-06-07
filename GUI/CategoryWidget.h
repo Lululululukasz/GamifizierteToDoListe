@@ -40,7 +40,8 @@ public slots:
 
 private slots:
     void openAddTaskWindow(bool checked);
-    bool openConfirmDeleteWindow(const std::shared_ptr<TaskWidget> taskWidget);
+    void openConfirmDeleteWindow(const std::shared_ptr<TaskWidget> taskWidget);
+    void deleteTask(const std::shared_ptr<TaskWidget> taskWidget);
 private:
     QVBoxLayout vlayout {QVBoxLayout()};
     QHBoxLayout hlayout {QHBoxLayout()};
@@ -52,7 +53,7 @@ private:
     std::shared_ptr<ConfirmDeleteWindow> confirmDeleteWindow;
 
 public:
-    void deleteTask(const std::shared_ptr<TaskWidget> taskWidget);
+
     // Adding Tasks
     std::shared_ptr<QPushButton> addTaskButton;
     std::shared_ptr<AddTaskBox> addTaskBox;

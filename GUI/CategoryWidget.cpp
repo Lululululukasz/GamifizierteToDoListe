@@ -78,12 +78,8 @@ void CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget> taskWidget) {
     TaskWidgets.remove(taskWidget);
 }
 
-bool CategoryWidget::openConfirmDeleteWindow(const std::shared_ptr<TaskWidget> taskWidget) {
+void CategoryWidget::openConfirmDeleteWindow(const std::shared_ptr<TaskWidget> taskWidget) {
     confirmDeleteWindow = std::make_shared<ConfirmDeleteWindow>();
-    connect(confirmDeleteWindow.get(), &ConfirmDeleteWindow::confirmDelete, this, [=, this]() {
-        if (confirmDeleteWindow->isConfirmed()) {
-            deleteTask(taskWidget);
-        }
-    });
+    connect(confirmDeleteWindow.get(), &ConfirmDeleteWindow::confirmDelete, this, [=, this]() {if (confirmDeleteWindow->isConfirmed()) { deleteTask(taskWidget);}});
 }
     //connect(widgetA, &WidgetAType::widgetASignal, widgetB, &WidgetBType::widgetBSlot);
