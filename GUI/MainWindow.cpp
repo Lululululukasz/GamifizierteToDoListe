@@ -10,13 +10,18 @@
 
 
 MainWindow::MainWindow(todolib::Profile &profile) : profile{profile} {
+    /*
     // MainPage automatically Added
-    std::shared_ptr<Page> mainPage {std::make_shared<MainPage>(profile.todoList)};
+    std::shared_ptr<Page> mainPage {std::make_shared<MainPage>(profile)};
     pages.push_back(mainPage);
     stackedLayout.addWidget(mainPage.get());
 
     connect(mainPage.get(), SIGNAL(openCategoryViewPageSignal()), this, SLOT(openCategoryViewPage()));
     connect(mainPage.get(), SIGNAL(openAchievementsPageSignal()), this, SLOT(openAchievementsPage()));
+
+     */
+
+    openCategoryViewPage();
 
     resize(1280, 720);
     setWindowTitle("To-Do List");
@@ -37,13 +42,14 @@ void MainWindow::closePage(const std::shared_ptr<Page>& page) {
 }
 
 void MainWindow::openCategoryViewPage() {
-    std::shared_ptr<Page> newpage {std::make_shared<CategoryViewPage>(profile.todoList)};
+    std::shared_ptr<Page> newpage {std::make_shared<CategoryViewPage>(profile)};
     openPage(newpage);
     connect(newpage.get(), &Page::refreshPageSignal, this, [=, this]() {refreshCategoryViewPage(newpage);});
+    connect(newpage.get(), SIGNAL(openAchievementsPageSignal()), this, SLOT(openAchievementsPage()));
 }
 
 void MainWindow::openAchievementsPage() {
-    std::shared_ptr<Page> newPage {std::make_shared<AchievementsPage>(profile.todoList)};
+    std::shared_ptr<Page> newPage {std::make_shared<AchievementsPage>(profile)};
     openPage(newPage);
 } // TODO apply same fix as category
 

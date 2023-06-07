@@ -7,6 +7,7 @@
 
 #include "todo-System/ToDoList.h"
 #include "achievement-System/AchievementList.h"
+#include "Xp.h"
 
 namespace todolib {
 
@@ -15,6 +16,7 @@ namespace todolib {
         ToDoList todoList {};
         AchievementList achievementList {todoList};
         // TODO add XP/Level - classes could be stored in todolib/leveling-System
+        Xp xp {};
     };
 
 } // todolib

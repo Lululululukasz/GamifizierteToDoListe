@@ -14,6 +14,8 @@ PageLayoutWidget::PageLayoutWidget() {
     vOuterLayout->addLayout(hOuterBodyLayout.get());
     hOuterBodyLayout->addLayout(vSideBar.get(), 1);
     hOuterBodyLayout->addLayout(vBodyLayout.get(), 3);
+
+    vBodyLayout->setAlignment(Qt::AlignTop);
 }
 
 

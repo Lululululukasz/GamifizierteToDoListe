@@ -4,15 +4,10 @@
 
 #include "GUI/pages/MainPage.h"
 
-MainPage::MainPage(todolib::ToDoList &toDoList) : Page{toDoList} {
+MainPage::MainPage(todolib::Profile &profile) : Page{profile} {
     // nav bar
     closeButton->hide();
     layoutWidget.hNavBar->addWidget(&header);
-
-    // Adding and connecting of the categoryViewPage use as template for other Pages
-    layoutWidget.hNavBar->addWidget(&categoryViewPageButton);
-    categoryViewPageButton.setGeometry(10, 100, 80, 30);
-    connect(&categoryViewPageButton, SIGNAL(clicked()), this, SIGNAL(openCategoryViewPageSignal()));
 
     // Adding and connecting the Achievements page
     layoutWidget.hNavBar->addWidget(&achievementsPageButton);
@@ -25,10 +20,4 @@ MainPage::MainPage(todolib::ToDoList &toDoList) : Page{toDoList} {
     //Filter
     filterWidget = std::make_shared<FilterWidget>();
     layoutWidget.vSideBar->addWidget(filterWidget.get());
-
-    // Body
-    layoutWidget.vBodyLayout->addWidget(&placeholderBody);
-
-    // Footer
-    layoutWidget.vOuterLayout->addWidget(&placeholderAddButton);
 }

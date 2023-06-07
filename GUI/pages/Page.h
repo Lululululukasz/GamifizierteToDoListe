@@ -14,6 +14,7 @@
 #include <memory>
 #include <QStackedLayout>
 #include <QLabel>
+#include "GUI/widgets/XpWidget.h"
 
 /**
  * Page
@@ -24,15 +25,17 @@ class Page : public QWidget {
 Q_OBJECT
 
 public:
-    explicit Page(todolib::ToDoList(& toDoList));
+    explicit Page(todolib::Profile& profile);
     void setOverlay(std::shared_ptr<QWidget> _overlay);
-
+    void addXpWidget();
 signals:
     void closePageSignal();
     void refreshPageSignal();
+    void xpWidgetSignalAdd();
+    void xpWidgetSignalSub();
 
 protected:
-    todolib::ToDoList& toDoList;
+    todolib::Profile& profile ;
     PageLayoutWidget layoutWidget {PageLayoutWidget()};
     std::shared_ptr<QPushButton> closeButton {std::make_shared<QPushButton>()};
     QLabel placeholderXP {QLabel("XP Bar")};
@@ -40,6 +43,8 @@ protected:
 private:
     QStackedLayout stackedLayout {QStackedLayout(this)};
     std::shared_ptr<QWidget> overlay;
+    std::list<std::shared_ptr<XpWidget>> xpWidgets;
+
 };
 
 

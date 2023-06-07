@@ -31,10 +31,9 @@ public:
      * Adds and connects the button for each type of page.
      * @param toDoList
      */
-    explicit MainPage(todolib::ToDoList &toDoList);
+    explicit MainPage(todolib::Profile& profile);
 
     signals:
-    void openCategoryViewPageSignal();
     void openAchievementsPageSignal();
 
 private:
@@ -45,9 +44,8 @@ private:
     std::shared_ptr<FilterWidget> filterWidget;
 
     QLabel placeholderSearchbar {QLabel("Searchbar")};
-    QLabel placeholderBody {QLabel("Body")};
+    //QLabel placeholderBody {QLabel("Body")};
     QLabel placeholderFilter {QLabel("Filter")};
-    QLabel placeholderAddButton {QLabel("AddButton")};
 
 };
 

@@ -12,13 +12,14 @@
 
 
 
+
 namespace todolib {
     using namespace std;
 
     /**
      * ToDoList
      *
-     * The purpose of the ToDoList is to be a top level place whithin which all backend information is saved.
+     * The purpose of the ToDoList is to be a top currrentLevel place whithin which all backend information is saved.
      */
 
     class ToDoList {
@@ -32,6 +33,7 @@ namespace todolib {
          */
         list<Category> categories;
 
+
         /**
          * ToDoList()
          * The Constructor automatically creates the "Default" Category and the suggestion list of Tasks.
@@ -44,13 +46,13 @@ namespace todolib {
          * @param name
          * @return a reference to the first Category that fits the name String
          */
-        Category &getCategoryByName(const string &name);
+        shared_ptr<Category> getCategoryByName(const string &name);
         /**
          * get getCategoryByID
          * @param id
          * @return a reference to the category with that id
          */
-        Category &getCategoryByID(const string &id);
+        shared_ptr<Category> getCategoryByID(const string &id);
 
         /**
          * addCategory

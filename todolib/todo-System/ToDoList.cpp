@@ -52,22 +52,25 @@ ToDoList::ToDoList() {
             Task("Quit", "quit university"),
             Task("Exams", "go to all of your exams"),
     };
+
 }
 
-Category &ToDoList::getCategoryByName(const string &name) {
+shared_ptr<Category> ToDoList::getCategoryByName(const string &name) {
     for (Category &category: categories) {
         if (category.name == name) {
-            return category;
+            return make_shared<Category>(category);
         }
     }
+    return static_cast<shared_ptr<Category>>(nullptr);
 }
 
-Category &ToDoList::getCategoryByID(const string &id) {
+shared_ptr<Category> ToDoList::getCategoryByID(const string &id) {
     for (Category &category: categories) {
         if (category.getID() == id) {
-            return category;
+            return make_shared<Category>(category);
         }
     }
+    return static_cast<shared_ptr<Category>>(nullptr);
 }
 
 void ToDoList::addCategory(Category &&category) {
@@ -79,7 +82,11 @@ void ToDoList::addCategory(Category &category) {
 }
 
 bool ToDoList::deleteCategory(const string &id) {
-    if (0 != this->categories.remove_if([&](const Category &c) { return (c.getID() == id); })) {
+    if (0 != this->categories.remove_if([&](const Category &c) { if (c.getID() == id) {
+        Json::deleteJson((c.getID()+".json").c_str());
+        return true;
+    }return false;
+    })) {
         return true;
     } else {
         return false;
