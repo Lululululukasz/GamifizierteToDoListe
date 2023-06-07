@@ -25,13 +25,23 @@ CategoryViewPage::CategoryViewPage(todolib::Profile &profile) : Page{profile} {
 }
 
 void CategoryViewPage::addCategory() {
-    QString categoryName = QInputDialog::getText(this, "New Category", "enter the category name");
-    if (!categoryName.isEmpty()) {
-        Category category = Category(categoryName.toStdString());
+    categoryName = std::make_shared<QInputDialog>();
+    QString categoryNameInput = categoryName->getText(this, "New Category", "enter the category name");
+    if (categoryNameInput.length() == 0) {
+        categoryName->setLabelText("Please enter a category name!");
+        categoryName->setStyleSheet("QLabel{color: red;}");
+        //to use in change category Name
+        categoryName->setTextValue("Test");
+
+        categoryName->exec();
+        categoryNameInput = categoryName->textValue();}
+
+        Category category = Category(categoryNameInput.toStdString());
         profile.todoList.addCategory(category);
         addCategoryWidget(profile.todoList.categories.back());
-    }
 }
+
+
 
 void CategoryViewPage::addCategoryWidget(Category& category) {
     shared_ptr<CategoryWidget> widget {make_shared<CategoryWidget>(category, *this)};
