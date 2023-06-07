@@ -56,8 +56,8 @@ void CategoryWidget::addTaskWidget(Task &task) {
     shared_ptr<TaskWidget> widget {make_shared<TaskWidget>(task)};
     TaskWidgets.push_back(widget);
     vlayout.addWidget(widget.get(), 0, Qt::AlignTop);
-    connect(widget.get(), &TaskWidget::deleteTaskSignal, confirmDeleteWindow, &ConfirmDeleteWindow::catchDeleteTask);
-    //connect(widgetA, &WidgetAType::widgetASignal, widgetB, &WidgetBType::widgetBSlot);
+    connect(widget.get(), &TaskWidget::deleteTaskSignal, this, [=, this] () {openConfirmDeleteWindow(widget);});
+    //connect(sender: widgetA, signal: &WidgetAType::widgetASignal, context: widgetB, slot: &WidgetBType::widgetBSlot);
 }
 
 void CategoryWidget::openAddTaskWindow(bool checked){
@@ -66,21 +66,24 @@ void CategoryWidget::openAddTaskWindow(bool checked){
         addTaskBox = std::make_shared<AddTaskBox>();
         addTaskBox->setCategory(category);
         addTaskBox->show();
-        connect(addTaskBox.get(), &AddTaskBox::isOver, this, [=, this]() {if(addTaskBox->hasTask()) { addTask(addTaskBox->task);};});
+        connect(addTaskBox.get(), &AddTaskBox::isOver, this, [=, this]() {if(addTaskBox->hasTask()) { addTask(addTaskBox->task);}});
     }
 }
-ConfirmDeleteWindow::ConfirmDeleteWindow() {
-    connect(this, &ConfirmDeleteWindow::confirmInput, CategoryWidget, &CategoryWidget::catchConfirmDelete);
-    //connect(widgetA, &WidgetAType::widgetASignal, widgetB, &WidgetBType::widgetBSlot);
-}
 
-void CategoryWidget::catchConfirmDelete() {
-    deleteTask(const std::shared_ptr<TaskWidget> &taskWidget);
-}
 
-void CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget> &taskWidget) {
+void CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget> taskWidget) {
     category.deleteTask(taskWidget->task.getID());
     taskWidget->hide();
     vlayout.removeWidget(taskWidget.get());
     TaskWidgets.remove(taskWidget);
 }
+
+bool CategoryWidget::openConfirmDeleteWindow(const std::shared_ptr<TaskWidget> taskWidget) {
+    confirmDeleteWindow = std::make_shared<ConfirmDeleteWindow>();
+    connect(confirmDeleteWindow.get(), &ConfirmDeleteWindow::confirmDelete, this, [=, this]() {
+        if (confirmDeleteWindow->isConfirmed()) {
+            deleteTask(taskWidget);
+        }
+    });
+}
+    //connect(widgetA, &WidgetAType::widgetASignal, widgetB, &WidgetBType::widgetBSlot);

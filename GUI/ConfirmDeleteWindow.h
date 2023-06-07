@@ -12,15 +12,17 @@
 
 class ConfirmDeleteWindow : public QWidget {
 Q_OBJECT
+
 signals:
-    static void confirmDelete();
+    void confirmDelete();
 
 public slots:
-    void catchDeleteTask();
-    void confirmInput();
+    void deleteButtonClicked(bool checked);
 
 public:
     ConfirmDeleteWindow();
+    bool confirmedClick{false};
+    bool isConfirmed() const;
 
 private:
     QVBoxLayout layout{QVBoxLayout(this)};
@@ -29,5 +31,4 @@ private:
     QLabel instructions{QLabel()};
 
 };
-
 #endif //PIC_AEM_PROJEKT_CONFIRMDELETEWINDOW_H

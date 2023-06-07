@@ -40,7 +40,6 @@ void AddTaskBox::addTaskClicked(bool checked)
         this->addTaskButton->setChecked(false);
         std::string name{this->aTNameTextEdit->toPlainText().toStdString()};
         std::string description{this->aTDecriptionTextEdit->toPlainText().toStdString()};
-        // category->addTask(todolib::Task(name, description));
         task = todolib::Task(name, description);
         hasTaskBool = true;
         emit isOver();
