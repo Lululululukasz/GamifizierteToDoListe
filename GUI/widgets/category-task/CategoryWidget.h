@@ -5,9 +5,7 @@
 #ifndef AEMPROJEKT_CATEGORYWIDGET_H
 #define AEMPROJEKT_CATEGORYWIDGET_H
 
-#include "todolib/todolib.h"
-#include "TaskWidget.h"
-
+#include <memory>
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QApplication>
@@ -18,12 +16,13 @@
 #include "GUI/popups/AddTaskBox.h"
 #include "GUI/pages/Page.h"
 
+#include "todolib/todolib.h"
+#include "GUI/widgets/category-task/TaskWidget.h"
+#include "GUI/popups/ConfirmDeleteWindow.h"
 
 class CategoryWidget : public QWidget {
 
 Q_OBJECT
-
-
 public:
     explicit CategoryWidget(todolib::Category &category, todolib::TaskFilterParameter &taskFilterParameter, Page &page);
 
@@ -36,7 +35,6 @@ public slots:
     void filterTasks();
 
 signals:
-
     void categoryDeleteSignal();
     void xpWidgetSignalAdd();
     void xpWidgetSignalSub();
@@ -51,6 +49,8 @@ private slots:
 
     void saveToJson();
 
+    void openConfirmDeleteWindow(const std::shared_ptr<TaskWidget> taskWidget);
+    void deleteTask( std::shared_ptr<TaskWidget> taskWidget);
 private:
     QVBoxLayout vlayout{QVBoxLayout()};
     QHBoxLayout hlayout{QHBoxLayout()};
@@ -66,14 +66,14 @@ private:
 
     void deleteCategory();
 
-    void deleteTask(const std::shared_ptr<TaskWidget> &taskWidget);
+    std::shared_ptr<ConfirmDeleteWindow> confirmDeleteWindow;
 
+public:
     // Adding Tasks
     std::shared_ptr<QPushButton> addTaskButton;
     std::shared_ptr<AddTaskBox> addTaskBox;
 
     void addTask(todolib::Task &task);
-
 };
 
 #endif //AEMPROJEKT_CATEGORYWIDGET_H

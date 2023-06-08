@@ -25,7 +25,7 @@ XpWidget::XpWidget(todolib::Xp &xp, QWidget *parent ) :xp {xp}, QWidget(parent) 
 
 //this two function add or take one to the Xp Number
 void XpWidget::xpWidgetFuncAdd(){
-    xp.xptrueNumber++;
+    xp.setxptrueNumber(++xp.xptrueNumber);
     levelUp();
     progressBar->setValue(xp.xptrueNumber);
     levelcap=xp.levelNumber;
@@ -34,8 +34,8 @@ void XpWidget::xpWidgetFuncAdd(){
 }
 void XpWidget::levelUp(){
     if (levelcap==xp.xptrueNumber){
-        xp.xptrueNumber=0;
-        ++xp.levelNumber;
+        xp.setxptrueNumber(0);
+        xp.setlevelNumber(++xp.levelNumber);
         currrentLevel= "Level: " + std::to_string(xp.levelNumber);
         levelcap=xp.levelNumber;
         progressBar->reset();
@@ -45,11 +45,11 @@ void XpWidget::levelUp(){
 
 }
 void XpWidget::xpWidgetFuncSub(){
-    --xp.xptrueNumber;
+    xp.setxptrueNumber(--xp.xptrueNumber);
     progressBar->setValue(xp.xptrueNumber);
     levelcap=xp.levelNumber;
     if(xp.xptrueNumber<0){
-        xp.xptrueNumber=0;
+        xp.setxptrueNumber(0);
         progressBar->setValue(0);
     }
 
