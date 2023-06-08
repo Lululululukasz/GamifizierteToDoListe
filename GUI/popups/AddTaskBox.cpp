@@ -153,7 +153,7 @@ void AddTaskBox::addTaskClicked(bool checked)
             this->addTaskButton->setChecked(false);
             std::string name{this->nameTextEdit->toPlainText().toStdString()};
             std::string description{this->descriptionTextEdit->toPlainText().toStdString()};
-            // category->addTask(todolib::Task(name, description));
+            // category.addTask(todolib::Task(name, description));
             task = todolib::Task(name, description);
             hasTaskBool = true;
             task.setPriority(static_cast<todolib::Task::priority_t>(selectPriorityBox->currentIndex()));
