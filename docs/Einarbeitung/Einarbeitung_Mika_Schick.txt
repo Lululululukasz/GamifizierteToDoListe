@@ -3,3 +3,6 @@
 	- QPushButtons
 	- Installation von QT
 	- Kleinere Projektversuche innerhalb QT
+    - Slots und Signals
+    - QInputDialog
+    - Beginn Einlesen in Stylesheets
