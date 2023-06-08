@@ -57,7 +57,7 @@ private:
     std::shared_ptr<QToolButton> showDueDateFilterButton;
     std::list<std::shared_ptr<QRadioButton>> dueDateRadioButtons;
 
-    void createDueDateRadioButton(std::chrono::days upperBound, std::string label);
+    void createDueDateRadioButton(int upperBound, std::string label);
 
     void showDueDateFilter();
 

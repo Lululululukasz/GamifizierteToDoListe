@@ -24,8 +24,8 @@ public:
 
     void addPriorityFilter(Task::priority_t priority);
     void removePriorityFilter(Task::priority_t priority);
-    void setDueDateFilter(std::chrono::days &newDueDateFilter);
-    void setDurationFilter(double &newDurationFilter);
+    void setDueDateFilter(int newDueDateFilter);
+    void setDurationFilter(double newDurationFilter);
     bool filterTask(Task& task);
     void clearPriorityFilter();
     void clearDueDateFilter();
@@ -34,7 +34,7 @@ public:
 
 private:
     list<Task::priority_t> priorityFilter;
-    optional<std::chrono::days> dueDateFilter;
+    optional<int> dueDateFilter;
     optional<double> durationFilter;
 
     bool filterPriority(Task& task);

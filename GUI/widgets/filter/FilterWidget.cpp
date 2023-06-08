@@ -76,11 +76,11 @@ FilterWidget::FilterWidget(todolib::TaskFilterParameter& taskFilterParameter) : 
     showDueDateFilterButton->setStyleSheet("QToolButton{border: none;}");
     dueDateFilterHLayout->addWidget(showDueDateFilterButton.get());
 
-    createDueDateRadioButton(std::chrono::days(0), "today");
-    createDueDateRadioButton(std::chrono::days(1), "by tomorrow");
-    createDueDateRadioButton(std::chrono::days(7), "within a week");
-    createDueDateRadioButton(std::chrono::days(31), "within a month");
-    createDueDateRadioButton(std::chrono::days(-1), "whenever");
+    createDueDateRadioButton(0, "today");
+    createDueDateRadioButton(1, "by tomorrow");
+    createDueDateRadioButton(7, "within a week");
+    createDueDateRadioButton(31, "within a month");
+    createDueDateRadioButton(-1, "whenever");
 
     connect(showDueDateFilterButton.get(), &QToolButton::toggled, [=,this](bool checked) {
         showDueDateFilterButton->setArrowType(checked ? Qt::ArrowType::DownArrow : Qt::ArrowType::RightArrow);
@@ -123,6 +123,7 @@ FilterWidget::FilterWidget(todolib::TaskFilterParameter& taskFilterParameter) : 
     applyFiltersButton = std::make_shared<QPushButton>("Apply Filters");
     filterVLayout->addWidget(applyFiltersButton.get());
     connect(applyFiltersButton.get(), &QPushButton::clicked, this, &FilterWidget::applyFiltersSignal);
+    connect(applyFiltersButton.get(), &QPushButton::clicked, this, [&]() {qDebug() << "apply filters button clicked";});
 
 }
 
@@ -170,13 +171,16 @@ void FilterWidget::createPriorityCheckbox(todolib::Task::priority_t priority) {
     checkBox->setHidden(true);
 }
 
-void FilterWidget::createDueDateRadioButton(std::chrono::days upperBound, std::string label) {
+void FilterWidget::createDueDateRadioButton(int upperBound, std::string label) {
     auto radioButton {std::make_shared<QRadioButton>()};
-    connect(radioButton.get(),&QRadioButton::toggled, this, [&](bool checked) {
+    connect(radioButton.get(),&QRadioButton::toggled, this, [&, upperBound](bool checked) {
+        qDebug() << "radio button activated";
         if (checked) {
-            if (upperBound < std::chrono::days(0)) {
+            if (upperBound < 0) {
+                qDebug() << "radio button cleared";
                 taskFilterParameter.clearDueDateFilter();
             } else {
+                qDebug() << "radio button " << QString::fromStdString(std::to_string(upperBound));
                 taskFilterParameter.setDueDateFilter(upperBound);
             }
         }
@@ -186,6 +190,7 @@ void FilterWidget::createDueDateRadioButton(std::chrono::days upperBound, std::s
     filterVLayout->addWidget(radioButton.get());
     dueDateRadioButtons.push_back(radioButton);
     radioButton->setHidden(true);
+    qDebug() << "created RadioButton";
 }
 
 void FilterWidget::showDurationFilter() {
