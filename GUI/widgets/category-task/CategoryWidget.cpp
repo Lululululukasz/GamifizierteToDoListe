@@ -2,10 +2,11 @@
 // Created by Jan Ole Weighardt on 23.05.23.
 //
 
-#include "CategoryWidget.h"
+#include "GUI/widgets/category-task/CategoryWidget.h"
 #include "todolib/todolib.h"
-#include "TaskWidget.h"
+#include "GUI/widgets/category-task/TaskWidget.h"
 #include "utility/Globals.h"
+#include "GUI/popups/ConfirmDeleteWindow.h"
 
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>
@@ -46,8 +47,6 @@ CategoryWidget::CategoryWidget(todolib::Category &category, Page &page, QWidget 
     for (Task &task: category.tasks) {
         addTaskWidget(task);
     }
-
-
 }
 
 void CategoryWidget::changeName(const QString &newName){
@@ -65,15 +64,13 @@ void CategoryWidget::deleteCategory() {
 void CategoryWidget::addTask(Task &task) {
     category.addTask(task);
     emit refreshPageWidgetSignal();
-    // addTaskWidget(task);
-    // category.showTasks();
 }
 
 void CategoryWidget::addTaskWidget(Task &task) {
-    shared_ptr<TaskWidget> widget {make_shared<TaskWidget>(task, page)};
+    shared_ptr<TaskWidget> widget {make_shared<TaskWidget>(make_shared<Task>(task), make_shared<Category>(category), page)};
     TaskWidgets.push_back(widget);
     vlayout.addWidget(widget.get(), 0, Qt::AlignTop);
-    connect(widget.get(), &TaskWidget::deleteTaskSignal, this, [=, this]() { deleteTask(widget); });
+    connect(widget.get(), &TaskWidget::deleteButtonPressed, this, [=, this]() { openConfirmDeleteWindow(widget); });
     connect(widget.get(), &TaskWidget::taskMarkedChanged, this, &CategoryWidget::saveToJson);
     connect(widget.get(),&TaskWidget::xpWidgetSignalAdd,this,&CategoryWidget::xpWidgetSignalAdd);
     connect(widget.get(),&TaskWidget::xpWidgetSignalSub,this,&CategoryWidget::xpWidgetSignalSub);
@@ -85,19 +82,22 @@ void CategoryWidget::openAddTaskWindow(bool checked){
         addTaskBox = std::make_shared<AddTaskBox>();
         addTaskBox->setCategory(category);
         addTaskBox->show();
-        connect(addTaskBox.get(), &AddTaskBox::isOver, this, [=, this]() {if(addTaskBox->hasTask()) { addTask(addTaskBox->task);};});
+        connect(addTaskBox.get(), &AddTaskBox::isOver, this, [=, this]() {if(addTaskBox->hasTask()) { addTask(addTaskBox->task);}});
     }
 }
 
-void CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget>& taskWidget) {
-    category.deleteTask(taskWidget->task.getID());
+void CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget> taskWidget) {
+    category.deleteTask(taskWidget->task->getID());
     taskWidget->hide();
     vlayout.removeWidget(taskWidget.get());
     TaskWidgets.remove(taskWidget);
-    //category.showTasks();
 }
 
 void CategoryWidget::saveToJson() {
     category.saveToJson();
 }
-
+// open the PopUp when called
+void CategoryWidget::openConfirmDeleteWindow(const std::shared_ptr<TaskWidget> taskWidget) {
+    confirmDeleteWindow = std::make_shared<ConfirmDeleteWindow>();
+    connect(confirmDeleteWindow.get(), &ConfirmDeleteWindow::confirmDelete, this, [=, this]() { deleteTask(taskWidget);});
+}

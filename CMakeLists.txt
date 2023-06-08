@@ -26,7 +26,12 @@ add_executable(pic_aem_projekt
 		GUI/widgets/achievement/AchievementWidget.cpp
 		utility/Globals.cpp GUI/pages/AchievementsPage.cpp GUI/pages/AchievementsPage.h
 		utility/Globals.cpp utility/JsonList.tpp
-		GUI/widgets/XpWidget.cpp GUI/widgets/XpWidget.h GUI/widgets/addTaskWidgets/DatePickerWidget.cpp GUI/widgets/addTaskWidgets/DatePickerWidget.h GUI/widgets/addTaskWidgets/AddTaskElementWidget.cpp GUI/widgets/addTaskWidgets/AddTaskElementWidget.h GUI/popups/AddPictureBox.cpp GUI/popups/AddPictureBox.h GUI/widgets/addTaskWidgets/AddPictureBoxElementWidget.cpp GUI/widgets/addTaskWidgets/AddPictureBoxElementWidget.h)
+		GUI/widgets/XpWidget.cpp GUI/widgets/XpWidget.h
+		GUI/widgets/addTaskWidgets/DatePickerWidget.cpp GUI/widgets/addTaskWidgets/DatePickerWidget.h
+		GUI/widgets/addTaskWidgets/AddTaskElementWidget.cpp GUI/widgets/addTaskWidgets/AddTaskElementWidget.h
+		GUI/popups/AddPictureBox.cpp GUI/popups/AddPictureBox.h
+		GUI/widgets/addTaskWidgets/AddPictureBoxElementWidget.cpp GUI/widgets/addTaskWidgets/AddPictureBoxElementWidget.h
+		GUI/popups/ConfirmDeleteWindow.cpp GUI/popups/ConfirmDeleteWindow.h)
 
 target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia)
 target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets)
