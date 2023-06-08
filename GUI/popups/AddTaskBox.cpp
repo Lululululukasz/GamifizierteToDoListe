@@ -178,7 +178,7 @@ void AddTaskBox::closeAddTaskWindow() {
 }
 
 void AddTaskBox::noPicturePath() {
-    picturePath = "no picture";
+    picturePath = "";
 }
 
 
