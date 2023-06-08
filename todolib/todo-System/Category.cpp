@@ -107,7 +107,7 @@ void Category::saveToJson() {
     jsonObject.insert("id", id.c_str());
     jsonObject.insert("name", name.c_str());
     jsonObject.insert("tasks", tasks.toJson());
-    Json::writeJsonObjectToFile(jsonObject);
+    Json::writeJsonObjectToFile(jsonObject, "categories/");
 }
 
 /**
