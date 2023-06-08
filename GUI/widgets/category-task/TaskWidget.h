@@ -30,8 +30,9 @@ class TaskWidget : public QWidget {
 Q_OBJECT
 
 public:
-    explicit TaskWidget(todolib::Task &task, todolib::Category& category, Page &page, QWidget *parent = nullptr);
+    explicit TaskWidget(todolib::Task &task, todolib::Category& category,  Page &page, QWidget *parent= nullptr);
     void update();
+
     todolib::Task &task;
     todolib::Category &category;
 
@@ -41,6 +42,7 @@ signals:
     void xpWidgetSignalAdd();
     void xpWidgetSignalSub();
     void taskMarkedChanged();
+
 
 private:
     Page &page;
@@ -68,9 +70,9 @@ private:
 private slots:
     void taskDone();
     void taskUndone();
-    void editTask();
     void deleteTask();
     void showDescription();
     void hideDescription();
+    void editTask();
 };
 #endif //PIC_AEM_PROJEKT_CHECKBOX_H

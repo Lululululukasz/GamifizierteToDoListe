@@ -52,7 +52,7 @@ void TaskWidget::update() {
 }
 
 TaskWidget::TaskWidget(todolib::Task &task, todolib::Category& category,  Page &page, QWidget *parent)
-        : task{task}, catgory{category}, page{page}, QWidget(parent) {
+        : task{task}, category{category}, page{page}, QWidget(parent) {
 
     //layouts
     hbox = std::make_shared<QHBoxLayout>();
@@ -174,7 +174,7 @@ void TaskWidget::taskDone() {
             playRandomSound();
             emit taskMarkedChanged();
             playConfettiAnimation();
-             catgory.saveToJson();
+            category.saveToJson();
         }
 }
 
@@ -186,7 +186,7 @@ void TaskWidget::taskUndone() {
         task.setAsUndone();
          emit xpWidgetSignalSub();// Emit the Signal Xp Number -1 sends the signal through CategoryWidget to CategoryViewPage to Page where it aktivates the function
         Points::getinstance().subPoints(1, 'n');
-        catgory.saveToJson();
+        category.saveToJson();
     }
 
 }
@@ -202,8 +202,8 @@ void TaskWidget::editTask() {
 
 //emits the deleteTaskSignal that is used in CategoryWidget
 void TaskWidget::deleteTask() {
-    catgory.deleteTask(task.getID());
-    catgory.saveToJson();
+    category.deleteTask(task.getID());
+    category.saveToJson();
 }
 
 //shows the description of a task when the showDescriptionButton is checked

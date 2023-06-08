@@ -67,7 +67,7 @@ void CategoryWidget::addTask(Task &task) {
 }
 
 void CategoryWidget::addTaskWidget(Task &task) {
-    shared_ptr<TaskWidget> widget {make_shared<TaskWidget>(make_shared<Task>(task), make_shared<Category>(category), page)};
+    shared_ptr<TaskWidget> widget {make_shared<TaskWidget>(task, category, page)};
     TaskWidgets.push_back(widget);
     vlayout.addWidget(widget.get(), 0, Qt::AlignTop);
     connect(widget.get(), &TaskWidget::deleteButtonPressed, this, [=, this]() { openConfirmDeleteWindow(widget); });
@@ -87,7 +87,7 @@ void CategoryWidget::openAddTaskWindow(bool checked){
 }
 
 void CategoryWidget::deleteTask(const std::shared_ptr<TaskWidget> taskWidget) {
-    category.deleteTask(taskWidget->task->getID());
+    category.deleteTask(taskWidget->task.getID());
     taskWidget->hide();
     vlayout.removeWidget(taskWidget.get());
     TaskWidgets.remove(taskWidget);
