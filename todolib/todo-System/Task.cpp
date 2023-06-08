@@ -85,6 +85,7 @@ std::string Task::getPriorityString() {
             return "urgent";
 
     }
+    return "";
 }
 
 void Task::setDuration(double dur) {

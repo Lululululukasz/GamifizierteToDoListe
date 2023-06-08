@@ -58,7 +58,7 @@ namespace todolib {
          * Constructor to create a task with a QjsonObject
          * @param QJsonObject taskObject
          */
-        Task(const QJsonObject &taskObject);
+        explicit Task(const QJsonObject &taskObject);
 
         string getID();
 

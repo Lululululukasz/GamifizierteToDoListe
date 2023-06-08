@@ -13,8 +13,8 @@
 
 using namespace todolib;
 
-CategoryViewPage::CategoryViewPage(todolib::Profile &profile) : Page{profile} {
-    layoutWidget.vOuterLayout->addWidget(&addCategoryButton);
+CategoryViewPage::CategoryViewPage(todolib::Profile &profile) : MainPage{profile} {
+    layoutWidget.vBodyLayout->addWidget(&addCategoryButton, 0,Qt::AlignTop);
     addCategoryButton.setGeometry(10, 100, 80, 30);
     connect(&addCategoryButton, &QPushButton::clicked, this, [&]() { addCategory(); });
 
@@ -50,7 +50,7 @@ void CategoryViewPage::addCategory() {
 void CategoryViewPage::addCategoryWidget(Category& category) {
     shared_ptr<CategoryWidget> widget {make_shared<CategoryWidget>(category, *this)};
     categoryWidgets.push_back(widget);
-    layoutWidget.vOuterLayout->addWidget(widget.get(), 0, Qt::AlignTop);
+    layoutWidget.vBodyLayout->addWidget(widget.get(), 0, Qt::AlignTop);
     connect(widget.get(), &CategoryWidget::categoryDeleteSignal, this, [=, this]() { deleteCategory(widget); });
     connect(widget.get(), &CategoryWidget::xpWidgetSignalAdd, this, &Page::xpWidgetSignalAdd);
     connect(widget.get(), &CategoryWidget::xpWidgetSignalSub, this, &Page::xpWidgetSignalSub);
