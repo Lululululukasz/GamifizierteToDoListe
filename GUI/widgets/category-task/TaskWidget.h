@@ -14,6 +14,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QGraphicsScene>
+#include <QPixmap>
 
 
 /** The hbox is the horizontal box that is the first element in the vertical box vbox. It
@@ -52,6 +53,8 @@ private:
     std::shared_ptr<QLabel> taskPriorityLabel;
     std::shared_ptr<QLabel> taskDurationLabel;
     std::shared_ptr<QLabel> taskDueDateLabel;
+    std::shared_ptr<QLabel> pictureLabel;
+    QPixmap picturePixmap;
     std::shared_ptr<QFont> font;
     std::shared_ptr<DrawConfetti> confetti;
     std::shared_ptr<QGraphicsScene> scene;

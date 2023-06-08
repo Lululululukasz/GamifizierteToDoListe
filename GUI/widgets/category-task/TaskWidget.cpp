@@ -85,6 +85,15 @@ TaskWidget::TaskWidget(std::shared_ptr<todolib::Task> task, std::shared_ptr<todo
         taskDueDateLabel->setText(dueDateText);
     }
 
+    //pictureLabel
+    pictureLabel = std::make_shared<QLabel>();
+    if(task.getPicture().empty()){
+        pictureLabel->setHidden(true);
+    } else {
+        picturePixmap = Globals::homepath + QString::fromStdString(task.getPicture());
+        pictureLabel->setPixmap(picturePixmap.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    }
+
 
     //adding widgets to the layouts
     vbox->addLayout(hbox.get());
@@ -159,6 +168,8 @@ void TaskWidget::showDescription() {
     taskDurationLabel->setVisible(true);
     vbox->addWidget(taskDueDateLabel.get());
     taskDueDateLabel->setVisible(true);
+    vbox->addWidget(pictureLabel.get());
+    pictureLabel->setVisible(true);
 }
 
 //hides the description of a task when the showDescriptionButton is unchecked
@@ -172,6 +183,8 @@ void TaskWidget::hideDescription() {
     taskDurationLabel->setVisible(false);
     vbox->removeWidget(taskDueDateLabel.get());
     taskDueDateLabel->setVisible(false);
+    vbox->removeWidget(pictureLabel.get());
+    pictureLabel->setVisible(false);
 
 }
 
