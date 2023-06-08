@@ -32,6 +32,7 @@ private slots:
 
 public:
     std::chrono::year_month_day createDueDate();
+    void setDueDate(std::chrono::year_month_day time);
     bool invalidDate();
 
 };

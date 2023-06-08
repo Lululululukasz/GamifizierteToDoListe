@@ -62,9 +62,9 @@ bool todolib::TaskFilterParameter::filterDueDate(todolib::Task &task) {
 
     std::cout << "today " << static_cast<unsigned>(today.day()) << "." << static_cast<unsigned>(today.month()) << "." << static_cast<int>(today.year()) << std::endl ;
     std::cout << "filter day " << static_cast<unsigned>(filter.day()) << "." << static_cast<unsigned>(filter.month()) << "." << static_cast<int>(filter.year()) << std::endl ;
-    std::cout << "task day " << static_cast<unsigned>(task.getdueDate().day()) << "." << static_cast<unsigned>(task.getdueDate().month()) << "." << static_cast<int>(task.getdueDate().year()) << std::endl ;
+    std::cout << "task day " << static_cast<unsigned>(task.getDueDate().day()) << "." << static_cast<unsigned>(task.getDueDate().month()) << "." << static_cast<int>(task.getDueDate().year()) << std::endl ;
 
-    if (task.getdueDate() <= filter) {
+    if (task.getDueDate() <= filter) {
         return true;
     }
     return false;

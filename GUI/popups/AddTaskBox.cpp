@@ -158,7 +158,7 @@ void AddTaskBox::addTaskClicked(bool checked)
             hasTaskBool = true;
             task.setPriority(static_cast<todolib::Task::priority_t>(selectPriorityBox->currentIndex()));
             task.setDuration(this->durationTextEdit->toPlainText().toDouble());
-            task.setdueDate(datePicker->createDueDate());
+            task.setDueDate(datePicker->createDueDate());
             task.setPicture(picturePath);
             emit isOver();
         }

@@ -31,9 +31,9 @@ signals:
 
     void isOver();
 
-private slots:
+protected slots:
 
-    void addTaskClicked(bool checked);
+    virtual void addTaskClicked(bool checked);
 
     void closeAddTaskWindow();
 
@@ -44,7 +44,7 @@ private slots:
     void noPicturePath();
 
 
-private:
+protected:
     bool hasTaskBool{false};
     QVBoxLayout layout {QVBoxLayout(this)};
 

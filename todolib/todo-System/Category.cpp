@@ -56,7 +56,9 @@ Category::Category(const QJsonObject &jsonObject) {
                         }
                     }
                 if (checksum == 1023) {
-                    this->tasks.push_back(Task(task.toObject()));
+                    auto taskObj {Task(task.toObject())};
+                    taskObj.setCategory(this);
+                    this->tasks.push_back(std::move(taskObj));
                 }
             }
     }
@@ -72,6 +74,7 @@ bool Category::isSame(const Category &other) const {
 
 void Category::addTask(Task &task) {
     tasks.push_back(task);
+    task.setCategory(this);
     saveToJson();
 }
 void Category::addTask(Task &&task) {

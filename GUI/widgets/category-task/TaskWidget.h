@@ -3,6 +3,7 @@
 #include "todolib/todo-System/Task.h"
 #include "GUI/ConfettiAnimation/DrawConfetti.h"
 #include "GUI/pages/Page.h"
+#include "GUI/popups/EditTaskBox.h"
 
 #include <memory>
 #include <QWidget>
@@ -30,9 +31,10 @@ Q_OBJECT
 
 public:
     explicit TaskWidget(todolib::Task& task, todolib::Category& category, Page &page);
+    void update();
 
-    todolib::Task& task;
-    todolib::Category& catgory;
+    todolib::Task &task;
+    todolib::Category &category;
 
 signals:
     void deleteButtonPressed();
@@ -41,6 +43,7 @@ signals:
     void xpWidgetSignalSub();
     void taskMarkedChanged();
 
+
 private:
     Page &page;
     std::shared_ptr<QHBoxLayout> hbox;
@@ -48,6 +51,7 @@ private:
     std::shared_ptr<QCheckBox> taskCheckbox;
     std::shared_ptr<QLabel> taskNameLabel;
     std::shared_ptr<QPushButton> taskDeleteButton;
+    std::shared_ptr<QPushButton> editTaskButton;
     std::shared_ptr<QToolButton> showDescriptionButton;
     std::shared_ptr<QLabel> taskDescriptionLabel;
     std::shared_ptr<QLabel> taskPriorityLabel;
@@ -58,7 +62,7 @@ private:
     std::shared_ptr<QFont> font;
     std::shared_ptr<DrawConfetti> confetti;
     std::shared_ptr<QGraphicsScene> scene;
-
+    std::shared_ptr<EditTaskBox> editTaskBox;
 
     static void playRandomSound();
     void playConfettiAnimation();
@@ -69,5 +73,6 @@ private slots:
     void deleteTask();
     void showDescription();
     void hideDescription();
+    void editTask();
 };
 #endif //PIC_AEM_PROJEKT_CHECKBOX_H

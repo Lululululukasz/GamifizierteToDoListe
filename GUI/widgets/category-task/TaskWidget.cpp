@@ -16,9 +16,43 @@
 #include <QGraphicsProxyWidget>
 #include <QGraphicsView>
 
+void TaskWidget::update() {
+    taskNameLabel->setText(QString::fromStdString(task.name));
 
-TaskWidget::TaskWidget(todolib::Task& task, todolib::Category& category, Page &page)
-        : task{task}, catgory{category}, page{page} {
+    QString descriptionText = "Description: " + QString::fromStdString(task.description);
+    taskDescriptionLabel->setText(descriptionText);
+
+    int year = static_cast<int>(task.getDueDate().year());
+    unsigned month = static_cast<unsigned>(task.getDueDate().month());
+    QStringList monthList {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    QString monthString = monthList[month - 1];
+    unsigned day = static_cast<unsigned>(task.getDueDate().day());
+    if(day<=3) {
+        QStringList dayList {"1st", "2nd", "3rd"};
+        QString dayString = dayList[day - 1];
+        QString dueDateText = "Due on: " + dayString + " of " + monthString + " " + QString::number(year);
+        taskDueDateLabel->setText(dueDateText);
+    } else if(day == 21 || day == 22 || day == 23){
+        QStringList dayList {"21st", "22nd", "23rd"};
+        QString dayString = dayList[day - 21];
+        QString dueDateText = "Due on: " + dayString + " of " + monthString + " " + QString::number(year);
+        taskDueDateLabel->setText(dueDateText);
+    }else{
+        QString dueDateText = "Due on: " + QString::number(day)  + "th" + " of " + monthString + " " + QString::number(year);
+        taskDueDateLabel->setText(dueDateText);
+    }
+
+    QString priorityText = "Priority: " + QString::fromStdString(task.getPriorityString(task.getPriority()));
+    taskPriorityLabel->setText(priorityText);
+
+    QString durationText = "Duration: " + QString::number(task.getDuration());
+    taskDurationLabel->setText(durationText);
+
+    taskCheckbox->setCheckState(task.getDoneStatus() ? Qt::Checked : Qt::Unchecked);
+}
+
+TaskWidget::TaskWidget(todolib::Task &task, todolib::Category& category,  Page &page)
+        : task{task}, category{category}, page{page}{
 
     //layouts
     hbox = std::make_shared<QHBoxLayout>();
@@ -41,6 +75,9 @@ TaskWidget::TaskWidget(todolib::Task& task, todolib::Category& category, Page &p
     taskDeleteButton->setText("  Delete");
     taskDeleteButton->setIcon(taskDeleteButton->style()->standardIcon(QStyle::SP_TrashIcon));
 
+    editTaskButton = std::make_shared<QPushButton>();
+    editTaskButton->setIcon(QIcon(Globals::homepath+"/resources/edit_icon.png"));
+
     //showDescriptionButton
     showDescriptionButton = std::make_shared<QToolButton>(this);
     showDescriptionButton->setCheckable(true);
@@ -53,9 +90,8 @@ TaskWidget::TaskWidget(todolib::Task& task, todolib::Category& category, Page &p
     QString descriptionText = "Description: " + QString::fromStdString(task.description);
     taskDescriptionLabel->setText(descriptionText);
 
-    //taskPriorityLabel
     taskPriorityLabel = std::make_shared<QLabel>();
-    QString priorityText = "Priority: " + QString::fromStdString(todolib::Task::getPriorityString(task.getPriority()));
+    QString priorityText = "Priority: " + QString::fromStdString(task.getPriorityString(task.getPriority()));
     taskPriorityLabel->setText(priorityText);
 
     //taskDurationLabel
@@ -65,11 +101,11 @@ TaskWidget::TaskWidget(todolib::Task& task, todolib::Category& category, Page &p
 
     //taskDueDateLabel
     taskDueDateLabel = std::make_shared<QLabel>();
-    int year = static_cast<int>(task.getdueDate().year());
-    unsigned month = static_cast<unsigned>(task.getdueDate().month());
+    int year = static_cast<int>(task.getDueDate().year());
+    unsigned month = static_cast<unsigned>(task.getDueDate().month());
     QStringList monthList {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     QString monthString = monthList[month - 1];
-    unsigned day = static_cast<unsigned>(task.getdueDate().day());
+    unsigned day = static_cast<unsigned>(task.getDueDate().day());
     if(day<=3) {
         QStringList dayList {"1st", "2nd", "3rd"};
         QString dayString = dayList[day - 1];
@@ -100,10 +136,12 @@ TaskWidget::TaskWidget(todolib::Task& task, todolib::Category& category, Page &p
     hbox->addWidget(taskCheckbox.get(), 0, Qt::AlignLeft | Qt::AlignVCenter);
     hbox->addWidget(showDescriptionButton.get(), 0, Qt::AlignLeft | Qt::AlignVCenter);
     hbox->addWidget(taskNameLabel.get(), 1, Qt::AlignLeft | Qt::AlignVCenter);
+    hbox->addWidget(editTaskButton.get(), 0, Qt::AlignRight | Qt::AlignVCenter);
     hbox->addWidget(taskDeleteButton.get(), 0, Qt::AlignRight | Qt::AlignVCenter);
 
     //connecting to the slots below
     connect(taskDeleteButton.get(), &QPushButton::clicked, this, &TaskWidget::deleteButtonPressed);
+    connect(editTaskButton.get(), &QPushButton::clicked, this, &TaskWidget::editTask);
     connect(taskCheckbox.get(), &QCheckBox::stateChanged, this, [=,this](bool checked){
         if (checked) taskDone();
         else taskUndone();
@@ -119,6 +157,7 @@ TaskWidget::TaskWidget(todolib::Task& task, todolib::Category& category, Page &p
         else hideDescription();
     });
 
+    update();
 }
 
 //changes the state of the taskNameLabel to strikedout or not strikedout
@@ -133,8 +172,9 @@ void TaskWidget::taskDone() {
             //The Values for the points are provisional and should later be changed to whatever you want.
             Points::getinstance().addPoints(1,1,'n');
             playRandomSound();
+            emit taskMarkedChanged();
             playConfettiAnimation();
-            catgory.saveToJson();
+            category.saveToJson();
         }
 }
 
@@ -146,15 +186,24 @@ void TaskWidget::taskUndone() {
         task.setAsUndone();
          emit xpWidgetSignalSub();// Emit the Signal Xp Number -1 sends the signal through CategoryWidget to CategoryViewPage to Page where it aktivates the function
         Points::getinstance().subPoints(1, 'n');
-        catgory.saveToJson();
+        category.saveToJson();
     }
 
 }
 
+void TaskWidget::editTask() {
+    editTaskBox = std::make_shared<EditTaskBox>(task);
+    editTaskBox->show();
+    connect(editTaskBox.get(), &EditTaskBox::isOver, this, [=, this]() {
+        task.saveToJson();
+        update();
+    });
+}
+
 //emits the deleteTaskSignal that is used in CategoryWidget
 void TaskWidget::deleteTask() {
-    catgory.deleteTask(task.getID());
-    catgory.saveToJson();
+    category.deleteTask(task.getID());
+    category.saveToJson();
 }
 
 //shows the description of a task when the showDescriptionButton is checked
