@@ -137,6 +137,13 @@ void FilterWidget::createDurationRadioButton(double limit, bool more) {
         label << " ";
         label << std::setprecision(3) << limit;
     }
+    connect(radioButton.get(), &QRadioButton::toggled, this, [=, this](bool checked) {
+        double filter = limit;
+        if (more) {
+            filter *= -1.0;
+        }
+        taskFilterParameter.setDurationFilter(filter);
+    });
     radioButton->setHidden(true);
     radioButton->setText(QString::fromStdString(label.str()));
     filterVLayout->addWidget(radioButton.get());

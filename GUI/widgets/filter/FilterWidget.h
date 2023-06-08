@@ -63,7 +63,7 @@ private:
 
     void hideDueDateFilter();
 
-    //DueDateFilter
+    //DuerationFilter
     std::shared_ptr<QHBoxLayout> durationFilterHLayout;
     std::shared_ptr<QLabel> filterForDurationLabel;
     std::shared_ptr<QToolButton> showDurationFilterButton;
