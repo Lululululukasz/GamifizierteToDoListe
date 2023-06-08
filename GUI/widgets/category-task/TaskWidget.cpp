@@ -87,10 +87,10 @@ TaskWidget::TaskWidget(std::shared_ptr<todolib::Task> task, std::shared_ptr<todo
 
     //pictureLabel
     pictureLabel = std::make_shared<QLabel>();
-    if(task.getPicture().empty()){
+    if(task->getPicture().empty()){
         pictureLabel->setHidden(true);
     } else {
-        picturePixmap = Globals::homepath + QString::fromStdString(task.getPicture());
+        picturePixmap = Globals::homepath + QString::fromStdString(task->getPicture());
         pictureLabel->setPixmap(picturePixmap.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     }
 
