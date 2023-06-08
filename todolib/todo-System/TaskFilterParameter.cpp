@@ -4,8 +4,11 @@
 
 #include "TaskFilterParameter.h"
 
-void todolib::TaskFilterParameter::setPriorityFilter(todolib::Task::priority_t &newPriority) {
-    priorityFilter = newPriority;
+void todolib::TaskFilterParameter::addPriorityFilter(todolib::Task::priority_t priority) {
+    priorityFilter.push_back(priority);
+}
+void todolib::TaskFilterParameter::removePriorityFilter(Task::priority_t priority) {
+    priorityFilter.remove(priority);
 }
 
 void todolib::TaskFilterParameter::setDueDateFilter(DueDateFilter &newDueDateFilter) {
@@ -17,7 +20,7 @@ void todolib::TaskFilterParameter::setDurationFilter(double &newDurationFilter) 
 }
 
 bool todolib::TaskFilterParameter::filterTask(todolib::Task &task) {
-    if (priorityFilter && !filterPriority(task)) {
+    if (!priorityFilter.empty() && !filterPriority(task)) {
         return false;
     } else if (dueDateFilter && !filterDueDate(task)) {
         return false;
@@ -28,11 +31,12 @@ bool todolib::TaskFilterParameter::filterTask(todolib::Task &task) {
 }
 
 bool todolib::TaskFilterParameter::filterPriority(todolib::Task &task) {
-    if (task.getPriority() == priorityFilter) {
-        return true;
-    } else {
-        return false;
+    for (Task::priority_t& filter : priorityFilter) {
+        if (task.getPriority() == filter) {
+            return true;
+        }
     }
+    return false;
 }
 
 bool todolib::TaskFilterParameter::filterDueDate(todolib::Task &task) {
@@ -54,13 +58,13 @@ bool todolib::TaskFilterParameter::filterDuration(todolib::Task &task) {
 }
 
 void todolib::TaskFilterParameter::clear() {
-    priorityFilter.reset();
+    priorityFilter.clear();
     dueDateFilter.reset();
     durationFilter.reset();
 }
 
 void todolib::TaskFilterParameter::clearPriorityFilter() {
-    priorityFilter.reset();
+    priorityFilter.clear();
 }
 
 void todolib::TaskFilterParameter::clearDueDateFilter() {

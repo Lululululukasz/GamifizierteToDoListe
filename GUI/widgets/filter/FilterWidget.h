@@ -14,13 +14,20 @@
 #include <QHBoxLayout>
 #include <QToolButton>
 #include <todolib/todolib.h>
+#include <QPushButton>
 
 class FilterWidget : public QWidget {
 
-    Q_OBJECT
+Q_OBJECT
 
 public:
-    explicit FilterWidget(QWidget *parent = nullptr);
+    explicit FilterWidget(todolib::TaskFilterParameter &taskFilterParameter);
+
+    todolib::TaskFilterParameter &taskFilterParameter;
+
+signals:
+
+    void applyFiltersSignal();
 
 private:
 
@@ -37,8 +44,11 @@ private:
     std::shared_ptr<QLabel> filterForPriorityLabel;
     std::shared_ptr<QToolButton> showPriorityFilterButton;
     std::list<std::shared_ptr<QCheckBox>> priorityCheckboxes;
+
     void createPriorityCheckbox(todolib::Task::priority_t priority);
+
     void showPriorityFilter();
+
     void hidePriorityFilter();
 
     //DueDateFilter
@@ -46,8 +56,11 @@ private:
     std::shared_ptr<QLabel> filterForDueDateLabel;
     std::shared_ptr<QToolButton> showDueDateFilterButton;
     std::list<std::shared_ptr<QCheckBox>> dueDateCheckboxes;
+
     void createDueDateCheckbox(std::chrono::days lowerBound, std::chrono::days upperBound, std::string label);
+
     void showDueDateFilter();
+
     void hideDueDateFilter();
 
     //DueDateFilter
@@ -55,11 +68,16 @@ private:
     std::shared_ptr<QLabel> filterForDurationLabel;
     std::shared_ptr<QToolButton> showDurationFilterButton;
     std::list<std::shared_ptr<QRadioButton>> durationRadioButtons;
+
     void createDurationRadioButton(double limit, bool more);
+
     void showDurationFilter();
+
     void hideDurationFilter();
 
     void paintEvent(QPaintEvent *event) override;
+
+    std::shared_ptr<QPushButton> applyFiltersButton;
 
 };
 

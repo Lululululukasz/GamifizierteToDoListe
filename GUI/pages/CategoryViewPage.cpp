@@ -48,7 +48,7 @@ void CategoryViewPage::addCategory() {
 
 
 void CategoryViewPage::addCategoryWidget(Category& category) {
-    shared_ptr<CategoryWidget> widget {make_shared<CategoryWidget>(category, *this)};
+    shared_ptr<CategoryWidget> widget {make_shared<CategoryWidget>(category, profile.taskFilterParameter, *this)};
     categoryWidgets.push_back(widget);
     layoutWidget.vBodyLayout->addWidget(widget.get(), 0, Qt::AlignTop);
     connect(widget.get(), &CategoryWidget::categoryDeleteSignal, this, [=, this]() { deleteCategory(widget); });
@@ -56,6 +56,7 @@ void CategoryViewPage::addCategoryWidget(Category& category) {
     connect(widget.get(), &CategoryWidget::xpWidgetSignalSub, this, &Page::xpWidgetSignalSub);
     connect(widget.get(), &CategoryWidget::categoryConfigSignal, this, [=, this]() { configCategory(widget); });
     connect(widget.get(), &CategoryWidget::refreshPageWidgetSignal, this, &CategoryViewPage::refreshPageSignal);
+    connect(this, &MainPage::applyFilters, widget.get(), &CategoryWidget::filterTasks);
 }
 
 void CategoryViewPage::deleteCategory(const shared_ptr<CategoryWidget>& categoryWidget) {

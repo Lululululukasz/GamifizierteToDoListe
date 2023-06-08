@@ -8,7 +8,7 @@
 #include <QStyleOption>
 #include <QPainter>
 
-FilterWidget::FilterWidget(QWidget *parent) : QWidget(parent) {
+FilterWidget::FilterWidget(todolib::TaskFilterParameter& taskFilterParameter) : taskFilterParameter{taskFilterParameter} {
 
     filterVLayout = std::make_shared<QVBoxLayout>();
     setStyleSheet("FilterWidget{border: 1px solid lightgray; background-color: white;}");
@@ -120,6 +120,10 @@ FilterWidget::FilterWidget(QWidget *parent) : QWidget(parent) {
         else hideDurationFilter();
     });
 
+    applyFiltersButton = std::make_shared<QPushButton>("Apply Filters");
+    filterVLayout->addWidget(applyFiltersButton.get());
+    connect(applyFiltersButton.get(), &QPushButton::clicked, this, &FilterWidget::applyFiltersSignal);
+
 }
 
 
@@ -141,8 +145,17 @@ void FilterWidget::createDurationRadioButton(double limit, bool more) {
 
 void FilterWidget::createPriorityCheckbox(todolib::Task::priority_t priority) {
     auto checkBox {std::make_shared<QCheckBox>()};
+    connect(checkBox.get(), &QCheckBox::stateChanged, this, [=, this](bool checked) {
+        if (checked) {
+            taskFilterParameter.addPriorityFilter(priority);
+            qDebug() << "adding " << QString::fromStdString(todolib::Task::getPriorityString(priority));
+        } else {
+            taskFilterParameter.removePriorityFilter(priority);
+            qDebug() << "remove " << QString::fromStdString(todolib::Task::getPriorityString(priority));
+        }
+    });
     checkBox->setText(QString::fromStdString(todolib::Task::getPriorityString(priority)));
-    checkBox->setChecked(true);
+    checkBox->setChecked(false);
     filterVLayout->addWidget(checkBox.get());
     priorityCheckboxes.push_back(checkBox);
     checkBox->setHidden(true);

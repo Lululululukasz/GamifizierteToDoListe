@@ -6,6 +6,7 @@
 #define PIC_AEM_PROJEKT_TASKFILTERPARAMETER_H
 
 #include <optional>
+#include <map>
 #include "Task.h"
 
 namespace todolib {
@@ -21,7 +22,8 @@ public:
         thisMonth
     };
 
-    void setPriorityFilter(Task::priority_t &newPriority);
+    void addPriorityFilter(Task::priority_t priority);
+    void removePriorityFilter(Task::priority_t priority);
     void setDueDateFilter(DueDateFilter &newDueDateFilter);
     void setDurationFilter(double &newDurationFilter);
     bool filterTask(Task& task);
@@ -31,7 +33,7 @@ public:
     void clear();
 
 private:
-    optional<Task::priority_t> priorityFilter;
+    list<Task::priority_t> priorityFilter;
     optional<DueDateFilter> dueDateFilter;
     optional<double> durationFilter;
 

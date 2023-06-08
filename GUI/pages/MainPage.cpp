@@ -18,6 +18,7 @@ MainPage::MainPage(todolib::Profile &profile) : Page{profile} {
     layoutWidget.vSideBar->addWidget(&placeholderSearchbar);
 
     //Filter
-    filterWidget = std::make_shared<FilterWidget>();
+    filterWidget = std::make_shared<FilterWidget>(profile.taskFilterParameter);
     layoutWidget.vSideBar->addWidget(filterWidget.get());
+    connect(filterWidget.get(), &FilterWidget::applyFiltersSignal, this, &MainPage::applyFilters);
 }

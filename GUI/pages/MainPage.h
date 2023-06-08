@@ -35,6 +35,7 @@ public:
 
     signals:
     void openAchievementsPageSignal();
+    void applyFilters();
 
 private:
     QLabel header {QLabel("Kontra Krastination")};
