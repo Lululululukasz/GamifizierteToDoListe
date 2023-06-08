@@ -42,9 +42,10 @@ namespace todolib {
         return this->achievements;
     }
 
+
     // returns true if task with that Name can be found and achievement for it can be set
     bool setThisAchievementAsDone(std::string &taskName) {
-
+        return false;
     }
 
 } // todolib

@@ -78,11 +78,11 @@ namespace todolib {
         void setPriority(Task::priority_t prio);
         priority_t getPriority();
 
-        /** converts the priority to a string
+        /** converts the priorityFilter to a string
          *
          * @return standard string
          */
-        std::string getPriorityString();
+        static std::string getPriorityString(priority_t prio);
 
         void setDuration(double dur);
         [[nodiscard]] double getDuration() const;

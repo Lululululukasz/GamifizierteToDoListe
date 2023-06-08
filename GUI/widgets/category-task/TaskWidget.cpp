@@ -22,6 +22,8 @@ void TaskWidget::update() {
     QString descriptionText = "Description: " + QString::fromStdString(task.description);
     taskDescriptionLabel->setText(descriptionText);
 
+TaskWidget::TaskWidget(todolib::Task& task, todolib::Category& category, Page &page)
+        : task{task}, category{category}, page{page} {
     int year = static_cast<int>(task.getDueDate().year());
     unsigned month = static_cast<unsigned>(task.getDueDate().month());
     QStringList monthList {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
@@ -90,6 +92,7 @@ TaskWidget::TaskWidget(todolib::Task &task, todolib::Category& category,  Page &
     QString descriptionText = "Description: " + QString::fromStdString(task.description);
     taskDescriptionLabel->setText(descriptionText);
 
+    //taskPriorityLabel
     taskPriorityLabel = std::make_shared<QLabel>();
     QString priorityText = "Priority: " + QString::fromStdString(task.getPriorityString());
     taskPriorityLabel->setText(priorityText);

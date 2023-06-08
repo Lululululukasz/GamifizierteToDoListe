@@ -41,7 +41,7 @@ AddTaskBox::AddTaskBox(QWidget *parent) : QWidget(parent), task(todolib::Task(""
     selectPriorityBox->addItems(prios);
     elements.push_back(std::make_shared<AddTaskElementWidget>(
             "Priority",
-            "Please enter a priority.",
+            "Please enter a priorityFilter.",
             true,
             [this] { return selectPriorityBox->currentIndex() > 0; },
             selectPriorityBox.get()
@@ -153,7 +153,7 @@ void AddTaskBox::addTaskClicked(bool checked)
             this->addTaskButton->setChecked(false);
             std::string name{this->nameTextEdit->toPlainText().toStdString()};
             std::string description{this->descriptionTextEdit->toPlainText().toStdString()};
-            // category->addTask(todolib::Task(name, description));
+            // category.addTask(todolib::Task(name, description));
             task = todolib::Task(name, description);
             hasTaskBool = true;
             task.setPriority(static_cast<todolib::Task::priority_t>(selectPriorityBox->currentIndex()));

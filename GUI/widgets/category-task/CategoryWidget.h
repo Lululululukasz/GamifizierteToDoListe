@@ -24,11 +24,15 @@ class CategoryWidget : public QWidget {
 
 Q_OBJECT
 public:
-    explicit CategoryWidget(todolib::Category &category, Page &page, QWidget *parent = nullptr);
+    explicit CategoryWidget(todolib::Category &category, todolib::TaskFilterParameter &taskFilterParameter, Page &page);
 
     todolib::Category &category;
+    todolib::TaskFilterParameter &taskFilterParameter;
 
     void changeName(const QString &newName);
+
+public slots:
+    void filterTasks();
 
 signals:
     void categoryDeleteSignal();
@@ -53,7 +57,7 @@ private:
     QLabel name{QLabel()};
     QPushButton deleteButton{QPushButton()};
     QPushButton confButton{QPushButton()};
-    std::list<std::shared_ptr<TaskWidget>> TaskWidgets;
+    std::list<std::shared_ptr<TaskWidget>> taskWidgets;
     Page &page;
 
     void addTaskWidget(todolib::Task &task);

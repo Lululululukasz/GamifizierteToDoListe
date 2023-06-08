@@ -12,9 +12,9 @@ PageLayoutWidget::PageLayoutWidget() {
 
     vOuterLayout->addLayout(hNavBar.get());
     vOuterLayout->addLayout(hOuterBodyLayout.get());
-    hOuterBodyLayout->addLayout(vSideBar.get());
-    hOuterBodyLayout->addLayout(vBodyLayout.get());
-
+    hOuterBodyLayout->addLayout(vSideBar.get(), 1);
+    vSideBar->setAlignment(Qt::AlignTop);
+    hOuterBodyLayout->addLayout(vBodyLayout.get(), 3);
     vBodyLayout->setAlignment(Qt::AlignTop);
 }
 
