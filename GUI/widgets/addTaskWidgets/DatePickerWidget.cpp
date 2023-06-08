@@ -58,4 +58,10 @@ std::chrono::year_month_day DatePickerWidget::createDueDate() {
     return dueDate;
 }
 
+void DatePickerWidget::setDueDate(std::chrono::year_month_day time) {
+    selectYearBox->setCurrentIndex(static_cast<int>(time.year()) - 2022);
+    selectMonthBox->setCurrentIndex(static_cast<int>(static_cast<unsigned>(time.month())));
+    selectDayBox->setCurrentIndex(static_cast<int>(static_cast<unsigned>(time.day())));
+}
+
 

@@ -3,6 +3,7 @@
 //
 
 #include "Task.h"
+#include "Category.h"
 #include <time.h>
 #include <iostream>
 
@@ -93,11 +94,11 @@ double Task::getDuration() const{
     return this->duration;
 }
 
-void Task::setdueDate(std::chrono::year_month_day due) {
+void Task::setDueDate(std::chrono::year_month_day due) {
     this->dueDate = due;
 }
 
-std::chrono::year_month_day Task::getdueDate() {
+std::chrono::year_month_day Task::getDueDate() {
     return this->dueDate;
 }
 
@@ -119,6 +120,14 @@ QJsonObject Task::toJson() {
     jsonObject.insert("dueDay", static_cast<int>(static_cast<unsigned>(dueDate.day())));
 
     return jsonObject;
+}
+
+void Task::saveToJson() {
+    category->saveToJson();
+}
+
+void Task::setCategory(todolib::Category *newCategory) {
+    category = newCategory;
 }
 
 

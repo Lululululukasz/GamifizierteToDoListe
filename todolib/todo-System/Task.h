@@ -14,6 +14,7 @@ namespace todolib {
 #include <memory>
 #include <chrono>
 #include <QtCore/QJsonObject>
+#include "Category.h"
 
 
 namespace todolib {
@@ -39,7 +40,7 @@ namespace todolib {
         priority_t priority;
         double duration;
         std::chrono::year_month_day dueDate;
-
+        todolib::Category* category {nullptr};
 
     public:
         string name;
@@ -85,14 +86,17 @@ namespace todolib {
         void setDuration(double dur);
         [[nodiscard]] double getDuration() const;
 
-        void setdueDate(std::chrono::year_month_day due);
-        std::chrono::year_month_day getdueDate();
+        void setDueDate(std::chrono::year_month_day due);
+        std::chrono::year_month_day getDueDate();
 
         /**
          * Function to convert the task with it's attributes to a QJsonObject
          * @return QJsonObject
          */
         QJsonObject toJson();
+
+        void saveToJson();
+        void setCategory(todolib::Category *newCategory);
     };
 
 }

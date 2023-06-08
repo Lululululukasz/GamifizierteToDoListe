@@ -31,9 +31,14 @@ ToDoList::ToDoList() {
                             }
                         }
                     if (checksum == 7) {
-                        this->addCategory(Category(categoryObject));
+                        this->addCategory(std::move(Category(categoryObject)));
                     }
                 }
+        }
+        for(auto& category : this->categories) {
+            for(auto& task : category.tasks) {
+                task.setCategory(&category);
+            }
         }
     }
     this->generalTasks = { // if these get changed, the achievements also have to be altered! (AchievementList.cpp)
@@ -78,7 +83,7 @@ void ToDoList::addCategory(Category &&category) {
 }
 
 void ToDoList::addCategory(Category &category) {
-    this->categories.emplace_back(category);
+    this->categories.push_back(category);
 }
 
 bool ToDoList::deleteCategory(const string &id) {

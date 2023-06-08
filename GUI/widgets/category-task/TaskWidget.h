@@ -3,6 +3,7 @@
 #include "todolib/todo-System/Task.h"
 #include "GUI/ConfettiAnimation/DrawConfetti.h"
 #include "GUI/pages/Page.h"
+#include "GUI/popups/EditTaskBox.h"
 
 #include <QWidget>
 #include <QCheckBox>
@@ -28,7 +29,7 @@ Q_OBJECT
 
 public:
     explicit TaskWidget(todolib::Task &task, Page &page, QWidget *parent = nullptr);
-
+    void update();
     todolib::Task &task;
 
 signals:
@@ -44,6 +45,7 @@ private:
     std::shared_ptr<QCheckBox> taskCheckbox;
     std::shared_ptr<QLabel> taskNameLabel;
     std::shared_ptr<QPushButton> taskDeleteButton;
+    std::shared_ptr<QPushButton> editTaskButton;
     std::shared_ptr<QToolButton> showDescriptionButton;
     std::shared_ptr<QLabel> taskDescriptionLabel;
     std::shared_ptr<QLabel> taskPriorityLabel;
@@ -52,7 +54,7 @@ private:
     std::shared_ptr<QFont> font;
     std::shared_ptr<DrawConfetti> confetti;
     std::shared_ptr<QGraphicsScene> scene;
-
+    std::shared_ptr<EditTaskBox> editTaskBox;
 
     static void playRandomSound();
     void playConfettiAnimation();
@@ -60,6 +62,7 @@ private:
 private slots:
     void taskDone();
     void taskUndone();
+    void editTask();
     void deleteTask();
     void showDescription();
     void hideDescription();
