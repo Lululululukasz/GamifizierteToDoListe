@@ -3,6 +3,7 @@
 //
 
 #include "TaskFilterParameter.h"
+#include <iostream>
 
 void todolib::TaskFilterParameter::addPriorityFilter(todolib::Task::priority_t priority) {
     priorityFilter.push_back(priority);
@@ -21,10 +22,13 @@ void todolib::TaskFilterParameter::setDurationFilter(double &newDurationFilter) 
 
 bool todolib::TaskFilterParameter::filterTask(todolib::Task &task) {
     if (!priorityFilter.empty() && !filterPriority(task)) {
+        std::cout << task.name << " filtered for priority";
         return false;
     } else if (dueDateFilter && !filterDueDate(task)) {
+        std::cout << task.name << " filtered for due date";
         return false;
     } else if (durationFilter && !filterDuration(task)) {
+        std::cout << task.name << " filtered for duration";
         return false;
     }
     return true;
@@ -43,7 +47,8 @@ bool todolib::TaskFilterParameter::filterDueDate(todolib::Task &task) {
     auto now = std::chrono::system_clock::now();
     auto today = std::chrono::floor<std::chrono::days>(now);
     std::chrono::year_month_day filter{today + dueDateFilter.value()};
-
+    std::cout << "filter day " << static_cast<unsigned>(filter.day()) << "." << static_cast<unsigned>(filter.month()) << "." << static_cast<int>(filter.year()) << std::endl ;
+    std::cout << "task due day " << static_cast<unsigned>(task.getdueDate().day()) << "." << static_cast<unsigned>(task.getdueDate().month()) << "." << static_cast<int>(task.getdueDate().year()) << std::endl ;
     if (task.getdueDate() < filter) {
         return true;
     }

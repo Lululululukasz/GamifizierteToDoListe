@@ -42,6 +42,7 @@ void MainWindow::closePage(const std::shared_ptr<Page>& page) {
 }
 
 void MainWindow::openCategoryViewPage() {
+    profile.taskFilterParameter.clear();
     std::shared_ptr<Page> newpage {std::make_shared<CategoryViewPage>(profile)};
     openPage(newpage);
     connect(newpage.get(), &Page::refreshPageSignal, this, [=, this]() {refreshCategoryViewPage(newpage);});

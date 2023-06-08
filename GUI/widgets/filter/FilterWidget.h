@@ -55,9 +55,9 @@ private:
     std::shared_ptr<QHBoxLayout> dueDateFilterHLayout;
     std::shared_ptr<QLabel> filterForDueDateLabel;
     std::shared_ptr<QToolButton> showDueDateFilterButton;
-    std::list<std::shared_ptr<QCheckBox>> dueDateCheckboxes;
+    std::list<std::shared_ptr<QRadioButton>> dueDateRadioButtons;
 
-    void createDueDateCheckbox(std::chrono::days upperBound, std::string label);
+    void createDueDateRadioButton(std::chrono::days upperBound, std::string label);
 
     void showDueDateFilter();
 
