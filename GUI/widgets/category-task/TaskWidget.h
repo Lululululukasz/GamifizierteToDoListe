@@ -30,7 +30,7 @@ class TaskWidget : public QWidget {
 Q_OBJECT
 
 public:
-    explicit TaskWidget(todolib::Task &task, todolib::Category& category,  Page &page);
+    explicit TaskWidget(todolib::Task& task, todolib::Category& category, Page &page);
     void update();
 
     todolib::Task &task;

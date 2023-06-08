@@ -22,8 +22,6 @@ void TaskWidget::update() {
     QString descriptionText = "Description: " + QString::fromStdString(task.description);
     taskDescriptionLabel->setText(descriptionText);
 
-TaskWidget::TaskWidget(todolib::Task& task, todolib::Category& category, Page &page)
-        : task{task}, category{category}, page{page} {
     int year = static_cast<int>(task.getDueDate().year());
     unsigned month = static_cast<unsigned>(task.getDueDate().month());
     QStringList monthList {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
@@ -44,7 +42,7 @@ TaskWidget::TaskWidget(todolib::Task& task, todolib::Category& category, Page &p
         taskDueDateLabel->setText(dueDateText);
     }
 
-    QString priorityText = "Priority: " + QString::fromStdString(task.getPriorityString());
+    QString priorityText = "Priority: " + QString::fromStdString(task.getPriorityString(task.getPriority()));
     taskPriorityLabel->setText(priorityText);
 
     QString durationText = "Duration: " + QString::number(task.getDuration());
@@ -53,8 +51,8 @@ TaskWidget::TaskWidget(todolib::Task& task, todolib::Category& category, Page &p
     taskCheckbox->setCheckState(task.getDoneStatus() ? Qt::Checked : Qt::Unchecked);
 }
 
-TaskWidget::TaskWidget(todolib::Task &task, todolib::Category& category,  Page &page, QWidget *parent)
-        : task{task}, category{category}, page{page}, QWidget(parent) {
+TaskWidget::TaskWidget(todolib::Task &task, todolib::Category& category,  Page &page)
+        : task{task}, category{category}, page{page}{
 
     //layouts
     hbox = std::make_shared<QHBoxLayout>();
@@ -92,9 +90,8 @@ TaskWidget::TaskWidget(todolib::Task &task, todolib::Category& category,  Page &
     QString descriptionText = "Description: " + QString::fromStdString(task.description);
     taskDescriptionLabel->setText(descriptionText);
 
-    //taskPriorityLabel
     taskPriorityLabel = std::make_shared<QLabel>();
-    QString priorityText = "Priority: " + QString::fromStdString(task.getPriorityString());
+    QString priorityText = "Priority: " + QString::fromStdString(task.getPriorityString(task.getPriority()));
     taskPriorityLabel->setText(priorityText);
 
     //taskDurationLabel
