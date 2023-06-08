@@ -14,7 +14,7 @@ using namespace todolib;
 CategoryViewPage::CategoryViewPage(todolib::Profile &profile) : MainPage{profile} {
     layoutWidget.vBodyLayout->addWidget(&addCategoryButton, 0, Qt::AlignTop);
     {
-        layoutWidget.vOuterLayout->addWidget(&addCategoryButton);
+        layoutWidget.vBodyLayout->addWidget(&addCategoryButton);
         connect(&addCategoryButton, &QPushButton::clicked, this, &CategoryViewPage::addCategory);
         addCategoryButton.setGeometry(10, 100, 80, 30);
         for (Category &category: profile.todoList.categories) {
@@ -48,7 +48,6 @@ CategoryViewPage::CategoryViewPage(todolib::Profile &profile) : MainPage{profile
         shared_ptr<CategoryWidget> widget{make_shared<CategoryWidget>(category, *this)};
         categoryWidgets.push_back(widget);
         layoutWidget.vBodyLayout->addWidget(widget.get(), 0, Qt::AlignTop);
-        layoutWidget.vOuterLayout->addWidget(widget.get(), 0, Qt::AlignTop);
         connect(widget.get(), &CategoryWidget::categoryDeleteSignal, this,
                 [=, this]() { openConfirmDeleteWindow(widget); });
         connect(widget.get(), &CategoryWidget::xpWidgetSignalAdd, this, &Page::xpWidgetSignalAdd);
