@@ -51,9 +51,11 @@ Category::Category(const QJsonObject &jsonObject) {
                             checksum += 128;
                         } else if (key == "dueDay"){
                             checksum += 256;
+                        } else if (key == "picture"){
+                            checksum += 512;
                         }
                     }
-                if (checksum == 511) {
+                if (checksum == 1023) {
                     auto taskObj {Task(task.toObject())};
                     taskObj.setCategory(this);
                     this->tasks.push_back(std::move(taskObj));
@@ -108,7 +110,7 @@ void Category::saveToJson() {
     jsonObject.insert("id", id.c_str());
     jsonObject.insert("name", name.c_str());
     jsonObject.insert("tasks", tasks.toJson());
-    Json::writeJsonObjectToFile(jsonObject);
+    Json::writeJsonObjectToFile(jsonObject, "categories/");
 }
 
 /**

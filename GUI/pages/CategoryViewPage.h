@@ -27,6 +27,10 @@ signals:
     void xpWidgetSignalAdd();
     void xpWidgetSignalSub();
 
+private slots:
+    void openConfirmDeleteWindow(std::shared_ptr<CategoryWidget> categoryWidget);
+    void addCategory();
+
 public:
     explicit CategoryViewPage(todolib::Profile & profile);
 
@@ -37,10 +41,10 @@ private:
     std::shared_ptr<QInputDialog> categoryConfig;
     std::optional<QString> invalidCategoryName();
     std::optional<QString> getCategoryName();
-    void addCategory();
     void addCategoryWidget(todolib::Category& category);
     void deleteCategory(const std::shared_ptr<CategoryWidget>& categoryWidget);
     void configCategory(const std::shared_ptr<CategoryWidget>& categoryWidget);
+    std::shared_ptr<ConfirmDeleteWindow> confirmDeleteWindow;
 };
 
 

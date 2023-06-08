@@ -6,6 +6,7 @@
 #include "Category.h"
 #include <time.h>
 #include <iostream>
+#include <utility>
 
 using namespace std;
 using namespace todolib;
@@ -35,6 +36,7 @@ Task::Task(const QJsonObject &taskObject) {
             std::chrono::month(taskObject.value(QString("dueMonth")).toInt()),
             std::chrono::day(taskObject.value(QString("dueDay")).toInt())
             );
+    picture = taskObject.value(QString("picture")).toString().toStdString();
 }
 
 string Task::getID() {
@@ -102,6 +104,13 @@ std::chrono::year_month_day Task::getDueDate() {
     return this->dueDate;
 }
 
+void Task::setPicture(std::string pic) {
+    this->picture = pic;
+}
+
+std::string Task::getPicture() {
+    return this->picture;
+}
 
 /**
  * Function to convert the task with it's attributes to a QJsonObject
@@ -118,7 +127,7 @@ QJsonObject Task::toJson() {
     jsonObject.insert("dueYear", static_cast<int>(dueDate.year()));
     jsonObject.insert("dueMonth", static_cast<int>(static_cast<unsigned>(dueDate.month())));
     jsonObject.insert("dueDay", static_cast<int>(static_cast<unsigned>(dueDate.day())));
-
+    jsonObject.insert("picture", picture.c_str());
     return jsonObject;
 }
 
@@ -129,6 +138,9 @@ void Task::saveToJson() {
 void Task::setCategory(todolib::Category *newCategory) {
     category = newCategory;
 }
+
+
+
 
 
 

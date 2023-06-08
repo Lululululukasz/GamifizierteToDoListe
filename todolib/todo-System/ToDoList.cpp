@@ -9,7 +9,7 @@
 using namespace todolib;
 
 ToDoList::ToDoList() {
-    QJsonArray categories = Json::getAllSaves();
+    QJsonArray categories = Json::getAllSaves("categories/");
     // if there is no json savefile create a new category
     if (categories.isEmpty()) {
         this->addCategory(Category("General"));

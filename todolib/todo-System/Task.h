@@ -40,6 +40,7 @@ namespace todolib {
         priority_t priority;
         double duration;
         std::chrono::year_month_day dueDate;
+        std::string picture;
         todolib::Category* category {nullptr};
 
     public:
@@ -88,6 +89,9 @@ namespace todolib {
 
         void setDueDate(std::chrono::year_month_day due);
         std::chrono::year_month_day getDueDate();
+
+        void setPicture(std::string pic);
+        std::string getPicture();
 
         /**
          * Function to convert the task with it's attributes to a QJsonObject
