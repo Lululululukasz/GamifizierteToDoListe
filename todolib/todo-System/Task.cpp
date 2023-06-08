@@ -28,8 +28,8 @@ Task::Task(const QJsonObject &taskObject) {
     name = taskObject.value(QString("name")).toString().toStdString();
     description = taskObject.value(QString("description")).toString().toStdString();
     done = taskObject.value(QString("done")).toString().toStdString() == "true";
-    priority = static_cast<priority_t>(taskObject.value(QString("priority")).toInt());
-    duration = taskObject.value(QString("duration")).toDouble();
+    priority = static_cast<priority_t>(taskObject.value(QString("priorityFilter")).toInt());
+    duration = taskObject.value(QString("durationFilter")).toDouble();
     dueDate = std::chrono::year_month_day(
             std::chrono::year(taskObject.value(QString("dueYear")).toInt()),
             std::chrono::month(taskObject.value(QString("dueMonth")).toInt()),
@@ -71,8 +71,8 @@ Task::priority_t Task::getPriority() {
     return this->priority;
 }
 
-std::string Task::getPriorityString() {
-    switch(priority) {
+std::string Task::getPriorityString(Task::priority_t prio) {
+    switch(prio) {
         case trivial:
             return "trivial";
         case low:
@@ -121,8 +121,8 @@ QJsonObject Task::toJson() {
     jsonObject.insert("name", name.c_str());
     jsonObject.insert("description", description.c_str());
     jsonObject.insert("done", done?"true":"false");
-    jsonObject.insert("priority", static_cast<int>(priority));
-    jsonObject.insert("duration", duration);
+    jsonObject.insert("priorityFilter", static_cast<int>(priority));
+    jsonObject.insert("durationFilter", duration);
     jsonObject.insert("dueYear", static_cast<int>(dueDate.year()));
     jsonObject.insert("dueMonth", static_cast<int>(static_cast<unsigned>(dueDate.month())));
     jsonObject.insert("dueDay", static_cast<int>(static_cast<unsigned>(dueDate.day())));

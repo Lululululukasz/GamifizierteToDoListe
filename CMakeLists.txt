@@ -31,7 +31,8 @@ add_executable(pic_aem_projekt
 		GUI/widgets/addTaskWidgets/AddTaskElementWidget.cpp GUI/widgets/addTaskWidgets/AddTaskElementWidget.h
 		GUI/popups/AddPictureBox.cpp GUI/popups/AddPictureBox.h
 		GUI/widgets/addTaskWidgets/AddPictureBoxElementWidget.cpp GUI/widgets/addTaskWidgets/AddPictureBoxElementWidget.h
-		GUI/popups/ConfirmDeleteWindow.cpp GUI/popups/ConfirmDeleteWindow.h)
+		GUI/popups/ConfirmDeleteWindow.cpp GUI/popups/ConfirmDeleteWindow.h
+		GUI/widgets/filter/FilterWidget.cpp GUI/widgets/filter/FilterWidget.h)
 
 target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia)
 target_link_libraries(pic_aem_projekt Qt5::Widgets Qt5::Multimedia Qt5::MultimediaWidgets)

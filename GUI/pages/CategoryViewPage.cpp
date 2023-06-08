@@ -45,7 +45,7 @@ CategoryViewPage::CategoryViewPage(todolib::Profile &profile) : MainPage{profile
     }
 
     void CategoryViewPage::addCategoryWidget(Category &category) {
-        shared_ptr<CategoryWidget> widget{make_shared<CategoryWidget>(category, *this)};
+        shared_ptr<CategoryWidget> widget{make_shared<CategoryWidget>(category, profile.taskFilterParameter, *this)};
         categoryWidgets.push_back(widget);
         layoutWidget.vBodyLayout->addWidget(widget.get(), 0, Qt::AlignTop);
         connect(widget.get(), &CategoryWidget::categoryDeleteSignal, this,
@@ -54,6 +54,7 @@ CategoryViewPage::CategoryViewPage(todolib::Profile &profile) : MainPage{profile
         connect(widget.get(), &CategoryWidget::xpWidgetSignalSub, this, &Page::xpWidgetSignalSub);
         connect(widget.get(), &CategoryWidget::categoryConfigSignal, this, [=, this]() { configCategory(widget); });
         connect(widget.get(), &CategoryWidget::refreshPageWidgetSignal, this, &CategoryViewPage::refreshPageSignal);
+        connect(this, &MainPage::applyFilters, widget.get(), &CategoryWidget::filterTasks);
     }
 
     void CategoryViewPage::deleteCategory(const shared_ptr<CategoryWidget> &categoryWidget) {

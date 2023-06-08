@@ -8,6 +8,7 @@
 #include "todo-System/ToDoList.h"
 #include "achievement-System/AchievementList.h"
 #include "Xp.h"
+#include "todo-System/TaskFilterParameter.h"
 
 namespace todolib {
 
@@ -17,6 +18,8 @@ namespace todolib {
         AchievementList achievementList {todoList};
         // TODO add XP/Level - classes could be stored in todolib/leveling-System
         Xp xp {};
+        TaskFilterParameter taskFilterParameter;
+
     };
 
 } // todolib

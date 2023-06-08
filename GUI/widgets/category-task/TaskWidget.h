@@ -29,10 +29,10 @@ class TaskWidget : public QWidget {
 Q_OBJECT
 
 public:
-    explicit TaskWidget(std::shared_ptr<todolib::Task> task, std::shared_ptr<todolib::Category> category, Page &page);
+    explicit TaskWidget(todolib::Task& task, todolib::Category& category, Page &page);
 
-    std::shared_ptr<todolib::Task> task;
-    std::shared_ptr<todolib::Category> catgory;
+    todolib::Task& task;
+    todolib::Category& catgory;
 
 signals:
     void deleteButtonPressed();
