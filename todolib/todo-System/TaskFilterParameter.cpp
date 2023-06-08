@@ -11,7 +11,7 @@ void todolib::TaskFilterParameter::removePriorityFilter(Task::priority_t priorit
     priorityFilter.remove(priority);
 }
 
-void todolib::TaskFilterParameter::setDueDateFilter(DueDateFilter &newDueDateFilter) {
+void todolib::TaskFilterParameter::setDueDateFilter(std::chrono::days &newDueDateFilter) {
     dueDateFilter = newDueDateFilter;
 }
 
@@ -40,6 +40,13 @@ bool todolib::TaskFilterParameter::filterPriority(todolib::Task &task) {
 }
 
 bool todolib::TaskFilterParameter::filterDueDate(todolib::Task &task) {
+    auto now = std::chrono::system_clock::now();
+    auto today = std::chrono::floor<std::chrono::days>(now);
+    std::chrono::year_month_day filter{today + dueDateFilter.value()};
+
+    if (task.getdueDate() < filter) {
+        return true;
+    }
     return false;
 }
 

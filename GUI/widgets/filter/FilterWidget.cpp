@@ -76,11 +76,11 @@ FilterWidget::FilterWidget(todolib::TaskFilterParameter& taskFilterParameter) : 
     showDueDateFilterButton->setStyleSheet("QToolButton{border: none;}");
     dueDateFilterHLayout->addWidget(showDueDateFilterButton.get());
 
-    createDueDateCheckbox(std::chrono::days(0), std::chrono::days(0), "today");
-    createDueDateCheckbox(std::chrono::days(1), std::chrono::days(1), "tomorrow");
-    createDueDateCheckbox(std::chrono::days(0), std::chrono::days(7), "this week");
-    createDueDateCheckbox(std::chrono::days(0), std::chrono::days(31), "this month");
-    createDueDateCheckbox(std::chrono::days(-100000), std::chrono::days(100000), "whenever");
+    createDueDateCheckbox(std::chrono::days(0), "today");
+    createDueDateCheckbox(std::chrono::days(1), "by tomorrow");
+    createDueDateCheckbox(std::chrono::days(7), "within a week");
+    createDueDateCheckbox(std::chrono::days(31), "within a month");
+    createDueDateCheckbox(std::chrono::days(-1), "whenever");
 
     connect(showDueDateFilterButton.get(), &QToolButton::toggled, [=,this](bool checked) {
         showDueDateFilterButton->setArrowType(checked ? Qt::ArrowType::DownArrow : Qt::ArrowType::RightArrow);
@@ -92,7 +92,7 @@ FilterWidget::FilterWidget(todolib::TaskFilterParameter& taskFilterParameter) : 
     filterVLayout->addWidget(dueDateBorderLabel.get());
     dueDateBorderLabel->setStyleSheet("QLabel { border-top: 1px solid lightgray; padding-top: 0.5em; }");
 
-    //DueDateFilter
+    //DurationFilter
     durationFilterHLayout = std::make_shared<QHBoxLayout>();
     filterVLayout->addLayout(durationFilterHLayout.get());
 
@@ -168,10 +168,17 @@ void FilterWidget::createPriorityCheckbox(todolib::Task::priority_t priority) {
     checkBox->setHidden(true);
 }
 
-void FilterWidget::createDueDateCheckbox(std::chrono::days lowerBound, std::chrono::days upperBound, std::string label) {
+void FilterWidget::createDueDateCheckbox(std::chrono::days upperBound, std::string label) {
     auto checkBox {std::make_shared<QCheckBox>()};
+    connect(checkBox.get(), &QCheckBox::stateChanged, this, [&]() {
+        if (upperBound < std::chrono::days(0)) {
+            taskFilterParameter.clearDueDateFilter();
+        } else {
+            taskFilterParameter.setDueDateFilter(upperBound);
+        }
+    });
     checkBox->setText(QString::fromStdString(label));
-    checkBox->setChecked(true);
+    checkBox->setChecked(false);
     filterVLayout->addWidget(checkBox.get());
     dueDateCheckboxes.push_back(checkBox);
     checkBox->setHidden(true);
