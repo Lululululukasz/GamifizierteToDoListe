@@ -10,6 +10,7 @@
 #include <QLabel>
 #include <memory>
 #include <QHBoxLayout>
+#include <QPushButton>
 #include "GUI/widgets/addTaskWidgets/AddPictureBoxElementWidget.h"
 
 class AddPictureBox : public QWidget {
@@ -19,16 +20,19 @@ public:
 
     signals:
    void picturePathSignal(std::string picturePath);
+   void noPictureSelectedSignal();
+
 private:
     std::shared_ptr<QVBoxLayout> addPictureVLayout;
     std::shared_ptr<QHBoxLayout> noPictureHLayout;
     std::list<std::shared_ptr<AddPictureBoxElementWidget>> elements;
-    std::shared_ptr<QRadioButton> noPictureButton;
+    std::shared_ptr<QPushButton> noPictureButton;
     std::shared_ptr<AddPictureBoxElementWidget> elementWidget;
 
 private slots:
     void closeAddPictureBox();
     void pictureSelected(std::string pic);
+    void noPictureSelected();
 
 };
 

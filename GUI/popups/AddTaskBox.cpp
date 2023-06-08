@@ -139,6 +139,7 @@ if(checked){
     addPictureBox = std::make_shared<AddPictureBox>();
     addPictureBox->show();
     connect(addPictureBox.get(), &AddPictureBox::picturePathSignal, this, &AddTaskBox::savePicturePath);
+    connect(addPictureBox.get(), &AddPictureBox::noPictureSelectedSignal, this, &AddTaskBox::noPicturePath);
 }
 }
 
@@ -174,6 +175,10 @@ bool AddTaskBox::hasTask() const {
 
 void AddTaskBox::closeAddTaskWindow() {
     this->hide();
+}
+
+void AddTaskBox::noPicturePath() {
+    picturePath = "no picture";
 }
 
 

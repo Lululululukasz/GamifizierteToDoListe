@@ -41,6 +41,8 @@ private slots:
 
     void savePicturePath(std::string picture);
 
+    void noPicturePath();
+
 
 private:
     bool hasTaskBool{false};

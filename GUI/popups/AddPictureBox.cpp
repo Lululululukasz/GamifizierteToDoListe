@@ -34,10 +34,11 @@ AddPictureBox::AddPictureBox(QWidget *parent) : QWidget(parent) {
     }
 
 
-    noPictureButton = std::make_shared<QRadioButton>();
+    noPictureButton = std::make_shared<QPushButton>();
     noPictureButton->setCheckable(true);
-    noPictureButton->setText("None");
+    noPictureButton->setText("No picture");
     addPictureVLayout->addWidget(noPictureButton.get());
+    connect(noPictureButton.get(), &QPushButton::clicked, this, &AddPictureBox::noPictureSelected);
 }
 
 void AddPictureBox::closeAddPictureBox() {
@@ -47,4 +48,9 @@ void AddPictureBox::closeAddPictureBox() {
 void AddPictureBox::pictureSelected(std::string pic) {
     closeAddPictureBox();
     emit picturePathSignal(pic);
+}
+
+void AddPictureBox::noPictureSelected() {
+    closeAddPictureBox();
+    emit noPictureSelectedSignal();
 }
